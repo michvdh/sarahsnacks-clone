@@ -1,0 +1,24 @@
+@import "../../styles/variables";
+
+.image {
+  transition: opacity 0.25s ease-in-out;
+}
+
+.image-container {
+  position: relative;
+  &:hover { 
+    cursor: pointer;
+  }
+
+  .quick-view {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: $background-rgba--brown;
+
+    &:hover {
+      background-color: $dark-brown;
+    }
+  }
+}

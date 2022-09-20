@@ -1,0 +1,46 @@
+.favorites {
+  margin: 10rem 0;
+  position: relative;
+  height: 100%;
+  // border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  column-gap: 5rem;
+
+  .carousel {
+    margin: 0 1rem;
+  }
+
+  .side {
+    display: flex;
+    flex-direction: row;
+    // position: relative;
+
+    .side-text {
+      max-width: 70%;
+
+      p {
+        line-height: 3rem;
+        margin: 3rem 0;
+      }
+    }
+
+    .image-container {
+      position: relative;
+
+      div {
+        // position: relative;
+        z-index: -1;
+        width: 28rem;
+        height: 120%;
+        position: absolute;
+        right: -25rem;
+        top: -15rem;
+
+        .image {
+          object-fit: contain;
+        }
+      }
+    }
+  }
+}

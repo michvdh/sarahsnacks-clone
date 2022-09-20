@@ -1,0 +1,46 @@
+@import './variables';
+
+.btn {
+  cursor: pointer;
+  border: none;
+
+  &--large {
+    padding: 1.4rem 3.5rem;
+  }
+  
+  &--regular {
+    padding: 1rem 2rem;
+  }
+
+  &--small {
+    padding: 0.5rem 1rem;
+  }
+
+  &--brown {
+    background-color: $dark-brown;
+  
+    &:hover {
+      background-color: $light-brown;
+    }
+  }
+
+  &--light-brown {
+    background-color: $light-brown;
+  
+    &:hover {
+      background-color: $dark-brown;
+    }
+  }
+
+  &--green {
+    background-color: $dark-green;
+  
+    &:hover {
+      background-color: $light-green;
+    }
+  }
+
+  &--featured {
+    max-width: 16rem;
+  }
+}

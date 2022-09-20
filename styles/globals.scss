@@ -1,0 +1,85 @@
+@import "./variables";
+@import "./typography";
+@import "./button";
+@import "./embla.scss";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.category, .snacks, .shop, .product {
+  max-width: 75%;
+  margin: 0 auto;
+}
+
+.sticky {
+  position: fixed !important;
+}
+
+.shadow {
+  box-shadow: 0px 2px 7px 0px rgba(0,0,0,0.2);
+}
+
+.main {
+  position: relative;
+
+  section:first-child {
+    padding-top: 18.2rem;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hidden { 
+  opacity: 0 !important;
+}
+
+.fa-icon {
+  &--white {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(5deg) brightness(108%) contrast(101%);
+    width: 1.3rem;
+  }
+
+  &--green {
+    filter: invert(30%) sepia(60%) saturate(2174%) hue-rotate(155deg) brightness(86%) contrast(101%);
+  }
+
+  &--light-green {
+    filter: invert(59%) sepia(39%) saturate(748%) hue-rotate(127deg) brightness(115%) contrast(89%);
+  }
+
+  &--brown {
+    filter: invert(18%) sepia(6%) saturate(3947%) hue-rotate(336deg) brightness(45%) contrast(81%);
+  }
+
+  &--light-brown {
+    filter: invert(25%) sepia(72%) saturate(587%) hue-rotate(330deg) brightness(60%) contrast(85%);
+  }
+
+  &--right {
+    margin-left: 1rem;
+  }
+
+  &--left {
+    margin-right: 0.5rem;
+  }
+}
+
+ul {
+  list-style-type: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: light;
+  }
+  /* body {
+    color: white;
+    background: black;
+  } */
+}

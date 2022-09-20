@@ -1,0 +1,13 @@
+.search-results {
+  // control template columns with media queries
+}
+
+.grid-type {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.column-type {
+  display: flex;
+  flex-direction: column;
+}

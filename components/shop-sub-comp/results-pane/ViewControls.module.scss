@@ -1,0 +1,41 @@
+.view-controls {
+  display: flex;
+  justify-content: space-between;
+
+  .view-style {
+    display: flex;
+    flex-direction: row;
+
+    .product-display-type {
+      display: flex;
+      
+      .detail-level {
+        border: 1px solid black;
+        padding: 0.5rem;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.result-control-count {
+  ul {
+    display: flex;
+    flex-direction: row;
+
+    li {
+      &:not(:first-child):not(:last-child)::after {
+        content: "/";
+      }
+
+      .option {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    } 
+  }
+}

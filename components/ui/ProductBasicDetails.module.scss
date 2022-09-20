@@ -1,0 +1,9 @@
+@import '../../styles/variables';
+
+.product-basic-details {
+  display: grid;
+  grid-template-columns: 1.5fr 3fr;
+  margin-bottom: 5rem;
+  border-bottom: 1px solid $dark-gray;
+  padding-bottom: 2.5rem;
+}
