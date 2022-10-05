@@ -6,7 +6,7 @@ import { produceWithPatches } from "immer";
 
 const ViewControls: React.FC<{
   onProductSort: (sortType: string) => void;
-  onPagination: (itemCount: string) => void;
+  onDisplayCount: (itemCount: string) => void;
   onReturnToDefaultSort: boolean;
   onChangeDisplayType: (displayType: string) => void;
 }> = (props) => {
@@ -16,7 +16,7 @@ const ViewControls: React.FC<{
   }
 
   const paginationHandler = (itemCount: string) => {
-    props.onPagination(itemCount);
+    props.onDisplayCount(itemCount);
   }
 
   const productDispayTypeHandler = (detailLevel: string) => {
@@ -41,9 +41,9 @@ const ViewControls: React.FC<{
         <div className={`${classes["sort-type"]}`}>
           <form>
             <select onChange={(e) => {sortHandler(e.target.value)}}>
-              <option value="default-sort" selected={props.onReturnToDefaultSort}>Default sorting</option>
-              <option value="price-asc">Sort by price: low to high</option>
-              <option value="price-desc">Sort by price: high to low</option>
+              <option key="1" value="default" selected={props.onReturnToDefaultSort}>Default sorting</option>
+              <option key="2"  value="price-asc">Sort by price: low to high</option>
+              <option key="3"  value="price-desc">Sort by price: high to low</option>
             </select>
           </form>
         </div>

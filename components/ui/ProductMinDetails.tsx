@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import classes from "./ProductMinDetails.module.scss";
-import { ProductMinModel } from "../model/productMinModel.model";
+import { ProductMinModel } from '../../model/productMinModel.model';
 import ProductQuickView from "./ProductQuickView";
-import getPriceRange from '../helper-functions/getPriceRange';
-import changeToKebabCase from '../helper-functions/changeToKebabCase';
+import getPriceRange from '../helpers/getPriceRange';
+import changeToKebabCase from '../helpers/changeToKebabCase';
 
 const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
 

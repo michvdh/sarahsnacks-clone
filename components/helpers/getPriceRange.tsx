@@ -1,4 +1,4 @@
-import { ProductMinModel } from "../model/productMinModel.model";
+import { ProductMinModel } from "../../model/productMinModel.model";
 
 const getPriceRange = (variations: ProductMinModel["variations"]) => {
   const priceVariationLength = variations.length;

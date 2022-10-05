@@ -34,4 +34,3 @@ export interface ProductsDBModel {
     };
 };
 
-// export interface ProductsDBModel extends Array<ProductDBModel> {};
