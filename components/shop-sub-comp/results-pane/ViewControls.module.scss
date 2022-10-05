@@ -17,6 +17,10 @@
           cursor: pointer;
         }
       }
+
+      .selected {
+        background-color: orange;
+      }
     }
   }
 }
@@ -40,7 +44,7 @@
       // transfer this code to typography css file
       .selected {
         color: red;
-      }
+      } 
     } 
   }
 }

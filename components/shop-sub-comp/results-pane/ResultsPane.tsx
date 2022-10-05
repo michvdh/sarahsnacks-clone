@@ -29,6 +29,7 @@ const ResultsPane: React.FC<ResultsPaneProps> = (props) => {
         onChangeDisplayType={props.onChangeDisplayType}
         sortInput={props.sortInput}
         displayCountInput={props.displayCountInput}
+        displayType={props.displayType}
       />
 
       <SearchResults

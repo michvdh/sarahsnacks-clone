@@ -11,6 +11,7 @@ interface ViewControlsProps {
   onChangeDisplayType: (displayType: string) => void;
   sortInput: string;
   displayCountInput: string;
+  displayType: string;
 }
 
 const ViewControls: React.FC<ViewControlsProps> = (props) => {
@@ -31,7 +32,7 @@ const ViewControls: React.FC<ViewControlsProps> = (props) => {
       <div className={`${classes["view-style"]}`}>
         <div className={`${classes["product-display-type"]}`}>
           <div
-            className={`${classes["min-details"]} ${classes["detail-level"]}`}
+            className={`${classes["min-details"]} ${classes["detail-level"]} ${props.displayType === "min-details" ? classes["selected"] : ""}`}
             onClick={(e) => {
               productDispayTypeHandler("min-details");
             }}
@@ -42,7 +43,7 @@ const ViewControls: React.FC<ViewControlsProps> = (props) => {
             />
           </div>
           <div
-            className={`${classes["basic-details"]} ${classes["detail-level"]}`}
+            className={`${classes["basic-details"]} ${classes["detail-level"]} ${props.displayType === "basic-details" ? classes["selected"] : ""}`}
             onClick={(e) => {
               productDispayTypeHandler("basic-details");
             }}
