@@ -10,10 +10,13 @@ interface ResultsPaneProps {
   onDisplayCount: (itemCount: string) => void;
   totalPages: number;
   onPageBtnClick: (clickedPage: number) => void;
-  onReturnToDefaultSort: boolean;
+  // onReturnToDefaultSort: boolean;
   onChangeDisplayType: (detailLevel: string) => void;
   displayType: string;
   resultsReady: boolean;
+  sortInput: string;
+  displayCountInput: string;
+  pageInput: number;
 }
 
 const ResultsPane: React.FC<ResultsPaneProps> = (props) => {
@@ -22,8 +25,10 @@ const ResultsPane: React.FC<ResultsPaneProps> = (props) => {
       <ViewControls
         onProductSort={props.onProductSort}
         onDisplayCount={props.onDisplayCount}
-        onReturnToDefaultSort={props.onReturnToDefaultSort}
+        // onReturnToDefaultSort={props.onReturnToDefaultSort}
         onChangeDisplayType={props.onChangeDisplayType}
+        sortInput={props.sortInput}
+        displayCountInput={props.displayCountInput}
       />
 
       <SearchResults
@@ -36,6 +41,7 @@ const ResultsPane: React.FC<ResultsPaneProps> = (props) => {
         <Pagination
           totalPages={props.totalPages}
           onPageBtnClick={props.onPageBtnClick}
+          pageInput={props.pageInput}
           // if totalPages is 1, then no need to generate a button
         />
       )}

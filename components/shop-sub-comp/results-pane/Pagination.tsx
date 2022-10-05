@@ -1,22 +1,27 @@
 import classes from './Pagination.module.scss';
 
-const Pagination: React.FC<{
+interface PaginationProps {
   totalPages: number;
   onPageBtnClick: (clickedPage: number) => void;
-}> = (props) => {
+  pageInput: number;
+}
+
+const Pagination: React.FC<PaginationProps> = (props) => {
   let pageButtons = [];
 
   const pageClickHandler = (clickedPage: number) => {
     props.onPageBtnClick(clickedPage)
   }
 
+  console.log(`props.pageInput: ${typeof props.pageInput}`);
+
   for (let i=0; i < props.totalPages; i++) {
-    const pageBtnEl = <button onClick={() => pageClickHandler(i+1)} >{i + 1}</button>;
+    const pageBtnEl = <button onClick={() => pageClickHandler(i+1)} className={props.pageInput === (i+1) ? classes.selected : ''}>{i + 1}</button>;
     pageButtons.push(pageBtnEl);
   }
 
   return (
-    <div>
+    <div className={`${classes['page-btn-container']}`}>
       {pageButtons.map((pageBtn) => (pageBtn))}
     </div>
   );

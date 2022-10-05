@@ -1,33 +1,32 @@
-import { useRouter } from "next/router";
 import { useRef } from "react";
 import categoriesDB from "../../../model/categoriesDB";
 
-const CategorySearch: React.FC<{
+interface CategorySearchProps {
   onCategorySearch: (category: string) => void;
   onClearCategory: boolean;
-}> = (props) => {
+  categoryInput: string;
+}
 
-  const router = useRouter();
+const CategorySearch: React.FC<CategorySearchProps> = (props) => {
 
   const setToDashedFormat = (category: string) => {
     return category.replace(/\s+/g,"-").toLowerCase();
   }
 
-  let categoryRef: any[] = [];
+  let categoryInputRef: any[] = [];
 
-  categoriesDB.forEach((category, index) => {
-    categoryRef[index] = useRef<HTMLInputElement>(null);
+  categoriesDB.forEach((_, index) => {
+    categoryInputRef[index] = useRef<HTMLInputElement>(null);
   });
 
   const selectHandler = (cat: number) => {
-    props.onCategorySearch(categoryRef[cat].current?.value);
+    props.onCategorySearch(categoryInputRef[cat].current?.value);
   }
 
   if (props.onClearCategory) {
     console.log("clearing category");
-    console.log(categoryRef[0]);
-    categoriesDB.forEach((category, index) => {
-      categoryRef[index].current.checked = false;
+    categoriesDB.forEach((_, index) => {
+      categoryInputRef[index].current.checked = false;
     });
   }
 
@@ -45,7 +44,8 @@ const CategorySearch: React.FC<{
                 name="categories" 
                 value={category}
                 onClick={() => selectHandler(index)}  
-                ref={categoryRef[index]}
+                ref={categoryInputRef[index]}
+                defaultChecked={props.categoryInput === category && true}
               />
               <label htmlFor={setToDashedFormat(category)}>{category}</label>
             </li>
@@ -54,6 +54,8 @@ const CategorySearch: React.FC<{
       </form>
     </div>
   );
+
+
 };
 
 export default CategorySearch;
