@@ -1,11 +1,13 @@
+import { useRouter } from "next/router";
 import { useRef } from "react";
-import categoriesDB from "../../model/categoriesDB";
+import categoriesDB from "../../../model/categoriesDB";
 
 const CategorySearch: React.FC<{
   onCategorySearch: (category: string) => void;
   onClearCategory: boolean;
-  // onRadioCheck: boolean | null;
 }> = (props) => {
+
+  const router = useRouter();
 
   const setToDashedFormat = (category: string) => {
     return category.replace(/\s+/g,"-").toLowerCase();
@@ -18,10 +20,12 @@ const CategorySearch: React.FC<{
   });
 
   const selectHandler = (cat: number) => {
-    props.onCategorySearch(categoryRef[cat].current?.value)
+    props.onCategorySearch(categoryRef[cat].current?.value);
   }
 
-  if (props.onClearCategory === true) {
+  if (props.onClearCategory) {
+    console.log("clearing category");
+    console.log(categoryRef[0]);
     categoriesDB.forEach((category, index) => {
       categoryRef[index].current.checked = false;
     });
@@ -42,7 +46,6 @@ const CategorySearch: React.FC<{
                 value={category}
                 onClick={() => selectHandler(index)}  
                 ref={categoryRef[index]}
-                // checked={props.onRadioCheck}
               />
               <label htmlFor={setToDashedFormat(category)}>{category}</label>
             </li>

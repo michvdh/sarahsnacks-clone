@@ -10,9 +10,8 @@
 // https://nextjs.org/docs/api-reference/next/link
 
 import { useRouter } from "next/router";
-import changeToKebabCase from "../../components/helper-functions/changeToKebabCase";
-import productsDB from "../../components/model/productsDB";
-import { ProductsDBModel } from "../../components/model/productsDBModel.model";
+import changeToKebabCase from "../../components/helpers/changeToKebabCase";
+import productsDB from "../../model/productsDB";
 import ProductCompleteDetails from "../../components/ui/ProductCompleteDetails";
 
 const Product = () => {

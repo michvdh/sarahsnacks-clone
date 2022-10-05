@@ -1,4 +1,4 @@
-import { ProductsDBModel } from "../model/productsDBModel.model";
+import { ProductsDBModel } from "../../model/productsDBModel.model";
 
 const changeToKebabCase = (
   productName: string[],

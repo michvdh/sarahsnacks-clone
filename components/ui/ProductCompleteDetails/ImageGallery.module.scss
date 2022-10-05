@@ -1,6 +1,11 @@
 .image-gallery {
+  .currently-viewed {
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
   .selections {
     display: flex;
-    
   }
 }

@@ -18,6 +18,7 @@ const KeywordSearch: React.FC<{
   }
 
   if (props.onClearKeyword) {
+    console.log("clearing keyword");
     keywordInputRef.current.value = ''; // here, I am interacting with the DOM directly. Not a good practice but kind of okay for these scenarios
   }
 

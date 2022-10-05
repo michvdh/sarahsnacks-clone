@@ -1,5 +1,5 @@
 import { useState } from "react";
-import getPriceRange from "../../helper-functions/getPriceRange";
+import getPriceRange from "../../helpers/getPriceRange";
 import classes from "./MainDescription.module.scss";
 
 interface MainDescriptionProps {
@@ -78,8 +78,8 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
       {/* Unordered list */}
       {props.mainDescription.unOrderedList && (
         <ul>
-          {props.mainDescription.unOrderedList.map((desc) => (
-            <li>
+          {props.mainDescription.unOrderedList.map((desc, index) => (
+            <li key={index}>
               {desc.map((text: string) => (
                 <span>{text}</span>
               ))}
@@ -93,8 +93,8 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
         <div>
           <h3>{props.mainDescription.orderedList.title}</h3>
           <ol>
-            {props.mainDescription.orderedList.items.map((item) => (
-              <li>{item}</li>
+            {props.mainDescription.orderedList.items.map((item, index) => (
+              <li key={index}>{item}</li>
             ))}
           </ol>
         </div>
@@ -114,9 +114,9 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
           <div>
             <form>
               <select onChange={(e) => {variationsHandler(e.target.value)}}>
-                <option value="Choose an option" selected={!selectedVariation ? true : false}>Choose an option</option>
-                {props.variations.map((variation) => (
-                  <option value={variation.weight}>{variation.weight}</option>
+                <option key="initial" value="Choose an option" selected={!selectedVariation ? true : false}>Choose an option</option>
+                {props.variations.map((variation, index) => (
+                  <option key={index} value={variation.weight}>{variation.weight}</option>
                 ))}
               </select>
             </form>

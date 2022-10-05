@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Fragment, useState } from "react";
-import getPriceRange from "../../helper-functions/getPriceRange";
-import { ProductsDBModel } from "../../model/productsDBModel.model";
+import getPriceRange from "../../helpers/getPriceRange";
+import { ProductsDBModel } from "../../../model/productsDBModel.model";
 import AdditionalInfo from "./AdditionalInfo";
 import ImageGallery from "./ImageGallery";
 import MainDescription from "./MainDescription";

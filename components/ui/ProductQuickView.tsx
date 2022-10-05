@@ -37,10 +37,12 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
           pathname: `/product/${props.productNameDashed}`,
           query: {
             id: props.id,
+            // ifld: props.imagesFolder
           },
         }}
         // as={`/product/${props.productNameDashed}`}
       >
+        {/* !! search regarding adding <a> with href inside <Link> -- they mentioned this isn't allowed or this isn't best practice */}
         <a href={props.productURL}>
           <Image
             className={`${classes["image--front"]} ${
@@ -51,6 +53,8 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
             src={`${basePath}${props.images[0]}`}
             // alt={props.productName}
             layout="fill"
+            // width="150"
+            // height="350"
           />
           {numberOfImages > 1 ? (
             <Image
@@ -66,6 +70,8 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
           )}
         </a>
       </Link>
+
+      {/* Quick View div should generate a modal when clicked */}
       <div
         className={`${classes["quick-view"]} ${!imageHover ? "hidden" : ""}`}
       >
