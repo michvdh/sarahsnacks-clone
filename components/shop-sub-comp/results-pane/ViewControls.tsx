@@ -26,8 +26,6 @@ const ViewControls: React.FC<ViewControlsProps> = (props) => {
     props.onChangeDisplayType(detailLevel);
   };
 
-  console.log(`props.displayCountInput: ${props.displayCountInput}`);
-
   return (
     <div className={`${classes["view-controls"]}`}>
       <div className={`${classes["view-style"]}`}>

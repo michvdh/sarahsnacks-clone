@@ -13,8 +13,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     props.onPageBtnClick(clickedPage)
   }
 
-  console.log(`props.pageInput: ${typeof props.pageInput}`);
-
   for (let i=0; i < props.totalPages; i++) {
     const pageBtnEl = <button onClick={() => pageClickHandler(i+1)} className={props.pageInput === (i+1) ? classes.selected : ''}>{i + 1}</button>;
     pageButtons.push(pageBtnEl);

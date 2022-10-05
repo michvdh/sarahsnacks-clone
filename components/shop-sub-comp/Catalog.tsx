@@ -43,13 +43,16 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
 
   const [resultsReady, setResultsReady] = useState(false);
 
-  console.log(`keywordSearch: ${keywordSearch}`);
-  console.log(`categorySearch: ${categorySearch}`);
-  console.log(`currentPage: ${currentPage}`);
-  console.log(`productSort: ${productSort}`);
 
   // shallowRouting helper function
-  const shallowRouting = ( category: string, keyword: string, page: number, sort: string ) => {
+  const shallowRouting = ( 
+      category: string, 
+      keyword: string, 
+      page: number, 
+      sort: string, 
+      display: string,
+      style: style
+    ) => {
 
     router.push(
       {
@@ -59,6 +62,8 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
           ...(keyword && {keyword: keyword}),
           ...(page && {page: page}),
           ...(sort && {sort: sort}),
+          ...(display && {display: display}),
+          ...(style && {style: style})
         },
       },
       undefined,
@@ -71,21 +76,19 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
 
   // page 1, 2, 3, etc.
   const pageControlHandler = (clickedPage: number) => {
-    console.log(`pageControlHandler`);
-    console.log(`clickedPage: ${typeof clickedPage}`);
     setCurrentPage(clickedPage);
 
     if (categorySearch !== "" || undefined) {
-      shallowRouting(categorySearch, "", clickedPage, productSort);
+      shallowRouting(categorySearch, "", clickedPage, productSort, displayCount);
       return;
     } 
     
     if (keywordSearch !== "" || undefined) {
-      shallowRouting("", keywordSearch, clickedPage, productSort);
+      shallowRouting("", keywordSearch, clickedPage, productSort, displayCount);
       return;
     }
 
-    shallowRouting("", "", clickedPage, productSort);
+    shallowRouting("", "", clickedPage, productSort, displayCount);
     return;
   };
 
@@ -93,6 +96,19 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
   // 12, 24, All
   const displayCountHandler = (itemCount: string) => {
     setDisplayCount(itemCount);
+
+    if (categorySearch) {
+      shallowRouting(categorySearch, "", currentPage, productSort, itemCount, displayType);
+      return;
+    } 
+    
+    if (keywordSearch) {
+      shallowRouting("", keywordSearch, currentPage, productSort, itemCount, displayType);
+      return;
+    }
+
+    shallowRouting("", "", currentPage, productSort, itemCount, displayType);
+    return;
   };
 
 
@@ -102,16 +118,16 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     setProductSort(sortType);
 
     if (categorySearch) {
-      shallowRouting(categorySearch, "", currentPage, sortType);
+      shallowRouting(categorySearch, "", currentPage, sortType, displayCount, displayType);
       return;
     } 
     
     if (keywordSearch) {
-      shallowRouting("", keywordSearch, currentPage, sortType);
+      shallowRouting("", keywordSearch, currentPage, sortType, displayCount, displayType);
       return;
     }
 
-    shallowRouting("", "", currentPage, sortType);
+    shallowRouting("", "", currentPage, sortType, displayCount, displayType);
     return;
   };
 
@@ -124,7 +140,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     setCurrentPage(1);
     setKeywordSearchTriggered(true);
     setCategorySearchTriggered(false);
-    shallowRouting("", keyword, 1, "default")
+    shallowRouting("", keyword, 1, "default", displayCount, displayType)
   };
 
 
@@ -136,13 +152,26 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     setSortChanged(false);
     setKeywordSearchTriggered(false);
     setCategorySearchTriggered(true);
-    shallowRouting(category, "", 1, "default");
+    shallowRouting(category, "", 1, "default", displayCount, displayType);
   };
 
 
   // Set display to Minimum or Basic Details
   const displayTypeHandler = (detailLevel: string) => {
     setDisplayType(detailLevel);
+
+    if (categorySearch) {
+      shallowRouting(categorySearch, "", currentPage, productSort, displayCount, detailLevel);
+      return;
+    } 
+    
+    if (keywordSearch) {
+      shallowRouting("", keywordSearch, currentPage, productSort, displayCount, detailLevel);
+      return;
+    }
+
+    shallowRouting("", "", currentPage, productSort, displayCount, detailLevel);
+    return;
   };
 
 
@@ -306,6 +335,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     applyProductSort();
   }
 
+  console.log(hasResults);
   hasResults && applyPagination();
 
 
@@ -315,41 +345,41 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     !resultsReady && setResultsReady(true);
 
     if (router.query.category) {
-      shallowRouting(router.query.category, "", router.query.page, router.query.sort);
-
+      shallowRouting(router.query.category, "", router.query.page, router.query.sort, router.query.display, router.query.style);
       !categorySearchTriggered && setCategorySearchTriggered(true);
       setCategorySearch(router.query.category.toString());
       setProductSort(router.query.sort);
       setSortChanged(true);
       setCurrentPage(+router.query.page);
-
+      setDisplayCount(router.query.display);
+      setDisplayType(router.query.style);
       return;
     }
 
     if (router.query.keyword) {
-      shallowRouting("", router.query.keyword, router.query.page, router.query.sort);
-
+      shallowRouting("", router.query.keyword, router.query.page, router.query.sort, router.query.display, router.query.style);
       !keywordSearchTriggered && setKeywordSearchTriggered(true);
       setKeywordSearch(router.query.keyword.toString());
       setProductSort(router.query.sort);
       setSortChanged(true);
       setCurrentPage(+router.query.page);
-
+      setDisplayCount(router.query.display);
+      setDisplayType(router.query.style);
       return;
     }
 
     if (!router.query.keyword && !router.query.category) {
-      shallowRouting("", "", router.query.page, router.query.sort);
+      shallowRouting("", "", router.query.page, router.query.sort, router.query.display, router.query.style);
       router.query.sort && setProductSort(router.query.sort);
       router.query.sort && setSortChanged(true);
       router.query.page && setCurrentPage(+router.query.page);
+      router.query.display && setDisplayCount(router.query.display);
+      router.query.style && setDisplayType(router.query.style);
+      return;
     }
 
   }, [isReady]);
 
-  console.log(`displayCount: ${displayCount}`);
-
-  console.log(`currentPage: ${typeof currentPage}`);
 
   return (
     <main className={`main`}>
