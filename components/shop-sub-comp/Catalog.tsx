@@ -4,8 +4,7 @@
 import ResultsPane from "../../components/shop-sub-comp/results-pane/ResultsPane";
 import SearchPane from "../../components/shop-sub-comp/search-pane/SearchPane";
 import classes from "./Catalog.module.scss";
-import { Fragment, useCallback, useEffect, useState } from "react";
-import productsDB from "../../model/productsDB";
+import { Fragment, useEffect, useState } from "react";
 import { ProductsDBModel } from "../../model/productsDBModel.model";
 import { useRouter } from "next/router";
 
@@ -51,6 +50,11 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
   const [keywordSearchTriggered, setKeywordSearchTriggered] = useState(false);
 
   const [resultsReady, setResultsReady] = useState(false);
+
+  console.log(`keywordSearch: ${keywordSearch}`);
+  console.log(`categorySearch: ${categorySearch}`);
+  console.log(`currentPage: ${currentPage}`);
+  console.log(`productSort: ${productSort}`);
 
   // shallowRouting helper function
   const shallowRouting = ( category: string, keyword: string, page: number, sort: string ) => {
