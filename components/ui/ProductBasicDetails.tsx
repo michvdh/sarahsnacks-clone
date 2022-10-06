@@ -1,14 +1,19 @@
 import classes from "./ProductBasicDetails.module.scss";
-import { ProductBasicModel } from "../model/productBasicModel.model";
+import { ProductBasicModel } from "../../model/productBasicModel.model";
 import ProductQuickView from "./ProductQuickView";
+import Link from "next/link";
 
 const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
-  const productName = props.otherName ? props.otherName : (props.productName[1] === "" ? props.productName[0] : (props.productName[0] + " " + props.productName[1]));
+  const productName = props.otherName
+    ? props.otherName
+    : props.productName[1] === ""
+    ? props.productName[0]
+    : props.productName[0] + " " + props.productName[1];
 
-  const productNameDashed = productName.replace("&","").replace(/\s+/g,"-").toLocaleLowerCase();
-
-  const productURL =
-    `/products/${productNameDashed}`;
+  const productNameDashed = productName
+    .replace("&", "")
+    .replace(/\s+/g, "-")
+    .toLocaleLowerCase();
 
   const categoryLength = props.category.length - 1;
 
@@ -30,42 +35,77 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
   return (
     <figure className={`${classes["product-basic-details"]}`}>
       <ProductQuickView
-        id={props.key}
+        id={props.id}
         productNameDashed={productNameDashed}
-        productURL={productURL}
         imagesFolder={props.imagesFolder}
         images={props.images}
       />
       <figcaption>
         <p className={`${classes["category-container"]}`}>
           {props.category.map((category, index) => (
-            <a
-              href={`https://sarahssnacks.com/product-category/${category
-                .replace(" ", "-")
-                .toLowerCase()}`}
-              key={index}
-              className={`category ${classes.category}`}
+            <Link
+              href={{
+                pathname: `/shop`,
+                query: {
+                  category: category,
+                  page: 1,
+                  sort: "default",
+                  display: "12",
+                  style: "min-details",
+                },
+              }}
+              passHref
+              shallow
             >
-              {category}
-              {index !== categoryLength ? ", " : ""}
-            </a>
+              <a
+                key={index}
+                onClick={() => {
+                  props.onCategorySearch(category);
+                }}
+                className={`category ${classes.category}`}
+              >
+                {category}
+                {index !== categoryLength ? ", " : ""}
+              </a>
+            </Link>
           ))}
         </p>
         <h2>
-          <a href={productURL} className={`product-name`}>
-            {productName}
-          </a>
+          <Link
+            href={{
+              pathname: `/product/${productNameDashed}`,
+              query: {
+                id: props.id,
+              },
+            }}
+            passHref
+          >
+            <a className={`product-name`}>
+              {props.productName.length > 1
+                ? `${props.productName[0]} ${props.productName[1]}`
+                : props.productName[0]}
+            </a>
+          </Link>
         </h2>
         <span className={`${classes["price-range"]}`}>
           {getPriceRange(props.variations)}
         </span>
         <p>{props.description}</p>
-        <a
-          className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
-          href={productURL}
+        <Link
+          href={{
+            pathname: `/product/${productNameDashed}`,
+            query: {
+              id: props.id,
+            },
+          }}
+          passHref
         >
-          Add to Cart
-        </a>
+          <a
+            className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
+          >
+            {props.variations.length > 1 ? "Select Options" : "Add to Cart"}
+          </a>
+        </Link>
       </figcaption>
     </figure>
   );

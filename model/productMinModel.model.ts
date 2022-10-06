@@ -1,5 +1,4 @@
 export interface ProductMinModel { // rename to ProductMinModel
-  // key: string; // id
   id: string;
   productName: string[];
   otherName: string;
@@ -12,5 +11,6 @@ export interface ProductMinModel { // rename to ProductMinModel
     weight: string;
     dimensions: string;
   }[];
-  btnLabel: string;
+  onCategorySearch: (category: string) => void;
+  // btnLabel: string;
 }

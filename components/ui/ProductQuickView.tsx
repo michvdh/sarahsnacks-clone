@@ -7,7 +7,6 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 interface QuickViewProps {
   id: string;
-  productURL: string;
   productNameDashed: string;
   imagesFolder: string;
   images: string[];
@@ -40,10 +39,9 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
             // ifld: props.imagesFolder
           },
         }}
-        // as={`/product/${props.productNameDashed}`}
+        passHref
       >
-        {/* !! search regarding adding <a> with href inside <Link> -- they mentioned this isn't allowed or this isn't best practice */}
-        <a href={props.productURL}>
+        <a>
           <Image
             className={`${classes["image--front"]} ${
               classes["image"]

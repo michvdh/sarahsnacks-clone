@@ -10,6 +10,7 @@ interface ResultsPaneProps {
   onDisplayCount: (itemCount: string) => void;
   totalPages: number;
   onPageBtnClick: (clickedPage: number) => void;
+  onCategorySearch: (category: string) => void;
   // onReturnToDefaultSort: boolean;
   onChangeDisplayType: (detailLevel: string) => void;
   displayType: string;
@@ -36,6 +37,7 @@ const ResultsPane: React.FC<ResultsPaneProps> = (props) => {
         showProducts={props.showProducts}
         displayType={props.displayType}
         resultsReady={props.resultsReady}
+        onCategorySearch={props.onCategorySearch}
       />
 
       {props.resultsReady && props.totalPages > 1 && (

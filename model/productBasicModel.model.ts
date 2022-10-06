@@ -1,5 +1,5 @@
 export interface ProductBasicModel {
-  key: string; // id
+  id: string; // id
   productName: string[];
   otherName: string;
   description: string[][];
@@ -12,4 +12,5 @@ export interface ProductBasicModel {
     weight: string;
     dimensions: string;
   }[];
+  onCategorySearch: (category: string) => void;
 }

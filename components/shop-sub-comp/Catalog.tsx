@@ -51,7 +51,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
       page: number, 
       sort: string, 
       display: string,
-      style: style
+      style: string
     ) => {
 
     router.push(
@@ -145,6 +145,8 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
 
 
   const categorySearchHandler = (category: string) => {
+    // if (category === categorySearch) return;
+
     setCategorySearch(category);
     setKeywordSearch("");
     setCurrentPage(1);
@@ -335,14 +337,15 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     applyProductSort();
   }
 
-  console.log(hasResults);
   hasResults && applyPagination();
 
 
+  // useEffect is designed to work for links that were copied to a new tab or session
   useEffect(() => {
     if (!isReady) return;
 
     !resultsReady && setResultsReady(true);
+    // console.log("useEffect");
 
     if (router.query.category) {
       shallowRouting(router.query.category, "", router.query.page, router.query.sort, router.query.display, router.query.style);
@@ -381,6 +384,12 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
   }, [isReady]);
 
 
+  // const [isChecked, setIsChecked] = useState(false);
+
+  // const categoryChangeHandler = (a: string, b: string) => {
+  //   a === b && setIsChecked(true); 
+  // }
+
   return (
     <main className={`main`}>
       <section className={`${classes.catalog} catalog`}>
@@ -391,12 +400,15 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
           onClearCategory={clearCategory}
           categoryInput={categorySearch}
           keywordInput={keywordSearch}
+          // onCategoryChange={categoryChangeHandler}
+          // categoryCheckState={isChecked}
         />
         <ResultsPane
           showProducts={hasResults ? pageControlledProductList : []}
           onProductSort={productSortHandler}
           onDisplayCount={displayCountHandler}
           onPageBtnClick={pageControlHandler}
+          onCategorySearch={categorySearchHandler}
           // onReturnToDefaultSort={defaultSort}
           onChangeDisplayType={displayTypeHandler}
           displayType={displayType}

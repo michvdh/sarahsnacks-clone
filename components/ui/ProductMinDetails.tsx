@@ -1,16 +1,18 @@
-import Link from 'next/link';
+import Link from "next/link";
 import classes from "./ProductMinDetails.module.scss";
-import { ProductMinModel } from '../../model/productMinModel.model';
+import { ProductMinModel } from "../../model/productMinModel.model";
 import ProductQuickView from "./ProductQuickView";
-import getPriceRange from '../helpers/getPriceRange';
-import changeToKebabCase from '../helpers/changeToKebabCase';
+import getPriceRange from "../helpers/getPriceRange";
+import changeToKebabCase from "../helpers/changeToKebabCase";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
-
-  const productNameDashed = changeToKebabCase(props.productName, props.otherName);
-
-  const productURL =
-    `/product/${productNameDashed}/?id=${props.id}`;
+  const productNameDashed = changeToKebabCase(
+    props.productName,
+    props.otherName
+  );
+  const categoryLength = props.category.length - 1;
 
   return (
     <figure
@@ -21,7 +23,6 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
         <ProductQuickView
           id={props.id}
           productNameDashed={productNameDashed}
-          productURL={productURL}
           imagesFolder={props.imagesFolder}
           images={props.images}
         />
@@ -29,40 +30,70 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
         <figcaption className="embla__slide__caption">
           <p className={`${classes["category-container"]}`}>
             {props.category.map((category, index) => (
-              <a
-                href={`/product-category/${category
-                  .replace(" ", "-")
-                  .toLowerCase()}`}
-                key={index}
-                className={`category ${classes.category}`}
+              <Link
+                href={{
+                  pathname: `/shop`,
+                  query: {
+                    category: category,
+                    page: 1,
+                    sort: "default",
+                    display: "12",
+                    style: "min-details",
+                  },
+                }}
+                passHref
+                shallow
               >
-                {category}{index !== (props.category.length - 1) ? ", " : ""}
-              </a>
+                <a
+                  key={index}
+                  onClick={() => {
+                    props.onCategorySearch(category);
+                  }}
+                  className={`category ${classes.category}`}
+                >
+                  {category}
+                  {index !== categoryLength ? ", " : ""}
+                </a>
+              </Link>
             ))}
           </p>
+
           <Link
             href={{
               pathname: `/product/${productNameDashed}`,
               query: {
-                id: props.id
+                id: props.id,
               },
             }}
-            // as={`/product/${productNameDashed}`}
-              // I commented out "as" because I needed id to show in the url. This way, when a user simply copies a link of the product, we can load the dynamic page
+            passHref
           >
-            <h2>
-              <a href={productURL} className={`product-name`}>
-                {props.productName.length > 1 ? `${props.productName[0]} ${props.productName[1]}` : props.productName[0]}
-              </a>
-            </h2>
+            <a className={`product-name`}>
+              {props.productName.length > 1
+                ? `${props.productName[0]} ${props.productName[1]}`
+                : props.productName[0]}
+            </a>
           </Link>
-          <span className={`${classes["price-range"]}`}>{getPriceRange(props.variations)}</span>
-          <a
-            className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
-            href={productURL}
+
+          <span className={`${classes["price-range"]}`}>
+            {getPriceRange(props.variations)}
+          </span>
+
+          {/* ---- Button ---- */}
+          <Link
+            href={{
+              pathname: `/product/${productNameDashed}`,
+              query: {
+                id: props.id,
+              },
+            }}
+            passHref
           >
-            {props.btnLabel}
-          </a>
+            <a
+              className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
+            >
+              {props.variations.length > 1 ? "Select Options" : "Add to Cart"}
+            </a>
+          </Link>
         </figcaption>
       </div>
     </figure>
