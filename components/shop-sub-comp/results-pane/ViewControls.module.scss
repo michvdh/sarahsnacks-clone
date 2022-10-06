@@ -17,6 +17,10 @@
           cursor: pointer;
         }
       }
+
+      .selected {
+        background-color: orange;
+      }
     }
   }
 }
@@ -31,11 +35,16 @@
         content: "/";
       }
 
-      .option {
+      span {
         &:hover {
           cursor: pointer;
         }
       }
+
+      // transfer this code to typography css file
+      .selected {
+        color: red;
+      } 
     } 
   }
 }

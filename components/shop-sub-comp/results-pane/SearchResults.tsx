@@ -7,6 +7,7 @@ interface SearchResultsProps {
   showProducts: ProductsDBModel[] | [];
   displayType: string;
   resultsReady: boolean;
+  onCategorySearch: (category: string) => void;
 }
 
 const SearchResults: React.FC<SearchResultsProps> = (props) => {
@@ -37,12 +38,14 @@ const SearchResults: React.FC<SearchResultsProps> = (props) => {
                 images={product.images.thumbnailRegular}
                 category={product.category}
                 variations={product.variations}
-                btnLabel="Add to Cart"
+                onCategorySearch={props.onCategorySearch}
+                // btnLabel="Add to Cart"
               />
             )) :
             props.showProducts.map((product: ProductsDBModel) => ( 
               <ProductBasicDetails
                 key={product.id}
+                id={product.id}
                 productName={product.productName}
                 otherName={product.otherName}
                 description={product.mainDescription.main}
@@ -50,6 +53,7 @@ const SearchResults: React.FC<SearchResultsProps> = (props) => {
                 images={product.images.thumbnailRegular}
                 category={product.category}
                 variations={product.variations}
+                onCategorySearch={props.onCategorySearch}
               />
             ))
           )

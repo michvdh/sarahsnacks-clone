@@ -1,53 +1,64 @@
-import { useRouter } from "next/router";
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import categoriesDB from "../../../model/categoriesDB";
+import Link from "next/link";
+import classes from './CategorySearch.module.scss';
 
-const CategorySearch: React.FC<{
+interface CategorySearchProps {
   onCategorySearch: (category: string) => void;
   onClearCategory: boolean;
-}> = (props) => {
+  categoryInput: string;
+  // onCategoryChange: (a: string, b:string) => void;
+  // categoryCheckState: boolean;
+}
 
-  const router = useRouter();
-
+const CategorySearch: React.FC<CategorySearchProps> = (props) => {
   const setToDashedFormat = (category: string) => {
-    return category.replace(/\s+/g,"-").toLowerCase();
-  }
+    return category.replace(/\s+/g, "-").toLowerCase();
+  };
 
-  let categoryRef: any[] = [];
+  let categoryInputRef: any[] = [];
 
-  categoriesDB.forEach((category, index) => {
-    categoryRef[index] = useRef<HTMLInputElement>(null);
+  categoriesDB.forEach((_, index) => {
+    categoryInputRef[index] = useRef<HTMLInputElement>(null);
   });
 
-  const selectHandler = (cat: number) => {
-    props.onCategorySearch(categoryRef[cat].current?.value);
-  }
+
+  const selectHandler = (category: string) => {
+    props.onCategorySearch(category);
+  };
+
+  // categoryInputRef[cat].current?.value
 
   if (props.onClearCategory) {
-    console.log("clearing category");
-    console.log(categoryRef[0]);
-    categoriesDB.forEach((category, index) => {
-      categoryRef[index].current.checked = false;
+    console.log("clearcategory");
+    categoriesDB.forEach((_, index) => {
+      categoryInputRef[index].current.checked = false;
     });
   }
 
+
   return (
-    <div>
+    <div className={`${classes['category-search']}`}>
       <h3>Categories</h3>
       <form action="">
         <ul>
           {categoriesDB.map((category, index) => (
             <li key={index}>
-              <input 
-                type="radio" 
-                className="radio-btn"
-                id={setToDashedFormat(category)} 
-                name="categories" 
+              <input
+                type="radio"
+                className={`radio-btn ${classes.option}`}
+                id={setToDashedFormat(category)}
+                name="categories"
                 value={category}
-                onClick={() => selectHandler(index)}  
-                ref={categoryRef[index]}
+                // onClick={() => selectHandler(category)}
+                ref={categoryInputRef[index]}
+                defaultChecked={props.categoryInput === category && true}
+                checked={props.categoryInput === category && true}
+                // checked={props.categoryCheckState}
+                // onChange={() => {props.onCategoryChange(props.categoryInput, category)}}
+                onChange={() => selectHandler(category)}
               />
-              <label htmlFor={setToDashedFormat(category)}>{category}</label>
+              <label htmlFor={setToDashedFormat(category)} className={classes.option}>{category}</label>
             </li>
           ))}
         </ul>
