@@ -384,12 +384,6 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
   }, [isReady]);
 
 
-  // const [isChecked, setIsChecked] = useState(false);
-
-  // const categoryChangeHandler = (a: string, b: string) => {
-  //   a === b && setIsChecked(true); 
-  // }
-
   return (
     <main className={`main`}>
       <section className={`${classes.catalog} catalog`}>
@@ -400,8 +394,6 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
           onClearCategory={clearCategory}
           categoryInput={categorySearch}
           keywordInput={keywordSearch}
-          // onCategoryChange={categoryChangeHandler}
-          // categoryCheckState={isChecked}
         />
         <ResultsPane
           showProducts={hasResults ? pageControlledProductList : []}

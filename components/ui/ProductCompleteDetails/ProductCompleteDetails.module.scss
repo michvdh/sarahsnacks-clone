@@ -1,7 +1,11 @@
 .product-complete-details {
   .upper {
     display: flex;
-    flex-direction: row;
-    row-gap: 5rem;
+    flex-direction: column;
+  
+    &__main {
+      display: flex;
+      row-gap: 5rem;
+    }
   }
 }

@@ -7,8 +7,6 @@ interface CategorySearchProps {
   onCategorySearch: (category: string) => void;
   onClearCategory: boolean;
   categoryInput: string;
-  // onCategoryChange: (a: string, b:string) => void;
-  // categoryCheckState: boolean;
 }
 
 const CategorySearch: React.FC<CategorySearchProps> = (props) => {
@@ -26,8 +24,6 @@ const CategorySearch: React.FC<CategorySearchProps> = (props) => {
   const selectHandler = (category: string) => {
     props.onCategorySearch(category);
   };
-
-  // categoryInputRef[cat].current?.value
 
   if (props.onClearCategory) {
     console.log("clearcategory");
@@ -50,12 +46,9 @@ const CategorySearch: React.FC<CategorySearchProps> = (props) => {
                 id={setToDashedFormat(category)}
                 name="categories"
                 value={category}
-                // onClick={() => selectHandler(category)}
                 ref={categoryInputRef[index]}
-                defaultChecked={props.categoryInput === category && true}
+                // defaultChecked={props.categoryInput === category && true}
                 checked={props.categoryInput === category && true}
-                // checked={props.categoryCheckState}
-                // onChange={() => {props.onCategoryChange(props.categoryInput, category)}}
                 onChange={() => selectHandler(category)}
               />
               <label htmlFor={setToDashedFormat(category)} className={classes.option}>{category}</label>

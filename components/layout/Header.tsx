@@ -3,7 +3,6 @@ import Link from "next/link";
 import classes from "./Header.module.scss";
 import CompanyLogo from "../company-logo/CompanyLogo";
 import { useSelector } from "react-redux";
-// import { useDispatch } from "react-redux";
 // import { useInView } from "react-intersection-observer";
 // import { ioActions } from '../../store/intersectionObserver';
 
@@ -23,6 +22,10 @@ const Header: React.FC = () => {
       };
     }) => state.io.targetIntersect
   );
+
+  const cartTotalQty = useSelector((state: {cart: {totalQty: number}}) => state.cart.totalQty)
+
+  const cartTotalPrice = useSelector((state: {cart: {totalPrice: number}}) => state.cart.totalPrice);
 
   // console.log(intersectState);
 
@@ -56,9 +59,9 @@ const Header: React.FC = () => {
               className={`${classes[`fa-icon`]} fa-icon--green`}
               icon={faCaretLeft}
             />
-            <span className={`${classes["cart__count"]} cart__count`}>0</span>
+            <span className={`${classes["cart__count"]} cart__count`}>{cartTotalQty}</span>
           </span>
-          <span className={`extra-bold`}>$0.00</span>
+          <span className={`extra-bold`}>${cartTotalPrice.toFixed(2)}</span>
         </div>
         <div className={`${classes.nav} nav`}>
           <ul className={`extra-bold`}>

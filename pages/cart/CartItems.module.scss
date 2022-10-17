@@ -1,0 +1,10 @@
+.cart-items {
+  .row {
+    display: grid;
+    grid-template-columns: 0.3fr 1fr 3fr 1fr 1.5fr 1fr;
+
+    .quantity {
+      display: flex;
+    }
+  }
+}
