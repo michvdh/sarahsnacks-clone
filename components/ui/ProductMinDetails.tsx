@@ -4,15 +4,30 @@ import { ProductMinModel } from "../../model/productMinModel.model";
 import ProductQuickView from "./ProductQuickView";
 import getPriceRange from "../helpers/getPriceRange";
 import changeToKebabCase from "../helpers/changeToKebabCase";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../store/cart";
 
 const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
   const productNameDashed = changeToKebabCase(
     props.productName,
     props.otherName
   );
+
   const categoryLength = props.category.length - 1;
+
+  const dispatch = useDispatch();
+
+  const addToCartHandler = () => {
+    dispatch(
+      cartActions.addItem({
+        id: props.id,
+        productName: `${props.productName[0]} ${props.productName[1] && props.productName[1]}`,
+        varPrice: props.variations[0].price,
+        varSize: props.variations[0],
+        qty: 1,
+      })
+    ); 
+  }
 
   return (
     <figure
@@ -79,21 +94,29 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
           </span>
 
           {/* ---- Button ---- */}
-          <Link
-            href={{
-              pathname: `/product/${productNameDashed}`,
-              query: {
-                id: props.id,
-              },
-            }}
-            passHref
-          >
-            <a
-              className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
+          {props.variations.length > 1 && (
+            <Link
+              href={{
+                pathname: `/product/${productNameDashed}`,
+                query: {
+                  id: props.id,
+                },
+              }}
+              passHref
             >
-              {props.variations.length > 1 ? "Select Options" : "Add to Cart"}
+              <a
+                className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
+              >
+                Select Options
+              </a>
+            </Link>
+          )}
+
+          {props.variations.length === 1 && (
+            <a className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`} onClick={addToCartHandler}>
+              Add to Cart
             </a>
-          </Link>
+          )}
         </figcaption>
       </div>
     </figure>

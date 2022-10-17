@@ -48,6 +48,13 @@
       vertical-align: middle;
     }
 
+    &-link {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: right;
+    }
+
     &__count {
       background-color: $dark-green;
       display: inline-block;

@@ -78,9 +78,6 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   props.selectionDetails(selectedVariation ? vIndex : 0, hasSelection);
 
   const addToCartHandler = () => {
-    console.log(varPrice);
-    console.log(quantityInputRef);
-
     if (quantityInputRef && quantityInputRef.current) {
       dispatch(
         cartActions.addItem({
