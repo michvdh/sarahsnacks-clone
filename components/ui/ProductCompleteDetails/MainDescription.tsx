@@ -42,11 +42,11 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   const dispatch = useDispatch();
 
   const [inputQty, setInputQty] = useState(1);
-  const [selectedVariation, setSelectedVariation] = useState("");
+ 
 
   const cart = useSelector((state: { cart: { cartItems: cartItemsInterface } }) => state.cart.cartItems
   );
-  
+
   const quantityInputRef = useRef<HTMLInputElement>(null);
   const tempPName =
     props.productName.length > 1
@@ -57,7 +57,7 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   
   // this will be used if there are multiple variations
   // the values will be the weight
-
+  const [selectedVariation, setSelectedVariation] = useState("");
   const [hasSelection, setHasSelection] = useState(
     props.variations.length === 1 ? true : false
   );
@@ -103,7 +103,7 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   }
 
   const addToCartHandler = () => {
-    if (quantityInputRef && quantityInputRef.current) {
+    if (quantityInputRef && quantityInputRef.current && hasSelection) {
       dispatch(
         cartActions.addItem({
           id: props.id,
@@ -118,9 +118,9 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
     }
   };
 
-  const checkCartHandler = () => {
-    dispatch(cartActions.checkCart());
-  };
+  // const checkCartHandler = () => {
+  //   dispatch(cartActions.checkCart());
+  // };
 
   const clearHandler = () => {
     setSelectedVariation("");
@@ -131,10 +131,6 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
     <div>
       {/* Price or Price Range */}
       <span>{getPriceRange(props.variations)}</span>
-
-      {/* {cart.map((item) => {
-        <span>{item.productName}</span>
-      })} */}
 
       {/* Product name */}
       <h1>{props.productName[0]}</h1>
@@ -227,8 +223,8 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
           />
           <button onClick={incrementQty}>+</button>
         </div>
-        <button onClick={addToCartHandler}>Add to Cart</button>
-        <button onClick={checkCartHandler}>Check cart</button>
+        <button className={hasSelection ? '' : `btn--disabled`} onClick={addToCartHandler}>Add to Cart</button>
+        {/* <button onClick={checkCartHandler}>Check cart</button> */}
       </div>
 
       {/* Category */}

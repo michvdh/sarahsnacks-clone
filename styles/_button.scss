@@ -4,6 +4,10 @@
   cursor: pointer;
   border: none;
 
+  &--disabled {
+    cursor: not-allowed;
+  }
+
   &--large {
     padding: 1.4rem 3.5rem;
   }
