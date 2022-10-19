@@ -1,0 +1,119 @@
+[33mcommit ad8bebea1dc81aaaf73341e9ac723889bd82d90f[m[33m ([m[1;36mHEAD -> [m[1;32mcart-and-modal[m[33m, [m[1;31morigin/cart-and-modal[m[33m)[m
+Author: michvdh <michael.v.d.hingpit@gmail.com>
+Date:   Tue Oct 18 11:14:35 2022 +0800
+
+    updated cart view when empty
+
+[33mcommit 2bd12e07d3a880bef156bbef118ca7e3c1a5528a[m
+Author: michvdh <michael.v.d.hingpit@gmail.com>
+Date:   Mon Oct 17 18:32:46 2022 +0800
+
+    added Cart Totals in cart page
+
+[33mcommit 8583202a19368ad7e8787fa1266d7e5c6796bb46[m
+Author: michvdh <michael.v.d.hingpit@gmail.com>
+Date:   Mon Oct 17 16:00:16 2022 +0800
+
+    Fixed add to cart for 1 var product in shop page. Added link to cart via cart icon
+
+[33mcommit 8fa99ad6b982c75a194d235e89bcd6bd0771d746[m
+Author: michvdh <michael.v.d.hingpit@gmail.com>
+Date:   Mon Oct 17 11:28:37 2022 +0800
+
+    included add items, remove items, update quantity in cart
+
+[33mcommit bf3c18d8ccfe17d88fb6ed7f93344b255b19351e[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m
+Merge: 15c9fa0 25e162b
+Author: Michael Hingpit <87687571+michvdh@users.noreply.github.com>
+Date:   Thu Oct 6 18:45:18 2022 +0800
+
+    Merge pull request #2 from michvdh/retain-shop-inputs-on-copied-link
+    
+    Retain shop inputs on copied link
+
+[33mcommit 25e162b60183dfb949f65ec0576883870dccf93a[m[33m ([m[1;31morigin/retain-shop-inputs-on-copied-link[m[33m)[m
+Author: michvdh <michael.v.d.hingpit@gmail.com>
+Date:   Thu Oct 6 18:37:45 2022 +0800
+
+    Fixed Link tags and routing for ProdQV, ProdMin, ProdBasic, Categories
+
+[33mcommit 9670998fb1562c05fd4c590e213b3d09797959a9[m
+Author: michvdh <michael.v.d.hingpit@gmail.com>
+Date:   Wed Oct 5 23:10:38 2022 +0800
+
+    added temporary indicators for active displayType buttons
+
+[33mcommit f24c0d79923160405977c5b0162676c34e640026[m
+Author: michvdh <michael.v.d.hingpit@gmail.com>
+Date:   Wed Oct 5 19:51:42 2022 +0800
+
+    added display type and display count to shallow routing
+
+[33mcommit 6a9d7b3151520b23a35c4598eae0fa524602f5b6[m
+Author: michvdh <michael.v.d.hingpit@gmail.com>
+Date:   Wed Oct 5 17:43:36 2022 +0800
+
+    retained selections except for display count, deleted mongodb uri and files
+
+[33mcommit 15c9fa038f4ea5b27a467cee2bff13e6ca4bfdbf[m
+Author: michvdh <michael.v.d.hingpit@gmail.com>
+Date:   Wed Oct 5 13:09:51 2022 +0800
+
+    added minor comments for testing. Pushing changes before I create a new branch
+
+[33mcommit d032ad499fee4fa6d21b04a21853650637dfc780[m
+Author: michvdh <michael.v.d.hingpit@gmail.com>
+Date:   Wed Oct 5 12:01:02 2022 +0800
+
+    forgot to delete old pub key on local. Deleted the old file now
+
+[33mcommit a72deaf68507f16ef358a65a5ec6155979a29f70[m
+Author: michvdh <michael.v.d.hingpit@gmail.com>
+Date:   Wed Oct 5 11:58:04 2022 +0800
+
+    created new key and updated git ignore. Deleted old key
+
+[33mcommit 09afe325d7ab7a088d0fe76a8a5cd16ac5de118a[m
+Author: Michael Hingpit <87687571+michvdh@users.noreply.github.com>
+Date:   Wed Oct 5 11:39:53 2022 +0800
+
+    Update .gitignore
+
+[33mcommit 92cfd75b7d53ecb4529e481d6028792cbf192d8f[m
+Author: Michael Hingpit <87687571+michvdh@users.noreply.github.com>
+Date:   Wed Oct 5 11:39:24 2022 +0800
+
+    Delete ssckey
+
+[33mcommit 97904df859486fc2d4b0c4d5ca7120fa38d94db8[m
+Merge: aa6e0eb 114d7de
+Author: Michael Hingpit <87687571+michvdh@users.noreply.github.com>
+Date:   Wed Oct 5 11:22:01 2022 +0800
+
+    Merge pull request #1 from michvdh/search-urls
+    
+    Search urls
+
+[33mcommit 114d7de4776a1a80254d078273496363853b0bb8[m[33m ([m[1;31morigin/search-urls[m[33m)[m
+Author: michvdh <michael.v.d.hingpit@gmail.com>
+Date:   Wed Oct 5 11:09:46 2022 +0800
+
+    adjusted gitignore file
+
+[33mcommit 2d8c2ce39b19ebf6454481f6103540fe0e591e42[m
+Author: michvdh <michael.v.d.hingpit@gmail.com>
+Date:   Wed Oct 5 11:01:45 2022 +0800
+
+    added shallow routing for keyword, category, page, sort
+
+[33mcommit aa6e0ebf8bc48a724af0c0c7992554cbc68f3645[m
+Author: michvdh <michael.v.d.hingpit@gmail.com>
+Date:   Tue Sep 20 09:55:03 2022 +0800
+
+    Initial commit
+
+[33mcommit d95e922605b8ae6907bd4684a03bc11503b306ca[m
+Author: michvdh <michael.v.d.hingpit@gmail.com>
+Date:   Tue Aug 2 10:20:23 2022 +0800
+
+    Initial commit from Create Next App

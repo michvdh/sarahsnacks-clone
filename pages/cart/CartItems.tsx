@@ -1,7 +1,7 @@
 import classes from "./CartItems.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cart";
-import { MutableRefObject, RefObject, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 
 interface cartItemsInterface {
@@ -20,20 +20,8 @@ const CartItems = () => {
       state.cart.cartItems
   );
 
-  // let refArray: RefObject<HTMLInputElement>[] = [];
-
-  // cartItems.forEach((item, index) => {
-  //   refArray.push(useRef<HTMLInputElement>(null));
-  // });
-
-  // console.log(refArray[0]);
-  // console.log(refArray[0].current?.defaultValue);
-  // console.log(refArray[0].current?.value);
-
-  ////////////////////////////////////////
-
   const [inputId, setInputId] = useState(""); // id of the specific item being adjusted
-  const [inputQty, setInputQty] = useState(0); // quantity of the specific item being adjusted
+  const [inputQty, setInputQty] = useState(1); // quantity of the specific item being adjusted
 
   const incrementQty = (id: string) => {
     const itemIndex = cartItems.findIndex((p) => p.id === id);
@@ -45,15 +33,23 @@ const CartItems = () => {
     const itemIndex = cartItems.findIndex((p) => p.id === id);
     setInputId(id);
 
-    if (cartItems[itemIndex].qty >= 1) {
+    if (cartItems[itemIndex].qty > 1) {
       setInputQty(cartItems[itemIndex].qty - 1);
     }
   };
 
+  // inputChangeHandler is not triggered for + and - buttons. Only for typing
   const inputChangeHandler = (e) => {
     setInputId(e.target.id);
     setInputQty(e.target.value);
   };
+
+  const inputExitHandler = (e) => {
+    if (e.target.value < 1) {
+      setInputId(e.target.id);
+      setInputQty(1);
+    }
+  }
 
   // removed delay - useEffect is now purely used for dispatch
   useEffect(() => {
@@ -63,8 +59,9 @@ const CartItems = () => {
     // return () => clearTimeout(timer);
 
     dispatch(
-      cartActions.adjustItemQty({ inputId: inputId, inputQty: +inputQty })
+      cartActions.adjustItemQty({ inputId: inputId, inputQty: inputQty })
     );
+
   }, [inputQty, inputId]);
 
   const removeItemHandler = (id: string) => {
@@ -73,15 +70,8 @@ const CartItems = () => {
 
   return (
     <div className={`${classes["cart-items"]}`}>
-      {/* {cartItems.length === 0 && (
-        <div>
-          <span>(icon here)</span>
-          <span>YOUR CART IS CURRENTLY EMPTY.</span>
-        </div>
-      )} */}
 
       {/* add a different JSX block for mobile view. This one below is for desktop / large tablet view */}
-
       <ul>
         <li className={classes.row}>
           <div></div>
@@ -117,6 +107,7 @@ const CartItems = () => {
                 min={0}
                 value={item.qty}
                 onChange={inputChangeHandler}
+                onBlur={inputExitHandler}
               />
               <button onClick={() => incrementQty(item.id)}>+</button>
             </div>

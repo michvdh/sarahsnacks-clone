@@ -7,7 +7,7 @@ interface cartStateType {
     productName: string;
     varPrice: number; // variation price
     varSize: string, // variation size
-    qty: number;
+    qty: number | string;
   }[];
   totalQty: number;
   totalPrice: number;
@@ -54,7 +54,7 @@ const cartSlice = createSlice({
       if (state.cartItems.length > 0) {
         state.totalPrice = 0;
         state.cartItems.forEach((item) => {
-          state.totalPrice += (item.qty * item.varPrice);
+          state.totalPrice += (+item.qty * item.varPrice);
         });
       }
       
@@ -63,7 +63,7 @@ const cartSlice = createSlice({
     removeItem(state, action) {
       const selectedItemId = action.payload.inputId;
       const itemIndex = state.cartItems.findIndex((p) => p.id === selectedItemId);
-      const selectedItemQty = state.cartItems[itemIndex].qty;
+      const selectedItemQty = +state.cartItems[itemIndex].qty;
       const selectedItemPrice = state.cartItems[itemIndex].varPrice;
       const selectedItemTotalPrice = selectedItemQty * selectedItemPrice;
 
@@ -77,9 +77,11 @@ const cartSlice = createSlice({
       const selectedItemQty = action.payload.inputQty;
       const itemIndex = state.cartItems.findIndex((p) => p.id === selectedItemId);
 
+      console.log(`cart itemqty: ${selectedItemQty}`);
+
       if (state.cartItems[itemIndex]) {
         const selectedItemPrice = state.cartItems[itemIndex].varPrice;
-        const prevItemQty = state.cartItems[itemIndex].qty;
+        const prevItemQty = +state.cartItems[itemIndex].qty;
 
         if (selectedItemQty > prevItemQty) {
           const difference = selectedItemQty - prevItemQty;
