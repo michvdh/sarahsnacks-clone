@@ -40,8 +40,13 @@ interface cartItemsInterface {
 
 const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   const dispatch = useDispatch();
+
+  const [inputQty, setInputQty] = useState(1);
+  const [selectedVariation, setSelectedVariation] = useState("");
+
   const cart = useSelector((state: { cart: { cartItems: cartItemsInterface } }) => state.cart.cartItems
   );
+  
   const quantityInputRef = useRef<HTMLInputElement>(null);
   const tempPName =
     props.productName.length > 1
@@ -49,7 +54,7 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
       : props.productName[0];
   const productName = capitalizeFirstLetter(tempPName);
 
-  const [selectedVariation, setSelectedVariation] = useState("");
+  
   // this will be used if there are multiple variations
   // the values will be the weight
 
@@ -76,6 +81,26 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   const varSize = props.variations[vIndex].size;
 
   props.selectionDetails(selectedVariation ? vIndex : 0, hasSelection);
+
+  const incrementQty = () => {
+    setInputQty(inputQty + 1);
+  }
+
+  const decrementQty = () => {
+    if (inputQty > 1) {
+      setInputQty(inputQty - 1)
+    }
+  }
+
+  const inputChangeHandler = (e) => {
+    setInputQty(e.target.value)
+  }
+
+  const inputExitHandler = (e) => {
+    if (e.target.value < 1) {
+      setInputQty(1);
+    } 
+  }
 
   const addToCartHandler = () => {
     if (quantityInputRef && quantityInputRef.current) {
@@ -191,14 +216,16 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
       <div>
         {selectedVariation && <span>${varPrice}</span>}
         <div>
-          <button>-</button>
+          <button onClick={decrementQty}>-</button>
           <input
             type="number"
-            min={1}
-            defaultValue={1}
+            min={0}
+            value={inputQty}
+            onChange={inputChangeHandler}
+            onBlur={inputExitHandler}
             ref={quantityInputRef}
           />
-          <button>+</button>
+          <button onClick={incrementQty}>+</button>
         </div>
         <button onClick={addToCartHandler}>Add to Cart</button>
         <button onClick={checkCartHandler}>Check cart</button>
