@@ -4,10 +4,17 @@ import { ProductMinModel } from "../../model/productMinModel.model";
 import ProductQuickView from "./ProductQuickView";
 import getPriceRange from "../helpers/getPriceRange";
 import changeToKebabCase from "../helpers/changeToKebabCase";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cart";
+import { useEffect, useState } from "react";
+import AddToCartSuccessModal from "./modal/AddToCartSuccessModal";
+import { modalActions } from "../../store/modal";
 
 const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
+  const showAddToCartModalState = useSelector((state: { modal: {addItemSuccesModal: boolean}}) => state.modal.addItemSuccesModal);
+
+  const [showSuccessModal, setShowSuccessModal] = useState(showAddToCartModalState);
+
   const productNameDashed = changeToKebabCase(
     props.productName,
     props.otherName
@@ -17,17 +24,44 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
 
   const dispatch = useDispatch();
 
+
   const addToCartHandler = () => {
     dispatch(
       cartActions.addItem({
         id: props.id,
-        productName: `${props.productName[0]} ${props.productName[1] && props.productName[1]}`,
+        productName: `${props.productName[0]} ${
+          props.productName[1] && props.productName[1]
+        }`,
         varPrice: props.variations[0].price,
         varSize: props.variations[0],
         qty: 1,
       })
+    );
+
+    addToCartModalHandler(!showSuccessModal);
+  };
+
+  const addToCartModalHandler = (modalState: boolean) => {
+    dispatch(
+      modalActions.showAddToCartSuccessModal({ 
+        addItemSuccesModal: modalState 
+      })
+    );
+
+    setShowSuccessModal(modalState);
+  };
+
+  const backdropHandler = () => {
+    const newState = !showSuccessModal;
+
+    dispatch(
+      modalActions.showAddToCartSuccessModal({ 
+        addItemSuccesModal: newState 
+      })
     ); 
+    setShowSuccessModal(newState)
   }
+
 
   return (
     <figure
@@ -113,12 +147,16 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
           )}
 
           {props.variations.length === 1 && (
-            <a className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`} onClick={addToCartHandler}>
+            <a
+              className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
+              onClick={addToCartHandler}
+            >
               Add to Cart
             </a>
           )}
         </figcaption>
       </div>
+      {(showSuccessModal === true) && <AddToCartSuccessModal onClick={backdropHandler} />}
     </figure>
   );
 };

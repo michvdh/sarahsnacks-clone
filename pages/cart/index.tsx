@@ -1,8 +1,9 @@
 import classes from "./Cart.module.scss";
 import CartItems from "./CartItems";
 import CartTotals from "./CartTotals";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Fragment } from "react";
+import {modalActions} from '../../store/modal';
 
 interface cartItemsInterface {
   id: string;
@@ -17,6 +18,14 @@ const Cart = () => {
     (state: { cart: { cartItems: cartItemsInterface[] } }) =>
       state.cart.cartItems
   );
+
+  // const dispatch = useDispatch();
+
+  // dispatch(
+  //   modalActions.showAddToCartSuccessModal({ 
+  //     addItemSuccesModal: false 
+  //   })
+  // ); 
 
   return (
     <main className={`main`}>

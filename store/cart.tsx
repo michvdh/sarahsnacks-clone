@@ -77,8 +77,6 @@ const cartSlice = createSlice({
       const selectedItemQty = action.payload.inputQty;
       const itemIndex = state.cartItems.findIndex((p) => p.id === selectedItemId);
 
-      console.log(`cart itemqty: ${selectedItemQty}`);
-
       if (state.cartItems[itemIndex]) {
         const selectedItemPrice = state.cartItems[itemIndex].varPrice;
         const prevItemQty = +state.cartItems[itemIndex].qty;

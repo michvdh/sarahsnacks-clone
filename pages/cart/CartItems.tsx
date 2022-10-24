@@ -32,7 +32,7 @@ const CartItems = () => {
   const decrementQty = (id: string) => {
     const itemIndex = cartItems.findIndex((p) => p.id === id);
     setInputId(id);
-
+    
     if (cartItems[itemIndex].qty > 1) {
       setInputQty(cartItems[itemIndex].qty - 1);
     }
