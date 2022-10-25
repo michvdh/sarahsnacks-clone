@@ -46,7 +46,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
 
   // shallowRouting helper function
   const shallowRouting = ( 
-      category: string, 
+      category: string | string[], 
       keyword: string, 
       page: number, 
       sort: string, 
