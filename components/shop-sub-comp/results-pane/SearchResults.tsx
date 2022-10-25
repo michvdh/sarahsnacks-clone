@@ -14,13 +14,14 @@ const SearchResults: React.FC<SearchResultsProps> = (props) => {
 
   const classDisplayType = props.displayType === "min-details" ? "grid-type" : "column-type";
 
-  if (!props.resultsReady) {
-    return (
-      <div className={`${classes["search-results"]} ${classes[classDisplayType]}`}>
-        <p>Loading . . .</p>
-      </div>
-    );
-  }
+  // -- commented this one out for now since we have a page-to-page loading spinner
+  // if (!props.resultsReady) {
+  //   return (
+  //     <div className={`${classes["search-results"]} ${classes[classDisplayType]}`}>
+  //       <p>Loading . . .</p>
+  //     </div>
+  //   );
+  // }
   
   if (props.resultsReady) {
     return (

@@ -15,14 +15,14 @@ interface cartStateType {
 
 const initialCartState: cartStateType = {
   cartItems: [
-    {id: "p100",
-    productName: "Ice Cream",
-    varPrice: 13,
-    varSize: "1L bucket",
-    qty: 1}
+    // {id: "p100",
+    // productName: "Ice Cream",
+    // varPrice: 13,
+    // varSize: "1L bucket",
+    // qty: 1}
   ],
-  totalQty: 1, // 0
-  totalPrice: 13.00, // 0
+  totalQty: 0, // 0
+  totalPrice: 0 // 0
 };
 
 const cartSlice = createSlice({
