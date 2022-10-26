@@ -16,7 +16,7 @@ const Loading = () => {
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-
+  
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -35,8 +35,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       router.events.off("routeChangeError", handleComplete);
     };
   });
-
-  console.log(loading);
 
   return (
     <Provider store={store}>

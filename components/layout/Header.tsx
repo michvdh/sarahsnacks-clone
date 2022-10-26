@@ -4,6 +4,9 @@ import classes from "./Header.module.scss";
 import CompanyLogo from "../company-logo/CompanyLogo";
 import { useSelector } from "react-redux";
 import { Fragment } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { cartActions } from '../../store/cart';
 // import { useInView } from "react-intersection-observer";
 // import { ioActions } from '../../store/intersectionObserver';
 
@@ -24,6 +27,8 @@ const Header: React.FC = () => {
     }) => state.io.targetIntersect
   );
 
+  const dispatch = useDispatch();
+
   const cartTotalQty = useSelector(
     (state: { cart: { totalQty: number } }) => state.cart.totalQty
   );
@@ -32,7 +37,17 @@ const Header: React.FC = () => {
     (state: { cart: { totalPrice: number } }) => state.cart.totalPrice
   );
 
-  // console.log(intersectState);
+  useEffect(() => {
+    let cartLS =
+      typeof window !== "undefined" &&
+      "cartLS" in localStorage &&
+      JSON.parse(localStorage.getItem("cartLS") || '{}');
+      // we need to check if window is not undefined because localStorage api is not available on the server
+      // cartLS = cart local storage
+    console.log("useEffect");
+    cartLS && dispatch(cartActions.getCartDetailsFromLocalStorage(cartLS));
+  }, []);
+
 
   return (
     <header
