@@ -2,8 +2,17 @@ import classes from "./ProductBasicDetails.module.scss";
 import { ProductBasicModel } from "../../model/productBasicModel.model";
 import ProductQuickView from "./ProductQuickView";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../../store/cart";
+import { useEffect, useState } from "react";
+import AddToCartSuccessModal from "./modal/AddToCartSuccessModal";
+import { modalActions } from "../../store/modal";
 
 const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
+  const showAddToCartModalState = useSelector((state: { modal: {addItemSuccesModal: boolean}}) => state.modal.addItemSuccesModal);
+
+  const [showSuccessModal, setShowSuccessModal] = useState(showAddToCartModalState);
+
   const productName = props.otherName
     ? props.otherName
     : props.productName[1] === ""
@@ -16,6 +25,45 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
     .toLocaleLowerCase();
 
   const categoryLength = props.category.length - 1;
+
+  const dispatch = useDispatch();
+
+  const addToCartHandler = () => {
+    dispatch(
+      cartActions.addItem({
+        id: props.id,
+        productName: `${props.productName[0]} ${
+          props.productName[1] && props.productName[1]
+        }`,
+        varPrice: props.variations[0].price,
+        varSize: props.variations[0],
+        qty: 1,
+      })
+    );
+
+    addToCartModalHandler(!showSuccessModal);
+  };
+
+  const addToCartModalHandler = (modalState: boolean) => {
+    dispatch(
+      modalActions.showAddToCartSuccessModal({
+        addItemSuccesModal: modalState,
+      })
+    );
+
+    setShowSuccessModal(modalState);
+  };
+
+  const backdropHandler = () => {
+    const newState = !showSuccessModal;
+
+    dispatch(
+      modalActions.showAddToCartSuccessModal({
+        addItemSuccesModal: newState,
+      })
+    );
+    setShowSuccessModal(newState);
+  };
 
   const getPriceRange = (variations: ProductBasicModel["variations"]) => {
     const priceVariationLength = variations.length;
@@ -91,7 +139,7 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
           {getPriceRange(props.variations)}
         </span>
         <p>{props.description}</p>
-        <Link
+        {/* <Link
           href={{
             pathname: `/product/${productNameDashed}`,
             query: {
@@ -105,8 +153,35 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
           >
             {props.variations.length > 1 ? "Select Options" : "Add to Cart"}
           </a>
-        </Link>
+        </Link> */}
+        {props.variations.length > 1 && (
+          <Link
+            href={{
+              pathname: `/product/${productNameDashed}`,
+              query: {
+                id: props.id,
+              },
+            }}
+            passHref
+          >
+            <a
+              className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
+            >
+              Select Options
+            </a>
+          </Link>
+        )}
+
+        {props.variations.length === 1 && (
+          <a
+            className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
+            onClick={addToCartHandler}
+          >
+            Add to Cart
+          </a>
+        )}
       </figcaption>
+      {(showSuccessModal === true) && <AddToCartSuccessModal onClick={backdropHandler} />}
     </figure>
   );
 };

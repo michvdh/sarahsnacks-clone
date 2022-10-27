@@ -44,7 +44,7 @@ const Header: React.FC = () => {
       JSON.parse(localStorage.getItem("cartLS") || '{}');
       // we need to check if window is not undefined because localStorage api is not available on the server
       // cartLS = cart local storage
-    console.log("useEffect");
+
     cartLS && dispatch(cartActions.getCartDetailsFromLocalStorage(cartLS));
   }, []);
 

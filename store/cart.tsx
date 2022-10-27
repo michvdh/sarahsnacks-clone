@@ -28,7 +28,7 @@ const initialCartState: cartStateType = {
   cartItems: [],
   totalQty: 0,
   totalPrice: 0,
-  expiry: 0,
+  expiry: 0, // current time + 24 hours
   ttl: 86400000 // 24 hours = 86400000 ms
 };
 
@@ -42,18 +42,28 @@ const cartSlice = createSlice({
       const cartLS = action.payload;
       const now = (new Date()).getTime();
 
-      console.log(cartLS.expiry);
-      console.log(now);
-      // console.log(cartLS);
+      console.log(`cartLS time: ${cartLS.expiry}`);
+      console.log(`now: ${now + 2592000000}`);
 
+      // remove localStorage cartLS if more than 24hours since last add item AND browser / tab has been refreshed or closed
+        // removal happens after user refreshes or re-opens site (even on right click + new tab)
       if ((cartLS.expiry + cartLS.ttl) < now) {
-        localStorage.removeItem("cartLS");
-        return;
+        window.onbeforeunload = () => {
+          localStorage.removeItem("cartLS");
+          return;
+        }
       }
 
-      state.cartItems = cartLS.cartItems;
-      state.totalPrice = cartLS.totalPrice;
-      state.totalQty = cartLS.totalQty;
+      // if user refreshes or loads the site in a new tab or browser session, and state.expiry is not yet expired, expiry time is refreshed.
+      if ((cartLS.expiry + cartLS.ttl) > now) {
+        state.expiry = now + state.ttl;
+        state.cartItems = cartLS.cartItems;
+        state.totalPrice = cartLS.totalPrice;
+        state.totalQty = cartLS.totalQty;
+
+        typeof window !== "undefined" &&
+        localStorage.setItem("cartLS", JSON.stringify(state));
+      }
     },
 
     addItem(state, action) {
