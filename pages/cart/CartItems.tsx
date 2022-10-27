@@ -68,6 +68,8 @@ const CartItems = () => {
     dispatch(cartActions.removeItem({ inputId: id }));
   };
 
+  console.log(cartItems);
+
   return (
     <div className={`${classes["cart-items"]}`}>
 

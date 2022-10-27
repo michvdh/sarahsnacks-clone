@@ -24,7 +24,6 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
 
   const dispatch = useDispatch();
 
-
   const addToCartHandler = () => {
     dispatch(
       cartActions.addItem({
@@ -33,7 +32,7 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
           props.productName[1] && props.productName[1]
         }`,
         varPrice: props.variations[0].price,
-        varSize: props.variations[0],
+        varSize: props.variations[0].size,
         qty: 1,
       })
     );
