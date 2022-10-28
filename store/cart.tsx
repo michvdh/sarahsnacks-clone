@@ -15,15 +15,6 @@ interface cartStateType {
   ttl: number;
 }
 
-
-// const initialCartState: cartStateType = cartLS
-//   ? cartLS
-//   : {
-//       cartItems: [],
-//       totalQty: 0,
-//       totalPrice: 0,
-//     };
-
 const initialCartState: cartStateType = {
   cartItems: [],
   totalQty: 0,
@@ -41,9 +32,6 @@ const cartSlice = createSlice({
     getCartDetailsFromLocalStorage(state, action) {
       const cartLS = action.payload;
       const now = (new Date()).getTime();
-
-      console.log(`cartLS time: ${cartLS.expiry}`);
-      console.log(`now: ${now + 2592000000}`);
 
       // remove localStorage cartLS if more than 24hours since last add item AND browser / tab has been refreshed or closed
         // removal happens after user refreshes or re-opens site (even on right click + new tab)

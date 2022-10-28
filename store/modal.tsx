@@ -1,21 +1,28 @@
-import {createSlice} from "@reduxjs/toolkit";
+// import {createSlice} from "@reduxjs/toolkit";
 
-const initialModalState = {
-  addItemSuccesModal: false
-};
+// const initialModalState = {
+//   addItemSuccesModal: false,
+//   qtyErrorModal: false
+// };
 
-const modalSlice = createSlice({
-  name: "modal",
-  initialState: initialModalState,
-  reducers: {
-    showAddToCartSuccessModal(state, action) {
-      const showModal = action.payload;
-      state.addItemSuccesModal = showModal;
-      console.log(showModal);
-    }
-  }
-});
+// // I don't think I need to use store for my modal
+// const modalSlice = createSlice({
+//   name: "modal",
+//   initialState: initialModalState,
+//   reducers: {
 
-export const modalActions = modalSlice.actions;
+//     showAddToCartSuccessModal(state, action) {
+//       const showModal = action.payload;
+//       state.addItemSuccesModal = showModal;
+//     },
 
-export default modalSlice.reducer;
+//     showQtyErrorModal(state, action) {
+//       const showModal = action.payload;
+//       state.qtyErrorModal = showModal;
+//     }
+//   }
+// });
+
+// export const modalActions = modalSlice.actions;
+
+// export default modalSlice.reducer;

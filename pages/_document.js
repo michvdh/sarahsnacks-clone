@@ -9,6 +9,7 @@ export default class MyDocument extends Document {
             <Main />
             <div id="backdrop-root"></div>
             <div id="success-overlay-root"></div>
+            <div id="qty-error-root"></div>
             <NextScript />
           </body>
       </Html>

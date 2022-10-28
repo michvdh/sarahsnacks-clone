@@ -30,7 +30,7 @@ const Hero: React.FC = () => {
     rootMargin: '0px'
   });
 
-  console.log(entry);
+  // console.log(entry);
 
   const intersectState = entry?.isIntersecting;
 
@@ -38,7 +38,7 @@ const Hero: React.FC = () => {
     dispatch(ioActions.changeIOState(intersectState));
   }
 
-  console.log(intersectState);
+  // console.log(intersectState);
 
   return (
     <section ref={heroRef} className={`${classes.hero} hero`}>

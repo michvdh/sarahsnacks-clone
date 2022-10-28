@@ -11,9 +11,11 @@ import AddToCartSuccessModal from "./modal/AddToCartSuccessModal";
 import { modalActions } from "../../store/modal";
 
 const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
-  const showAddToCartModalState = useSelector((state: { modal: {addItemSuccesModal: boolean}}) => state.modal.addItemSuccesModal);
+  // const showAddToCartModalState = useSelector((state: { modal: {addItemSuccesModal: boolean}}) => state.modal.addItemSuccesModal);
 
-  const [showSuccessModal, setShowSuccessModal] = useState(showAddToCartModalState);
+  // const [showSuccessModal, setShowSuccessModal] = useState(showAddToCartModalState);
+
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const productNameDashed = changeToKebabCase(
     props.productName,
@@ -41,11 +43,11 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
   };
 
   const addToCartModalHandler = (modalState: boolean) => {
-    dispatch(
-      modalActions.showAddToCartSuccessModal({ 
-        addItemSuccesModal: modalState 
-      })
-    );
+    // dispatch(
+    //   modalActions.showAddToCartSuccessModal({ 
+    //     addItemSuccesModal: modalState 
+    //   })
+    // );
 
     setShowSuccessModal(modalState);
   };
@@ -53,11 +55,11 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
   const backdropHandler = () => {
     const newState = !showSuccessModal;
 
-    dispatch(
-      modalActions.showAddToCartSuccessModal({ 
-        addItemSuccesModal: newState 
-      })
-    ); 
+    // dispatch(
+    //   modalActions.showAddToCartSuccessModal({ 
+    //     addItemSuccesModal: newState 
+    //   })
+    // ); 
     setShowSuccessModal(newState)
   }
 

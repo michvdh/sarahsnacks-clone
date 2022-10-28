@@ -29,8 +29,6 @@ const ProductCompleteDetails: React.FC<{product: ProductsDBModel}> = (props) => 
     setNewItemProductName(productName);
   }
 
-  console.log(addToCartConfirmation);
-  
   return (
     <div className={`${classes['product-complete-details']}`}>
       {/* Upper */}

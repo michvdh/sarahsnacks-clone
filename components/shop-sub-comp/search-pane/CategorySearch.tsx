@@ -26,7 +26,6 @@ const CategorySearch: React.FC<CategorySearchProps> = (props) => {
   };
 
   if (props.onClearCategory) {
-    console.log("clearcategory");
     categoriesDB.forEach((_, index) => {
       categoryInputRef[index].current.checked = false;
     });
