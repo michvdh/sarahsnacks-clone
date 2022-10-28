@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cart";
 import { useEffect, useRef } from "react";
 import { useState } from "react";
-import { modalActions } from "../../store/modal";
+// import { modalActions } from "../../store/modal";
 import { Fragment } from "react";
-import QtyErrorModal from "../../components/ui/modal/qtyErrorModal";
+import QtyErrorModal from "../../components/ui/modal/QtyErrorModal";
 
 interface cartItemsInterface {
   id: string;
@@ -54,11 +54,11 @@ const CartItems = () => {
       setInputId(e.target.id);
       setInputQty(1);
 
-      dispatch(
-        modalActions.showQtyErrorModal({
-          qtyErrorModal: true,
-        })
-      );
+      // dispatch(
+      //   modalActions.showQtyErrorModal({
+      //     qtyErrorModal: true,
+      //   })
+      // );
 
       setShowQtyInputError(true);
     }

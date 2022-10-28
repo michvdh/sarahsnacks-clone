@@ -1,6 +1,8 @@
+import ReactDOM from "react-dom";
 import classes from "./QtyErrorModal.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { Fragment } from "react";
+import { useState, useEffect } from "react";
 
 const QtyErrorOverlay = () => {
   return (
@@ -16,10 +18,16 @@ const QtyErrorOverlay = () => {
 
 const QtyErrorModal = () => {
   const qtyErrorOverlay = document.getElementById("qty-error-root")!;
+  const [mounted, setMounted] = useState(false);
+
+  // useEffect(() => {
+  //   setMounted(true);
+  //   return () => setMounted(false);
+  // }, []);
 
   return (
     <Fragment>
-      ReactDOM.createPortal(<QtyErrorOverlay />, qtyErrorOverlay)
+      {ReactDOM.createPortal(<QtyErrorOverlay />, qtyErrorOverlay)}
     </Fragment>
   );
 };

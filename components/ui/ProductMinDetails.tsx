@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cart";
 import { useEffect, useState } from "react";
 import AddToCartSuccessModal from "./modal/AddToCartSuccessModal";
-import { modalActions } from "../../store/modal";
+// import { modalActions } from "../../store/modal";
 
 const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
   // const showAddToCartModalState = useSelector((state: { modal: {addItemSuccesModal: boolean}}) => state.modal.addItemSuccesModal);

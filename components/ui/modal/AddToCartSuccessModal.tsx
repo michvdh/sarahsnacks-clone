@@ -43,21 +43,22 @@ const SuccessModalOverlay: React.FC<{onClick: () => void}> = (props) => {
 
 // this is the modal that appears once a user adds an item (with single variation) from the shop page
 const AddToCartSuccessModal: React.FC<{onClick: () => void}> = (props) => {
-  const [mounted, setMounted] = useState(false);
+  // const [mounted, setMounted] = useState(false);
   const backdrop = document.getElementById("backdrop-root")!;
   const successOverlay = document.getElementById("success-overlay-root")!;
 
-  useEffect(() => {
-    setMounted(true);
-    return () => setMounted(false);
-  }, []);
+  // useEffect(() => {
+  //   setMounted(true);
+  //   return () => setMounted(false);
+  // }, []);
 
   return (
     <Fragment>
-      {mounted && ReactDOM.createPortal(<Backdrop onClick={props.onClick} />, backdrop)}
+      {/* {mounted && ReactDOM.createPortal(<Backdrop onClick={props.onClick} />, backdrop)} */}
+      
+      {ReactDOM.createPortal(<Backdrop onClick={props.onClick} />, backdrop)}
 
-      {mounted &&
-        ReactDOM.createPortal(<SuccessModalOverlay onClick={props.onClick} />, successOverlay)}
+      {ReactDOM.createPortal(<SuccessModalOverlay onClick={props.onClick} />, successOverlay)}
     </Fragment>
   );
 };
