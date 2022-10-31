@@ -10,10 +10,38 @@ import { useEffect, useState } from "react";
 import AddToCartSuccessModal from "./modal/AddToCartSuccessModal";
 // import { modalActions } from "../../store/modal";
 
+interface cartStateType {
+  cartItems: {
+    id: string;
+    productName: string;
+    varPrice: number; // variation price
+    varSize: string; // variation size
+    qty: number | string;
+  }[];
+  totalQty: number;
+  totalPrice: number;
+  expiry: number;
+  ttl: number;
+}
+
 const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
   // const showAddToCartModalState = useSelector((state: { modal: {addItemSuccesModal: boolean}}) => state.modal.addItemSuccesModal);
 
   // const [showSuccessModal, setShowSuccessModal] = useState(showAddToCartModalState);
+
+  const cartItems = useSelector(
+    (state: { cart: cartStateType }) => state.cart.cartItems
+  );
+
+  let inCart = false;
+
+  cartItems.every((item) => {
+    if (item.id === props.id) {
+      inCart = true;
+      return false;
+    }
+    return true;
+  });
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
@@ -44,8 +72,8 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
 
   const addToCartModalHandler = (modalState: boolean) => {
     // dispatch(
-    //   modalActions.showAddToCartSuccessModal({ 
-    //     addItemSuccesModal: modalState 
+    //   modalActions.showAddToCartSuccessModal({
+    //     addItemSuccesModal: modalState
     //   })
     // );
 
@@ -56,13 +84,12 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
     const newState = !showSuccessModal;
 
     // dispatch(
-    //   modalActions.showAddToCartSuccessModal({ 
-    //     addItemSuccesModal: newState 
+    //   modalActions.showAddToCartSuccessModal({
+    //     addItemSuccesModal: newState
     //   })
-    // ); 
-    setShowSuccessModal(newState)
-  }
-
+    // );
+    setShowSuccessModal(newState);
+  };
 
   return (
     <figure
@@ -93,6 +120,7 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
                 }}
                 passHref
                 shallow
+                key={index}
               >
                 <a
                   key={index}
@@ -147,17 +175,31 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
             </Link>
           )}
 
-          {props.variations.length === 1 && (
-            <a
-              className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
-              onClick={addToCartHandler}
-            >
-              Add to Cart
-            </a>
-          )}
+          {props.variations.length === 1 &&
+            (inCart ? (
+              <Link
+                href={{
+                  pathname: `/cart`
+                }}
+                passHref
+              >
+                <a className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}>View Cart</a>
+              </Link>
+            ) : (
+              <a
+                className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
+                onClick={addToCartHandler}
+              >
+                Add to Cart
+              </a>
+            ))
+          }
         </figcaption>
       </div>
-      {(showSuccessModal === true) && <AddToCartSuccessModal onClick={backdropHandler} />}
+
+      {showSuccessModal === true && (
+        <AddToCartSuccessModal onClick={backdropHandler} />
+      )}
     </figure>
   );
 };

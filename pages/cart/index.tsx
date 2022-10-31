@@ -3,7 +3,7 @@ import CartItems from "./CartItems";
 import CartTotals from "./CartTotals";
 import { useDispatch, useSelector } from "react-redux";
 import { Fragment } from "react";
-import {modalActions} from '../../store/modal';
+// import {modalActions} from '../../store/modal';
 
 interface cartItemsInterface {
   id: string;

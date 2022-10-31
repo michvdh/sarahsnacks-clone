@@ -3,6 +3,7 @@ import { faTableCellsLarge, faList } from "@fortawesome/free-solid-svg-icons";
 
 import classes from "./ViewControls.module.scss";
 import { produceWithPatches } from "immer";
+import { useEffect, useState } from "react";
 
 interface ViewControlsProps {
   onProductSort: (sortType: string) => void;
@@ -52,30 +53,31 @@ const ViewControls: React.FC<ViewControlsProps> = (props) => {
           </div>
         </div>
         <div className={`${classes["sort-type"]}`}>
-          <form>
+          <form key={props.sortInput}>
             <select
               onChange={(e) => {
                 sortHandler(e.target.value);
               }}
+              defaultValue={props.sortInput}
             >
               <option
                 key="1"
                 value="default"
-                selected={props.sortInput === "default" && true}
+                // selected={props.sortInput === "default" && true}
               >
                 Default sorting
               </option>
               <option 
                 key="2" 
                 value="price-asc"
-                selected={props.sortInput === "price-asc" && true}
+                // selected={props.sortInput === "price-asc" && true}
               >
                 Sort by price: low to high
               </option>
               <option 
                 key="3" 
                 value="price-desc"
-                selected={props.sortInput === "price-desc" && true}
+                // selected={props.sortInput === "price-desc" && true}
               >
                 Sort by price: high to low
               </option>

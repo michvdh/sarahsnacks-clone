@@ -192,14 +192,16 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
                   onChange={(e) => {
                     variationsHandler(e.target.value);
                   }}
+                  defaultValue="Choose an option"
                 >
                   <option
                     key="initial"
                     value="Choose an option"
-                    selected={!selectedVariation ? true : false}
+                    // selected={!selectedVariation ? true : false}
                   >
                     Choose an option
                   </option>
+
                   {props.variations.map((variation, index) => (
                     <option key={index} value={variation.size}>
                       {variation.size}

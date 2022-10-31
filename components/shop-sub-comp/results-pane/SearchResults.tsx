@@ -61,6 +61,10 @@ const SearchResults: React.FC<SearchResultsProps> = (props) => {
         }
       </div>
     );
+  } else {
+    return (
+      <div className={`${classes["search-results"]} ${classes[classDisplayType]}`}></div>
+    )
   }
 
 };
