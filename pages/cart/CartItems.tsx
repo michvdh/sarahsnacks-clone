@@ -104,6 +104,7 @@ const CartItems = () => {
   //     setTimeout(() => (setShowQtyInputError(false), 10000));
   //   }
   // }, [showQtyInputError])
+  console.log(cartItems);
 
   return (
     <Fragment>
@@ -138,7 +139,7 @@ const CartItems = () => {
               </div>
               <div>image</div>
               <div>
-                {item.productName} {item.varSize && `- ${item.varSize}`}
+                {item.productName} {item.varSize !== "" && `- ${item.varSize}`}
               </div>
               <div>{item.varPrice}</div>
               <div className={`${classes.quantity}`}>
