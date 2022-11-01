@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cart";
 import { useEffect, useState } from "react";
 import AddToCartSuccessModal from "./modal/AddToCartSuccessModal";
+import changeToKebabCase from "../helpers/changeToKebabCase";
 // import { modalActions } from "../../store/modal";
 
 interface cartStateType {
@@ -38,10 +39,10 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
     ? props.productName[0]
     : props.productName[0] + " " + props.productName[1];
 
-  const productNameDashed = productName
-    .replace("&", "")
-    .replace(/\s+/g, "-")
-    .toLocaleLowerCase();
+    const productNameDashed = changeToKebabCase(
+      props.productName, ''
+      // props.otherName
+    );
 
   const categoryLength = props.category.length - 1;
 

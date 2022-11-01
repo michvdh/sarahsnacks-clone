@@ -6,6 +6,8 @@ import { useState } from "react";
 // import { modalActions } from "../../store/modal";
 import { Fragment } from "react";
 import QtyErrorModal from "../../components/ui/modal/QtyErrorModal";
+import changeToKebabCase from "../../components/helpers/changeToKebabCase";
+import Link from "next/link";
 
 interface cartItemsInterface {
   id: string;
@@ -104,7 +106,6 @@ const CartItems = () => {
   //     setTimeout(() => (setShowQtyInputError(false), 10000));
   //   }
   // }, [showQtyInputError])
-  console.log(cartItems);
 
   return (
     <Fragment>
@@ -139,7 +140,18 @@ const CartItems = () => {
               </div>
               <div>image</div>
               <div>
-                {item.productName} {item.varSize !== "" && `- ${item.varSize}`}
+                <Link
+                  href={{
+                    pathname: `/product/${changeToKebabCase([], item.productName)}`,
+                    query: {
+                      id: item.id
+                    }
+                  }}
+                >
+                  <a className={classes['product-link']}>
+                    {item.productName} {item.varSize !== "" && `- ${item.varSize}`}
+                  </a>
+                </Link>
               </div>
               <div>{item.varPrice}</div>
               <div className={`${classes.quantity}`}>

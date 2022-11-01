@@ -46,8 +46,8 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const productNameDashed = changeToKebabCase(
-    props.productName,
-    props.otherName
+    props.productName, ''
+    // props.otherName
   );
 
   const categoryLength = props.category.length - 1;
