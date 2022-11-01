@@ -52,6 +52,8 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
         varPrice: props.variations[0].price,
         varSize: props.variations[0].size,
         qty: 1,
+        imagesFolder: props.imagesFolder,
+        image: props.images[0]
       })
     );
 

@@ -3,6 +3,7 @@ import CartItems from "./CartItems";
 import CartTotals from "./CartTotals";
 import { useDispatch, useSelector } from "react-redux";
 import { Fragment } from "react";
+import {cartStateModel} from "../../model/cartStateModel";
 // import {modalActions} from '../../store/modal';
 
 interface cartItemsInterface {
@@ -15,7 +16,7 @@ interface cartItemsInterface {
 
 const Cart = () => {
   const cartItems = useSelector(
-    (state: { cart: { cartItems: cartItemsInterface[] } }) =>
+    (state: { cart: cartStateModel }) =>
       state.cart.cartItems
   );
 

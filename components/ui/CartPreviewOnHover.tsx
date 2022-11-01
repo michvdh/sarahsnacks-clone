@@ -1,25 +1,66 @@
 import { useSelector, useDispatch } from "react-redux";
-import { cartItemsModel } from "../../model/cartItemsModel";
+import { cartStateModel } from "../../model/cartStateModel";
+import Image from "next/image";
+import { cartActions } from "../../store/cart";
+import classes from "./CartPreviewOnHover.module.scss";
 
-const CartPreviewOnHover = () => {
+interface CartPreviewInterface {
+  className: string;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
+}
+
+const CartPreviewOnHover: React.FC<CartPreviewInterface> = (props) => {
   const dispatch = useDispatch();
 
-  const cartItems = useSelector(
-    (state: { cart: { cartItems: cartItemsModel[] } }) =>
-      state.cart.cartItems
+  const cart = useSelector(
+    (state: { cart: cartStateModel }) =>
+      state.cart
   );
+
+  const removeItemHandler = (id: string) => {
+    dispatch(cartActions.removeItem({ inputId: id }));
+  };
+
+
+  console.log(props.className);
 
 
   return (
-    <div>
+    <div 
+      className={`${classes["cart-preview"]} ${props.className}`}
+      onMouseEnter={props.onMouseEnter}
+      onMouseLeave={props.onMouseLeave}
+    >
       <div>
-        <ul></ul>
+        <ul className={classes["list-container"]}>
+          {cart.cartItems.map((item, index) => (
+            <li key={index} className={classes.list}>
+              <div>
+                <Image
+                  src={`/images/products${item.imagesFolder}${item.image}`}
+                  width="100"
+                  height="100"
+                />
+              </div>
+              <div>
+                <p>{item.productName} {item.varSize && `- ${item.varSize}`}</p>
+                <p>{item.qty} × {item.varPrice}</p>
+              </div>
+              <div>
+                <button onClick={() => removeItemHandler(item.id)}>x</button>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
-      <div>
-        {/* subtotal */}
+      <div className={classes.subtotal}>
+        <span>Subtotal:</span>
+        <span>${cart.totalPrice}</span>
       </div>
-      <div>
-        {/* buttons */}
+      <div className={classes['buttons-container']}>
+        <button>View Cart</button>
+        <button>Checkout</button>
       </div>
     </div>
   )

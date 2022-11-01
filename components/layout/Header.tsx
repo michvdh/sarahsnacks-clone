@@ -7,6 +7,7 @@ import { Fragment } from "react";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { cartActions } from '../../store/cart';
+import CartPreviewOnHover from "../ui/CartPreviewOnHover";
 // import { useInView } from "react-intersection-observer";
 // import { ioActions } from '../../store/intersectionObserver';
 
@@ -37,6 +38,12 @@ const Header: React.FC = () => {
     (state: { cart: { totalPrice: number } }) => state.cart.totalPrice
   );
 
+  const [cartHover, setCartHover] = useState(false);
+
+  const cartHoverHandler = () => {
+    setCartHover(!cartHover);
+  };
+
   useEffect(() => {
     let cartLS =
       typeof window !== "undefined" &&
@@ -48,7 +55,7 @@ const Header: React.FC = () => {
     cartLS && dispatch(cartActions.getCartDetailsFromLocalStorage(cartLS));
   }, []);
 
-
+  console.log(cartHover);
   return (
     <header
       className={`${classes.header} header ${intersectState ? "" : "shadow"}`}
@@ -69,7 +76,11 @@ const Header: React.FC = () => {
           width={intersectState ? 243 : 138}
           height={intersectState ? 80 : 45.5}
         />
-        <div className={`${classes.cart} cart`}>
+        <div 
+          className={`${classes.cart} cart`}
+          onMouseEnter={cartHoverHandler}
+          onMouseLeave={cartHoverHandler}
+        >
           <Link href={{ pathname: `/cart` }} passHref>
             <a>
               <div className={`${classes['cart-link']}`}>
@@ -120,6 +131,12 @@ const Header: React.FC = () => {
             </li>
           </ul>
         </div>
+        <CartPreviewOnHover 
+          className={`${cartHover ? classes['show-cart-preview'] : classes['hide-cart-preview']}`} 
+          onMouseEnter={cartHoverHandler}
+          onMouseLeave={cartHoverHandler}
+        />
+        {/* <CartPreviewOnHover className="" /> */}
       </div>
     </header>
   );

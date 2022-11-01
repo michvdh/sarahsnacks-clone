@@ -23,7 +23,7 @@ const SuccessModalOverlay: React.FC<{onClick: () => void}> = (props) => {
     <div className={classes['success-overlay']}>
       <p>insert check svg</p>
       <h2>Item added to your cart</h2>
-      <p>{cartTotalQty} items in the cart (${cartTotalPrice})</p>
+      <p>{cartTotalQty} items in the cart (${cartTotalPrice.toFixed(2)})</p>
       <div>
         <button onClick={props.onClick}>Continue Shopping</button>
         <button onClick={props.onClick}>

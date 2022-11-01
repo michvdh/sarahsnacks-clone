@@ -2,19 +2,6 @@ import { createSlice, current } from "@reduxjs/toolkit";
 import {cartStateModel} from  '../model/cartStateModel';
 // current is used so that we can get the "current state" for debugging
 
-interface cartStateType {
-  cartItems: {
-    id: string;
-    productName: string;
-    varPrice: number; // variation price
-    varSize: string; // variation size
-    qty: number | string;
-  }[];
-  totalQty: number;
-  totalPrice: number;
-  expiry: number;
-  ttl: number;
-}
 
 const initialCartState: cartStateModel = {
   cartItems: [],
@@ -70,6 +57,8 @@ const cartSlice = createSlice({
           varPrice: +newItem.varPrice,
           varSize: newItem.varSize,
           qty: +newItem.qty,
+          imagesFolder: newItem.imagesFolder,
+          image: newItem.image
         });
       } else {
         existingItem.qty += newItem.qty;

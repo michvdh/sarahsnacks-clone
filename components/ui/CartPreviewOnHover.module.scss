@@ -1,0 +1,51 @@
+.cart-preview {
+  z-index: 999;
+  position: absolute;
+  background-color: white;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  width: 35rem;
+  // height: 40rem;
+  // overflow:auto;
+
+  .list-container {
+    max-height: 25rem;
+    overflow:auto;
+
+    .list {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .subtotal {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .buttons-container {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+// CartOnPreview
+.show-cart-preview {
+  // opacity: 1;
+  // animation: mymove 5s;
+}
+
+.hide-cart-preview {
+  // opacity: 0;
+  // z-index: -1;
+  // display: none !important; // I can add in the animation that after x seconds, display:none will apply
+  display: none !important;
+}
+
+
+@keyframes mymove {
+  0%   {top: 0px; background: red; width: 100px;}
+  100% {top: 200px; background: yellow; width: 300px;}
+}
