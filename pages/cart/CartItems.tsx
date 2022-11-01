@@ -8,21 +8,13 @@ import { Fragment } from "react";
 import QtyErrorModal from "../../components/ui/modal/QtyErrorModal";
 import changeToKebabCase from "../../components/helpers/changeToKebabCase";
 import Link from "next/link";
-
-interface cartItemsInterface {
-  id: string;
-  productName: string;
-  varPrice: number; // variation price
-  varSize: string; // variation size
-  qty: number;
-}
+import {cartStateModel} from "../../model/cartStateModel";
 
 const CartItems = () => {
   const dispatch = useDispatch();
 
   const cartItems = useSelector(
-    (state: { cart: { cartItems: cartItemsInterface[] } }) =>
-      state.cart.cartItems
+    (state: { cart: cartStateModel }) => state.cart.cartItems
   );
 
   const [inputId, setInputId] = useState(""); // id of the specific item being adjusted
@@ -77,16 +69,13 @@ const CartItems = () => {
     );
 
     if (showQtyInputError) {
-      setTimeout(() => (setShowQtyInputError(false)), 3000);
+      setTimeout(() => setShowQtyInputError(false), 3000);
     }
-
   }, [inputQty, inputId]);
 
   const removeItemHandler = (id: string) => {
-    const itemIndex = cartItems.findIndex(
-      (p) => p.id === id
-    );
-    
+    const itemIndex = cartItems.findIndex((p) => p.id === id);
+
     const latestItemRemoved = cartItems[itemIndex];
     setItemToUndo(latestItemRemoved);
 
@@ -96,10 +85,10 @@ const CartItems = () => {
   };
 
   const undoHandler = () => {
-    dispatch(cartActions.addItem(itemToUndo)); 
+    dispatch(cartActions.addItem(itemToUndo));
     setShowUndoBox(false);
     setItemToUndo({});
-  }
+  };
 
   // useEffect(() => {
   //   if (showQtyInputError) {
@@ -109,10 +98,12 @@ const CartItems = () => {
 
   return (
     <Fragment>
-      {showUndoBox && <div className={`${classes.undo}`}>
-        <span>"name of item" removed</span>
-        <button onClick={undoHandler}>Undo?</button>
-      </div>}
+      {showUndoBox && (
+        <div className={`${classes.undo}`}>
+          <span>"name of item" removed</span>
+          <button onClick={undoHandler}>Undo?</button>
+        </div>
+      )}
 
       <div className={`${classes["cart-items"]}`}>
         {/* add a different JSX block for mobile view. This one below is for desktop / large tablet view */}
@@ -142,14 +133,18 @@ const CartItems = () => {
               <div>
                 <Link
                   href={{
-                    pathname: `/product/${changeToKebabCase([], item.productName)}`,
+                    pathname: `/product/${changeToKebabCase(
+                      [],
+                      item.productName
+                    )}`,
                     query: {
-                      id: item.id
-                    }
+                      id: item.id,
+                    },
                   }}
                 >
-                  <a className={classes['product-link']}>
-                    {item.productName} {item.varSize !== "" && `- ${item.varSize}`}
+                  <a className={classes["product-link"]}>
+                    {item.productName}{" "}
+                    {item.varSize !== "" && `- ${item.varSize}`}
                   </a>
                 </Link>
               </div>

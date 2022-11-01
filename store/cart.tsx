@@ -1,4 +1,5 @@
 import { createSlice, current } from "@reduxjs/toolkit";
+import {cartStateModel} from  '../model/cartStateModel';
 // current is used so that we can get the "current state" for debugging
 
 interface cartStateType {
@@ -15,7 +16,7 @@ interface cartStateType {
   ttl: number;
 }
 
-const initialCartState: cartStateType = {
+const initialCartState: cartStateModel = {
   cartItems: [],
   totalQty: 0,
   totalPrice: 0,

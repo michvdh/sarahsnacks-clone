@@ -8,21 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cart";
 import { useEffect, useState } from "react";
 import AddToCartSuccessModal from "./modal/AddToCartSuccessModal";
+import {cartStateModel} from '../../model/cartStateModel';
 // import { modalActions } from "../../store/modal";
 
-interface cartStateType {
-  cartItems: {
-    id: string;
-    productName: string;
-    varPrice: number; // variation price
-    varSize: string; // variation size
-    qty: number | string;
-  }[];
-  totalQty: number;
-  totalPrice: number;
-  expiry: number;
-  ttl: number;
-}
 
 const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
   // const showAddToCartModalState = useSelector((state: { modal: {addItemSuccesModal: boolean}}) => state.modal.addItemSuccesModal);
@@ -30,7 +18,7 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
   // const [showSuccessModal, setShowSuccessModal] = useState(showAddToCartModalState);
 
   const cartItems = useSelector(
-    (state: { cart: cartStateType }) => state.cart.cartItems
+    (state: { cart: cartStateModel }) => state.cart.cartItems
   );
 
   let inCart = false;
