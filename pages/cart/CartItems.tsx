@@ -9,9 +9,15 @@ import QtyErrorModal from "../../components/ui/modal/QtyErrorModal";
 import changeToKebabCase from "../../components/helpers/changeToKebabCase";
 import Link from "next/link";
 import {cartStateModel} from "../../model/cartStateModel";
+import { cartItemsModel } from "../../model/cartItemsModel";
 import Image from "next/image";
 
-const CartItems = () => {
+
+interface cartItemsInterface {
+  itemToUndoHandler: (item: cartItemsModel) => void;
+}
+
+const CartItems: React.FC<cartItemsInterface> = (props) => {
   const dispatch = useDispatch();
 
   const cartItems = useSelector(
@@ -20,9 +26,6 @@ const CartItems = () => {
 
   const [inputId, setInputId] = useState(""); // id of the specific item being adjusted
   const [inputQty, setInputQty] = useState(1); // quantity of the specific item being adjusted
-
-  const [showUndoBox, setShowUndoBox] = useState(false);
-  const [itemToUndo, setItemToUndo] = useState({});
 
   const [showQtyInputError, setShowQtyInputError] = useState(false);
 
@@ -78,18 +81,12 @@ const CartItems = () => {
     const itemIndex = cartItems.findIndex((p) => p.id === id);
 
     const latestItemRemoved = cartItems[itemIndex];
-    setItemToUndo(latestItemRemoved);
 
-    setShowUndoBox(true);
+    props.itemToUndoHandler(latestItemRemoved);
 
     dispatch(cartActions.removeItem({ inputId: id }));
   };
 
-  const undoHandler = () => {
-    dispatch(cartActions.addItem(itemToUndo));
-    setShowUndoBox(false);
-    setItemToUndo({});
-  };
 
   // useEffect(() => {
   //   if (showQtyInputError) {
@@ -99,13 +96,6 @@ const CartItems = () => {
 
   return (
     <Fragment>
-      {showUndoBox && (
-        <div className={`${classes.undo}`}>
-          <span>"name of item" removed</span>
-          <button onClick={undoHandler}>Undo?</button>
-        </div>
-      )}
-
       <div className={`${classes["cart-items"]}`}>
         {/* add a different JSX block for mobile view. This one below is for desktop / large tablet view */}
         <ul>

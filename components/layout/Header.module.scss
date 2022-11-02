@@ -46,6 +46,14 @@
   }
 }
 
+// .cart-preview {
+//   visibility: hidden;
+//   opacity: 0;
+//   z-index: 30;
+//   transition: all 0.2s 0.2s;
+// }
+
+
 .call {
   grid-area: call;
 }
@@ -88,10 +96,16 @@
     flex-direction: column;
     justify-content: center;
     text-align: right;
+    position: relative;
 
     &:hover {
       cursor: pointer;
       color: $dark-green;
+
+      .cart-hover {
+        visibility: visible;
+        opacity: 1;
+      }
     }
 
     .fa-icon {

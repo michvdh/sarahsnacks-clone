@@ -6,8 +6,11 @@
   display: flex;
   flex-direction: column;
   width: 35rem;
-  // height: 40rem;
-  // overflow:auto;
+  right: 0;
+  top: 6rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s 0.2s;
 
   .list-container {
     max-height: 25rem;
@@ -31,21 +34,3 @@
   }
 }
 
-// CartOnPreview
-.show-cart-preview {
-  // opacity: 1;
-  // animation: mymove 5s;
-}
-
-.hide-cart-preview {
-  // opacity: 0;
-  // z-index: -1;
-  // display: none !important; // I can add in the animation that after x seconds, display:none will apply
-  display: none !important;
-}
-
-
-@keyframes mymove {
-  0%   {top: 0px; background: red; width: 100px;}
-  100% {top: 200px; background: yellow; width: 300px;}
-}

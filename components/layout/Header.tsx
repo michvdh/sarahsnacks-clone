@@ -38,12 +38,6 @@ const Header: React.FC = () => {
     (state: { cart: { totalPrice: number } }) => state.cart.totalPrice
   );
 
-  const [cartHover, setCartHover] = useState(false);
-
-  const cartHoverHandler = () => {
-    setCartHover(!cartHover);
-  };
-
   useEffect(() => {
     let cartLS =
       typeof window !== "undefined" &&
@@ -55,7 +49,7 @@ const Header: React.FC = () => {
     cartLS && dispatch(cartActions.getCartDetailsFromLocalStorage(cartLS));
   }, []);
 
-  console.log(cartHover);
+  
   return (
     <header
       className={`${classes.header} header ${intersectState ? "" : "shadow"}`}
@@ -76,10 +70,9 @@ const Header: React.FC = () => {
           width={intersectState ? 243 : 138}
           height={intersectState ? 80 : 45.5}
         />
+
         <div 
           className={`${classes.cart} cart`}
-          onMouseEnter={cartHoverHandler}
-          onMouseLeave={cartHoverHandler}
         >
           <Link href={{ pathname: `/cart` }} passHref>
             <a>
@@ -101,7 +94,9 @@ const Header: React.FC = () => {
               </div>
             </a>
           </Link>
+          <CartPreviewOnHover className={classes['cart-hover']} />
         </div>
+
         <div className={`${classes.nav} nav`}>
           <ul className={`extra-bold`}>
             <li>
@@ -131,12 +126,6 @@ const Header: React.FC = () => {
             </li>
           </ul>
         </div>
-        <CartPreviewOnHover 
-          className={`${cartHover ? classes['show-cart-preview'] : classes['hide-cart-preview']}`} 
-          onMouseEnter={cartHoverHandler}
-          onMouseLeave={cartHoverHandler}
-        />
-        {/* <CartPreviewOnHover className="" /> */}
       </div>
     </header>
   );

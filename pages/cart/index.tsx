@@ -4,21 +4,29 @@ import CartTotals from "./CartTotals";
 import { useDispatch, useSelector } from "react-redux";
 import { Fragment } from "react";
 import {cartStateModel} from "../../model/cartStateModel";
+import { useState } from "react";
+import {cartActions} from "../../store/cart";
+import {cartItemsModel} from "../../model/cartItemsModel";
 // import {modalActions} from '../../store/modal';
 
-interface cartItemsInterface {
-  id: string;
-  productName: string;
-  varPrice: number; // variation price
-  varSize: string; // variation size
-  qty: number;
-}
 
 const Cart = () => {
   const cartItems = useSelector(
     (state: { cart: cartStateModel }) =>
       state.cart.cartItems
   );
+  
+  const dispatch = useDispatch();
+  const [showUndoBox, setShowUndoBox] = useState(false);
+  const [itemToUndo, setItemToUndo] = useState({
+    id: '',
+    productName: '',
+    varPrice: 0, 
+    varSize: '', 
+    qty: 0,
+    imagesFolder: '', 
+    image: '',
+  });
 
   // const dispatch = useDispatch();
 
@@ -28,9 +36,30 @@ const Cart = () => {
   //   })
   // ); 
 
+  const undoHandler = () => {
+    dispatch(cartActions.addItem(itemToUndo));
+    setShowUndoBox(false);
+    setItemToUndo({});
+  };
+
+  const itemToUndoHandler = (latestItemRemoved: cartItemsModel) => {
+    console.log("hello");
+    setItemToUndo(latestItemRemoved);
+    setShowUndoBox(true); 
+  }
+
+  console.log(itemToUndo ? "true" : "false");
+
   return (
     <main className={`main`}>
       <section className={`${classes.cart} cart`}>
+        {showUndoBox && (
+          <div className={`${classes.undo}`}>
+            <span>"{itemToUndo.productName}" removed</span>
+            <button onClick={undoHandler}>{`Undo?`}</button>
+          </div>
+        )}
+
         {cartItems.length === 0 && (
           <div>
             <span>(icon here)</span>
@@ -40,7 +69,7 @@ const Cart = () => {
 
         {cartItems.length > 0 && (
           <Fragment>
-            <CartItems />
+            <CartItems itemToUndoHandler={itemToUndoHandler} />
             <CartTotals />
           </Fragment>
         )}

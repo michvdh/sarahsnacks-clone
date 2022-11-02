@@ -6,8 +6,6 @@ import classes from "./CartPreviewOnHover.module.scss";
 
 interface CartPreviewInterface {
   className: string;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
 }
 
 const CartPreviewOnHover: React.FC<CartPreviewInterface> = (props) => {
@@ -22,15 +20,9 @@ const CartPreviewOnHover: React.FC<CartPreviewInterface> = (props) => {
     dispatch(cartActions.removeItem({ inputId: id }));
   };
 
-
-  console.log(props.className);
-
-
   return (
     <div 
       className={`${classes["cart-preview"]} ${props.className}`}
-      onMouseEnter={props.onMouseEnter}
-      onMouseLeave={props.onMouseLeave}
     >
       <div>
         <ul className={classes["list-container"]}>
