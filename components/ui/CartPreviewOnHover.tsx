@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { cartStateModel } from "../../model/cartStateModel";
+import { CartStateModel } from "../../model/cartStateModel.model";
 import Image from "next/image";
 import { cartActions } from "../../store/cart";
 import classes from "./CartPreviewOnHover.module.scss";
@@ -12,7 +12,7 @@ const CartPreviewOnHover: React.FC<CartPreviewInterface> = (props) => {
   const dispatch = useDispatch();
 
   const cart = useSelector(
-    (state: { cart: cartStateModel }) =>
+    (state: { cart: CartStateModel }) =>
       state.cart
   );
 

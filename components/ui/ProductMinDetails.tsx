@@ -8,17 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cart";
 import { useEffect, useState } from "react";
 import AddToCartSuccessModal from "./modal/AddToCartSuccessModal";
-import {cartStateModel} from '../../model/cartStateModel';
-// import { modalActions } from "../../store/modal";
+import {CartStateModel} from '../../model/cartStateModel.model';
 
 
 const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
-  // const showAddToCartModalState = useSelector((state: { modal: {addItemSuccesModal: boolean}}) => state.modal.addItemSuccesModal);
-
-  // const [showSuccessModal, setShowSuccessModal] = useState(showAddToCartModalState);
-
   const cartItems = useSelector(
-    (state: { cart: cartStateModel }) => state.cart.cartItems
+    (state: { cart: CartStateModel }) => state.cart.cartItems
   );
 
   let inCart = false;
@@ -42,7 +37,6 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
   const dispatch = useDispatch();
 
   const addToCartHandler = () => {
-    console.log(props.otherName);
     dispatch(
       cartActions.addItem({
         id: props.id,
@@ -62,23 +56,11 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
   };
 
   const addToCartModalHandler = (modalState: boolean) => {
-    // dispatch(
-    //   modalActions.showAddToCartSuccessModal({
-    //     addItemSuccesModal: modalState
-    //   })
-    // );
-
     setShowSuccessModal(modalState);
   };
 
   const backdropHandler = () => {
     const newState = !showSuccessModal;
-
-    // dispatch(
-    //   modalActions.showAddToCartSuccessModal({
-    //     addItemSuccesModal: newState
-    //   })
-    // );
     setShowSuccessModal(newState);
   };
 

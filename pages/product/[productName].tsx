@@ -46,19 +46,12 @@ const Product = () => {
     targetProduct = productsDB[pIndex];
   }
 
-  console.log(tempProd);
-  console.log(queriedProductName);
-  console.log(productNameDashed);
-  console.log(targetProduct);
-  console.log(resultsReady);
-
-
   useEffect(() => {
     if (!isReady) return;
-    console.log("---effect---");
     setResultsReady(true)
-
   }, [isReady]);
+
+  console.log(targetProduct);
 
   return (
     // <main className={`main`}>

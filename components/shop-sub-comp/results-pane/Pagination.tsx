@@ -38,8 +38,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
   lastPage = pages.length > 1 ? pages.at(-1)! : 1;
 
-  console.log(props.pageInput);
-
   return (
     <div className={`${classes['page-btn-container']}`}>
       {(props.pageInput > 1) && <button onClick={prevPageHandler}>{'<'}</button>} 

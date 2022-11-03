@@ -6,12 +6,16 @@ import { Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "../../../store/cart";
 import QtyErrorModal from "../modal/QtyErrorModal";
+import {cartItemsModel} from "../../../model/cartItemsModel.model";
 
 interface MainDescriptionProps {
   id: string;
   productName: string[];
+  otherName: string;
   nameColor: string;
   category: string[];
+  imagesFolder: string;
+  image: string;
   mainDescription: {
     main: string[][];
     unOrderedList: string[][];
@@ -31,13 +35,6 @@ interface MainDescriptionProps {
   confirmation: (quantity: number, productName: string) => void;
 }
 
-interface cartItemsInterface {
-  id: string;
-  productName: string;
-  varPrice: number; // variation price
-  varSize: string; // variation size
-  qty: number;
-}
 
 const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   const dispatch = useDispatch();
@@ -45,8 +42,10 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   const [inputQty, setInputQty] = useState(1);
   const [showQtyInputError, setShowQtyInputError] = useState(false);
 
-  const cart = useSelector((state: { cart: { cartItems: cartItemsInterface } }) => state.cart.cartItems
+  const cart = useSelector((state: { cart: { cartItems: cartItemsModel } }) => state.cart.cartItems
   );
+
+  console.log(props);
 
   const quantityInputRef = useRef<HTMLInputElement>(null);
   const tempPName =
@@ -110,9 +109,12 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
         cartActions.addItem({
           id: props.id,
           productName: productName,
+          otherName: props.otherName,
           varPrice: varPrice,
           varSize: varSize,
           qty: quantityInputRef.current?.valueAsNumber,
+          imagesFolder: props.imagesFolder,
+          image: props.image
         })
       );
 

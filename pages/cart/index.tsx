@@ -3,10 +3,10 @@ import CartItems from "./CartItems";
 import CartTotals from "./CartTotals";
 import { useDispatch, useSelector } from "react-redux";
 import { Fragment } from "react";
-import {cartStateModel} from "../../model/cartStateModel";
+import {cartStateModel} from "../../model/cartStateModel.model";
 import { useState } from "react";
 import {cartActions} from "../../store/cart";
-import {cartItemsModel} from "../../model/cartItemsModel";
+import {cartItemsModel} from "../../model/cartItemsModel.model";
 // import {modalActions} from '../../store/modal';
 
 
@@ -57,7 +57,6 @@ const Cart = () => {
     setShowUndoBox(true); 
   }
 
-  console.log(itemToUndo ? "true" : "false");
 
   return (
     <main className={`main`}>

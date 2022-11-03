@@ -8,23 +8,21 @@ import { Fragment } from "react";
 import QtyErrorModal from "../../components/ui/modal/QtyErrorModal";
 import changeToKebabCase from "../../components/helpers/changeToKebabCase";
 import Link from "next/link";
-import {cartStateModel} from "../../model/cartStateModel";
-import { cartItemsModel } from "../../model/cartItemsModel";
+import {CartStateModel} from "../../model/cartStateModel.model";
+import { CartItemsModel } from "../../model/cartItemsModel.model";
 import Image from "next/image";
 
 
 interface cartItemsInterface {
-  itemToUndoHandler: (item: cartItemsModel) => void;
+  itemToUndoHandler: (item: CartItemsModel) => void;
 }
 
 const CartItems: React.FC<cartItemsInterface> = (props) => {
   const dispatch = useDispatch();
 
   const cartItems = useSelector(
-    (state: { cart: cartStateModel }) => state.cart.cartItems
+    (state: { cart: CartStateModel }) => state.cart.cartItems
   );
-
-  console.log(cartItems);
 
   const [inputId, setInputId] = useState(""); // id of the specific item being adjusted
   const [inputQty, setInputQty] = useState(1); // quantity of the specific item being adjusted

@@ -1,4 +1,4 @@
-export interface cartItemsModel {
+export interface CartItemsModel {
   id: string;
   productName: string; // array combined already
   otherName: string;

@@ -1,5 +1,5 @@
 import { createSlice, current } from "@reduxjs/toolkit";
-import {cartStateModel} from  '../model/cartStateModel';
+import {cartStateModel} from  '../model/cartStateModel.model';
 // current is used so that we can get the "current state" for debugging
 
 
@@ -62,7 +62,6 @@ const cartSlice = createSlice({
           image: newItem.image
         });
 
-        console.log(current(state));
       } else {
         existingItem.qty += newItem.qty;
       }

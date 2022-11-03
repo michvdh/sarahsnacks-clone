@@ -7,47 +7,22 @@ import { cartActions } from "../../store/cart";
 import { useEffect, useState } from "react";
 import AddToCartSuccessModal from "./modal/AddToCartSuccessModal";
 import changeToKebabCase from "../helpers/changeToKebabCase";
-// import { modalActions } from "../../store/modal";
+import {CartStateModel} from "../../model/cartStateModel.model";
 
-interface cartStateType {
-  cartItems: {
-    id: string;
-    productName: string;
-    varPrice: number; // variation price
-    varSize: string; // variation size
-    qty: number | string;
-  }[];
-  totalQty: number;
-  totalPrice: number;
-  expiry: number;
-  ttl: number;
-}
 
 const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
-  // const showAddToCartModalState = useSelector(
-  //   (state: { modal: { addItemSuccesModal: boolean } }) =>
-  //     state.modal.addItemSuccesModal
-  // );
-
   const [showSuccessModal, setShowSuccessModal] = useState(
     false
   );
 
-  const productName = props.otherName
-    ? props.otherName
-    : props.productName[1] === ""
-    ? props.productName[0]
-    : props.productName[0] + " " + props.productName[1];
-
-    const productNameDashed = changeToKebabCase(
-      props.productName, ''
-      // props.otherName
-    );
+  const productNameDashed = changeToKebabCase(
+    props.productName, props.otherName
+  );
 
   const categoryLength = props.category.length - 1;
 
   const cartItems = useSelector(
-    (state: { cart: cartStateType }) => state.cart.cartItems
+    (state: { cart: CartStateModel }) => state.cart.cartItems
   );
 
   let inCart = false;
@@ -69,9 +44,12 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
         productName: `${props.productName[0]} ${
           props.productName[1] && props.productName[1]
         }`,
+        otherName: props.otherName,
         varPrice: props.variations[0].price,
-        varSize: props.variations[0],
+        varSize: props.variations[0].size,
         qty: 1,
+        imagesFolder: props.imagesFolder,
+        image: props.images[0]
       })
     );
 
@@ -79,23 +57,11 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
   };
 
   const addToCartModalHandler = (modalState: boolean) => {
-    // dispatch(
-    //   modalActions.showAddToCartSuccessModal({
-    //     addItemSuccesModal: modalState,
-    //   })
-    // );
-
     setShowSuccessModal(modalState);
   };
 
   const backdropHandler = () => {
     const newState = !showSuccessModal;
-
-    // dispatch(
-    //   modalActions.showAddToCartSuccessModal({
-    //     addItemSuccesModal: newState,
-    //   })
-    // );
     setShowSuccessModal(newState);
   };
 

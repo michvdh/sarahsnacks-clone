@@ -44,12 +44,15 @@ const ProductCompleteDetails: React.FC<{product: ProductsDBModel}> = (props) => 
           <MainDescription
             id={product.id}
             productName={product.productName}
+            otherName={product.otherName}
             nameColor={product.nameColor}
             category={product.category}
             mainDescription={product.mainDescription}
             variations={product.variations}
             selectionDetails={additionalInfoHandler}
             confirmation={confirmationHandler}
+            imagesFolder={product.images.folderName}
+            image={product.images.thumbnailSmall[0]}
           />
         </div>
       </div>
