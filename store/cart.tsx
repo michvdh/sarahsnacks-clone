@@ -54,12 +54,15 @@ const cartSlice = createSlice({
         state.cartItems.push({
           id: newItem.id,
           productName: newItem.productName,
+          otherName: newItem.otherName,
           varPrice: +newItem.varPrice,
           varSize: newItem.varSize,
           qty: +newItem.qty,
           imagesFolder: newItem.imagesFolder,
           image: newItem.image
         });
+
+        console.log(current(state));
       } else {
         existingItem.qty += newItem.qty;
       }

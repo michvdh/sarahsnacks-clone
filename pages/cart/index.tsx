@@ -21,6 +21,7 @@ const Cart = () => {
   const [itemToUndo, setItemToUndo] = useState({
     id: '',
     productName: '',
+    otherName: '',
     varPrice: 0, 
     varSize: '', 
     qty: 0,
@@ -39,11 +40,19 @@ const Cart = () => {
   const undoHandler = () => {
     dispatch(cartActions.addItem(itemToUndo));
     setShowUndoBox(false);
-    setItemToUndo({});
+    setItemToUndo({
+      id: '',
+      productName: '',
+      otherName: '',
+      varPrice: 0, 
+      varSize: '', 
+      qty: 0,
+      imagesFolder: '', 
+      image: '',
+    });
   };
 
   const itemToUndoHandler = (latestItemRemoved: cartItemsModel) => {
-    console.log("hello");
     setItemToUndo(latestItemRemoved);
     setShowUndoBox(true); 
   }

@@ -1,10 +1,11 @@
 export interface cartItemsModel {
   id: string;
-  productName: string;
+  productName: string; // array combined already
+  otherName: string;
   varPrice: number; // variation price
   varSize: string; // variation size
-  // qty: number | string;
   qty: number;
   imagesFolder: string; // images.folderName
   image: string; // images.thumbnailRegular
+  // qty: number | string;
 }

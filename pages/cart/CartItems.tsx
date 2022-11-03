@@ -24,6 +24,8 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
     (state: { cart: cartStateModel }) => state.cart.cartItems
   );
 
+  console.log(cartItems);
+
   const [inputId, setInputId] = useState(""); // id of the specific item being adjusted
   const [inputQty, setInputQty] = useState(1); // quantity of the specific item being adjusted
 
@@ -132,7 +134,7 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
                   href={{
                     pathname: `/product/${changeToKebabCase(
                       [],
-                      item.productName
+                      item.otherName ? item.otherName : item.productName
                     )}`,
                     query: {
                       id: item.id,

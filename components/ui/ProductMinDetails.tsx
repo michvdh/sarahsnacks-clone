@@ -34,8 +34,7 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const productNameDashed = changeToKebabCase(
-    props.productName, ''
-    // props.otherName
+    props.productName, props.otherName
   );
 
   const categoryLength = props.category.length - 1;
@@ -43,12 +42,14 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
   const dispatch = useDispatch();
 
   const addToCartHandler = () => {
+    console.log(props.otherName);
     dispatch(
       cartActions.addItem({
         id: props.id,
         productName: `${props.productName[0]} ${
           props.productName[1] && props.productName[1]
         }`,
+        otherName: props.otherName,
         varPrice: props.variations[0].price,
         varSize: props.variations[0].size,
         qty: 1,

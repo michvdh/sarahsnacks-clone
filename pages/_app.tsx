@@ -5,14 +5,7 @@ import { Provider } from "react-redux";
 import store from "../store/index";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-
-const Loading = () => {
-  return (
-    <div className="spinner-wrapper">
-      <div className="spinner"></div>
-    </div>
-  );
-};
+import Loading from "../components/ui/Loading";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
