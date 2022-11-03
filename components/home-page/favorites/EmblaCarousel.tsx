@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { PrevButton, NextButton } from "../../ui/EmblaCarouselButton";
 import useEmblaCarousel from "embla-carousel-react";
 import ProductMinDetails from "../../ui/ProductMinDetails";
-import productsDB from '../../../model/productsDB';
+import productsDB from "../../../model/productsDB";
 
 // import { useInfiniteScroll } from "./useInfiniteScroll";
 // import { mediaByIndex } from "../media";
@@ -17,8 +17,7 @@ import productsDB from '../../../model/productsDB';
 
 interface ProductsProps {
   className: string;
-};
-
+}
 
 const EmblaCarousel: React.FC<ProductsProps> = (props) => {
   // const [hasMoreToLoad, setHasMoreToLoad] = useState(true);
@@ -66,27 +65,31 @@ const EmblaCarousel: React.FC<ProductsProps> = (props) => {
     onSelect();
   }, [embla, onSelect]);
 
-
   // this filters only the featuredProducts
-  const featuredProducts = productsDB.filter((product) => {return product.featuredInCarousel == true});
+  const featuredProducts = productsDB.filter((product) => {
+    return product.featuredInCarousel == true;
+  });
+
+  // created this dummyCategSearch function because of productMinModel
+  const dummyCategSearch = () => {
+    return;
+  };
 
   return (
     <div className={`${props.className} embla`}>
       <div className="embla__viewport" ref={viewportRef}>
         <div className="embla__container">
-
           {featuredProducts.map((product) => (
             <ProductMinDetails
-              key={product.id}
               id={product.id}
-              imagesFolder={product.images.folderName}
-              images={product.images.thumbnailRegular}
               productName={product.productName}
               otherName={product.otherName}
+              imagesFolder={product.images.folderName}
+              images={product.images.thumbnailRegular}
               category={product.category}
               variations={product.variations}
-              btnLabel="Select Options"
-          />  
+              onCategorySearch={dummyCategSearch}
+            />
           ))}
 
           {/* {hasMoreToLoad && (
@@ -96,7 +99,6 @@ const EmblaCarousel: React.FC<ProductsProps> = (props) => {
               </div>
             </div>
           )} */}
-
         </div>
       </div>
       <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />

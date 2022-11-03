@@ -1,9 +1,8 @@
 import classes from "./CartItems.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cart";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
-// import { modalActions } from "../../store/modal";
 import { Fragment } from "react";
 import QtyErrorModal from "../../components/ui/modal/QtyErrorModal";
 import changeToKebabCase from "../../components/helpers/changeToKebabCase";
@@ -56,13 +55,6 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
     if (e.target.value < 1) {
       setInputId(e.target.id);
       setInputQty(1);
-
-      // dispatch(
-      //   modalActions.showQtyErrorModal({
-      //     qtyErrorModal: true,
-      //   })
-      // );
-
       setShowQtyInputError(true);
     }
   };
@@ -86,13 +78,6 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
 
     dispatch(cartActions.removeItem({ inputId: id }));
   };
-
-
-  // useEffect(() => {
-  //   if (showQtyInputError) {
-  //     setTimeout(() => (setShowQtyInputError(false), 10000));
-  //   }
-  // }, [showQtyInputError])
 
   return (
     <Fragment>

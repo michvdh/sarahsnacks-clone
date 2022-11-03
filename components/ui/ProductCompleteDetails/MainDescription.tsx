@@ -6,7 +6,7 @@ import { Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "../../../store/cart";
 import QtyErrorModal from "../modal/QtyErrorModal";
-import {cartItemsModel} from "../../../model/cartItemsModel.model";
+import {CartItemsModel} from "../../../model/cartItemsModel.model";
 
 interface MainDescriptionProps {
   id: string;
@@ -42,7 +42,7 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   const [inputQty, setInputQty] = useState(1);
   const [showQtyInputError, setShowQtyInputError] = useState(false);
 
-  const cart = useSelector((state: { cart: { cartItems: cartItemsModel } }) => state.cart.cartItems
+  const cart = useSelector((state: { cart: { cartItems: CartItemsModel } }) => state.cart.cartItems
   );
 
   console.log(props);
@@ -122,9 +122,6 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
     }
   };
 
-  // const checkCartHandler = () => {
-  //   dispatch(cartActions.checkCart());
-  // };
 
   const clearHandler = () => {
     setSelectedVariation("");

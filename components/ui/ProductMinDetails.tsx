@@ -6,17 +6,23 @@ import getPriceRange from "../helpers/getPriceRange";
 import changeToKebabCase from "../helpers/changeToKebabCase";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cart";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AddToCartSuccessModal from "./modal/AddToCartSuccessModal";
 import {CartStateModel} from '../../model/cartStateModel.model';
+import BtnAddToCart from "./buttons/BtnAddToCart";
+import BtnSelectOptions from "./buttons/BtnSelectOptions";
+import BtnViewCart from "./buttons/BtnViewCart";
 
 
 const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
+  let inCart = false;
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const categoryLength = props.category.length - 1;
+  const dispatch = useDispatch();
+  
   const cartItems = useSelector(
     (state: { cart: CartStateModel }) => state.cart.cartItems
   );
-
-  let inCart = false;
 
   cartItems.every((item) => {
     if (item.id === props.id) {
@@ -26,16 +32,12 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
     return true;
   });
 
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
-
+  
   const productNameDashed = changeToKebabCase(
     props.productName, props.otherName
   );
 
-  const categoryLength = props.category.length - 1;
-
-  const dispatch = useDispatch();
-
+  
   const addToCartHandler = () => {
     dispatch(
       cartActions.addItem({
@@ -131,40 +133,17 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
 
           {/* ---- Button ---- */}
           {props.variations.length > 1 && (
-            <Link
-              href={{
-                pathname: `/product/${productNameDashed}`,
-                query: {
-                  id: props.id,
-                },
-              }}
-              passHref
-            >
-              <a
-                className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
-              >
-                Select Options
-              </a>
-            </Link>
+            <BtnSelectOptions 
+              productNameDashed={productNameDashed}
+              id={props.id}
+            />
           )}
 
           {props.variations.length === 1 &&
             (inCart ? (
-              <Link
-                href={{
-                  pathname: `/cart`
-                }}
-                passHref
-              >
-                <a className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}>View Cart</a>
-              </Link>
+              <BtnViewCart />
             ) : (
-              <a
-                className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
-                onClick={addToCartHandler}
-              >
-                Add to Cart
-              </a>
+              <BtnAddToCart onClick={addToCartHandler} />
             ))
           }
         </figcaption>

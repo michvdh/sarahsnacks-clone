@@ -12,5 +12,4 @@ export interface ProductMinModel { // rename to ProductMinModel
     dimensions: string;
   }[];
   onCategorySearch: (category: string) => void;
-  // btnLabel: string;
 }

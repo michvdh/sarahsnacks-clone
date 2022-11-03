@@ -325,13 +325,11 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     sortChanged && applyProductSort();
   }
 
-  
   if (keywordSearchTriggered && resultsReady) {
     clearSearchAndSort("category");
     applyKeywordSearch();
     sortChanged && applyProductSort();
   }
-
 
   if (sortChanged) {
     applyProductSort();
@@ -345,7 +343,6 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     if (!isReady) return;
 
     !resultsReady && setResultsReady(true);
-    // console.log("useEffect");
 
     if (router.query.category) {
       shallowRouting(router.query.category, "", router.query.page, router.query.sort, router.query.display, router.query.style);
@@ -401,7 +398,6 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
           onDisplayCount={displayCountHandler}
           onPageBtnClick={pageControlHandler}
           onCategorySearch={categorySearchHandler}
-          // onReturnToDefaultSort={defaultSort}
           onChangeDisplayType={displayTypeHandler}
           displayType={displayType}
           totalPages={totalPages}
