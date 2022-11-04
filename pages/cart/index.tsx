@@ -3,16 +3,16 @@ import CartItems from "./CartItems";
 import CartTotals from "./CartTotals";
 import { useDispatch, useSelector } from "react-redux";
 import { Fragment } from "react";
-import {cartStateModel} from "../../model/cartStateModel.model";
+import {CartStateModel} from "../../model/cartStateModel.model";
 import { useState } from "react";
 import {cartActions} from "../../store/cart";
-import {cartItemsModel} from "../../model/cartItemsModel.model";
+import {CartItemsModel} from "../../model/cartItemsModel.model";
 // import {modalActions} from '../../store/modal';
 
 
 const Cart = () => {
   const cartItems = useSelector(
-    (state: { cart: cartStateModel }) =>
+    (state: { cart: CartStateModel }) =>
       state.cart.cartItems
   );
   
@@ -52,7 +52,7 @@ const Cart = () => {
     });
   };
 
-  const itemToUndoHandler = (latestItemRemoved: cartItemsModel) => {
+  const itemToUndoHandler = (latestItemRemoved: CartItemsModel) => {
     setItemToUndo(latestItemRemoved);
     setShowUndoBox(true); 
   }

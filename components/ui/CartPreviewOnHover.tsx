@@ -37,7 +37,7 @@ const CartPreviewOnHover: React.FC<CartPreviewInterface> = (props) => {
               </div>
               <div>
                 <p>{item.productName} {item.varSize && `- ${item.varSize}`}</p>
-                <p>{item.qty} × {item.varPrice}</p>
+                <p>{item.qty} × <span className={`price-range`}>{item.varPrice.toFixed(2)}</span></p>
               </div>
               <div>
                 <button onClick={() => removeItemHandler(item.id)}>x</button>
@@ -48,7 +48,7 @@ const CartPreviewOnHover: React.FC<CartPreviewInterface> = (props) => {
       </div>
       <div className={classes.subtotal}>
         <span>Subtotal:</span>
-        <span>${cart.totalPrice}</span>
+        <span className={`price-range`}>${cart.totalPrice.toFixed(2)}</span>
       </div>
       <div className={classes['buttons-container']}>
         <button>View Cart</button>

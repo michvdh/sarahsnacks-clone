@@ -135,7 +135,7 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
             </a>
           </Link>
         </h2>
-        <span className={`${classes["price-range"]}`}>
+        <span className={`${classes["price-range"]} price-ranges`}>
           {getPriceRange(props.variations)}
         </span>
         <p>{props.description}</p>

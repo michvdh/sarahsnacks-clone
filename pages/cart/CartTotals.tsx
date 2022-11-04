@@ -13,7 +13,7 @@ const CartTotals = () => {
           <li className={classes.full}>Cart Totals</li>
           <li className={classes.divided}>
             <span>Subtotal</span>
-            <span>{cartTotalPrice.toFixed(2)}</span>
+            <span className={`price-range`}>{cartTotalPrice.toFixed(2)}</span>
           </li>
           <li className={classes.divided}>
             <span>Shipping</span>
@@ -21,7 +21,7 @@ const CartTotals = () => {
           </li>
           <li className={classes.divided}>
             <span>Total</span>
-            <span>{cartTotalPrice.toFixed(2)}</span>
+            <span className={`price-range`}>{cartTotalPrice.toFixed(2)}</span>
           </li>
           <li className={classes.full}>
             <button>Proceed to checkout</button>

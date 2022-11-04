@@ -9,14 +9,27 @@ import Loading from "../components/ui/Loading";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  
   const [loading, setLoading] = useState(false);
+
+  const isReady = router.isReady;
+  const [routerReady, setRouterReady] = useState(false);
+
+  // i could probably use isReady here to help opimize
+
+  console.log(router);
 
   useEffect(() => {
     const handleStart = (url: string) =>
       url !== router.asPath && setLoading(true);
-    const handleComplete = (url: string) =>
-      url === router.asPath && setLoading(false);
+    // checks if the url matches router.asPath
+
+    // const handleComplete = (url: string) =>
+    //   url === router.asPath && setLoading(false);
+
+    const handleComplete = () => setLoading(false);
+
+    // we start the loading the routeChangeStart
+    // we can finish the loading at routeChangeComplete or routeChangeError
 
     router.events.on("routeChangeStart", handleStart);
     router.events.on("routeChangeComplete", handleComplete);

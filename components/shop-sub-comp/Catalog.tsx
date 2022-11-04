@@ -58,7 +58,8 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
       {
         pathname: `/shop`,
         query: {
-          ...(category && {category: category}),
+          // this means if there is no value for category, then we don't add it to the url. I use this for category and keyword search
+          ...(category && {category: category}), 
           ...(keyword && {keyword: keyword}),
           ...(page && {page: page}),
           ...(sort && {sort: sort}),

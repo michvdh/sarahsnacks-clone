@@ -40,7 +40,6 @@ const SearchResults: React.FC<SearchResultsProps> = (props) => {
                 category={product.category}
                 variations={product.variations}
                 onCategorySearch={props.onCategorySearch}
-                // btnLabel="Add to Cart"
               />
             )) :
             props.showProducts.map((product: ProductsDBModel) => ( 

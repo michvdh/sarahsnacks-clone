@@ -127,7 +127,7 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
             </a>
           </Link>
 
-          <span className={`${classes["price-range"]}`}>
+          <span className={`${classes["price-range"]} price-range`}>
             {getPriceRange(props.variations)}
           </span>
 

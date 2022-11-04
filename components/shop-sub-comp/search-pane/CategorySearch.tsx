@@ -46,7 +46,6 @@ const CategorySearch: React.FC<CategorySearchProps> = (props) => {
                 name="categories"
                 value={category}
                 ref={categoryInputRef[index]}
-                // defaultChecked={props.categoryInput === category && true}
                 checked={props.categoryInput === category && true}
                 onChange={() => selectHandler(category)}
               />

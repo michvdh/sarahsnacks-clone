@@ -130,7 +130,7 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
                   </a>
                 </Link>
               </div>
-              <div>{item.varPrice}</div>
+              <div className={`price-range`}>{item.varPrice.toFixed(2)}</div>
               <div className={`${classes.quantity}`}>
                 <button onClick={() => decrementQty(item.id)}>-</button>
                 <input
@@ -143,7 +143,7 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
                 />
                 <button onClick={() => incrementQty(item.id)}>+</button>
               </div>
-              <div>{item.varPrice * item.qty}</div>
+              <div className={`price-range`}>{(item.varPrice * item.qty).toFixed(2)}</div>
             </li>
           ))}
         </ul>
