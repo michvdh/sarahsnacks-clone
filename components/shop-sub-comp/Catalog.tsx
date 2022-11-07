@@ -261,10 +261,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     if (!hasResults) return;
 
     const tempSourceList = sortChanged
-      ? sortedProducts
-        : filteredProducts.length === 0
-      ? products
-        : filteredProducts;
+      ? sortedProducts : (filteredProducts.length === 0 ? products : filteredProducts);
 
     if (displayCount === "All") {
       totalPages = 1;

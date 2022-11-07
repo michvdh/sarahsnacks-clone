@@ -4,12 +4,8 @@ import { Fragment } from "react";
 import classes from './AddToCartSuccessModal.module.scss';
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
+import Backdrop from "./Backdrop";
 
-const Backdrop: React.FC<{onClick: () => void}> = (props) => {
-  return (
-    <div onClick={props.onClick} className={classes.backdrop}></div>
-  );
-};
 
 const SuccessModalOverlay: React.FC<{onClick: () => void}> = (props) => {
   const cartTotalPrice = useSelector(
@@ -43,19 +39,11 @@ const SuccessModalOverlay: React.FC<{onClick: () => void}> = (props) => {
 
 // this is the modal that appears once a user adds an item (with single variation) from the shop page
 const AddToCartSuccessModal: React.FC<{onClick: () => void}> = (props) => {
-  // const [mounted, setMounted] = useState(false);
   const backdrop = document.getElementById("backdrop-root")!;
   const successOverlay = document.getElementById("success-overlay-root")!;
 
-  // useEffect(() => {
-  //   setMounted(true);
-  //   return () => setMounted(false);
-  // }, []);
-
   return (
     <Fragment>
-      {/* {mounted && ReactDOM.createPortal(<Backdrop onClick={props.onClick} />, backdrop)} */}
-      
       {ReactDOM.createPortal(<Backdrop onClick={props.onClick} />, backdrop)}
 
       {ReactDOM.createPortal(<SuccessModalOverlay onClick={props.onClick} />, successOverlay)}

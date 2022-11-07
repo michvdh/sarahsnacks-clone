@@ -1,10 +1,11 @@
 @import "../../../styles/variables";
 
-.success-overlay {
+.product-qv-overlay {
   position: fixed;
-  background-color: white;
+  background-color: silver;
   top: 30vh;
   left: 10%;
   width: 80%;
   z-index: 999;
+  border: 1px solid black
 }

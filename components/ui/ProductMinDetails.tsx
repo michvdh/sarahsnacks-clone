@@ -66,6 +66,7 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
     setShowSuccessModal(newState);
   };
 
+
   return (
     <figure
       className={`embla__slide ${classes["featured-item"]} featured-item`}

@@ -35,10 +35,10 @@ const SearchResults: React.FC<SearchResultsProps> = (props) => {
                 id={product.id}
                 productName={product.productName}
                 otherName={product.otherName}
-                imagesFolder={product.images.folderName}
-                images={product.images.thumbnailRegular}
                 category={product.category}
                 variations={product.variations}
+                imagesFolder={product.images.folderName}
+                images={product.images.thumbnailRegular}
                 onCategorySearch={props.onCategorySearch}
               />
             )) :

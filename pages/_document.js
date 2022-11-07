@@ -7,9 +7,14 @@ export default class MyDocument extends Document {
         <Head />
           <body>
             <Main />
-            <div id="backdrop-root"></div>
-            <div id="success-overlay-root"></div>
+            {/* AddToCartSuccessModal*/}
+            <div id="backdrop-root"></div> 
+            <div id="success-overlay-root"></div> 
+
+            {/* QtyErrorModal*/}
             <div id="qty-error-root"></div>
+
+            <div id="product-quick-view-root"></div>
             <NextScript />
           </body>
       </Html>

@@ -14,8 +14,8 @@ interface MainDescriptionProps {
   otherName: string;
   nameColor: string;
   category: string[];
-  imagesFolder: string;
-  image: string;
+  imagesFolder: string; // this value will be pushed to cart store
+  image: string; // this value will be pushed to cart store
   mainDescription: {
     main: string[][];
     unOrderedList: string[][];
@@ -44,8 +44,6 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
 
   const cart = useSelector((state: { cart: { cartItems: CartItemsModel } }) => state.cart.cartItems
   );
-
-  console.log(props);
 
   const quantityInputRef = useRef<HTMLInputElement>(null);
   const tempPName =

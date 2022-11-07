@@ -9,6 +9,7 @@ import classes from "./ProductCompleteDetails.module.scss";
 import AddToCartConfirmation from "./AddToCartConfirmation";
 import { useSelector, useDispatch } from "react-redux";
 
+
 const ProductCompleteDetails: React.FC<{product: ProductsDBModel}> = (props) => {
   const product = props.product;
   const variationLength = product.variations.length;
@@ -49,10 +50,10 @@ const ProductCompleteDetails: React.FC<{product: ProductsDBModel}> = (props) => 
             category={product.category}
             mainDescription={product.mainDescription}
             variations={product.variations}
+            imagesFolder={product.images.folderName} // to be used by cart
+            image={product.images.thumbnailSmall[0]} // to be used by cart
             selectionDetails={additionalInfoHandler}
             confirmation={confirmationHandler}
-            imagesFolder={product.images.folderName}
-            image={product.images.thumbnailSmall[0]}
           />
         </div>
       </div>

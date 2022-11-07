@@ -4,6 +4,7 @@ import Link from "next/link";
 import classes from "./ProductQuickView.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import ProductQuickViewModal from "./modal/ProductQuickViewModal";
 
 interface QuickViewProps {
   id: string;
@@ -17,6 +18,9 @@ interface QuickViewProps {
 
 const ProductQuickView: React.FC<QuickViewProps> = (props) => {
   const [imageHover, setImageHover] = useState(false);
+  const [showProductQuickViewModal, setShowProductQuickViewModal] = useState(false);
+  // const [quickViewId, setQuickViewId] = useState('');
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const imageHoverHandler = () => {
     setImageHover(!imageHover);
@@ -25,10 +29,24 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
   const basePath = `/images/products${props.imagesFolder}`;
   const numberOfImages = props.images.length;
 
+  const productQuickViewModalHandler = (pid: string) => {
+    // console.log("test qv modal handler"); 
+    // console.log(pid);
+    // setQuickViewId(pid);
+    setShowProductQuickViewModal(true);
+  }       
+
+  const backdropHandler = () => {
+    const newState = !showProductQuickViewModal;
+    setShowProductQuickViewModal(newState);
+  };
+
+
   return (
     <div
       className={`${classes["image-container"]} embla__slide__img-container`}
-      onMouseEnter={imageHoverHandler}
+      // Replace with csshover.. don't use mouseenter, mouseleave
+      onMouseEnter={imageHoverHandler} 
       onMouseLeave={imageHoverHandler}
     >
       <Link
@@ -72,15 +90,23 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
       {/* Quick View div should generate a modal when clicked */}
       <div
         className={`${classes["quick-view"]} ${!imageHover ? "hidden" : ""}`}
+        onClick={() => productQuickViewModalHandler(props.id)}
       >
         <span>
           <FontAwesomeIcon
             className={`fa-icon--white fa-icon--left`}
             icon={faEye}
+          
           />
         </span>
         <span className={`quick-view-text`}>Quick View</span>
       </div>
+      {showProductQuickViewModal && 
+        <ProductQuickViewModal 
+          id={props.id}
+          onClick={backdropHandler}
+        />
+      }
     </div>
   );
 };
