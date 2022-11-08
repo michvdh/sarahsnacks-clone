@@ -7,6 +7,7 @@ import ReactDOM from "react-dom";
 import { getAllProducts } from "../../helpers/apiUtils";
 import classes from "./ProductQuickViewModal.module.scss";
 import AddToCartSuccessModal from "./AddToCartSuccessModal";
+import ImageGalleryEmbla from "../../ui/ImageGalleryEmbla/index";
 
 // export async function getStaticProps() {
 //   const allProducts = await getAllProducts();
@@ -84,6 +85,7 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
 
       {product && !addToCartConfirmation && ReactDOM.createPortal(
         <div className={classes['product-qv-overlay']}>
+          <ImageGalleryEmbla />
           <MainDescription
             id={product.id}
             productName={product.productName}
