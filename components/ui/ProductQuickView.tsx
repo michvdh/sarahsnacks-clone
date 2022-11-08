@@ -27,7 +27,7 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
     setShowProductQuickViewModal(true);
   }       
 
-  const backdropHandler = () => {
+  const overlayHandler = () => {
     const newState = !showProductQuickViewModal;
     setShowProductQuickViewModal(newState);
   };
@@ -92,7 +92,7 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
       {showProductQuickViewModal && 
         <ProductQuickViewModal 
           id={props.id}
-          onClick={backdropHandler}
+          onClick={overlayHandler}
         />
       }
     </div>

@@ -61,7 +61,7 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
     setShowSuccessModal(modalState);
   };
 
-  const backdropHandler = () => {
+  const overlayHandler = () => {
     const newState = !showSuccessModal;
     setShowSuccessModal(newState);
   };
@@ -151,7 +151,7 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
       </div>
 
       {showSuccessModal === true && (
-        <AddToCartSuccessModal onClick={backdropHandler} />
+        <AddToCartSuccessModal onClick={overlayHandler} />
       )}
     </figure>
   );
