@@ -9,6 +9,18 @@
 
   &:hover { 
     cursor: pointer;
+
+    .quick-view {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      background-color: $background-rgba--brown;
+  
+      &:hover {
+        background-color: $dark-brown;
+      }
+    }
   }
 
   // a {
@@ -17,15 +29,5 @@
   //   height: 2rem;
   // }
   
-  .quick-view {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    background-color: $background-rgba--brown;
 
-    &:hover {
-      background-color: $dark-brown;
-    }
-  }
 }

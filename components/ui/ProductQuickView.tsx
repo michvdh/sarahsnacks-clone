@@ -19,12 +19,6 @@ interface QuickViewProps {
 const ProductQuickView: React.FC<QuickViewProps> = (props) => {
   const [imageHover, setImageHover] = useState(false);
   const [showProductQuickViewModal, setShowProductQuickViewModal] = useState(false);
-  // const [quickViewId, setQuickViewId] = useState('');
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
-
-  const imageHoverHandler = () => {
-    setImageHover(!imageHover);
-  };
 
   const basePath = `/images/products${props.imagesFolder}`;
   const numberOfImages = props.images.length;
@@ -42,9 +36,6 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
   return (
     <div
       className={`${classes["image-container"]} embla__slide__img-container`}
-      // Replace with csshover.. don't use mouseenter, mouseleave
-      onMouseEnter={imageHoverHandler} 
-      onMouseLeave={imageHoverHandler}
     >
       <Link
         href={{
@@ -86,7 +77,7 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
 
       {/* Quick View div should generate a modal when clicked */}
       <div
-        className={`${classes["quick-view"]} ${!imageHover ? "hidden" : ""}`}
+        className={`${classes["quick-view"]}`}
         onClick={productQuickViewModalHandler}
       >
         <span>
