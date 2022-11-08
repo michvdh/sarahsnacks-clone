@@ -11,7 +11,6 @@
 
 import { useRouter } from "next/router";
 import changeToKebabCase from "../../components/helpers/changeToKebabCase";
-import productsDB from "../../model/productsDB";
 import ProductCompleteDetails from "../../components/ui/ProductCompleteDetails";
 import { useEffect, useState } from "react";
 import Custom404 from "../404";
@@ -26,11 +25,22 @@ const Product = () => {
   let targetProduct;
   let productNameDashed;
   const [resultsReady, setResultsReady] = useState(false);
+  const [productsDB, setProductsDB] = useState([]);
+  
+  const allData = async() => {
+    const response = await fetch('https://sarahsnacks-clone-default-rtdb.firebaseio.com/productsDB.json');
+    const data = await response.json();
+    console.log(response);
+    setProductsDB(data);
+  }
 
-  // console.log(router);
+  useEffect(() => {
+    allData();
+  }, []);
 
   // get the index of the product
-  const pIndex = productsDB.findIndex((p) => (p.id === queriedProductID));
+  const pIndex = productsDB.findIndex((p) => (p.id === queriedProductID)); 
+  console.log(pIndex);
 
   // get the specific product and store in a temporary variable
   const tempProd = productsDB[pIndex];
@@ -51,7 +61,7 @@ const Product = () => {
     setResultsReady(true)
   }, [isReady]);
 
-  console.log(targetProduct);
+  // console.log(targetProduct);
 
   return (
     // <main className={`main`}>
@@ -60,7 +70,7 @@ const Product = () => {
     //   </section>
     // </main>
     <Fragment>
-      { resultsReady ?
+      { (resultsReady && productsDB.length > 1) ?
         ( targetProduct ? <main className={`main`}>
           <section className={`product`}>
             <ProductCompleteDetails product={targetProduct} />

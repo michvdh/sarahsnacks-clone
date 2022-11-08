@@ -16,8 +16,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   // i could probably use isReady here to help opimize
 
-  console.log(router);
-
   useEffect(() => {
     const handleStart = (url: string) =>
       url !== router.asPath && setLoading(true);

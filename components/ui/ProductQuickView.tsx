@@ -29,10 +29,7 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
   const basePath = `/images/products${props.imagesFolder}`;
   const numberOfImages = props.images.length;
 
-  const productQuickViewModalHandler = (pid: string) => {
-    // console.log("test qv modal handler"); 
-    // console.log(pid);
-    // setQuickViewId(pid);
+  const productQuickViewModalHandler = () => {
     setShowProductQuickViewModal(true);
   }       
 
@@ -90,7 +87,7 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
       {/* Quick View div should generate a modal when clicked */}
       <div
         className={`${classes["quick-view"]} ${!imageHover ? "hidden" : ""}`}
-        onClick={() => productQuickViewModalHandler(props.id)}
+        onClick={productQuickViewModalHandler}
       >
         <span>
           <FontAwesomeIcon
