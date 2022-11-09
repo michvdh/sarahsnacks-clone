@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { PrevButton, NextButton } from "../../ui/EmblaCarouselButton";
+import { PrevButton, NextButton } from "../buttons/EmblaCarouselButtons";
 import useEmblaCarousel from "embla-carousel-react";
-import ProductMinDetails from "../../ui/ProductMinDetails";
+import ProductMinDetails from "../ProductMinDetails";
 import productsDB from "../../../model/productsDB";
+import emblaClass from "./embla.module.scss";
 
 // import { useInfiniteScroll } from "./useInfiniteScroll";
 // import { mediaByIndex } from "../media";
@@ -77,9 +78,9 @@ const EmblaCarousel: React.FC<ProductsProps> = (props) => {
   };
 
   return (
-    <div className={`${props.className} embla`}>
-      <div className="embla__viewport" ref={viewportRef}>
-        <div className="embla__container">
+    <div className={`${props.className} ${emblaClass.embla}`}>
+      <div className={`${emblaClass['embla__viewport']}`} ref={viewportRef}>
+        <div className={`${emblaClass['embla__container']}`}>
           {featuredProducts.map((product) => (
             <ProductMinDetails
               id={product.id}

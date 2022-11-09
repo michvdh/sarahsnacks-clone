@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import classes from "./Favorites.module.scss";
-import EmblaCarousel from "./EmblaCarousel";
+import EmblaCarousel from "../../ui/FavoritesCarouselEmbla/EmblaCarousel";
 import Image from 'next/image';
 
 const Favorites = () => {

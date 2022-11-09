@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import classes from "./ProductQuickView.module.scss";
+import emblaClass from "./FavoritesCarouselEmbla/embla.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import ProductQuickViewModal from "./modal/ProductQuickViewModal";
@@ -35,14 +36,13 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
 
   return (
     <div
-      className={`${classes["image-container"]} embla__slide__img-container`}
+      className={`${classes["image-container"]} ${emblaClass['embla__slide__img-container']}`}
     >
       <Link
         href={{
           pathname: `/product/${props.productNameDashed}`,
           query: {
             id: props.id,
-            // ifld: props.imagesFolder
           },
         }}
         passHref
@@ -51,7 +51,7 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
           <Image
             className={`${classes["image--front"]} ${
               classes["image"]
-            } embla__slide__img ${
+            } ${emblaClass['embla__slide__img']} ${
               imageHover && numberOfImages > 1 ? "hidden" : ""
             }`}
             src={`${basePath}${props.images[0]}`}
@@ -64,7 +64,7 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
             <Image
               className={`${classes["image--back"]} ${
                 classes["image"]
-              } embla__slide__img ${!imageHover ? "hidden" : ""}`}
+              } ${emblaClass['embla__slide__img']} ${!imageHover ? "hidden" : ""}`}
               src={`${basePath}${props.images[1]}`}
               // alt={props.productName}
               layout="fill"

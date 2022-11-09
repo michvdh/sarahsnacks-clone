@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { NavButton, PrevButton, NextButton } from "./EmblaCarouselButtons";
+import { NavButton, PrevButton, NextButton } from "../buttons/EmblaCarouselButtons";
 import useEmblaCarousel from "embla-carousel-react";
 // import { mediaByIndex } from "../media";
 import classes from "./embla.module.scss";

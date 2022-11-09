@@ -1,5 +1,6 @@
 import Link from "next/link";
 import classes from "./ProductMinDetails.module.scss";
+import emblaClass from "./FavoritesCarouselEmbla/embla.module.scss";
 import { ProductMinModel } from "../../model/productMinModel.model";
 import ProductQuickView from "./ProductQuickView";
 import getPriceRange from "../helpers/getPriceRange";
@@ -69,10 +70,10 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
 
   return (
     <figure
-      className={`embla__slide ${classes["featured-item"]} featured-item`}
+      className={`${emblaClass['embla__slide']} ${classes["featured-item"]} featured-item`}
       key={props.id}
     >
-      <div className="embla__slide__inner">
+      <div className={`${emblaClass['embla__slide__inner']}`}>
         <ProductQuickView
           id={props.id}
           productNameDashed={productNameDashed}
@@ -80,7 +81,7 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
           images={props.images}
         />
 
-        <figcaption className="embla__slide__caption">
+        <figcaption className={`${emblaClass['embla__slide__caption']}`}>
           <p className={`${classes["category-container"]}`}>
             {props.category.map((category, index) => (
               <Link

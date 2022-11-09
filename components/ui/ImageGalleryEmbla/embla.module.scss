@@ -1,6 +1,6 @@
 .embla {
   position: relative;
-  background-color: #f7f7f7;
+  // background-color: #f7f7f7;
   padding: 20px;
   // max-width: 670px;
   margin-left: auto;
@@ -30,9 +30,7 @@
   -webkit-touch-callout: none;
   -khtml-user-select: none;
   -webkit-tap-highlight-color: transparent;
-  // margin-left: -10px;
-  /////////////////////////////////
-  // position: relative;
+  margin-left: -10px;
 }
 
 .embla__slide {
@@ -46,9 +44,8 @@
   overflow: hidden;
   height: 190px;
   ///////////////////////////////////////////////////
-  // height: 100%;
+
   width: 100px;
-  // object-fit: contain;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,11 +64,6 @@
   // transform: translate(-50%, -50%);
   ///////////////////////////////////////////////////
 
-  // min-height: 100%;
-  // min-width: 100%;
-  // transform: translate(-50%, -50%);
-
-  // object-fit: contain;
   margin: 0 auto;
   text-align: center;
 }
