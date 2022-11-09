@@ -5,6 +5,8 @@ import useEmblaCarousel from "embla-carousel-react";
 import classes from "./embla.module.scss";
 import productsDB from "../../../model/productsDB";
 import Image from "next/image";
+import { Fragment } from "react";
+import { ImageGalleryEmblaModel } from "../../../model/imageGalleryEmblaModel.model";
 
 /*
   - I am still using local productsDB. Update this later
@@ -26,17 +28,19 @@ import Image from "next/image";
 
 
 // const EmblaCarousel = ({ slides }) => {
-const EmblaCarousel = () => {
-  const slides = productsDB[1].images.thumbnailLarge;
-  const imagesFolder = productsDB[1].images.folderName;
+const EmblaCarousel: React.FC<ImageGalleryEmblaModel> = (props) => {
+  const slides = props.images.thumbnailLarge;
+  const imagesFolder = props.images.folderName;
   const basePath = `/images/products${imagesFolder}`;
 
   const [viewportRef, embla] = useEmblaCarousel({
     align: "start",
-    dragFree: true,
+    dragFree: false,
     inViewThreshold: 0,
-    containScroll: "trimSnaps",
+    skipSnaps: true,
     loop: true,
+    // draggable: false,
+    // containScroll: "keepSnaps",
   }); // the parameters make it an infinite carousel
 
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
@@ -85,8 +89,12 @@ const EmblaCarousel = () => {
             ))}
           </div>
         </div>
-        <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
-        <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
+        {(props.navType === "dot") &&
+          <Fragment>
+            <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
+            <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
+          </Fragment>
+        }
       </div>
       <div className={`${classes[`embla__dots`]}`}>
         {scrollSnaps.map((_, index) => (
@@ -94,7 +102,7 @@ const EmblaCarousel = () => {
             key={index}
             selected={index === selectedIndex}
             onClick={() => scrollTo(index)}
-            navType="image"
+            navType={props.navType}
             imgSource={`${basePath}${slides[index]}`}
           />
         ))}

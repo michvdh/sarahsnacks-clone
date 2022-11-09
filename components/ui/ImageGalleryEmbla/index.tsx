@@ -3,11 +3,12 @@
   // EmblaCarousel parameters = images or dots
 
 import EmblaCarousel from "./EmblaCarousel";
+import { ImageGalleryEmblaModel } from "../../../model/imageGalleryEmblaModel.model";
 
-const ImageGalleryEmbla = () => {
+const ImageGalleryEmbla: React.FC<ImageGalleryEmblaModel> = (props) => {
   return (
     <div>
-      <EmblaCarousel />
+      <EmblaCarousel images={props.images} navType={props.navType} />
     </div>
   );
 }

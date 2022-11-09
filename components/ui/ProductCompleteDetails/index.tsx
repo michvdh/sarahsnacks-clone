@@ -8,6 +8,7 @@ import MainDescription from "./MainDescription";
 import classes from "./ProductCompleteDetails.module.scss";
 import AddToCartConfirmation from "./AddToCartConfirmation";
 import { useSelector, useDispatch } from "react-redux";
+import ImageGalleryEmbla from "../ImageGalleryEmbla";
 
 
 const ProductCompleteDetails: React.FC<{product: ProductsDBModel}> = (props) => {
@@ -41,7 +42,11 @@ const ProductCompleteDetails: React.FC<{product: ProductsDBModel}> = (props) => 
           />
         }
         <div className={`${classes['upper__main']}`}>
-          <ImageGallery images={product.images} />
+          {/* <ImageGallery images={product.images} /> */}
+          <ImageGalleryEmbla 
+            images={product.images}
+            navType="image" // navType = "dot" or "image"
+          />
           <MainDescription
             id={product.id}
             productName={product.productName}

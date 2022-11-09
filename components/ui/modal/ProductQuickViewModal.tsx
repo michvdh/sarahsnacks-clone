@@ -85,20 +85,28 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
 
       {product && !addToCartConfirmation && ReactDOM.createPortal(
         <div className={classes['product-qv-overlay']}>
-          <ImageGalleryEmbla />
-          <MainDescription
-            id={product.id}
-            productName={product.productName}
-            otherName={product.otherName}
-            nameColor={product.nameColor}
-            category={product.category}
-            mainDescription={product.mainDescription}
-            variations={product.variations}
-            imagesFolder={product.images.folderName}
-            image={product.images.thumbnailSmall[0]}
-            selectionDetails={additionalInfoHandler}
-            confirmation={confirmationHandler}
-          />
+          <div className={classes.close}>
+            <button onClick={props.onClick}>×</button>
+          </div>
+          <div className={classes.main}>
+            <ImageGalleryEmbla
+              images={product.images}
+              navType="dot" // navType = "dot" or "image"
+            />
+            <MainDescription
+              id={product.id}
+              productName={product.productName}
+              otherName={product.otherName}
+              nameColor={product.nameColor}
+              category={product.category}
+              mainDescription={product.mainDescription}
+              variations={product.variations}
+              imagesFolder={product.images.folderName}
+              image={product.images.thumbnailSmall[0]}
+              selectionDetails={additionalInfoHandler}
+              confirmation={confirmationHandler}
+            />
+          </div>
         </div>,
         productQuickViewOverlay
       )}

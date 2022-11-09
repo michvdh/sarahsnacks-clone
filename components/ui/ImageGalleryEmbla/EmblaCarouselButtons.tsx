@@ -12,12 +12,14 @@ interface NavButtonInterface {
 
 export const NavButton = ({ selected, onClick, navType, imgSource }) => (
   <Fragment>
-    {(navType === 'dot') ?
+    {(navType === 'dot') &&
       <button
         className={`${classes[`embla__dot`]} ${selected ? classes[`is-selected`] : ""}`}
         type="button"
         onClick={onClick}
-      /> :
+      />
+    }
+    {(navType === 'image') &&
       <Image
         className={`${classes[`embla__dot`]} ${selected ? classes[`is-selected`] : ""}`}
         src={imgSource}

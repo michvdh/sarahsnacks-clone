@@ -27,9 +27,9 @@ const EmblaCarousel: React.FC<ProductsProps> = (props) => {
 
   const [viewportRef, embla] = useEmblaCarousel({
     align: "start",
-    dragFree: true,
+    dragFree: false,
     inViewThreshold: 0,
-    containScroll: "trimSnaps",
+    skipSnaps: true,
     loop: true,
   }); // the parameters make it an infinite carousel
 
