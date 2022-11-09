@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { DotButton, PrevButton, NextButton } from "./EmblaCarouselButtons";
+import { NavButton, PrevButton, NextButton } from "./EmblaCarouselButtons";
 import useEmblaCarousel from "embla-carousel-react";
 // import { mediaByIndex } from "../media";
-import "./embla.module.scss";
+import classes from "./embla.module.scss";
 import productsDB from "../../../model/productsDB";
 import Image from "next/image";
 
@@ -11,13 +11,34 @@ import Image from "next/image";
 */
 
 
+/*
+  embla and embla__viewport
+    - controls the size of what is to be displayed by the slide
+
+  embla__container
+    - container of all slides stacked in a row
+    - slides outside of "embla and embla__viewport" are not displayed
+
+  embla__slide
+    - this is the container of the currently displayed image
+
+*/
+
 
 // const EmblaCarousel = ({ slides }) => {
 const EmblaCarousel = () => {
   const slides = productsDB[1].images.thumbnailLarge;
   const imagesFolder = productsDB[1].images.folderName;
+  const basePath = `/images/products${imagesFolder}`;
 
-  const [viewportRef, embla] = useEmblaCarousel({ skipSnaps: false });
+  const [viewportRef, embla] = useEmblaCarousel({
+    align: "start",
+    dragFree: true,
+    inViewThreshold: 0,
+    containScroll: "trimSnaps",
+    loop: true,
+  }); // the parameters make it an infinite carousel
+
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -45,18 +66,19 @@ const EmblaCarousel = () => {
 
   return (
     <>
-      <div className="embla">
-        <div className="embla__viewport" ref={viewportRef}>
-          <div className="embla__container">
+      <div className={classes.embla}>
+        <div className={`${classes['embla__viewport']}`} ref={viewportRef}>
+          <div className={`${classes[`embla__container`]}`}>
             {slides.map((index) => (
-              <div className="embla__slide" key={index}>
-                <div className="embla__slide__inner">
+              <div className={`${classes[`embla__slide`]}`} key={index}>
+                <div className={`${classes[`embla__slide__inner`]}`}>
                   <Image
-                    className="embla__slide__img"
-                    src={`/images/products${imagesFolder}${index}`}
+                    className={`${classes[`embla__slide__img`]}`}
+                    src={`${basePath}${index}`}
                     // alt="A cool cat."
-                    width={100}
-                    height={150}
+                    // width={100}
+                    // height={150}
+                    layout='fill'
                   />
                 </div>
               </div>
@@ -66,12 +88,14 @@ const EmblaCarousel = () => {
         <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
         <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
       </div>
-      <div className="embla__dots">
+      <div className={`${classes[`embla__dots`]}`}>
         {scrollSnaps.map((_, index) => (
-          <DotButton
+          <NavButton
             key={index}
             selected={index === selectedIndex}
             onClick={() => scrollTo(index)}
+            navType="image"
+            imgSource={`${basePath}${slides[index]}`}
           />
         ))}
       </div>

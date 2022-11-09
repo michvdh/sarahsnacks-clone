@@ -1,5 +1,9 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 
+
+// I think I'm not actually using this file because everything about "useInfiniteScroll.tsx" was commented out in EmblaCarousel.tsx
+
+
 export const useInfiniteScroll = (embla, slides, hasMoreToLoad) => {
   const scrollListener = useRef(null);
   const [loadingMore, setLoadingMore] = useState(false);

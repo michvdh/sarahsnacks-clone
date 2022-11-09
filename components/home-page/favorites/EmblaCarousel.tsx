@@ -24,13 +24,14 @@ const EmblaCarousel: React.FC<ProductsProps> = (props) => {
 
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = useState(true);
+
   const [viewportRef, embla] = useEmblaCarousel({
     align: "start",
     dragFree: true,
     inViewThreshold: 0,
     containScroll: "trimSnaps",
     loop: true,
-  });
+  }); // the parameters make it an infinite carousel
 
   // const loadingMore = useInfiniteScroll(embla, props.slides, hasMoreToLoad);
 

@@ -1,16 +1,37 @@
 import React from "react";
+import classes from "./embla.module.scss";
+import Image from "next/image";
+import { Fragment } from "react";
 
-export const DotButton = ({ selected, onClick }) => (
-  <button
-    className={`embla__dot ${selected ? "is-selected" : ""}`}
-    type="button"
-    onClick={onClick}
-  />
+interface NavButtonInterface {
+  selected: boolean;
+  onClick: () => void;
+  navType: string;
+  imgSource: string;
+}
+
+export const NavButton = ({ selected, onClick, navType, imgSource }) => (
+  <Fragment>
+    {(navType === 'dot') ?
+      <button
+        className={`${classes[`embla__dot`]} ${selected ? classes[`is-selected`] : ""}`}
+        type="button"
+        onClick={onClick}
+      /> :
+      <Image
+        className={`${classes[`embla__dot`]} ${selected ? classes[`is-selected`] : ""}`}
+        src={imgSource}
+        width={100}
+        height={120}
+        onClick={onClick}
+      />
+    }
+  </Fragment>
 );
 
 export const PrevButton = ({ enabled, onClick }) => (
   <button
-    className="embla__button embla__button--prev"
+    className={`${classes[`embla__button`]} ${classes[`embla__button--prev`]}`}
     onClick={onClick}
     disabled={!enabled}
   >
@@ -22,7 +43,7 @@ export const PrevButton = ({ enabled, onClick }) => (
 
 export const NextButton = ({ enabled, onClick }) => (
   <button
-    className="embla__button embla__button--next"
+    className={`${classes[`embla__button`]} ${classes[`embla__button--next`]}`}
     onClick={onClick}
     disabled={!enabled}
   >
