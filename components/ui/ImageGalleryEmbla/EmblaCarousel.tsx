@@ -1,16 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { NavButton, PrevButton, NextButton } from "../buttons/EmblaCarouselButtons";
 import useEmblaCarousel from "embla-carousel-react";
-// import { mediaByIndex } from "../media";
 import classes from "./embla.module.scss";
-import productsDB from "../../../model/productsDB";
 import Image from "next/image";
 import { Fragment } from "react";
 import { ImageGalleryEmblaModel } from "../../../model/imageGalleryEmblaModel.model";
-
-/*
-  - I am still using local productsDB. Update this later
-*/
 
 
 /*
@@ -23,11 +17,9 @@ import { ImageGalleryEmblaModel } from "../../../model/imageGalleryEmblaModel.mo
 
   embla__slide
     - this is the container of the currently displayed image
-
 */
 
 
-// const EmblaCarousel = ({ slides }) => {
 const EmblaCarousel: React.FC<ImageGalleryEmblaModel> = (props) => {
   const slides = props.images.thumbnailLarge;
   const imagesFolder = props.images.folderName;

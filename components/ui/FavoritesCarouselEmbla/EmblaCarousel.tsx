@@ -5,23 +5,11 @@ import ProductMinDetails from "../ProductMinDetails";
 import productsDB from "../../../model/productsDB";
 import emblaClass from "./embla.module.scss";
 
-// import { useInfiniteScroll } from "./useInfiniteScroll";
-// import { mediaByIndex } from "../media";
-// import "./embla.scss";
-
-// const mockApiCall = (minWait: number, maxWait: number, callback) => {
-//   const min = Math.ceil(minWait);
-//   const max = Math.floor(maxWait);
-//   const wait = Math.floor(Math.random() * (max - min + 1)) + min;
-//   setTimeout(callback, wait);
-// };
-
 interface ProductsProps {
   className: string;
 }
 
 const EmblaCarousel: React.FC<ProductsProps> = (props) => {
-  // const [hasMoreToLoad, setHasMoreToLoad] = useState(true);
 
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = useState(true);
@@ -34,8 +22,6 @@ const EmblaCarousel: React.FC<ProductsProps> = (props) => {
     loop: true,
   }); // the parameters make it an infinite carousel
 
-  // const loadingMore = useInfiniteScroll(embla, props.slides, hasMoreToLoad);
-
   const scrollPrev = useCallback(() => embla && embla.scrollPrev(), [embla]);
   const scrollNext = useCallback(() => embla && embla.scrollNext(), [embla]);
 
@@ -45,20 +31,6 @@ const EmblaCarousel: React.FC<ProductsProps> = (props) => {
     setNextBtnEnabled(embla.canScrollNext());
   }, [embla]);
 
-  // useEffect(() => {
-  //   if (!loadingMore) return;
-  //   mockApiCall(1000, 2000, () => {
-  //     props.setSlides((currentSlides: number[]) => {
-  //       console.log(currentSlides);
-  //       if (currentSlides.length === 9) {
-  //         setHasMoreToLoad(false);
-  //         return currentSlides;
-  //       }
-  //       const newSlideCount = currentSlides.length + 4;
-  //       return Array.from(Array(newSlideCount).keys());
-  //     });
-  //   });
-  // }, [props.setSlides, loadingMore]);
 
   useEffect(() => {
     if (!embla) return;
@@ -93,14 +65,6 @@ const EmblaCarousel: React.FC<ProductsProps> = (props) => {
               onCategorySearch={dummyCategSearch}
             />
           ))}
-
-          {/* {hasMoreToLoad && (
-            <div className="embla__slide embla__slide--loading">
-              <div className="embla__slide__inner embla__slide__inner--loading">
-                {loadingMore && <div className="embla__slide__loading" />}
-              </div>
-            </div>
-          )} */}
         </div>
       </div>
       <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
