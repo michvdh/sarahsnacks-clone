@@ -6,6 +6,7 @@ import emblaClass from "./FavoritesCarouselEmbla/embla.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import ProductQuickViewModal from "./modal/ProductQuickViewModal";
+import Loading from "../ui/Loading";
 
 interface QuickViewProps {
   id: string;
@@ -20,18 +21,25 @@ interface QuickViewProps {
 const ProductQuickView: React.FC<QuickViewProps> = (props) => {
   const [imageHover, setImageHover] = useState(false);
   const [showProductQuickViewModal, setShowProductQuickViewModal] = useState(false);
+  // const [qvClicked, setQVClicked] = useState(false);
+  const [fetched, setFetched] = useState(false);
 
   const basePath = `/images/products${props.imagesFolder}`;
   const numberOfImages = props.images.length;
 
-  const productQuickViewModalHandler = () => {
-    setShowProductQuickViewModal(true);
-  }       
-
   const overlayHandler = () => {
     const newState = !showProductQuickViewModal;
     setShowProductQuickViewModal(newState);
-  };
+  }; // used by close button and backdrop to close the modal
+
+  const productQuickViewModalHandler = () => {
+    setShowProductQuickViewModal(true);
+    setFetched(false);
+  } 
+
+  const fetchStateHandler = () => {
+    setFetched(true); 
+  } // used by loading indicator in ProductQuickView
 
 
   return (
@@ -47,7 +55,7 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
         }}
         passHref
       >
-        <a>
+        <a className={`${classes.link}`}>
           <Image
             className={`${classes["image--front"]} ${
               classes["image"]
@@ -72,10 +80,20 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
           ) : (
             ""
           )}
+
+          {showProductQuickViewModal && !fetched && 
+            // <div className={classes.loading}>
+            //   <p>Loading</p>
+            // </div>
+            <div className={classes['spinner-wrapper']}>
+              <div className={classes.spinner}></div>
+              {/* <p>Loading</p> */}
+            </div>
+          }
         </a>
       </Link>
 
-      {/* Quick View div should generate a modal when clicked */}
+      {/* Quick view button */}
       <div
         className={`${classes["quick-view"]}`}
         onClick={productQuickViewModalHandler}
@@ -89,10 +107,12 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
         </span>
         <span className={`quick-view-text`}>Quick View</span>
       </div>
-      {showProductQuickViewModal && 
+      {showProductQuickViewModal &&
         <ProductQuickViewModal 
           id={props.id}
           onClick={overlayHandler}
+          fetching={fetchStateHandler}
+          fetched={fetched}
         />
       }
     </div>

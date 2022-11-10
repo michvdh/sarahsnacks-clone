@@ -1,7 +1,10 @@
 @import "../../styles/variables";
 
-.image {
-  transition: opacity 0.25s ease-in-out;
+// .link {
+//   position: relative;
+// }
+.test {
+  // position: relative;
 }
 
 .image-container {
@@ -23,11 +26,62 @@
     }
   }
 
-  // a {
-  //   position: relative;
-  //   width: 2rem;
-  //   height: 2rem;
-  // }
-  
+  .image {
+    transition: opacity 0.25s ease-in-out;
+  }
 
+  // .loading {
+  //   position: absolute;
+  //   z-index: 999;
+  // }
 }
+
+.spinner-wrapper {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // position: fixed;
+  top: 0;
+  left: 0;
+  background-color: $overlay--dark;
+  z-index: 9999;
+}
+
+.spinner {
+  position: absolute;
+  // left: 50%;
+  // top: 50%;
+  height:3rem;
+  width:3rem;
+  margin:0px auto;
+  -webkit-animation: rotation .6s infinite linear;
+  -moz-animation: rotation .6s infinite linear;
+  -o-animation: rotation .6s infinite linear;
+  animation: rotation .6s infinite linear;
+  border-left:0.3rem solid rgba(0,174,239,.15);
+  border-right:0.3rem solid rgba(0,174,239,.15);
+  border-bottom:0.3rem solid rgba(0,174,239,.15);
+  border-top:0.3rem solid rgba(0,174,239,.8);
+  border-radius:100%;
+}
+
+@-webkit-keyframes rotation {
+  from {-webkit-transform: rotate(0deg);}
+  to {-webkit-transform: rotate(359deg);}
+}
+@-moz-keyframes rotation {
+  from {-moz-transform: rotate(0deg);}
+  to {-moz-transform: rotate(359deg);}
+}
+@-o-keyframes rotation {
+  from {-o-transform: rotate(0deg);}
+  to {-o-transform: rotate(359deg);}
+}
+@keyframes rotation {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(359deg);}
+}
+

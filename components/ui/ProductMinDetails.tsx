@@ -65,7 +65,7 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
   const overlayHandler = () => {
     const newState = !showSuccessModal;
     setShowSuccessModal(newState);
-  };
+  }; // used by backdrop
 
 
   return (

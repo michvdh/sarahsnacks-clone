@@ -8,6 +8,7 @@ import { getAllProducts } from "../../helpers/apiUtils";
 import classes from "./ProductQuickViewModal.module.scss";
 import AddToCartSuccessModal from "./AddToCartSuccessModal";
 import ImageGalleryEmbla from "../../ui/ImageGalleryEmbla/index";
+import { produceWithPatches } from "immer";
 
 // export async function getStaticProps() {
 //   const allProducts = await getAllProducts();
@@ -22,6 +23,8 @@ import ImageGalleryEmbla from "../../ui/ImageGalleryEmbla/index";
 interface ProductQuickViewModalInterface {
   id: string;
   onClick: () => void;
+  fetching: () => void;
+  fetched: boolean;
   // allProducts: ProductsDBModel[];
 }
 
@@ -33,6 +36,7 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
   let product;
   let variationLength;
   const [productsDB, setProductsDB] = useState([]);
+  const [closeWindow, setCloseWindow] = useState(false);
   
   const allData = async() => {
     const response = await fetch('https://sarahsnacks-clone-default-rtdb.firebaseio.com/productsDB.json');
@@ -43,14 +47,17 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
   useEffect(() => {
     allData();
   }, []);
+
+  useEffect(() => {
+    (productsDB.length > 0) && props.fetching();
+  }, [productsDB]); // used by loading indicator in ProductQuickView
+  
   
 
   if (productsDB.length > 0) {
     pIndex = productsDB.findIndex((p) => p.id === productID);
     product = productsDB[pIndex];
     variationLength = product.variations.length;
-    
-    console.log(pIndex);
   }
 
   const backdrop = document.getElementById("backdrop-root")!;
@@ -78,15 +85,21 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
     setNewItemProductName(productName);
   };
 
+  const closeHandler = () => {
+    setCloseWindow(true);
+    setTimeout(() => props.onClick(), 220); 
+    // adjust based on close animate -> ProductQuickViewModal.module.scss
+  }
+
 
   return (
     <Fragment>
-      {ReactDOM.createPortal(<Backdrop onClick={props.onClick} />, backdrop)}
+      {product && !addToCartConfirmation && ReactDOM.createPortal(<Backdrop onClick={closeHandler} />, backdrop)}
 
       {product && !addToCartConfirmation && ReactDOM.createPortal(
-        <div className={classes['product-qv-overlay']}>
+        <div className={`${classes['product-qv-overlay']} ${closeWindow ? classes['animate-close'] : classes['animate-open']}`}>
           <div className={classes.close}>
-            <button onClick={props.onClick}>×</button>
+            <button onClick={closeHandler}>×</button>
           </div>
           <div className={classes.main}>
             <ImageGalleryEmbla
