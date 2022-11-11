@@ -1,16 +1,19 @@
 @import "../../styles/variables";
 
-// .link {
-//   position: relative;
-// }
-.test {
-  // position: relative;
-}
+// styles directly applied to image is handled by ui/FavoritesCarouselEmbla/embla.module.scss -> .embla__slide__img
 
 .image-container {
   position: relative;
 
   .image--back {
+    opacity: 0;
+  }
+
+  .quick-view {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
     opacity: 0;
   }
 
@@ -22,10 +25,7 @@
     }
 
     .quick-view {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      text-align: center;
+      opacity: 1;
       background-color: $background-rgba--brown;
   
       &:hover {
@@ -33,20 +33,6 @@
       }
     }
   }
-
-  // .link {
-  //   position: relative;
-  // }
-
-  .image {
-    transition: opacity 0.25s ease-in-out;
-    // object-fit: cover;
-  }
-
-  // .loading {
-  //   position: absolute;
-  //   z-index: 999;
-  // }
 }
 
 .spinner-wrapper {

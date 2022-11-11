@@ -6,7 +6,6 @@ import emblaClass from "./FavoritesCarouselEmbla/embla.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import ProductQuickViewModal from "./modal/ProductQuickViewModal";
-import Loading from "../ui/Loading";
 
 interface QuickViewProps {
   id: string;
@@ -14,9 +13,6 @@ interface QuickViewProps {
   imagesFolder: string;
   images: string[];
 }
-
-// right now, this component isn't accepting the complete details of the product
-// I can probably start accepting productID and use it as reference
 
 const ProductQuickView: React.FC<QuickViewProps> = (props) => {
   const [showProductQuickViewModal, setShowProductQuickViewModal] = useState(false);
@@ -64,8 +60,6 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
             src={`${basePath}${props.images[0]}`}
             alt={props.productNameDashed}
             layout="fill"
-            // width="150"
-            // height="350"
           />
           {numberOfImages > 1 ? (
             <Image
@@ -82,12 +76,8 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
           ) : ("")}
 
           {showProductQuickViewModal && !fetched && 
-            // <div className={classes.loading}>
-            //   <p>Loading</p>
-            // </div>
             <div className={classes['spinner-wrapper']}>
               <div className={classes.spinner}></div>
-              {/* <p>Loading</p> */}
             </div>
           }
         </a>

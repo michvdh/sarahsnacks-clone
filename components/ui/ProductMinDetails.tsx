@@ -74,6 +74,8 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
       key={props.id}
     >
       <div className={`${emblaClass['embla__slide__inner']}`}>
+
+        {/* ProductQuickView is only the image and quick view button */}
         <ProductQuickView
           id={props.id}
           productNameDashed={productNameDashed}
