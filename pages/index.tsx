@@ -4,7 +4,7 @@ import Head from "next/head";
 import { Fragment } from "react";
 import Category from "../components/home-page/category/Category";
 import Favorites from "../components/home-page/favorites/Favorites";
-import EmblaCarousel from "../components/home-page/favorites/EmblaCarousel";
+import EmblaCarousel from "../components/ui/FavoritesCarouselEmbla/EmblaCarousel";
 
 import Hero from "../components/home-page/hero/Hero";
 import Quote from "../components/home-page/quote/Quote";

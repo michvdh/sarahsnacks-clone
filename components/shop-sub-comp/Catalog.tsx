@@ -46,7 +46,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
 
   // shallowRouting helper function
   const shallowRouting = ( 
-      category: string, 
+      category: string | string[], 
       keyword: string, 
       page: number, 
       sort: string, 
@@ -58,7 +58,8 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
       {
         pathname: `/shop`,
         query: {
-          ...(category && {category: category}),
+          // this means if there is no value for category, then we don't add it to the url. I use this for category and keyword search
+          ...(category && {category: category}), 
           ...(keyword && {keyword: keyword}),
           ...(page && {page: page}),
           ...(sort && {sort: sort}),
@@ -260,10 +261,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     if (!hasResults) return;
 
     const tempSourceList = sortChanged
-      ? sortedProducts
-        : filteredProducts.length === 0
-      ? products
-        : filteredProducts;
+      ? sortedProducts : (filteredProducts.length === 0 ? products : filteredProducts);
 
     if (displayCount === "All") {
       totalPages = 1;
@@ -325,13 +323,11 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     sortChanged && applyProductSort();
   }
 
-  
   if (keywordSearchTriggered && resultsReady) {
     clearSearchAndSort("category");
     applyKeywordSearch();
     sortChanged && applyProductSort();
   }
-
 
   if (sortChanged) {
     applyProductSort();
@@ -345,7 +341,6 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     if (!isReady) return;
 
     !resultsReady && setResultsReady(true);
-    // console.log("useEffect");
 
     if (router.query.category) {
       shallowRouting(router.query.category, "", router.query.page, router.query.sort, router.query.display, router.query.style);
@@ -384,12 +379,6 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
   }, [isReady]);
 
 
-  // const [isChecked, setIsChecked] = useState(false);
-
-  // const categoryChangeHandler = (a: string, b: string) => {
-  //   a === b && setIsChecked(true); 
-  // }
-
   return (
     <main className={`main`}>
       <section className={`${classes.catalog} catalog`}>
@@ -400,8 +389,6 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
           onClearCategory={clearCategory}
           categoryInput={categorySearch}
           keywordInput={keywordSearch}
-          // onCategoryChange={categoryChangeHandler}
-          // categoryCheckState={isChecked}
         />
         <ResultsPane
           showProducts={hasResults ? pageControlledProductList : []}
@@ -409,7 +396,6 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
           onDisplayCount={displayCountHandler}
           onPageBtnClick={pageControlHandler}
           onCategorySearch={categorySearchHandler}
-          // onReturnToDefaultSort={defaultSort}
           onChangeDisplayType={displayTypeHandler}
           displayType={displayType}
           totalPages={totalPages}

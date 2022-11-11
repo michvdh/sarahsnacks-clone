@@ -1,0 +1,36 @@
+.cart-preview {
+  z-index: 999;
+  position: absolute;
+  background-color: white;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  width: 35rem;
+  right: 0;
+  top: 6rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s 0.2s;
+
+  .list-container {
+    max-height: 25rem;
+    overflow:auto;
+
+    .list {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .subtotal {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .buttons-container {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+

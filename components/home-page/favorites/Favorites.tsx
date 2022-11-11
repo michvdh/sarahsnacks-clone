@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import classes from "./Favorites.module.scss";
-import EmblaCarousel from "./EmblaCarousel";
+import EmblaCarousel from "../../ui/FavoritesCarouselEmbla/EmblaCarousel";
 import Image from 'next/image';
 
 const Favorites = () => {
@@ -13,9 +13,6 @@ const Favorites = () => {
 
   return (
     <section className={`${classes.favorites} favorites`}>
-
-      {/* <EmblaCarousel className={`${classes.carousel}`} products={products} /> */}
-
       <EmblaCarousel className={`${classes.carousel}`} />
 
       <div className={`${classes['side']}`}>

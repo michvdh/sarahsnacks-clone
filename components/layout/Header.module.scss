@@ -1,9 +1,71 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
-.call { grid-area: call; }
-.logo { grid-area: logo; }
-.cart { grid-area: cart; }
-.nav { grid-area: nav; }
+// CartOnPreview
+.show-cart-preview:hover {
+  // opacity: 1;
+  animation: show-cart 0.5s;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  -ms-animation-fill-mode: forwards;
+  -o-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.hide-cart-preview:hover {
+  // opacity: 0;
+  // z-index: -1;
+  // display: none !important; // I can add in the animation that after x seconds, display:none will apply
+  // display: none !important;
+  // display: none !important;
+  animation: hide-cart 1.5s;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  -ms-animation-fill-mode: forwards;
+  -o-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+@keyframes show-cart {
+  0% {
+    opacity: 0;
+    display: none !important;
+  }
+  100% {
+    opacity: 1;
+    display: initial;
+  }
+}
+
+@keyframes hide-cart {
+  0% {
+    // opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none !important;
+  }
+}
+
+// .cart-preview {
+//   visibility: hidden;
+//   opacity: 0;
+//   z-index: 30;
+//   transition: all 0.2s 0.2s;
+// }
+
+
+.call {
+  grid-area: call;
+}
+.logo {
+  grid-area: logo;
+}
+.cart {
+  grid-area: cart;
+}
+.nav {
+  grid-area: nav;
+}
 
 .header {
   background-color: $white;
@@ -17,13 +79,11 @@
     max-width: 75%;
     margin: 0 auto;
     padding: 1.5rem 0 1rem 0;
-    grid-template-areas: 
-    'call logo cart'
-    'nav nav nav';
+    grid-template-areas:
+      "call logo cart"
+      "nav nav nav";
     grid-template-columns: 1fr 1fr 1fr;
   }
-  
-
 
   .call {
     display: flex;
@@ -36,16 +96,29 @@
     flex-direction: column;
     justify-content: center;
     text-align: right;
+    position: relative;
 
     &:hover {
       cursor: pointer;
       color: $dark-green;
+
+      .cart-hover {
+        visibility: visible;
+        opacity: 1;
+      }
     }
 
     .fa-icon {
       position: relative;
       right: -0.3rem;
       vertical-align: middle;
+    }
+
+    &-link {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: right;
     }
 
     &__count {
@@ -83,9 +156,3 @@
     }
   }
 }
-
-
-
-
-
-

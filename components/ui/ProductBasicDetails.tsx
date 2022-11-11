@@ -2,20 +2,68 @@ import classes from "./ProductBasicDetails.module.scss";
 import { ProductBasicModel } from "../../model/productBasicModel.model";
 import ProductQuickView from "./ProductQuickView";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../../store/cart";
+import { useEffect, useState } from "react";
+import AddToCartSuccessModal from "./modal/AddToCartSuccessModal";
+import changeToKebabCase from "../helpers/changeToKebabCase";
+import {CartStateModel} from "../../model/cartStateModel.model";
+
 
 const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
-  const productName = props.otherName
-    ? props.otherName
-    : props.productName[1] === ""
-    ? props.productName[0]
-    : props.productName[0] + " " + props.productName[1];
+  const [showSuccessModal, setShowSuccessModal] = useState(
+    false
+  );
 
-  const productNameDashed = productName
-    .replace("&", "")
-    .replace(/\s+/g, "-")
-    .toLocaleLowerCase();
+  const productNameDashed = changeToKebabCase(
+    props.productName, props.otherName
+  );
 
   const categoryLength = props.category.length - 1;
+
+  const cartItems = useSelector(
+    (state: { cart: CartStateModel }) => state.cart.cartItems
+  );
+
+  let inCart = false;
+
+  cartItems.every((item) => {
+    if (item.id === props.id) {
+      inCart = true;
+      return false;
+    }
+    return true;
+  });
+
+  const dispatch = useDispatch();
+
+  const addToCartHandler = () => {
+    dispatch(
+      cartActions.addItem({
+        id: props.id,
+        productName: `${props.productName[0]} ${
+          props.productName[1] && props.productName[1]
+        }`,
+        otherName: props.otherName,
+        varPrice: props.variations[0].price,
+        varSize: props.variations[0].size,
+        qty: 1,
+        imagesFolder: props.imagesFolder,
+        image: props.images[0]
+      })
+    );
+
+    addToCartModalHandler(!showSuccessModal);
+  };
+
+  const addToCartModalHandler = (modalState: boolean) => {
+    setShowSuccessModal(modalState);
+  };
+
+  const backdropHandler = () => {
+    const newState = !showSuccessModal;
+    setShowSuccessModal(newState);
+  };
 
   const getPriceRange = (variations: ProductBasicModel["variations"]) => {
     const priceVariationLength = variations.length;
@@ -87,11 +135,11 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
             </a>
           </Link>
         </h2>
-        <span className={`${classes["price-range"]}`}>
+        <span className={`${classes["price-range"]} price-ranges`}>
           {getPriceRange(props.variations)}
         </span>
         <p>{props.description}</p>
-        <Link
+        {/* <Link
           href={{
             pathname: `/product/${productNameDashed}`,
             query: {
@@ -105,8 +153,51 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
           >
             {props.variations.length > 1 ? "Select Options" : "Add to Cart"}
           </a>
-        </Link>
+        </Link> */}
+        {props.variations.length > 1 && (
+          <Link
+            href={{
+              pathname: `/product/${productNameDashed}`,
+              query: {
+                id: props.id,
+              },
+            }}
+            passHref
+          >
+            <a
+              className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
+            >
+              Select Options
+            </a>
+          </Link>
+        )}
+
+        {props.variations.length === 1 &&
+          (inCart ? (
+            <Link
+              href={{
+                pathname: `/cart`,
+              }}
+              passHref
+            >
+              <a
+                className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
+              >
+                View Cart
+              </a>
+            </Link>
+          ) : (
+            <a
+              className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
+              onClick={addToCartHandler}
+            >
+              Add to Cart
+            </a>
+          ))}
       </figcaption>
+      {showSuccessModal === true && (
+        <AddToCartSuccessModal onClick={backdropHandler} />
+      )}
     </figure>
   );
 };

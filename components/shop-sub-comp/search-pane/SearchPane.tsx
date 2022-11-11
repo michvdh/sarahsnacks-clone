@@ -9,8 +9,6 @@ interface SearchPaneProps {
   onClearCategory: boolean;
   categoryInput: string;
   keywordInput: string;
-  onCategoryChange: (a: string, b:string) => void;
-  categoryCheckState: boolean;
 }
 
 const SearchPane: React.FC<SearchPaneProps> = (props) => {
@@ -25,8 +23,6 @@ const SearchPane: React.FC<SearchPaneProps> = (props) => {
         onCategorySearch={props.onCategorySearch}
         onClearCategory={props.onClearCategory}
         categoryInput={props.categoryInput}
-        onCategoryChange={props.onCategoryChange}
-        categoryCheckState={props.categoryCheckState}
       />
       <RecentlyViewed />
     </div>

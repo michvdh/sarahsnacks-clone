@@ -1,3 +1,10 @@
+/* 
+  CSS here is used by the following:
+  1. Home page carousel
+  2. ProductQuickView
+  3. ProductMinDetails
+*/
+
 .embla {
   position: relative;
   // background-color: #f7f7f7;
@@ -23,6 +30,7 @@
 
 .embla__container {
   display: flex;
+  gap: 2rem;
   user-select: none;
   -webkit-touch-callout: none;
   -khtml-user-select: none;
@@ -33,7 +41,7 @@
 .embla__slide {
   position: relative;
   min-width: 25%;
-  padding-left: 2rem;
+  // padding-left: 2rem;
   display: flex;
   flex-direction: row;
 }
@@ -63,7 +71,7 @@
   // position: absolute;
   // display: block;
   // top: 50%;
-  // le ft: 50%;
+  // left: 50%;
   position: relative;
   width: auto;
   // min-height: 100%;
@@ -74,7 +82,9 @@
 }
 
 .embla__slide__img {
-  object-fit: contain;
+  transition: opacity 0.25s ease-in-out;
+  // object-fit: cover;
+  // height : 100%;
 }
 
 .embla__slide__caption {

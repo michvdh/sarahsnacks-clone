@@ -1,25 +1,81 @@
 import Link from "next/link";
 import classes from "./ProductMinDetails.module.scss";
+import emblaClass from "./FavoritesCarouselEmbla/embla.module.scss";
 import { ProductMinModel } from "../../model/productMinModel.model";
 import ProductQuickView from "./ProductQuickView";
 import getPriceRange from "../helpers/getPriceRange";
 import changeToKebabCase from "../helpers/changeToKebabCase";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../../store/cart";
+import { useState } from "react";
+import AddToCartSuccessModal from "./modal/AddToCartSuccessModal";
+import {CartStateModel} from '../../model/cartStateModel.model';
+import BtnAddToCart from "./buttons/BtnAddToCart";
+import BtnSelectOptions from "./buttons/BtnSelectOptions";
+import BtnViewCart from "./buttons/BtnViewCart";
+
 
 const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
-  const productNameDashed = changeToKebabCase(
-    props.productName,
-    props.otherName
-  );
+  let inCart = false;
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const categoryLength = props.category.length - 1;
+  const dispatch = useDispatch();
+  
+  const cartItems = useSelector(
+    (state: { cart: CartStateModel }) => state.cart.cartItems
+  );
+
+  cartItems.every((item) => {
+    if (item.id === props.id) {
+      inCart = true;
+      return false;
+    }
+    return true;
+  });
+
+  
+  const productNameDashed = changeToKebabCase(
+    props.productName, props.otherName
+  );
+
+  
+  const addToCartHandler = () => {
+    dispatch(
+      cartActions.addItem({
+        id: props.id,
+        productName: `${props.productName[0]} ${
+          props.productName[1] && props.productName[1]
+        }`,
+        otherName: props.otherName,
+        varPrice: props.variations[0].price,
+        varSize: props.variations[0].size,
+        qty: 1,
+        imagesFolder: props.imagesFolder,
+        image: props.images[0]
+      })
+    );
+
+    addToCartModalHandler(!showSuccessModal);
+  };
+
+  const addToCartModalHandler = (modalState: boolean) => {
+    setShowSuccessModal(modalState);
+  };
+
+  const overlayHandler = () => {
+    const newState = !showSuccessModal;
+    setShowSuccessModal(newState);
+  }; // used by backdrop
+
 
   return (
     <figure
-      className={`embla__slide ${classes["featured-item"]} featured-item`}
+      className={`${emblaClass['embla__slide']} ${classes["featured-item"]} featured-item`}
       key={props.id}
     >
-      <div className="embla__slide__inner">
+      <div className={`${emblaClass['embla__slide__inner']}`}>
+
+        {/* ProductQuickView is only the image and quick view button */}
         <ProductQuickView
           id={props.id}
           productNameDashed={productNameDashed}
@@ -27,7 +83,7 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
           images={props.images}
         />
 
-        <figcaption className="embla__slide__caption">
+        <figcaption className={`${emblaClass['embla__slide__caption']}`}>
           <p className={`${classes["category-container"]}`}>
             {props.category.map((category, index) => (
               <Link
@@ -43,6 +99,7 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
                 }}
                 passHref
                 shallow
+                key={index}
               >
                 <a
                   key={index}
@@ -74,28 +131,31 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
             </a>
           </Link>
 
-          <span className={`${classes["price-range"]}`}>
+          <span className={`${classes["price-range"]} price-range`}>
             {getPriceRange(props.variations)}
           </span>
 
           {/* ---- Button ---- */}
-          <Link
-            href={{
-              pathname: `/product/${productNameDashed}`,
-              query: {
-                id: props.id,
-              },
-            }}
-            passHref
-          >
-            <a
-              className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
-            >
-              {props.variations.length > 1 ? "Select Options" : "Add to Cart"}
-            </a>
-          </Link>
+          {props.variations.length > 1 && (
+            <BtnSelectOptions 
+              productNameDashed={productNameDashed}
+              id={props.id}
+            />
+          )}
+
+          {props.variations.length === 1 &&
+            (inCart ? (
+              <BtnViewCart />
+            ) : (
+              <BtnAddToCart onClick={addToCartHandler} />
+            ))
+          }
         </figcaption>
       </div>
+
+      {showSuccessModal === true && (
+        <AddToCartSuccessModal onClick={overlayHandler} />
+      )}
     </figure>
   );
 };

@@ -11,7 +11,6 @@ interface ResultsPaneProps {
   totalPages: number;
   onPageBtnClick: (clickedPage: number) => void;
   onCategorySearch: (category: string) => void;
-  // onReturnToDefaultSort: boolean;
   onChangeDisplayType: (detailLevel: string) => void;
   displayType: string;
   resultsReady: boolean;
@@ -26,7 +25,6 @@ const ResultsPane: React.FC<ResultsPaneProps> = (props) => {
       <ViewControls
         onProductSort={props.onProductSort}
         onDisplayCount={props.onDisplayCount}
-        // onReturnToDefaultSort={props.onReturnToDefaultSort}
         onChangeDisplayType={props.onChangeDisplayType}
         sortInput={props.sortInput}
         displayCountInput={props.displayCountInput}

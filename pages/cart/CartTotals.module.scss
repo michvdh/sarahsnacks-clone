@@ -1,0 +1,33 @@
+.cart-totals {
+  position: relative;
+  display: flex;
+  justify-content: right;
+  
+  .totals-table {
+    width: 50%;
+    border: 1px solid black;
+
+    ul {
+      display: grid;
+      padding: 0 1rem;    
+
+      .full {
+        display: flex;
+        justify-content: center;
+      }
+
+      .divided {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        span {
+          border-bottom: 1px solid black;
+          
+          &:first-child {
+            border-right: 1px solid black;
+          }
+        }
+      }
+    }
+  }
+}

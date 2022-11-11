@@ -3,7 +3,11 @@ import Link from "next/link";
 import classes from "./Header.module.scss";
 import CompanyLogo from "../company-logo/CompanyLogo";
 import { useSelector } from "react-redux";
-// import { useDispatch } from "react-redux";
+import { Fragment } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { cartActions } from '../../store/cart';
+import CartPreviewOnHover from "../ui/CartPreviewOnHover";
 // import { useInView } from "react-intersection-observer";
 // import { ioActions } from '../../store/intersectionObserver';
 
@@ -24,8 +28,28 @@ const Header: React.FC = () => {
     }) => state.io.targetIntersect
   );
 
-  // console.log(intersectState);
+  const dispatch = useDispatch();
 
+  const cartTotalQty = useSelector(
+    (state: { cart: { totalQty: number } }) => state.cart.totalQty
+  );
+
+  const cartTotalPrice = useSelector(
+    (state: { cart: { totalPrice: number } }) => state.cart.totalPrice
+  );
+
+  useEffect(() => {
+    let cartLS =
+      typeof window !== "undefined" &&
+      "cartLS" in localStorage &&
+      JSON.parse(localStorage.getItem("cartLS") || '{}');
+      // we need to check if window is not undefined because localStorage api is not available on the server
+      // cartLS = cart local storage
+
+    cartLS && dispatch(cartActions.getCartDetailsFromLocalStorage(cartLS));
+  }, []);
+
+  
   return (
     <header
       className={`${classes.header} header ${intersectState ? "" : "shadow"}`}
@@ -46,20 +70,33 @@ const Header: React.FC = () => {
           width={intersectState ? 243 : 138}
           height={intersectState ? 80 : 45.5}
         />
-        <div className={`${classes.cart} cart`}>
-          <span>
-            <FontAwesomeIcon
-              className={`${classes[`fa-icon`]} fa-icon--left`}
-              icon={faBagShopping}
-            />
-            <FontAwesomeIcon
-              className={`${classes[`fa-icon`]} fa-icon--green`}
-              icon={faCaretLeft}
-            />
-            <span className={`${classes["cart__count"]} cart__count`}>0</span>
-          </span>
-          <span className={`extra-bold`}>$0.00</span>
+
+        <div 
+          className={`${classes.cart} cart`}
+        >
+          <Link href={{ pathname: `/cart` }} passHref>
+            <a>
+              <div className={`${classes['cart-link']}`}>
+                <span>
+                  <FontAwesomeIcon
+                    className={`${classes[`fa-icon`]} fa-icon--left`}
+                    icon={faBagShopping}
+                  />
+                  <FontAwesomeIcon
+                    className={`${classes[`fa-icon`]} fa-icon--green`}
+                    icon={faCaretLeft}
+                  />
+                  <span className={`${classes["cart__count"]} cart__count`}>
+                    {cartTotalQty}
+                  </span>
+                </span>
+                <span className={`extra-bold`}>${cartTotalPrice.toFixed(2)}</span>
+              </div>
+            </a>
+          </Link>
+          <CartPreviewOnHover className={classes['cart-hover']} />
         </div>
+
         <div className={`${classes.nav} nav`}>
           <ul className={`extra-bold`}>
             <li>

@@ -11,33 +11,75 @@
 
 import { useRouter } from "next/router";
 import changeToKebabCase from "../../components/helpers/changeToKebabCase";
-import productsDB from "../../model/productsDB";
 import ProductCompleteDetails from "../../components/ui/ProductCompleteDetails";
+import { useEffect, useState } from "react";
+import Custom404 from "../404";
+import { Fragment } from "react";
+import Loading from "../../components/ui/Loading";
 
 const Product = () => {
   const router = useRouter();
+  const isReady = router.isReady;
   const queriedProductID = router.query.id;
   const queriedProductName = router.query.productName;
   let targetProduct;
   let productNameDashed;
+  const [resultsReady, setResultsReady] = useState(false);
+  const [productsDB, setProductsDB] = useState([]);
+  
+  const allData = async() => {
+    const response = await fetch('https://sarahsnacks-clone-default-rtdb.firebaseio.com/productsDB.json');
+    const data = await response.json();
+    console.log(response);
+    setProductsDB(data);
+  }
 
-  const pIndex = productsDB.findIndex((p) => (p.id === queriedProductID));
+  useEffect(() => {
+    allData();
+  }, []);
 
+  // get the index of the product
+  const pIndex = productsDB.findIndex((p) => (p.id === queriedProductID)); 
+  console.log(pIndex);
+
+  // get the specific product and store in a temporary variable
   const tempProd = productsDB[pIndex];
 
   // I added an if condition here because React would automatically render an error because it directly gets the values of ".otherName" etc even if we haven't retrieved yet the pIndex.
-  if (tempProd) productNameDashed = changeToKebabCase(tempProd.productName, tempProd.otherName);
+  // if temProd has value, then proceed in changing productName ot kebab case
+  if (tempProd) {
+    productNameDashed = changeToKebabCase(tempProd.productName, tempProd.otherName);
+  }
 
-  if (queriedProductName === productNameDashed) targetProduct = productsDB[pIndex];
+  // if productName from link is same with converted pName
+  if (queriedProductName === productNameDashed) {
+    targetProduct = productsDB[pIndex];
+  }
+
+  useEffect(() => {
+    if (!isReady) return;
+    setResultsReady(true)
+  }, [isReady]);
+
+  // console.log(targetProduct);
 
   return (
-    <main className={`main`}>
-      <section className={`product`}>
-        {targetProduct ? <ProductCompleteDetails product={targetProduct} /> :
-        <p>Incorrect URL. No results</p> // update the error handling for this
-        }
-      </section>
-    </main>
+    // <main className={`main`}>
+    //   <section className={`product`}>
+    //     {targetProduct && <ProductCompleteDetails product={targetProduct} />}
+    //   </section>
+    // </main>
+    <Fragment>
+      { (resultsReady && productsDB.length > 1) ?
+        ( targetProduct ? <main className={`main`}>
+          <section className={`product`}>
+            <ProductCompleteDetails product={targetProduct} />
+          </section>
+        </main> : <Custom404 />)
+        :
+        <Loading />
+      }
+    </Fragment>
   );
 };
 
