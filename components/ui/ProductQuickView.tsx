@@ -19,7 +19,6 @@ interface QuickViewProps {
 // I can probably start accepting productID and use it as reference
 
 const ProductQuickView: React.FC<QuickViewProps> = (props) => {
-  const [imageHover, setImageHover] = useState(false);
   const [showProductQuickViewModal, setShowProductQuickViewModal] = useState(false);
   // const [qvClicked, setQVClicked] = useState(false);
   const [fetched, setFetched] = useState(false);
@@ -57,29 +56,30 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
       >
         <a className={`${classes.link}`}>
           <Image
-            className={`${classes["image--front"]} ${
-              classes["image"]
-            } ${emblaClass['embla__slide__img']} ${
-              imageHover && numberOfImages > 1 ? "hidden" : ""
-            }`}
+            className={`
+              ${classes["image--front"]} 
+              ${classes["image"]} 
+              ${emblaClass['embla__slide__img']} 
+            `}
             src={`${basePath}${props.images[0]}`}
-            // alt={props.productName}
+            alt={props.productNameDashed}
             layout="fill"
             // width="150"
             // height="350"
           />
           {numberOfImages > 1 ? (
             <Image
-              className={`${classes["image--back"]} ${
-                classes["image"]
-              } ${emblaClass['embla__slide__img']} ${!imageHover ? "hidden" : ""}`}
+              className={`
+                ${classes["image--back"]} 
+                ${classes["image"]} 
+                ${emblaClass['embla__slide__img']} 
+                
+              `}
               src={`${basePath}${props.images[1]}`}
-              // alt={props.productName}
+              alt={props.productNameDashed}
               layout="fill"
             />
-          ) : (
-            ""
-          )}
+          ) : ("")}
 
           {showProductQuickViewModal && !fetched && 
             // <div className={classes.loading}>
@@ -102,7 +102,6 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
           <FontAwesomeIcon
             className={`fa-icon--white fa-icon--left`}
             icon={faEye}
-          
           />
         </span>
         <span className={`quick-view-text`}>Quick View</span>
@@ -112,7 +111,7 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
           id={props.id}
           onClick={overlayHandler}
           fetching={fetchStateHandler}
-          fetched={fetched}
+          // fetched={fetched}
         />
       }
     </div>

@@ -10,8 +10,16 @@
 .image-container {
   position: relative;
 
+  .image--back {
+    opacity: 0;
+  }
+
   &:hover { 
     cursor: pointer;
+
+    .image--back {
+      opacity: 1;
+    }
 
     .quick-view {
       position: absolute;
@@ -26,8 +34,13 @@
     }
   }
 
+  // .link {
+  //   position: relative;
+  // }
+
   .image {
     transition: opacity 0.25s ease-in-out;
+    // object-fit: cover;
   }
 
   // .loading {

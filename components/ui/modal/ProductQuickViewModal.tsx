@@ -24,7 +24,7 @@ interface ProductQuickViewModalInterface {
   id: string;
   onClick: () => void;
   fetching: () => void;
-  fetched: boolean;
+  // fetched: boolean;
   // allProducts: ProductsDBModel[];
 }
 
