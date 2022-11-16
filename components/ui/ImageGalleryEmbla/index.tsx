@@ -8,7 +8,8 @@ import { ImageGalleryEmblaModel } from "../../../model/imageGalleryEmblaModel.mo
 const ImageGalleryEmbla: React.FC<ImageGalleryEmblaModel> = (props) => {
   return (
     <div>
-      <EmblaCarousel images={props.images} navType={props.navType} />
+      {/* <EmblaCarousel images={props.images} navType={props.navType} /> */}
+      <EmblaCarousel images={props.images} />
     </div>
   );
 }

@@ -7,10 +7,8 @@
 
 .embla {
   position: relative;
-  // background-color: #f7f7f7;
   padding: 0 2rem;
   max-width: 55%;
-  // margin-left: auto;
   margin-right: auto;
 }
 
@@ -28,6 +26,7 @@
   cursor: grabbing;
 }
 
+
 .embla__container {
   display: flex;
   gap: 2rem;
@@ -36,55 +35,32 @@
   -khtml-user-select: none;
   -webkit-tap-highlight-color: transparent;
   margin-left: -10px;
+  position: relative;
 }
+
+/////////////////////////////////////////
 
 .embla__slide {
   position: relative;
   min-width: 25%;
-  // padding-left: 2rem;
-  display: flex;
-  flex-direction: row;
 }
 
 .embla__slide__inner {
   position: relative;
-  overflow: hidden;
-  height: 40rem;
-  // height: 19rem;
-  width: 100%;
-
+  display: block;
 }
 
-// .embla__slide__number {
-//   position: absolute;
-//   z-index: 1;
-//   bottom: 0;
-//   right: 0;
-//   color: white;
-//   font-weight: bold;
-//   font-size: 25px;
-//   padding: 10px 22px;
-//   background-color: rgba(0, 0, 0, 0.6);
-// }
-
 .embla__slide__img-container {
-  // position: absolute;
-  // display: block;
-  // top: 50%;
-  // left: 50%;
   position: relative;
-  width: auto;
-  // min-height: 100%;
-  height: 60%;
-  min-width: 100%;
-  max-width: none;
-  // transform: translate(-50%, -50%);
+  width: 100%;
+  padding-top: 100%;
 }
 
 .embla__slide__img {
   transition: opacity 0.25s ease-in-out;
-  // object-fit: cover;
-  // height : 100%;
+  object-fit: contain;
+  max-height:100%; 
+  max-width: 100%;
 }
 
 .embla__slide__caption {
@@ -93,6 +69,8 @@
   justify-content: center;
   text-align: center;
 }
+
+//////////////////////////////////////////////////
 
 .embla__slide--loading {
   flex: 0 0 auto;

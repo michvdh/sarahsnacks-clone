@@ -6,5 +6,5 @@ export interface ImageGalleryEmblaModel {
     thumbnailLarge: string[];
     hd: string[];
   };
-  navType: string;
+  // navType: string;
 }

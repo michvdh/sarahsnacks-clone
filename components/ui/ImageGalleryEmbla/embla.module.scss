@@ -1,18 +1,17 @@
 .embla {
   position: relative;
-  // background-color: #f7f7f7;
-  padding: 20px;
-  // max-width: 670px;
+  // padding: 2rem;
+  min-width: 30rem;
+  max-width: 30rem;
   margin-left: auto;
   margin-right: auto;
-
-  ////////////////////////
-  max-width: 200px;
+  // background-color: violet;
 }
 
 .embla__viewport {
   overflow: hidden;
   width: 100%;
+  // background-color: aquamarine;
 }
 
 .embla__viewport.is-draggable {
@@ -24,48 +23,46 @@
   cursor: grabbing;
 }
 
-.embla__container {
+.embla__container { 
   display: flex;
+  gap: 2rem;
   user-select: none;
   -webkit-touch-callout: none;
   -khtml-user-select: none;
   -webkit-tap-highlight-color: transparent;
-  margin-left: -10px;
+  // margin-left: -10px;
+  // position: relative;
 }
 
+/////////////////////////////////
 .embla__slide {
   position: relative;
   min-width: 100%;
-  padding-left: 10px;
+  // padding-left: 10px;
+  // background-color: burlywood;
 }
 
 .embla__slide__inner {
   position: relative;
   overflow: hidden;
-  height: 190px;
-  ///////////////////////////////////////////////////
+  // background-color: green;
+}
 
-  width: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
+.embla__slide__img-container {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  // background-color: cornflowerblue;
 }
 
 .embla__slide__img {
-  // position: absolute;
-  // display: block;
-  // top: 50%;
-  // left: 50%;
-  // width: auto;
-  // min-height: 100%;
-  // min-width: 100%;
-  // max-width: none;
-  // transform: translate(-50%, -50%);
-  ///////////////////////////////////////////////////
-
-  margin: 0 auto;
-  text-align: center;
+  transition: opacity 0.25s ease-in-out;
+  object-fit: cover;
+  width: auto;
+  min-height: 100%;
+  min-width: 100%;
+  max-width: none;
+  // background-color: chartreuse;
 }
 
 .embla__button {
