@@ -28,11 +28,11 @@ const CartPreviewOnHover: React.FC<CartPreviewInterface> = (props) => {
         <ul className={classes["list-container"]}>
           {cart.cartItems.map((item, index) => (
             <li key={index} className={classes.list}>
-              <div>
+              <div className={`${classes['image-container']}`}>
                 <Image
                   src={`/images/products${item.imagesFolder}${item.image}`}
-                  width="100"
-                  height="100"
+                  layout="fill"
+                  className={`${classes['image']}`}
                 />
               </div>
               <div>
