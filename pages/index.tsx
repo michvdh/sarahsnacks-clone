@@ -17,21 +17,6 @@ import { ioActions } from "../store/intersectionObserver";
 
 // this will be served for "domain.com/" - no sub pages
 const Home: React.FC = () => {
-  // const dispatch = useDispatch();
-
-  // const { ref: mainRef, entry } = useInView({
-  //   threshold: 1, // this means IO will trigger once 10% of the target is inside the viewport
-  //   root: null,
-  //   rootMargin: '0px'
-  // });
-
-  // console.log(entry);
-
-  // const intersectState = entry?.isIntersecting;
-
-  // if (intersectState !== undefined) {
-  //   dispatch(ioActions.changeIOState(intersectState));
-  // }
 
   return (
     <Fragment>

@@ -31,7 +31,6 @@ const CategorySearch: React.FC<CategorySearchProps> = (props) => {
     });
   }
 
-
   return (
     <div className={`${classes['category-search']}`}>
       <h3>Categories</h3>

@@ -5,10 +5,6 @@
   3. ProductMinDetails
 */
 
-// .embla > * {
-//   box-sizing: border-box;
-// }
-
 .embla {
   position: relative;
   padding: 0 2rem;
@@ -16,14 +12,14 @@
   // width: 100rem;
   margin-right: auto;
   height: auto;
-  background-color: aqua;
+  // background-color: aqua;
 }
 
 .embla__viewport {
   overflow: hidden;
   min-width: auto;
   height: auto;
-  background-color: bisque;
+  // background-color: bisque;
 }
 
 .embla__viewport.is-draggable {
@@ -46,7 +42,7 @@
   // margin-left: -10px;
   // position: relative;
   height: auto;
-  background-color: cadetblue ;
+  // background-color: cadetblue ;
   width: 100%;
 }
 
@@ -59,7 +55,7 @@
   margin-left: 2%;
   // min-width: 32%;
   // margin-left: 2%;
-  background-color: chartreuse;
+  // background-color: chartreuse;
 }
 
 .embla__slide__inner {

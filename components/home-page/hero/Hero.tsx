@@ -17,31 +17,13 @@ interface RefDetails {
 }
 
 // const Hero: React.FC<RefDetails> = React.forwardRef((props, ref) => {
-//   const heroRef = useRef();
+//   const heroRef = useRef();  
 
 const Hero: React.FC = () => {
-  // const heroRef = useRef();
-
-  const dispatch = useDispatch();
-
-  const { ref: heroRef, entry } = useInView({
-    threshold: 0.8, // this means IO will trigger once 10% of the target is inside the viewport
-    root: null,
-    rootMargin: '0px'
-  });
-
-  // console.log(entry);
-
-  const intersectState = entry?.isIntersecting;
-
-  if (intersectState !== undefined) {
-    dispatch(ioActions.changeIOState(intersectState));
-  }
-
-  // console.log(intersectState);
 
   return (
-    <section ref={heroRef} className={`${classes.hero} hero`}>
+    // <section className={`${classes.hero} hero`} ref={heroRef}>
+    <section className={`${classes.hero} hero`}>
       <div>
         <div className={classes["image-container"]}>
           <div className={`${classes.image} ${classes.exclamation}`}>
@@ -62,6 +44,7 @@ const Hero: React.FC = () => {
           </div>
         </div>
       </div>
+
       <div className={classes["text-container"]}>
         <h1>
           Inspiring Mindful
@@ -74,6 +57,7 @@ const Hero: React.FC = () => {
           <FontAwesomeIcon className={`fa-icon--right fa-icon--white`} icon={faRightLong} />
         </button>
       </div>
+
       <div className={`${classes.overlay}`}></div>
     </section>
   );

@@ -8,8 +8,6 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { cartActions } from '../../store/cart';
 import CartPreviewOnHover from "../ui/CartPreviewOnHover";
-// import { useInView } from "react-intersection-observer";
-// import { ioActions } from '../../store/intersectionObserver';
 
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import {
@@ -30,6 +28,7 @@ const Header: React.FC = () => {
 
   const dispatch = useDispatch();
 
+ 
   const cartTotalQty = useSelector(
     (state: { cart: { totalQty: number } }) => state.cart.totalQty
   );
@@ -38,21 +37,22 @@ const Header: React.FC = () => {
     (state: { cart: { totalPrice: number } }) => state.cart.totalPrice
   );
 
+
   useEffect(() => {
     let cartLS =
       typeof window !== "undefined" &&
       "cartLS" in localStorage &&
       JSON.parse(localStorage.getItem("cartLS") || '{}');
       // we need to check if window is not undefined because localStorage api is not available on the server
-      // cartLS = cart local storage
+      // cartLS = cart Local Storage
 
     cartLS && dispatch(cartActions.getCartDetailsFromLocalStorage(cartLS));
   }, []);
 
-  
   return (
     <header
       className={`${classes.header} header ${intersectState ? "" : "shadow"}`}
+      
     >
       <div className={`${classes["header-container"]}`}>
         <div className={`${classes.call} call`}>

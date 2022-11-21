@@ -381,7 +381,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
 
   return (
     <main className={`main`}>
-      <section className={`${classes.catalog} catalog`}>
+      <section className={`${classes.catalog} catalog`} >
         <SearchPane
           onKeywordSearch={keywordSearchHandler}
           onClearKeyword={clearKeyword}
