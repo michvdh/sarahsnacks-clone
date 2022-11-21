@@ -52,9 +52,9 @@ const Header: React.FC = () => {
   return (
     <header
       className={`${classes.header} header ${intersectState ? "" : "shadow"}`}
-      
     >
       <div className={`${classes["header-container"]}`}>
+        
         <div className={`${classes.call} call`}>
           <span>
             <FontAwesomeIcon
@@ -65,6 +65,7 @@ const Header: React.FC = () => {
           </span>
           <span className={`extra-bold`}>717-814-9648</span>
         </div>
+
         <CompanyLogo
           className={classes.logo}
           width={intersectState ? 243 : 138}

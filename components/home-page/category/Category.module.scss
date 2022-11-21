@@ -1,4 +1,5 @@
 @import "../../../styles/variables";
+@import "../../../styles/mixins";
 
 .order-online {
   grid-area: online;
@@ -8,16 +9,23 @@
 }
 
 .category {
-  display: grid;
-  grid-template-areas: "online feel";
-  grid-template-columns: 1.2fr 2fr;
-  column-gap: 7%;
-  position: relative;
-  top: -5rem;
-  z-index: 2;
+  display: flex;
+  flex-direction: column-reverse;
+
+
+  @include respond(screen-960) {
+    display: grid;
+    grid-template-areas: "online feel";
+    grid-template-columns: 1.2fr 2fr;
+    column-gap: 7%;
+    position: relative;
+    top: -5rem;
+    z-index: 2;
+  }
 
   .order-online {
     position: relative;
+    min-height: 30rem;
 
     .image-container {
       position: absolute;
@@ -40,7 +48,7 @@
       .text-container {
         display: flex;
         text-align: center;
-        justify-content: center;        
+        justify-content: center;
 
         h2 {
           border-top: 1px solid $white;

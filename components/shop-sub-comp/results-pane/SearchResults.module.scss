@@ -1,11 +1,21 @@
+@import "../../../styles/mixins";
+
 .search-results {
   // control template columns with media queries
 }
 
 .grid-type {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 2rem;
+
+  @include respond(screen-520) {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  @include respond(screen-760) {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+  }
 }
 
 .column-type {

@@ -1,5 +1,12 @@
+@import "../../styles/mixins";
+
 .catalog {
   display: flex;
-  flex-direction: row;
+  flex-direction: column-reverse;
   // background-color:darkseagreen;
+
+  @include respond(screen-1024) {
+    flex-direction: row;
+  }
+  
 }

@@ -1,8 +1,8 @@
 @import "../../styles/variables";
+@import "../../styles/mixins";
 
 // CartOnPreview
 .show-cart-preview:hover {
-  // opacity: 1;
   animation: show-cart 0.5s;
   -webkit-animation-fill-mode: forwards;
   -moz-animation-fill-mode: forwards;
@@ -12,11 +12,6 @@
 }
 
 .hide-cart-preview:hover {
-  // opacity: 0;
-  // z-index: -1;
-  // display: none !important; // I can add in the animation that after x seconds, display:none will apply
-  // display: none !important;
-  // display: none !important;
   animation: hide-cart 1.5s;
   -webkit-animation-fill-mode: forwards;
   -moz-animation-fill-mode: forwards;
@@ -46,13 +41,6 @@
   }
 }
 
-// .cart-preview {
-//   visibility: hidden;
-//   opacity: 0;
-//   z-index: 30;
-//   transition: all 0.2s 0.2s;
-// }
-
 
 .call {
   grid-area: call;
@@ -62,6 +50,7 @@
 }
 .cart {
   grid-area: cart;
+  justify-self: end;
 }
 .nav {
   grid-area: nav;
@@ -75,14 +64,19 @@
   // max-height: 18.2rem;
 
   .header-container {
-    display: grid;
-    max-width: 75%;
-    margin: 0 auto;
-    padding: 1.5rem 0 1rem 0;
-    grid-template-areas:
-      "call logo cart"
-      "nav nav nav";
-    grid-template-columns: 1fr 1fr 1fr;
+
+    @include respond(screen-1024) {
+      display: grid;
+      max-width: 75%;
+      margin: 0 auto;
+      padding: 1.5rem 0 1rem 0;
+      grid-template-areas:
+        "call logo cart"
+        "nav nav nav";
+      // grid-template-columns: 1fr 1fr 1fr;
+      justify-content: space-between  ;
+    }
+    
   }
 
   .call {
@@ -95,7 +89,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: right;
+    // text-align: right;
     position: relative;
 
     &:hover {

@@ -1,4 +1,7 @@
 .page-btn-container {
+  display: flex;
+  justify-content: right;
+
   .selected {
     color: red;
   }
