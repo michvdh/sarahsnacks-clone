@@ -5,14 +5,19 @@
   3. ProductMinDetails
 */
 
+@import "../../../styles/mixins"; 
+
 .embla {
   position: relative;
-  padding: 0 2rem;
-  max-width: 55%;
-  // width: 100rem;
+  padding: 0 2rem; 
   margin-right: auto;
   height: auto;
-  // background-color: aqua;
+  max-width: 100%;  
+  
+
+  @include respond(screen-960) {
+    max-width: 55%;
+  }
 }
 
 .embla__viewport {
@@ -51,12 +56,24 @@
 .embla__slide {
   box-sizing: border-box !important;
   position: relative;
-  min-width: 23.5%;
   margin-left: 2%;
+  min-width: 100%;
   // min-width: 32%;
   // margin-left: 2%;
   // background-color: chartreuse;
-}
+
+  @include respond(screen-480) {
+    min-width: 50%;
+  }
+
+  @include respond(screen-620) {
+    min-width: 32%;
+  }
+
+  @include respond(screen-1250) {
+    min-width: 23.5%;
+  }
+ }
 
 .embla__slide__inner {
   position: relative;

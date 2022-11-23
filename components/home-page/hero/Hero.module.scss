@@ -26,35 +26,77 @@
     top: 0;
   }
   
-  .image-container {
-    position: relative;
-    max-width: 95rem;
-    max-height: 65rem;
+
+  .hero--upper {
+    // position: relative;
+    width: 100%;
+    // pad    ding-top: 100%;
+    background-color: blueviolet;
+  }
+
+  .image--main-container {
+    // position: relative;
+    // max-width: 95rem;
+    // max-height: 65rem;
+    // width: 85rem;
+    // height: 65rem;
+    width: 100%;
+    height: 100%;
     text-align: center;
     margin: 0 auto;
     z-index: 1;
+    // top: -44rem;
 
-    .image {
-      z-index: 1;
+    .image--container { // both Exclamation and PBandChoco div
+      // z-index: 1;
       position: absolute;
       left: 0;
       right: 0;
       margin: 0 auto;
-      top: -44rem;
+      // top: 0;
       // top: 18.2rem;
+      // object-fit: contain;
+      top: -40rem;
+    }
+
+    .exclamation {
+      // background-color: chartreuse;
+      width: 85%;
+      height: 85%;
     }
 
     .PBandChoco {
-      top: -47rem;
+      // top: -47rem;
+      // top: -40%   ;
+      z-index: 10;
+      // back ground-color: bisque;
+      width: 78%;
+      height: 78%;
+    }
+
+    .image {
+      object-fit: contain;
     }
   }
 
   .text-container {
     text-align: center;
     z-index: 100;
-    margin-top: 30rem;  ;
+    margin-top: 15rem;
 
-    @include respond(screen-960) {
+    @include respond(screen-480) {
+      margin-top: 20rem;
+    }
+
+    @include respond(screen-620) {
+      margin-top: 25rem;
+    }
+
+    @include respond(screen-760) {
+      margin-top: 30rem;
+    }
+
+    @include respond(screen-1250) {
       margin-top: 35rem;
     }
 

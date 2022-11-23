@@ -1,13 +1,32 @@
+.logo--large {
+  width: 24.3rem;
+  height: 8rem;
+}
+
+.logo--regular {
+  width: 21.3rem;
+  height: 6.99rem
+}
+
+.logo--small {
+  width: 13.8rem;
+  height: 4.55rem;
+}
+
 .logo-container {
   display: flex;
   justify-content: center;
+  position: relative;
 
   .image {
     // margin: 0 auto;
     cursor: pointer;
+    transition: all 0.2s;
+    object-fit: contain;
 
     &:hover {
       opacity: 0.6;
     }
   }
 }
+

@@ -24,22 +24,26 @@ const Hero: React.FC = () => {
   return (
     // <section className={`${classes.hero} hero`} ref={heroRef}>
     <section className={`${classes.hero} hero`}>
-      <div>
-        <div className={classes["image-container"]}>
-          <div className={`${classes.image} ${classes.exclamation}`}>
+      <div className={`${classes['hero--upper']}`}>
+        <div className={classes["image--main-container"]}>
+          <div className={`${classes['image--container']} ${classes.exclamation}`}>
             <Image
               src="/images/white-exclamation.png"
               alt="White exclamation image"
-              width={850}
-              height={650}
+              // width={850}
+              // height={650}
+              layout="fill"
+              className={classes.image}
             />
           </div>
-          <div className={`${classes.image} ${classes.PBandChoco}`}>
+          <div className={`${classes['image--container']} ${classes.PBandChoco}`}>
             <Image
               src="/images/PBandChoco.png"
               alt="PB and Choco image"
-              width={950}
-              height={650}
+              // width={850}
+              // height={650}
+              layout="fill"
+              className={classes.image}
             />
           </div>
         </div>

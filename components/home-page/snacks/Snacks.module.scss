@@ -1,4 +1,5 @@
 @import "../../../styles/variables";
+@import "../../../styles/mixins";
 
 .snacks {
   display: flex;
@@ -9,7 +10,15 @@
   margin-bottom: 18rem;
 
   .text-container {
-    width: 40%;
+    width: 100%;
+
+    @include respond(screen-760) {
+      width: 50%;
+    }
+
+    @include respond(screen-960) {
+      width: 40%;
+    }
 
     ul {
       margin: 2.5rem 0;
@@ -53,7 +62,16 @@
   .image-container {
     position: relative;
     height: 100%;
-    width: 60%;
+    display: none;
+
+    @include respond(screen-760) {
+      display: initial;
+      width: 50%;
+    }
+
+    @include respond(screen-960) {
+      width: 60%;
+    }
 
     div {
       position: relative;

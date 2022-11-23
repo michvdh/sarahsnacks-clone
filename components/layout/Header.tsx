@@ -49,9 +49,14 @@ const Header: React.FC = () => {
     cartLS && dispatch(cartActions.getCartDetailsFromLocalStorage(cartLS));
   }, []);
 
+
+  // If intersectState = true, this means default state
+
+  console.log(intersectState);
+
   return (
     <header
-      className={`${classes.header} header ${intersectState ? "" : "shadow"}`}
+      className={`${classes.header} header shadow`}
     >
       <div className={`${classes["header-container"]}`}>
         
@@ -67,13 +72,17 @@ const Header: React.FC = () => {
         </div>
 
         <CompanyLogo
-          className={classes.logo}
-          width={intersectState ? 243 : 138}
-          height={intersectState ? 80 : 45.5}
+          // className={`${classes.logo} ${intersectState ? classes['logo--regular'] : classes['logo--small']}`}
+          // width={intersectState ? 243 : 138}
+          // height={intersectState ? 80 : 45.5}
+          className={`${classes.logo}`}
+          section={'header'}
+          intersectState={intersectState}
         />
 
         <div 
-          className={`${classes.cart} cart`}
+          // className={`${classes.cart} cart`}
+          className={`${classes.cart}`}
         >
           <Link href={{ pathname: `/cart` }} passHref>
             <a>

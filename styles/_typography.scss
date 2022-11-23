@@ -1,6 +1,8 @@
 /* ---------- GENERAL TYPOGRAPHY ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100&display=swap');
 
+@import "./mixins";
+
 html {
   font-family: "Raleway", sans-serif;
   font-size: 62.5%;
@@ -83,8 +85,12 @@ html {
 
     span {
       color: $white;
-      font-size: $font-header--extra-large;
+      font-size: 15vw;
       // font-weight: $font-weight--extra-bold;
+
+      @include respond(screen-620) {
+        font-size: $font-header--extra-large;
+      }
     }
   }
 

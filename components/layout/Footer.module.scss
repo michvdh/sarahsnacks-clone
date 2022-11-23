@@ -1,4 +1,5 @@
 @import "../../styles/variables";
+@import "../../styles/mixins";
 
 .brands { grid-area: brands; }
 .contacts-details { grid-area: contacts }
@@ -8,14 +9,26 @@
 
 .footer {
   .footer--upper {
-    max-width: 75%;
-    position: relative;
-    display: grid;
-    justify-content: space-between;
-    margin: 2rem auto ;
-    grid-template-areas: 
-    'brands contacts navigation logo';
+    width: 95%;
+    margin: 2rem auto;
 
+    @include respond(screen-1024) {
+      position: relative;
+      display: grid;
+      // width: 85%;
+      justify-content: space-between;
+      grid-template-areas: 
+      'brands contacts navigation logo';
+    }
+
+    @include respond(screen-1250) {
+      width: 85%;
+    }
+
+    @include respond(screen-1366) {
+      width: 1250px;
+    }
+    
     .brands {
       .media {
         margin-left: 1rem;
@@ -49,7 +62,7 @@
     }
   
     .nav {
-      width: 130%;
+      width: 100%;
       display: flex;
       flex-direction: row;
       align-items: center;
