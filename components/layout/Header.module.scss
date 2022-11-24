@@ -51,6 +51,9 @@
   grid-area: cart;
   justify-self: end;
 }
+.border {
+  grid-area: border;
+}
 .nav {
   grid-area: nav;
 }
@@ -63,26 +66,30 @@
   position: fixed;
   width: 100%;
   z-index: 100;
-  // max-height: 18.2rem;
+  padding: 1.5rem 0 1rem 0;
+  font-weight: $font-weight--bold;
+  text-transform: uppercase;
 
   .header-container {
-    width: 95%;
+    width: 90%;
     margin: 0 auto;
     display: grid;
     grid-template-areas:
         "call cart"
+        "border border"
         "logo hamburger"
         "nav nav";
+    row-gap: 1rem;
 
     @include respond(screen-1024) {
       display: grid;
       // width: 85%;
-      padding: 1.5rem 0 1rem 0;
+      
       grid-template-areas:
         "call logo cart"
         "nav nav nav";
       // grid-template-columns: 1fr 1fr 1fr;
-      justify-content: space-between  ;
+      justify-content: space-between;
     }
 
     @include respond(screen-1250) {
@@ -98,6 +105,7 @@
   .hamburger {
     display: flex;
     justify-content: right;
+    align-items: center;
 
     @include respond(screen-1024) {
       display: none;
@@ -190,16 +198,41 @@
 
   .call {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    column-gap: 0.5rem;
+    
+    @include respond(screen-760) {
+      column-gap: 1rem;
+    }
+
+    @include respond(screen-1024) {
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .call-now {
+      display: none;
+      font-weight: $font-weight--regular;
+      font-size: $font-size--small;
+
+
+      @include respond(screen-760) {
+        display: initial;
+        margin-left: 0.2rem;
+      }
+    }
+
+    .call-number {
+
+    }
+    
   }
 
   .cart {
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: center;
-    // text-align: right;
-    position: relative;
 
     &:hover {
       cursor: pointer;
@@ -217,20 +250,35 @@
       vertical-align: middle;
     }
 
-    &-link {
+    .cart__link {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
+      flex-direction: row;
       text-align: right;
+      column-gap: 0.5rem;
+
+      @include respond(screen-1024) {
+        flex-direction: column;
+        justify-content: center;
+      }
     }
 
-    &__count {
+    .cart__count {
       background-color: $dark-green;
       display: inline-block;
       padding: 0.2rem 0.45rem;
       text-align: center;
       vertical-align: middle;
       border-radius: 0.3rem;
+      color: $white;
+      font-size: $font-size--2xs;
+    }
+  }
+
+  .border {
+    border-bottom: 1px solid $dark-gray;
+
+    @include respond(screen-1024) {
+      display: none;
     }
   }
 
@@ -238,37 +286,32 @@
   .nav {
     display: flex;
     justify-content: space-around;
-    margin-top: 2rem;
-    border-top: 0.1rem solid $light-gray;
+    border-top: 0.3rem solid $dark-green;
     position: absolute;
-    top: 88%;
+    margin-top: 2rem;
+    top: 87%;
     width: 100%;
     right: 0;
     background-color: $white;
     transform-origin: top;
     transition: max-height 0.3s, transform 0.3s;
 
-    ///////////////////////////
-    // height:auto;
-    // max-height: 0;
-
-
-    ///////////////////////////
-
     @include respond(screen-1024) {
-      top: 80%;
+      border-top: 0.1rem solid $light-gray;
+      top: 75%;
     }
 
     ul {
       width: 100%;
       list-style-type: none;
       display: grid;
-      padding-top: 1rem;
+      // padding-top: 1rem;
       
       @include respond(screen-1024) {
         width: 80%;
         grid-template-columns: auto auto auto auto auto auto auto;
         grid-template-rows: 4.5rem;
+        padding: 1rem 0;
       }
        
       li {
@@ -280,9 +323,16 @@
           display: flex;
           align-items: center;
           transition: background-color 0.2s, color 0.2s;
+          padding: 1rem 0 1rem 1rem;
+          font-size: $font-size--xs;
+          font-weight: $font-weight--medium;
+          letter-spacing: 0.2rem;
 
           @include respond(screen-1024) {
             justify-content: center;
+            padding: initial;
+            font-weight: $font-weight--bold;
+            font-size: $font-size--small;
           }
   
           &:hover {

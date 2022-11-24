@@ -13,6 +13,8 @@ html {
   color: $black;
 }
 
+
+
 .extra-bold {
   font-weight: $font-weight--extra-bold;
 }
@@ -47,30 +49,42 @@ html {
 /* ---------------------------------- */
 /* ---------- HEADER SECTION ---------- */
 
-.header {
-  text-transform: uppercase;
+// .header {
+//   // text-transform: uppercase;
 
-  .call {
-    &-now {
-      font-size: $font-size--small;
-    }
-  }
+//   // .call {
+//   //   &-now {
+//   //     font-size: $font-size--small;
+//   //   }
+//   // }
 
-  .cart {
-    font-weight: $font-weight--semi-bold;
+//   // .cart {
+    
 
-    &__count {
-      color: $white;
-      font-size: $font-size--2xs;
-    }
-  }
+//   //   &__count {
+//   //     color: $white;
+//   //     font-size: $font-size--2xs;
+//   //      
+//   //   }
 
-  .nav {
-    li {
-      font-size: $font-size--small;
-    }
-  }
-}
+//   //   &__price {
+//   //     font-weight: $font-weight--bold;
+//   //   }
+//   // }
+
+//   // .nav {
+//   //   ul {
+//   //     li {
+//   //       font-size: $font-size--small;
+  
+//   //       .link {
+//   //         font-weight: $font-weight--bold;
+//   //       }
+//   //     }
+//   //   }
+    
+//   // }
+// }
 
 /* ---------------------------------- */
 /* ---------- HERO SECTION ---------- */

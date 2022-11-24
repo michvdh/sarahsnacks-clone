@@ -1,6 +1,14 @@
+@import "../../styles/mixins";
+
 .logo--large {
-  width: 24.3rem;
-  height: 8rem;
+  width: 13.8rem;
+  height: 4.55rem;
+  // the initial size for ".logo--large" will just be the same as ".logo--small". I want to keep the small size for mobile view. Instead of altering the conditions in the header's jsx or intersection observer, I opted to set the initial dimensions here instead because it's easier.
+
+  @include respond(screen-1024) {
+    width: 24.3rem;
+    height: 8rem;
+  }
 }
 
 .logo--regular {

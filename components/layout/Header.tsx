@@ -70,9 +70,9 @@ const Header: React.FC = () => {
               className={`fa-icon--green fa-icon--left`}
               icon={faPhone}
             />
-            <span className="call-now">Call Now</span>
+            <span className={`${classes['call-now']} call-now`}>Call Now</span>
           </span>
-          <span className={`extra-bold`}>717-814-9648</span>
+          <span className={`${classes['call-number']} `}>717-814-9648</span>
         </div>
 
         <CompanyLogo
@@ -86,7 +86,7 @@ const Header: React.FC = () => {
         >
           <Link href={{ pathname: `/cart` }} passHref>
             <a>
-              <div className={`${classes['cart-link']}`}>
+              <div className={`${classes['cart__link']}`}>
                 <span>
                   <FontAwesomeIcon
                     className={`${classes[`fa-icon`]} fa-icon--left`}
@@ -100,12 +100,14 @@ const Header: React.FC = () => {
                     {cartTotalQty}
                   </span>
                 </span>
-                <span className={`extra-bold`}>${cartTotalPrice.toFixed(2)}</span>
+                <span className={`${classes['cart__price']} `}>${cartTotalPrice.toFixed(2)}</span>
               </div>
             </a>
           </Link>
           <CartPreviewOnHover className={classes['cart-hover']} />
         </div>
+
+        <div className={classes.border}></div>
 
         <div className={classes.hamburger}>
           <input type="checkbox" className={classes.checkbox} id="navi-toggle" onChange={checkboxHandler} />
@@ -115,7 +117,7 @@ const Header: React.FC = () => {
         </div>
 
         <div className={`${classes.nav} nav ${checked ? classes.open : classes.closed}`}>
-          <ul className={`extra-bold`}>
+          <ul className={``}>
             <li>
               <Link href="/">
                 <a className={`${classes.link}`}>Home</a>
