@@ -4,7 +4,7 @@ import classes from "./Header.module.scss";
 import CompanyLogo from "../company-logo/CompanyLogo";
 import { useSelector } from "react-redux";
 import { Fragment } from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { cartActions } from '../../store/cart';
 import CartPreviewOnHover from "../ui/CartPreviewOnHover";
@@ -37,6 +37,12 @@ const Header: React.FC = () => {
     (state: { cart: { totalPrice: number } }) => state.cart.totalPrice
   );
 
+  const [checked, setChecked] = useState(false);
+
+  const checkboxHandler = (e) => {
+    setChecked(e.target.checked);
+  }
+
 
   useEffect(() => {
     let cartLS =
@@ -51,8 +57,6 @@ const Header: React.FC = () => {
 
 
   // If intersectState = true, this means default state
-
-  console.log(intersectState);
 
   return (
     <header
@@ -72,16 +76,12 @@ const Header: React.FC = () => {
         </div>
 
         <CompanyLogo
-          // className={`${classes.logo} ${intersectState ? classes['logo--regular'] : classes['logo--small']}`}
-          // width={intersectState ? 243 : 138}
-          // height={intersectState ? 80 : 45.5}
           className={`${classes.logo}`}
           section={'header'}
           intersectState={intersectState}
         />
 
         <div 
-          // className={`${classes.cart} cart`}
           className={`${classes.cart}`}
         >
           <Link href={{ pathname: `/cart` }} passHref>
@@ -107,7 +107,14 @@ const Header: React.FC = () => {
           <CartPreviewOnHover className={classes['cart-hover']} />
         </div>
 
-        <div className={`${classes.nav} nav`}>
+        <div className={classes.hamburger}>
+          <input type="checkbox" className={classes.checkbox} id="navi-toggle" onChange={checkboxHandler} />
+          <label htmlFor="navi-toggle" className={classes['mobile-nav']}>
+            <span className={classes['mobile-nav__icon']}>&nbsp;</span>
+          </label> 
+        </div>
+
+        <div className={`${classes.nav} nav ${checked ? classes.open : classes.closed}`}>
           <ul className={`extra-bold`}>
             <li>
               <Link href="/">

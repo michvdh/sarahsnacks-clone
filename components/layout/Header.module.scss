@@ -54,6 +54,9 @@
 .nav {
   grid-area: nav;
 }
+.hamburger {
+  grid-area: hamburger;
+}
 
 .header {
   background-color: $white;
@@ -65,6 +68,11 @@
   .header-container {
     width: 95%;
     margin: 0 auto;
+    display: grid;
+    grid-template-areas:
+        "call cart"
+        "logo hamburger"
+        "nav nav";
 
     @include respond(screen-1024) {
       display: grid;
@@ -87,12 +95,98 @@
     
   }
 
-  // .logo {
-  //   &--regular {
-  //     width: 243px;
-  //     height: 80px;
-  //   }
-  // }
+  .hamburger {
+    display: flex;
+    justify-content: right;
+
+    @include respond(screen-1024) {
+      display: none;
+    }
+
+    .mobile-nav {
+      position: relative;
+      border-radius: 15rem;
+      transition: all .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      width: 4rem;
+      height: 4rem;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 0.5rem;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
+      -webkit-focus-ring-color: rgba(255, 255, 255, 0); 
+      outline: none;
+      cursor: pointer;
+    
+      &__icon {
+        position: relative;
+
+        &,
+        &::before,
+        &::after {
+          width: 2rem;
+          height: 2px;
+          background-color: $darker-gray;
+          display: inline-block;
+          transition: all .3s;
+        }
+    
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+        }
+    
+        &::before {
+          top: -0.5rem;
+        }
+    
+        &::after {
+          top: 0.5rem;
+        }
+      }
+    
+      &:hover {
+        .mobile-nav__icon {
+          background-color: $black;
+        }
+
+        .mobile-nav__icon::before {
+          top: -0.65rem;
+          background-color: $black;
+          transition: all .2s;
+        }
+
+        .mobile-nav__icon::after {
+          top: 0.65rem;
+          background-color: $black;
+          transition: all .2s;
+        }
+      }
+    }
+    
+    
+    .checkbox {
+      display: none;
+    }
+    
+    .checkbox:checked + .mobile-nav .mobile-nav__icon {
+      background: transparent;
+    }
+    
+    .checkbox:checked + .mobile-nav .mobile-nav__icon::before {
+      transform: rotate(135deg);
+      top: 0;
+    }
+    
+    .checkbox:checked + .mobile-nav .mobile-nav__icon::after {
+      transform: rotate(-135deg);
+      top: 0;
+    }
+    
+  }
 
   .call {
     display: flex;
@@ -140,32 +234,56 @@
     }
   }
 
+  
   .nav {
     display: flex;
     justify-content: space-around;
     margin-top: 2rem;
     border-top: 0.1rem solid $light-gray;
+    position: absolute;
+    top: 88%;
+    width: 100%;
+    right: 0;
+    background-color: $white;
+    transform-origin: top;
+    transition: max-height 0.3s, transform 0.3s;
+
+    ///////////////////////////
+    // height:auto;
+    // max-height: 0;
+
+
+    ///////////////////////////
+
+    @include respond(screen-1024) {
+      top: 80%;
+    }
 
     ul {
-      width: 80%;
+      width: 100%;
       list-style-type: none;
       display: grid;
-      grid-template-columns: auto auto auto auto auto auto auto;
-      grid-template-rows: 4.5rem;
       padding-top: 1rem;
       
+      @include respond(screen-1024) {
+        width: 80%;
+        grid-template-columns: auto auto auto auto auto auto auto;
+        grid-template-rows: 4.5rem;
+      }
+       
       li {
-
         .link {
           display: block;
           width: 100%;
           height: 100%;
           cursor: pointer;
-          // background-color: bisque;
           display: flex;
           align-items: center;
-          justify-content: center;
-          transition: all 0.2s;
+          transition: background-color 0.2s, color 0.2s;
+
+          @include respond(screen-1024) {
+            justify-content: center;
+          }
   
           &:hover {
             background-color: $light-gray;
@@ -174,6 +292,28 @@
         }
       }
       
+    }
+  }
+
+  .open {
+    // height: 25rem;
+    transform: scaleY(1);
+    max-height: 100vh;
+
+    @include respond(screen-1024) {
+      max-height: initial;
+    }
+  }
+
+  .closed { 
+    overflow: hidden;
+    transform: scaleY(0);
+    max-height: 0;
+
+    @include respond(screen-1024) {
+      max-height: initial;
+      transform: scaleY(1);
+      overflow: initial;
     }
   }
 }
