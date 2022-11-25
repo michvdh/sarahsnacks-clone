@@ -16,6 +16,7 @@ import {
   faCaretLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/router";
 
 const Header: React.FC = () => {
   const intersectState = useSelector(
@@ -27,6 +28,9 @@ const Header: React.FC = () => {
   );
 
   const dispatch = useDispatch();
+  const router = useRouter();
+  const pathName = router.pathname;
+  console.log(pathName);
 
  
   const cartTotalQty = useSelector(
@@ -64,7 +68,7 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={`${classes.header} header shadow`}
+      className={`${classes.header} header shadow--bottom`}
     >
       <div className={`${classes["header-container"]}`}>
         
@@ -83,6 +87,7 @@ const Header: React.FC = () => {
           className={`${classes.logo}`}
           section={'header'}
           intersectState={intersectState}
+          onClick={mobileNavHandler}
         />
 
         <div 
@@ -122,15 +127,19 @@ const Header: React.FC = () => {
           </label> 
         </div>
 
-        <div className={`${classes.nav} nav ${checked ? classes.open : classes.closed}`}>
+        <div className={`${classes.nav} nav shadow--bottom ${checked ? classes.open : classes.closed}`}>
           <ul className={``}>
-            <li onClick={mobileNavHandler}>
+            <li 
+              onClick={mobileNavHandler} 
+              className={`${pathName === "/" ? classes.active : ''}`}>
               <Link href="/">
                 <a className={`${classes.link}`}>Home</a>
               </Link>
             </li>
 
-            <li onClick={mobileNavHandler}>
+            <li 
+              onClick={mobileNavHandler}
+              className={`${pathName === "/shop" ? classes.active : ''}`}>
               <Link href="/shop">
                 <a className={`${classes.link}`}>Shop</a>
               </Link>
@@ -151,7 +160,7 @@ const Header: React.FC = () => {
             <li onClick={mobileNavHandler}>
               <a className={`${classes.link}`}>News</a>
             </li>
-            
+
             <li onClick={mobileNavHandler}>
               <a className={`${classes.link}`}>Contact</a>
             </li>

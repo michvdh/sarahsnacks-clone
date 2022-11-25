@@ -138,7 +138,7 @@
           height: 2px;
           background-color: $darker-gray;
           display: inline-block;
-          transition: all .3s;
+          // transition: all .3s;
         }
     
         &::before,
@@ -367,6 +367,7 @@
           @include respond(screen-1024) {
             justify-content: center;
             padding: initial;
+            letter-spacing: 0.1rem;
             font-weight: $font-weight--bold;
             font-size: $font-size--small;
           }
@@ -376,6 +377,11 @@
             color: $dark-green;
           }
         }
+      }
+
+      .active {
+        background-color: $light-gray;
+        color: $dark-green;
       }
       
     }

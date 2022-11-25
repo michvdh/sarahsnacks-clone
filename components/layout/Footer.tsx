@@ -8,15 +8,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CompanyLogo from '../company-logo/CompanyLogo';
 
 const Footer: React.FC = () => {
+  const mobileNavHandler = () => {
+    // need to fix this later 
+  }
+
   return (
     <footer className={`${classes.footer} footer`}>
       <div className={`${classes['footer--upper']}`}>
         <div className={classes.brands}>
           <div className={classes['logo-container']}>
             <CompanyLogo
-              width={212}
-              height={70}
-              className=""
+              className={`${classes.logo}`}
+              section={'footer'}
+              intersectState={null}
+              onClick={mobileNavHandler}
             />
             <div className={classes.media}>
               <ul>

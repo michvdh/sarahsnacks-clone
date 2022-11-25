@@ -10,7 +10,11 @@
   padding: 0;
 }
 
-.category, .snacks, .catalog, .product, .cart {
+.category,
+.snacks,
+.catalog,
+.product,
+.cart {
   width: 90%;
   margin: 0 auto;
 
@@ -28,7 +32,13 @@
 }
 
 .shadow {
-  box-shadow: 0px 2px 7px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.2);
+}
+
+.shadow--bottom {
+  box-shadow: -1px 5px 5px -4px rgba(0,0,0,0.2);
+  -webkit-box-shadow: -1px 5px 5px -4px rgba(0,0,0,0.2);
+  -moz-box-shadow: -1px 5px 5px -4px rgba(0,0,0,0.2);
 }
 
 .main {
@@ -52,34 +62,39 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.hidden { 
+.hidden {
   opacity: 0 !important;
 }
 
 .fa-icon {
   &--white {
-    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(5deg) brightness(108%) contrast(101%);
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(5deg)
+      brightness(108%) contrast(101%);
     width: 1.3rem;
   }
 
   &--green {
-    filter: invert(30%) sepia(60%) saturate(2174%) hue-rotate(155deg) brightness(86%) contrast(101%);
+    filter: invert(30%) sepia(60%) saturate(2174%) hue-rotate(155deg)
+      brightness(86%) contrast(101%);
   }
 
   &--light-green {
-    filter: invert(59%) sepia(39%) saturate(748%) hue-rotate(127deg) brightness(115%) contrast(89%);
+    filter: invert(59%) sepia(39%) saturate(748%) hue-rotate(127deg)
+      brightness(115%) contrast(89%);
   }
 
   &--brown {
-    filter: invert(18%) sepia(6%) saturate(3947%) hue-rotate(336deg) brightness(45%) contrast(81%);
+    filter: invert(18%) sepia(6%) saturate(3947%) hue-rotate(336deg)
+      brightness(45%) contrast(81%);
   }
 
   &--light-brown {
-    filter: invert(25%) sepia(72%) saturate(587%) hue-rotate(330deg) brightness(60%) contrast(85%);
+    filter: invert(25%) sepia(72%) saturate(587%) hue-rotate(330deg)
+      brightness(60%) contrast(85%);
   }
 
   &--right {
@@ -94,7 +109,6 @@ input[type=number] {
 ul {
   list-style-type: none;
 }
-
 
 @media (prefers-color-scheme: dark) {
   html {
