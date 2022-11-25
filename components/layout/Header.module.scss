@@ -87,6 +87,7 @@
       
       grid-template-areas:
         "call logo cart"
+        "border border border"
         "nav nav nav";
       // grid-template-columns: 1fr 1fr 1fr;
       justify-content: space-between;
@@ -229,6 +230,8 @@
   }
 
   .cart {
+    // clip-path: polygon(12% 36%, 12% 6%, 100% 5%, 100% 95%, 11% 95%, 11% 65%, 0 51%);
+
     display: flex;
     position: relative;
     flex-direction: column;
@@ -254,7 +257,14 @@
       display: flex;
       flex-direction: row;
       text-align: right;
-      column-gap: 0.5rem;
+      column-gap: 0.8rem;
+
+      .icons {
+        display: flex;
+        column-gap: 0.8rem;
+        justify-content: right;
+        align-items: center;
+      }
 
       @include respond(screen-1024) {
         flex-direction: column;
@@ -265,21 +275,37 @@
     .cart__count {
       background-color: $dark-green;
       display: inline-block;
+      min-width: 2.3rem;
+      min-height: 2.3rem;
       padding: 0.2rem 0.45rem;
       text-align: center;
       vertical-align: middle;
       border-radius: 0.3rem;
-      color: $white;
       font-size: $font-size--2xs;
+      position: relative;
+
+      .total-qty {
+        color: $white;
+        vertical-align: middle;
+        font-size: $font-size--2xs;
+      }
+    }
+
+    .fa-icon--caret {
+      position: absolute;
+      left: -16%;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: -1;
     }
   }
 
   .border {
     border-bottom: 1px solid $dark-gray;
 
-    @include respond(screen-1024) {
-      display: none;
-    }
+    // @include respond(screen-1024) {
+    //   display: none;
+    // }
   }
 
   
@@ -297,7 +323,8 @@
     transition: max-height 0.3s, transform 0.3s;
 
     @include respond(screen-1024) {
-      border-top: 0.1rem solid $light-gray;
+      // border-top: 0.1rem solid $light-gray;
+      border-top: none;
       top: 75%;
     }
 
@@ -311,7 +338,16 @@
         width: 80%;
         grid-template-columns: auto auto auto auto auto auto auto;
         grid-template-rows: 4.5rem;
-        padding: 1rem 0;
+        padding: 0 0 1rem 0;
+        // border-top: 0.1rem solid $light-gray;
+      }
+
+      @include respond(screen-1250) {
+        width: 960px;
+      }
+  
+      @include respond(screen-1366) {
+        width: 1150px;
       }
        
       li {
