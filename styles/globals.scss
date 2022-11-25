@@ -45,7 +45,11 @@
   position: relative;
 
   section:first-child {
-    padding-top: 28rem;
+    padding-top: 19rem;
+
+    @include respond(screen-1024) {
+      padding-top: 23rem;
+    }
   }
 }
 

@@ -1,6 +1,29 @@
+@import "../../../styles/variables";
+
 .keyword-search {
   form {
     display: flex;
     flex-direction: column;
+
+    input {
+      padding: 1.5rem;
+      background-color: $lighter-gray;
+      // min-width: 25rem;
+      
+      border-color: #f2f2f2;
+      outline: none;
+      transition: border .2s;
+      border-radius: 1px;
+      border: 1px solid #ddd;
+      border-width: 1px 1px 3px 1px;
+
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+
+      &:focus {
+        // border: 0.5px solid $light-gray;
+        border-color: #ccc;
+      }
+    }
   }
 }

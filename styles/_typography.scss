@@ -9,6 +9,7 @@ html {
 }
 
 * {
+  font-family: "Raleway", sans-serif;
   font-size: $font-size--regular;
   color: $black;
 }
@@ -19,26 +20,26 @@ html {
   font-weight: $font-weight--extra-bold;
 }
 
-.btn {
-  color: $white;
-  text-transform: uppercase;
-  font-size: $font-size--2xs;
-  letter-spacing: 0.15rem;
+// .btn {
+//   color: $white;
+//   text-transform: uppercase;
+//   font-size: $font-size--2xs;
+//   letter-spacing: 0.15rem;
 
-  span {
-    color: $white;
-    font-size: $font-size--2xs;
-    letter-spacing: 0.15rem;
-  }
+//   span {
+//     color: $white;
+//     font-size: $font-size--2xs;
+//     letter-spacing: 0.15rem;
+//   }
 
-  &--thick-font {
-    font-weight: $font-weight--bold;
-  }
+//   &--thick-font {
+//     font-weight: $font-weight--bold;
+//   }
 
-  &--small {
-    font-size: $font-size--3xs;
-  }
-}
+//   &--small {
+//     font-size: $font-size--3xs;
+//   }
+// }
 
 .quick-view-text {
   color: $white;

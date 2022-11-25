@@ -23,8 +23,13 @@ const KeywordSearch: React.FC<KeywordSearchProps> = (props) => {
   return (
     <div className={`${classes['keyword-search']}`}>
       <form onSubmit={submitHandler}>
-        <input type="text" ref={keywordInputRef} placeholder="Search products..." defaultValue={props.keywordInput && props.keywordInput} />
-        <button type="submit">Search</button>
+        <input 
+          type="text" 
+          ref={keywordInputRef} 
+          placeholder="Search products..." 
+          defaultValue={props.keywordInput && props.keywordInput} 
+          />
+        <button className={`btn btn--green btn--regular`} type="submit">Search</button>
       </form>
     </div>
   );
