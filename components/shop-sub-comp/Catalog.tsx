@@ -404,7 +404,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
           displayCountInput={displayCount}
           pageInput={currentPage}
         />
-        <div>{/* RecentlyViewed */}</div>
+        {/* <div>RecentlyViewed</div> */}
       </section>
     </main>
   );

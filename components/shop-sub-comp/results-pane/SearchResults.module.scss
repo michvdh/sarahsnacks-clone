@@ -6,6 +6,7 @@
 
 .grid-type {
   display: grid;
+  row-gap: 2rem;
 
   @include respond(screen-520) {
     grid-template-columns: 1fr 1fr;

@@ -94,7 +94,9 @@ const ViewControls: React.FC<ViewControlsProps> = (props) => {
       {/* display control */}
       <div className={`${classes["result-control-count"]}`}>
         <ul>
-          <li>View:</li>
+          <li>
+            <span>View:</span>
+          </li>
           <li>
             <span
               onClick={(e) => {

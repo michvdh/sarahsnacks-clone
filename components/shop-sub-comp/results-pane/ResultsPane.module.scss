@@ -1,4 +1,12 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
 .results-pane {
   display: flex;
   flex-direction: column;
+
+  @include respond(screen-1024) {
+    border-left: 1px solid $border-gray;
+    padding-left: 2.5rem;
+  }
 }
