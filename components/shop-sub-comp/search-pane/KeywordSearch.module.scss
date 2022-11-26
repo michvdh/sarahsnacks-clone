@@ -1,9 +1,13 @@
 @import "../../../styles/variables";
 
 .keyword-search {
+  margin-bottom: 5rem;
+
   form {
     display: flex;
     flex-direction: column;
+    justify-content: right;
+    row-gap: 1.5rem;
 
     input {
       padding: 1.5rem;
@@ -17,13 +21,18 @@
       border: 1px solid #ddd;
       border-width: 1px 1px 3px 1px;
 
-      margin-top: 2rem;
-      margin-bottom: 2rem;
+      // margin-top: 2rem;
+      // margin-bottom: 2rem;
 
       &:focus {
         // border: 0.5px solid $light-gray;
         border-color: #ccc;
       }
+    }
+
+    button {
+      width: 12rem;
+      margin-left: auto;
     }
   }
 }

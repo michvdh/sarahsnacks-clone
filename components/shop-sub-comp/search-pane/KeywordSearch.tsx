@@ -29,7 +29,7 @@ const KeywordSearch: React.FC<KeywordSearchProps> = (props) => {
           placeholder="Search products..." 
           defaultValue={props.keywordInput && props.keywordInput} 
           />
-        <button className={`btn btn--green btn--regular`} type="submit">Search</button>
+        <button className={`btn btn--green btn--regular btn--rounded`} type="submit">Search</button>
       </form>
     </div>
   );
