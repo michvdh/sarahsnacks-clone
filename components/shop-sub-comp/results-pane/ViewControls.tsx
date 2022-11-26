@@ -31,6 +31,8 @@ const ViewControls: React.FC<ViewControlsProps> = (props) => {
   return (
     <div className={`${classes["view-controls"]}`}>
       <div className={`${classes["view-style"]}`}>
+
+        {/* Grid or List View */}
         <div className={`${classes["product-display-type"]}`}>
           <div
             className={`${classes["min-details"]} ${classes["detail-level"]} ${props.displayType === "min-details" ? classes["selected"] : ""}`}
@@ -52,8 +54,11 @@ const ViewControls: React.FC<ViewControlsProps> = (props) => {
             <FontAwesomeIcon className={`${classes["icon"]}`} icon={faList} />
           </div>
         </div>
+
+        {/* Sort - asc, desc, etc */}
         <div className={`${classes["sort-type"]}`}>
           <form key={props.sortInput}>
+            {/* <div className={classes.border}></div> */}
             <select
               onChange={(e) => {
                 sortHandler(e.target.value);
@@ -85,6 +90,8 @@ const ViewControls: React.FC<ViewControlsProps> = (props) => {
           </form>
         </div>
       </div>
+
+      {/* display control */}
       <div className={`${classes["result-control-count"]}`}>
         <ul>
           <li>View:</li>

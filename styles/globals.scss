@@ -81,6 +81,10 @@ input[type="number"] {
     width: 1.3rem;
   }
 
+  &--gray {
+    filter: invert(83%) sepia(1%) saturate(0%) hue-rotate(67deg) brightness(98%) contrast(93%);
+  }
+
   &--green {
     filter: invert(30%) sepia(60%) saturate(2174%) hue-rotate(155deg)
       brightness(86%) contrast(101%);
