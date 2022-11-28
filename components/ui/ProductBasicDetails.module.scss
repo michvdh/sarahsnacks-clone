@@ -12,6 +12,30 @@
     -webkit-box-shadow: 2px 3px 13px -5px rgba(0, 0, 0, 0.65);
     -moz-box-shadow: 2px 3px 13px -5px rgba(0, 0, 0, 0.65);
   }
+
+  figcaption {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    
+    h2 {
+      margin-bottom: 2rem;
+    }
+
+    .price-range {
+      margin-bottom: 1.5rem;
+    }
+
+    .description {
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      text-align: center;
+      margin: 0 auto;
+    }
+  }
 }
 
 .category {

@@ -138,22 +138,8 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
         <span className={`${classes["price-range"]} price-ranges`}>
           {getPriceRange(props.variations)}
         </span>
-        <p>{props.description}</p>
-        {/* <Link
-          href={{
-            pathname: `/product/${productNameDashed}`,
-            query: {
-              id: props.id,
-            },
-          }}
-          passHref
-        >
-          <a
-            className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
-          >
-            {props.variations.length > 1 ? "Select Options" : "Add to Cart"}
-          </a>
-        </Link> */}
+        <p className={classes.description}>{props.description}</p>
+
         {props.variations.length > 1 && (
           <Link
             href={{
@@ -165,7 +151,7 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
             passHref
           >
             <a
-              className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
+              className={`${classes.btn} btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
             >
               Select Options
             </a>
@@ -181,14 +167,14 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
               passHref
             >
               <a
-                className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
+                className={`${classes.btn} btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
               >
                 View Cart
               </a>
             </Link>
           ) : (
             <a
-              className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
+              className={`${classes.btn} btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
               onClick={addToCartHandler}
             >
               Add to Cart
