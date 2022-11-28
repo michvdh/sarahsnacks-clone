@@ -59,11 +59,11 @@
 
       .selected {
         // background-color: orange;
-        border: 2px solid $dark-green;
+        border: 1.5px solid $dark-green;
         transition: all .2s;
 
         &:hover {
-          border: 2px solid $dark-green !important;
+          border: 1.5px solid $dark-green !important;
         }
 
         .icon { // green
