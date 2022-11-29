@@ -1,16 +1,5 @@
 @import "../../styles/variables";
 
-.category {
-  margin: 0 0.5rem;
-  cursor: pointer;
-}
-
-.category-container {
-  margin-bottom: 0.3rem;
-  // display: flex;
-  // justify-content: center;
-}
-
 .featured-item {
   padding-bottom: 1.5rem;
   transition: all .2s;
@@ -24,6 +13,3 @@
   }
 }
 
-.price-range {
-  margin: 2rem 0 1rem 0;
-}

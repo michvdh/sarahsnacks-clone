@@ -6,16 +6,15 @@
 
 .grid-type {
   display: grid;
-  row-gap: 2rem;
+  row-gap: 6rem;
 
   @include respond(screen-520) {
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    column-gap: 2rem;
   }
 
   @include respond(screen-760) {
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 2rem;
   }
 }
 

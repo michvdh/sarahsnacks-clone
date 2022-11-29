@@ -84,7 +84,7 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
         />
 
         <figcaption className={`${emblaClass['embla__slide__caption']}`}>
-          <p className={`${classes["category-container"]}`}>
+          <p className={`${classes["category-container"]} category-container`}>
             {props.category.map((category, index) => (
               <Link
                 href={{
@@ -115,21 +115,23 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
             ))}
           </p>
 
-          <Link
-            href={{
-              pathname: `/product/${productNameDashed}`,
-              query: {
-                id: props.id,
-              },
-            }}
-            passHref
-          >
-            <a className={`product-name`}>
-              {props.productName.length > 1
-                ? `${props.productName[0]} ${props.productName[1]}`
-                : props.productName[0]}
-            </a>
-          </Link>
+          <h2>
+            <Link
+              href={{
+                pathname: `/product/${productNameDashed}`,
+                query: {
+                  id: props.id,
+                },
+              }}
+              passHref
+            >
+              <a className={`product-name`}>
+                {props.productName.length > 1
+                  ? `${props.productName[0]} ${props.productName[1]}`
+                  : props.productName[0]}
+              </a>
+            </Link>
+          </h2>
 
           <span className={`${classes["price-range"]} price-range`}>
             {getPriceRange(props.variations)}

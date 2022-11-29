@@ -111,7 +111,7 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
         />
       </div>
       <figcaption>
-        <p className={`${classes["category-container"]}`}>
+        <p className={`${classes["category-container"]} category-container`}>
           {props.category.map((category, index) => (
             <Link
               href={{
