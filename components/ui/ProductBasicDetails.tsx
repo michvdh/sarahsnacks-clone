@@ -80,6 +80,22 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
     return priceRange;
   };
 
+  const filterAr = (desc) => {
+    return desc !== "";
+  }
+
+  const paragraph = props.description.map(desc => {
+    return desc.filter(filterAr).join(" ");
+  }).join(" ");
+
+  const parAr = paragraph.split(" ");
+  const initParLength = parAr.length;
+
+  parAr.length > 50 && parAr.splice(50, parAr.length - 50);
+
+  const description = initParLength <= 50 ? parAr.join(" ") : parAr.join(" ").concat("...");
+
+
   return (
     <figure className={`${classes["product-basic-details"]}`}>
       <ProductQuickView
@@ -118,6 +134,7 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
             </Link>
           ))}
         </p>
+
         <h2>
           <Link
             href={{
@@ -135,10 +152,12 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
             </a>
           </Link>
         </h2>
+
         <span className={`${classes["price-range"]} price-ranges`}>
           {getPriceRange(props.variations)}
         </span>
-        <p className={classes.description}>{props.description}</p>
+
+        <p className={classes.description}>{description}</p>
 
         {props.variations.length > 1 && (
           <Link
