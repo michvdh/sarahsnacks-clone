@@ -8,6 +8,10 @@
     @media only screen and (min-width: 400px) { @content };
   }
 
+  @if $breakpoint == screen-430 {
+    @media only screen and (min-width: 430px) { @content };
+  }
+
   @if $breakpoint == screen-480 {
     @media only screen and (min-width: 480px) { @content };
   }
@@ -26,6 +30,14 @@
 
   @if $breakpoint == screen-620 {
     @media only screen and (min-width: 620px) { @content };
+  }
+
+  @if $breakpoint == screen-650 {
+    @media only screen and (min-width: 650px) { @content };
+  }
+
+  @if $breakpoint == screen-730 {
+    @media only screen and (min-width: 730px) { @content };
   }
 
   @if $breakpoint == screen-760 {

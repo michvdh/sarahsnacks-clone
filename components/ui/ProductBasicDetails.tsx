@@ -80,6 +80,8 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
     return priceRange;
   };
 
+
+  // -- used to control description length -- //
   const filterAr = (desc) => {
     return desc !== "";
   }
@@ -95,15 +97,19 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
 
   const description = initParLength <= 50 ? parAr.join(" ") : parAr.join(" ").concat("...");
 
+  // -- -- -- //
+
 
   return (
     <figure className={`${classes["product-basic-details"]}`}>
-      <ProductQuickView
-        id={props.id}
-        productNameDashed={productNameDashed}
-        imagesFolder={props.imagesFolder}
-        images={props.images}
-      />
+      <div className={classes.image}>
+        <ProductQuickView
+          id={props.id}
+          productNameDashed={productNameDashed}
+          imagesFolder={props.imagesFolder}
+          images={props.images}
+        />
+      </div>
       <figcaption>
         <p className={`${classes["category-container"]}`}>
           {props.category.map((category, index) => (
@@ -153,7 +159,7 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
           </Link>
         </h2>
 
-        <span className={`${classes["price-range"]} price-ranges`}>
+        <span className={`${classes["price-range"]} price-range`}>
           {getPriceRange(props.variations)}
         </span>
 
