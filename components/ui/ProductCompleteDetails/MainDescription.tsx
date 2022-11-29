@@ -132,36 +132,55 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
     }
   }, [showQtyInputError]);
 
+  // const mainDescLength = props.mainDescription.main.length;
+
+  console.log(props.mainDescription.unOrderedList.length);
 
   return (
     <Fragment>
-      <div>
+      <div className={`${classes['main-description']}`}>
+
         {/* Price or Price Range */}
-        <span>{getPriceRange(props.variations)}</span>
+        <span className={`${classes['price-range']}`}>{getPriceRange(props.variations)}</span>
+
         {/* Product name */}
-        <h1>{props.productName[0]}</h1>
-        {props.productName.length > 1 && <h1>{props.productName[1]}</h1>}
+        <div className={classes['product-name']}>
+          <h1 className={`${classes[`${props.nameColor}`]} ${classes['first-header']}`}>
+            {props.productName[0]}
+          </h1>
+          {props.productName.length > 1 &&
+            <h1 className={`${classes[`${props.nameColor}`]} ${classes['second-header']}`}>
+              {props.productName[1]}
+            </h1>
+          }
+        </div>
+        
         {/* Main Description */}
         {props.mainDescription.main &&
           props.mainDescription.main.map((desc: string[]) => (
-            <p>
-              {desc.map((text: string) => (
-                <span>{text}</span>
+            <p className={`${classes['description--main']}`}>
+              {desc.map((text: string, index) => (
+                <span className={`${index === 0 ? 'bold' : ''}`}>
+                  {text}{' '}
+                  {/* {mainDescLength !== (index -1) ? ' ' : ''} */}
+                </span>
               ))}
             </p>
           ))}
+
         {/* Unordered list */}
-        {props.mainDescription.unOrderedList && (
+        {(props.mainDescription.unOrderedList[0][0] !== "") && (
           <ul>
             {props.mainDescription.unOrderedList.map((desc, index) => (
               <li key={index}>
-                {desc.map((text: string) => (
-                  <span>{text}</span>
+                {desc.map((text: string, index) => (
+                  <span className={`${index === 0 ? 'bold' : ''}`}>{text}</span>
                 ))}
               </li>
             ))}
           </ul>
         )}
+
         {/* Ordered list */}
         {props.mainDescription.orderedList.items[0] !== "" && (
           <div>
@@ -173,17 +192,19 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
             </ol>
           </div>
         )}
+
         {/* Last description */}
         {props.mainDescription.last !== "" && (
           <span>{props.mainDescription.last.toUpperCase()}</span>
         )}
+
         {/* Variations */}
         {props.variations.length > 1 && (
-          <div>
-            <div>
+          <div className={`${classes.variations}`}>
+            <div className={classes.size}>
               <span>Sizes</span>
             </div>
-            <div>
+            <div className={classes.form}>
               <form>
                 <select
                   onChange={(e) => {
@@ -206,15 +227,24 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
                   ))}
                 </select>
               </form>
-              {selectedVariation && <button onClick={clearHandler}>Clear</button>}
+              {selectedVariation && <button className={classes.clear} onClick={clearHandler}>
+                <span className={classes.icon}>×</span>
+                <span className={classes.text}>Clear</span>
+              </button>}
             </div>
           </div>
         )}
-        {/* Add to cart options */}
+
         <div>
           {selectedVariation && <span>${varPrice}</span>}
+        </div>
+
+        {/* Add to cart options */}
+        <div className={`${classes['qty-control-container']}`}>
           <div>
-            <button onClick={decrementQty}>-</button>
+            <button 
+              className={`${classes['qty-control']} ${classes.btn}`} 
+              onClick={decrementQty}>-</button>
             <input
               type="number"
               min={0}
@@ -222,15 +252,19 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
               onChange={inputChangeHandler}
               onBlur={inputExitHandler}
               ref={quantityInputRef}
+              className={`${classes['qty-control']} ${classes.input}`}
             />
-            <button onClick={incrementQty}>+</button>
+            <button 
+              className={`${classes['qty-control']} ${classes.btn}`} 
+              onClick={incrementQty}>+</button>
           </div>
-          <button className={hasSelection ? '' : `btn--disabled`} onClick={addToCartHandler}>Add to Cart</button>
+
+          <button className={`${hasSelection ? '' : `btn--disabled`} btn btn--green btn--regular btn--rounded`} onClick={addToCartHandler}>Add to Cart</button>
           {/* <button onClick={checkCartHandler}>Check cart</button> */}
         </div>
         {/* Category */}
-        <div>
-          <span>Category</span>
+        <div className={`${classes.category}`}>
+          <span className={`bold`}>Category: </span>
           {props.category.map((category, index) => (
             <a
               href={`/product-category/${category

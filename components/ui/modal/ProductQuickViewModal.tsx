@@ -37,8 +37,8 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
   let variationLength;
   const [productsDB, setProductsDB] = useState([]);
   const [closeWindow, setCloseWindow] = useState(false);
-  
-  const allData = async() => {
+
+  const allData = async () => {
     const response = await fetch('https://sarahsnacks-clone-default-rtdb.firebaseio.com/productsDB.json');
     const data = await response.json();
     setProductsDB(data);
@@ -51,8 +51,8 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
   useEffect(() => {
     (productsDB.length > 0) && props.fetching();
   }, [productsDB]); // used by loading indicator in ProductQuickView
-  
-  
+
+
 
   if (productsDB.length > 0) {
     pIndex = productsDB.findIndex((p) => p.id === productID);
@@ -65,7 +65,7 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
     "product-quick-view-root"
   )!;
 
-  
+
   const [variationIndex, setVariationIndex] = useState(0);
   const [selectionStatus, setSelectionStatus] = useState(
     variationLength > 1 ? false : true
@@ -87,7 +87,7 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
 
   const closeHandler = () => {
     setCloseWindow(true);
-    setTimeout(() => props.onClick(), 220); 
+    setTimeout(() => props.onClick(), 220);
     // adjust based on close animate -> ProductQuickViewModal.module.scss
   }
 
@@ -98,9 +98,6 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
 
       {product && !addToCartConfirmation && ReactDOM.createPortal(
         <div className={`${classes['product-qv-overlay']} ${closeWindow ? classes['animate-close'] : classes['animate-open']}`}>
-          <div className={classes.close}>
-            <button onClick={closeHandler}>×</button>
-          </div>
           <div className={classes.main}>
             <ImageGalleryEmbla
               images={product.images}
@@ -119,6 +116,9 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
               selectionDetails={additionalInfoHandler}
               confirmation={confirmationHandler}
             />
+            <div className={classes.close}>
+              <button className={classes['btn--close']} onClick={closeHandler}>×</button>
+            </div>
           </div>
         </div>,
         productQuickViewOverlay
