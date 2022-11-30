@@ -14,7 +14,9 @@ export default class MyDocument extends Document {
             {/* QtyErrorModal*/}
             <div id="qty-error-root"></div>
 
+            {/* QuickView Modal */}
             <div id="product-quick-view-root"></div>
+
             <NextScript />
           </body>
       </Html>

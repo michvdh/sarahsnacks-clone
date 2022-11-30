@@ -134,7 +134,6 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
 
   // const mainDescLength = props.mainDescription.main.length;
 
-  console.log(props.mainDescription.unOrderedList.length);
 
   return (
     <Fragment>

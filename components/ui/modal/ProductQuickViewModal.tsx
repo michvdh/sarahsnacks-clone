@@ -85,39 +85,50 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
     setNewItemProductName(productName);
   };
 
-  const closeHandler = () => {
-    setCloseWindow(true);
-    setTimeout(() => props.onClick(), 220);
-    // adjust based on close animate -> ProductQuickViewModal.module.scss
+  const closeHandler = (e) => {
+    console.log(e.target);
+    console.log(e.currentTarget);
+
+    if (e.target === e.currentTarget) {
+      setCloseWindow(true);
+      setTimeout(() => props.onClick(), 220);
+      // adjust based on close animate -> ProductQuickViewModal.module.scss
+    }
   }
 
 
   return (
     <Fragment>
-      {product && !addToCartConfirmation && ReactDOM.createPortal(<Backdrop onClick={closeHandler} />, backdrop)}
+      {/* {product && !addToCartConfirmation && ReactDOM.createPortal(<Backdrop onClick={closeHandler} />, backdrop)} */}
 
       {product && !addToCartConfirmation && ReactDOM.createPortal(
-        <div className={`${classes['product-qv-overlay']} ${closeWindow ? classes['animate-close'] : classes['animate-open']}`}>
-          <div className={classes.main}>
-            <ImageGalleryEmbla
-              images={product.images}
-              navType="dot" // navType = "dot" or "image"
-            />
-            <MainDescription
-              id={product.id}
-              productName={product.productName}
-              otherName={product.otherName}
-              nameColor={product.nameColor}
-              category={product.category}
-              mainDescription={product.mainDescription}
-              variations={product.variations}
-              imagesFolder={product.images.folderName}
-              image={product.images.thumbnailSmall[0]}
-              selectionDetails={additionalInfoHandler}
-              confirmation={confirmationHandler}
-            />
-            <div className={classes.close}>
-              <button className={classes['btn--close']} onClick={closeHandler}>×</button>
+        <div className={classes['product-qv-modal']} onClick={closeHandler}>
+          <div className={classes['product-qv-container']} onClick={closeHandler}>
+            <div className={classes['product-qv-wrap']} onClick={closeHandler}>
+              <div className={`${classes['product-qv-inner']} ${closeWindow ? classes['animate-close'] : classes['animate-open']}`}>
+                <div className={classes.main}>
+                  <ImageGalleryEmbla
+                    images={product.images}
+                    // navType="dot" // navType = "dot" or "image"
+                  />
+                  <MainDescription
+                    id={product.id}
+                    productName={product.productName}
+                    otherName={product.otherName}
+                    nameColor={product.nameColor}
+                    category={product.category}
+                    mainDescription={product.mainDescription}
+                    variations={product.variations}
+                    imagesFolder={product.images.folderName}
+                    image={product.images.thumbnailSmall[0]}
+                    selectionDetails={additionalInfoHandler}
+                    confirmation={confirmationHandler}
+                  />
+                  <div className={classes.close}>
+                    <button className={classes['btn--close']} onClick={closeHandler}>×</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>,
