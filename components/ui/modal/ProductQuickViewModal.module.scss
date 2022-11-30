@@ -18,8 +18,12 @@
 .product-qv-container {
   position: absolute;
   width: 100%;
-  top: 20vh;
+  top: 10vh;
   vertical-align: baseline;
+
+  @include respond(screen-840) {
+    top: 20vh;
+  }
 
   // &::before {
   //   content: "";
@@ -46,7 +50,15 @@
   display: flex;
   flex-direction: column;
   cursor: initial;
-  width: 80%; // adjust this when screen size changes
+  width: 95%; // adjust this when screen size changes
+
+  @include respond(screen-1024) {
+    width: 90%;
+  }
+
+  @include respond(screen-1536) {
+    width: 1200px;
+  }
 
   position: relative;
   margin: 0 auto;
@@ -63,24 +75,69 @@
   // I can also use fade instead of scale for a gentler UI effect
 
   .main {
-    display: flex;
     pointer-events: initial;
+    display: flex;
     flex-direction: column;
+    position: relative;
     // display: grid;
     // grid-template-columns: 5fr 1fr 0.5fr;
 
-
-    @include respond(screen-1024) {
+    @include respond(screen-840) {
       column-gap: 2rem;
       flex-direction: row;
+      justify-content: initial;
     }
 
-    .close {
-      // display: flex;
-      // justify-content: right;
+    .image-gallery-embla {
+      min-width: 100% !important;
+      max-width: 100% !important;
 
-      .btn--close {
-        cursor: pointer;
+      @include respond(screen-480) {
+        min-width: 80% !important;
+        max-width: 80% !important;
+      }
+
+      @include respond(screen-560) {
+        min-width: 40rem !important;
+        max-width: 40rem !important;
+      }
+    }
+
+    .main-description {
+      max-width: 90%;
+      margin: 0 auto;
+
+      @include respond(screen-730) {
+        max-width: 85%;
+        margin: 0 auto;
+      }
+
+      @include respond(screen-730) {
+        max-width: 85%;
+        margin: 0 auto;
+      }
+
+      @include respond(screen-840) {
+        max-width: initial;
+        margin: initial;
+      }
+    }
+    .btn--close {
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      right: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: $font-header--regular;
+      background: none;
+      border: none;
+      color: $darker-gray;
+      transition: all .2s;
+
+      &:hover {
+        color: $black;
       }
     }
   }

@@ -25,6 +25,7 @@
 
   &--disabled {
     cursor: not-allowed !important;
+    background-color: $black-fade-2 !important;
   }
 
   &--large {

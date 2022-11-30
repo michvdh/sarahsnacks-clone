@@ -109,6 +109,7 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
                 <div className={classes.main}>
                   <ImageGalleryEmbla
                     images={product.images}
+                    className={classes['image-gallery-embla']}
                     // navType="dot" // navType = "dot" or "image"
                   />
                   <MainDescription
@@ -123,10 +124,9 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
                     image={product.images.thumbnailSmall[0]}
                     selectionDetails={additionalInfoHandler}
                     confirmation={confirmationHandler}
+                    className={classes['main-description']}
                   />
-                  <div className={classes.close}>
-                    <button className={classes['btn--close']} onClick={closeHandler}>×</button>
-                  </div>
+                  <button className={classes['btn--close']} onClick={closeHandler}>×</button>
                 </div>
               </div>
             </div>

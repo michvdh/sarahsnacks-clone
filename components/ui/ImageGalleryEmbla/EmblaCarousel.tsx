@@ -66,7 +66,7 @@ const EmblaCarousel: React.FC<ImageGalleryEmblaModel> = (props) => {
   return (
     <>
       {/* main image */}
-      <div className={classes.embla}>
+      <div className={`${classes.embla} ${props.className}`}>
         <div className={`${classes["embla__viewport"]}`} ref={viewportRef}>
           <div className={`${classes[`embla__container`]}`}>
             {slides.map((index) => (

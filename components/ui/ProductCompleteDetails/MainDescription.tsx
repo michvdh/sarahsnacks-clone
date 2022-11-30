@@ -33,6 +33,7 @@ interface MainDescriptionProps {
   }[];
   selectionDetails: (vIndex: number, hasSelection: boolean) => void;
   confirmation: (quantity: number, productName: string) => void;
+  className: string;
 }
 
 
@@ -137,7 +138,7 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
 
   return (
     <Fragment>
-      <div className={`${classes['main-description']}`}>
+      <div className={`${classes['main-description']} ${props.className}`}>
 
         {/* Price or Price Range */}
         <span className={`${classes['price-range']}`}>{getPriceRange(props.variations)}</span>
@@ -227,14 +228,14 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
                 </select>
               </form>
               {selectedVariation && <button className={classes.clear} onClick={clearHandler}>
-                <span className={classes.icon}>×</span>
+                <div><span className={classes.icon}>×</span></div>
                 <span className={classes.text}>Clear</span>
               </button>}
             </div>
           </div>
         )}
 
-        <div>
+        <div className={classes['var-price']}>
           {selectedVariation && <span>${varPrice}</span>}
         </div>
 
@@ -259,8 +260,8 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
           </div>
 
           <button className={`${hasSelection ? '' : `btn--disabled`} btn btn--green btn--regular btn--rounded`} onClick={addToCartHandler}>Add to Cart</button>
-          {/* <button onClick={checkCartHandler}>Check cart</button> */}
         </div>
+        
         {/* Category */}
         <div className={`${classes.category}`}>
           <span className={`bold`}>Category: </span>
