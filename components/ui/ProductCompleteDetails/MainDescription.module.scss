@@ -71,23 +71,59 @@
     }
   }
 
-  .description--main {
-    line-height: 2.8rem;
-  }
-
   ul {
     list-style-type: disc;
     margin-left: 2rem;
   }
+
+  ol {
+    margin-left: 2rem;
+  }
+
+  .description--main {
+    line-height: 2.8rem;
+    margin-bottom: 4rem;
+  }
+
+  .ul--main {
+    ul {
+      li {
+        margin-bottom: 1rem;
+        line-height: 2.8rem;
+      }
+    }
+  }
+
+  .ol--main {
+    h3 {
+      margin-bottom: 2rem;
+    }
+
+    ol {
+      margin-bottom: 4rem;
+
+      li {
+        margin-bottom: 1rem;
+        line-height: 2.8rem;
+      }
+    }
+  }
+
+  .last-description {
+    display: block;
+    text-transform: uppercase;
+    line-height: 2.8rem;
+  }
+
+  
 
   .variations {
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
-    padding: 2rem 0 3rem 0;
+    padding: 2rem 0 0 0;
     border-top: 1px solid $border-gray;
-    border-bottom: 1px solid $border-gray;
 
     @include respond(screen-380) {
       flex-direction: row;
@@ -181,9 +217,14 @@
 
   .var-price {
     margin-top: 2.5rem;
+    position: relative;
     
     span {
       color: $dark-green;
+      border-top: 1px solid $border-gray;
+    padding-top: 2rem;
+    display: inline-block;
+    width: 100%;
     }
   }
 
@@ -192,6 +233,8 @@
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
+    border-top: 1px solid $border-gray;
+    padding: 2rem 0 0 0;
 
     @include respond(screen-380) {
       flex-direction: row;

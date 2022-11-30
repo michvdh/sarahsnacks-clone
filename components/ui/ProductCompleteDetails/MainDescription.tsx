@@ -157,10 +157,13 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
         
         {/* Main Description */}
         {props.mainDescription.main &&
-          props.mainDescription.main.map((desc: string[]) => (
-            <p className={`${classes['description--main']}`}>
+          props.mainDescription.main.map((desc: string[], index) => (
+            <p className={`${classes['description--main']}`} key={index}>
               {desc.map((text: string, index) => (
-                <span className={`${index === 0 ? 'bold' : ''}`}>
+                <span
+                  className={`${index === 0 ? 'bold' : ''}`}
+                  key={index}
+                >
                   {text}{' '}
                   {/* {mainDescLength !== (index -1) ? ' ' : ''} */}
                 </span>
@@ -170,20 +173,22 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
 
         {/* Unordered list */}
         {(props.mainDescription.unOrderedList[0][0] !== "") && (
-          <ul>
-            {props.mainDescription.unOrderedList.map((desc, index) => (
-              <li key={index}>
-                {desc.map((text: string, index) => (
-                  <span className={`${index === 0 ? 'bold' : ''}`}>{text}</span>
-                ))}
-              </li>
-            ))}
-          </ul>
+          <div className={classes['ul--main']}>
+            <ul>
+              {props.mainDescription.unOrderedList.map((desc, index) => (
+                <li key={index}>
+                  {desc.map((text: string, index) => (
+                    <span className={`${index === 0 ? 'bold' : ''}`}>{text}</span>
+                  ))}
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
 
         {/* Ordered list */}
         {props.mainDescription.orderedList.items[0] !== "" && (
-          <div>
+          <div className={`${classes['ol--main']}`}>
             <h3>{props.mainDescription.orderedList.title}</h3>
             <ol>
               {props.mainDescription.orderedList.items.map((item, index) => (
@@ -195,7 +200,7 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
 
         {/* Last description */}
         {props.mainDescription.last !== "" && (
-          <span>{props.mainDescription.last.toUpperCase()}</span>
+          <span className={`${classes['last-description']} bold`}>{props.mainDescription.last.toUpperCase()}</span>
         )}
 
         {/* Variations */}
@@ -215,7 +220,7 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
                   <option
                     key="initial"
                     value="Choose an option"
-                    // selected={!selectedVariation ? true : false}
+                    selected={!selectedVariation ? true : false}
                   >
                     Choose an option
                   </option>
