@@ -118,6 +118,7 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
       );
 
       props.confirmation(quantityInputRef.current.valueAsNumber, productName);
+        // values passed here will be used by AddToCartSuccessModal
     }
   };
 

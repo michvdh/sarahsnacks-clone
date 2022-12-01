@@ -24,7 +24,7 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
   const numberOfImages = props.images.length;
 
   const overlayHandler = () => {
-    const newState = !showProductQuickViewModal;
+    const newState = !showProductQuickViewModal; // boolean
     setShowProductQuickViewModal(newState);
   }; // used by close button and backdrop to close the modal
 

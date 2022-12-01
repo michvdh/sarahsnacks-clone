@@ -135,7 +135,7 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
         productQuickViewOverlay
       )}
 
-      {addToCartConfirmation && <AddToCartSuccessModal onClick={props.onClick} />}
+      {addToCartConfirmation && <AddToCartSuccessModal onClick={props.onClick} addToCartConfirmation={addToCartConfirmation}/>}
     </Fragment>
   );
 };
