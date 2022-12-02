@@ -3,12 +3,11 @@
 .catalog {
   display: flex;
   flex-direction: column-reverse;
-  // background-color:darkseagreen;
+  margin-bottom: 3rem;
 
   @include respond(screen-1024) {
     flex-direction: row;
     column-gap: 5rem;
-    // justify-content: space-between;
   }
   
 }

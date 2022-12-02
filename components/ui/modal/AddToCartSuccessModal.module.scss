@@ -1,12 +1,26 @@
 @import "../../../styles/variables";
 
-.success-overlay {
+
+.success-backdrop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
+  background-color: $overlay--dark;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 900;
+}
+
+.success-overlay {
   background-color: white;
-  margin: 0 auto;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  // position: fixed;
+  // margin: 0 auto;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
   width: 60rem;
   height: 60rem;
   z-index: 999;
@@ -15,6 +29,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  overflow: hidden;
 
   animation-duration: 0.4s;
   animation-iteration-count: 1;

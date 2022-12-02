@@ -1,8 +1,30 @@
+@import "../../../styles/variables";
+
 .page-btn-container {
   display: flex;
   justify-content: right;
+  column-gap: 1rem;
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+
+  .page-btn {
+    border: 1px solid $border-gray;
+    width: 4rem;
+    height: 4rem;
+    background-color: $white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 
   .selected {
-    color: red;
+    background-color: $dark-gray;
   }
 }

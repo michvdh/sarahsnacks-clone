@@ -53,7 +53,6 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
       : props.productName[0];
   const productName = capitalizeFirstLetter(tempPName);
 
-  
   // this will be used if there are multiple variations
   // the values will be the weight
   const [selectedVariation, setSelectedVariation] = useState("");
@@ -79,7 +78,11 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   const varPrice = props.variations[vIndex].price.toFixed(2);
   const varSize = props.variations[vIndex].size;
 
-  props.selectionDetails(selectedVariation ? vIndex : 0, hasSelection);
+  
+
+  useEffect(() => {
+    props.selectionDetails(selectedVariation ? vIndex : 0, hasSelection);
+  }, []);
 
   const incrementQty = () => {
     setInputQty(inputQty + 1);
@@ -87,12 +90,12 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
 
   const decrementQty = () => {
     if (inputQty > 1) {
-      setInputQty(inputQty - 1)
+      setInputQty(inputQty - 1);
     }
   }
 
   const inputChangeHandler = (e) => {
-    setInputQty(e.target.value)
+    setInputQty(e.target.value);
   }
 
   const inputExitHandler = (e) => {
@@ -121,7 +124,6 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
         // values passed here will be used by AddToCartSuccessModal
     }
   };
-
 
   const clearHandler = () => {
     setSelectedVariation("");
@@ -179,7 +181,7 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
               {props.mainDescription.unOrderedList.map((desc, index) => (
                 <li key={index}>
                   {desc.map((text: string, index) => (
-                    <span className={`${index === 0 ? 'bold' : ''}`}>{text}</span>
+                    <span key={index} className={`${index === 0 ? 'bold' : ''}`}>{text}</span>
                   ))}
                 </li>
               ))}

@@ -26,7 +26,7 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
   const overlayHandler = () => {
     const newState = !showProductQuickViewModal; // boolean
     setShowProductQuickViewModal(newState);
-  }; // used by close button and backdrop to close the modal
+  }; // used to close PQVModal and AddToCartSuccessModal
 
   const productQuickViewModalHandler = () => {
     setShowProductQuickViewModal(true);

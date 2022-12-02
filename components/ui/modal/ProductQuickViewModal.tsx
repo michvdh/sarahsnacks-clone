@@ -33,8 +33,8 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
 ) => {
   let productID = props.id;
   let pIndex;
-  let product;
-  let variationLength;
+  let product: ProductsDBModel | null = null;
+  let variationLength: number = 0;
   const [productsDB, setProductsDB] = useState([]);
   const [closeWindow, setCloseWindow] = useState(false);
 
@@ -55,7 +55,7 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
 
 
   if (productsDB.length > 0) {
-    pIndex = productsDB.findIndex((p) => p.id === productID);
+    pIndex = productsDB.findIndex((p: ProductsDBModel) => p.id === productID);
     product = productsDB[pIndex];
     variationLength = product.variations.length;
   }
@@ -86,9 +86,6 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
   };
 
   const closeHandler = (e) => {
-    console.log(e.target);
-    console.log(e.currentTarget);
-
     if (e.target === e.currentTarget) {
       setCloseWindow(true);
       setTimeout(() => props.onClick(), 220);
@@ -96,12 +93,11 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
     }
   }
 
-
   return (
     <Fragment>
       {/* {product && !addToCartConfirmation && ReactDOM.createPortal(<Backdrop onClick={closeHandler} />, backdrop)} */}
 
-      {product && !addToCartConfirmation && ReactDOM.createPortal(
+      {product !== null && !addToCartConfirmation && ReactDOM.createPortal(
         <div className={classes['product-qv-modal']} onClick={closeHandler}>
           <div className={classes['product-qv-container']} onClick={closeHandler}>
             <div className={classes['product-qv-wrap']} onClick={closeHandler}>
@@ -135,7 +131,7 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
         productQuickViewOverlay
       )}
 
-      {addToCartConfirmation && <AddToCartSuccessModal onClick={props.onClick} addToCartConfirmation={addToCartConfirmation}/>}
+      {addToCartConfirmation && <AddToCartSuccessModal onClick={props.onClick} />}
     </Fragment>
   );
 };

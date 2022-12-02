@@ -30,8 +30,6 @@ const Header: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const pathName = router.pathname;
-  console.log(pathName);
-
  
   const cartTotalQty = useSelector(
     (state: { cart: { totalQty: number } }) => state.cart.totalQty

@@ -2,6 +2,7 @@ import classes from './IODiv.module.scss';
 import { useDispatch } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 import { ioActions } from '../../store/intersectionObserver';
+import { useEffect } from 'react';
 
 // this is a helper component whose purpose is for the header's intersection observer
 
@@ -16,9 +17,12 @@ const IODiv = () => {
 
   const intersectState = entry?.isIntersecting;
 
-  if (intersectState !== undefined) {
-    dispatch(ioActions.changeIOState(intersectState));
-  }
+  useEffect(() => {
+    if (intersectState !== undefined) {
+      dispatch(ioActions.changeIOState(intersectState));
+    }
+  });
+  
 
   return (
     <div className={`${classes['io-div']}`} ref={ioDivRef}></div>

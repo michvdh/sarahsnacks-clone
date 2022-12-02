@@ -55,16 +55,16 @@ const EmblaCarousel: React.FC<ProductsProps> = (props) => {
         <div className={`${emblaClass['embla__container']}`}>
           {featuredProducts.map((product) => (
             <ProductMinDetails
-              key={product.id}
-              id={product.id}
-              productName={product.productName}
-              otherName={product.otherName}
-              imagesFolder={product.images.folderName}
-              images={product.images.thumbnailRegular}
-              category={product.category}
-              variations={product.variations}
-              onCategorySearch={dummyCategSearch}
-            />
+            key={product.id}
+            id={product.id}
+            productName={product.productName}
+            otherName={product.otherName}
+            imagesFolder={product.images.folderName}
+            images={product.images.thumbnailRegular}
+            category={product.category}
+            variations={product.variations}
+            onCategorySearch={dummyCategSearch}
+          />
           ))}
         </div>
       </div>
