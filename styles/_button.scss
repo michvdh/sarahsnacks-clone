@@ -60,6 +60,16 @@
     }
   }
 
+  &--gray {
+    color: $black-fade;
+    background-color: $light-gray;
+
+    &:hover {
+      color: $black;
+      background-color: $dark-gray;
+    }
+  }
+
   &--green {
     background-color: $dark-green;
   

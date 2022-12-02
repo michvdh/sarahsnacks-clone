@@ -114,6 +114,7 @@ const Header: React.FC = () => {
             </a>
           </Link>
           <CartPreviewOnHover className={classes['cart-hover']} />
+          {/* <CartPreviewOnHover className={classes['cart-hover']} /> */}
         </div>
 
         <div className={classes.border}></div>
