@@ -109,12 +109,13 @@ const Header: React.FC = () => {
                     </span>
                   </div>
                 </span>
-                <span className={`${classes['cart__price']} `}>${cartTotalPrice.toFixed(2)}</span>
+                <span className={`${classes['cart__price']} `}>
+                  ${cartTotalPrice.toFixed(2)}
+                </span>
               </div>
             </a>
           </Link>
           <CartPreviewOnHover className={classes['cart-hover']} />
-          {/* <CartPreviewOnHover className={classes['cart-hover']} /> */}
         </div>
 
         <div className={classes.border}></div>

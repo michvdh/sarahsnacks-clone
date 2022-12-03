@@ -9,15 +9,15 @@
   flex-direction: column;
   width: 31rem;
   right: 0;
-  top: 4rem;
+  top: 110%;
   visibility: hidden;
   opacity: 0;
   transition: all 0.2s 0.2s;
   border-top: 2.5px solid $dark-green;
 
-  @include respond(screen-1024) {
-    top: 6.5rem;
-  }
+  // @include respond(screen-1024) {
+  //   top: 110%;
+  // }
 
   .list-container {
     max-height: 25rem;
@@ -58,6 +58,10 @@
       .item-details {
         width: 65%;
         padding-left: 1rem;
+        // display: flex;
+        // flex-direction: column;
+        // justify-content: left !important;
+        text-align: left;
 
         .product {
           .product-link {
