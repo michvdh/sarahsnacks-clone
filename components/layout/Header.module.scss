@@ -275,7 +275,7 @@
 
     .cart__count {
       background-color: $dark-green;
-      display: inline-block;
+      // display: inline-block;
       min-width: 2.3rem;
       min-height: 2.3rem;
       padding: 0.2rem 0.45rem;
@@ -284,6 +284,9 @@
       border-radius: 0.3rem;
       font-size: $font-size--2xs;
       position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       .total-qty {
         color: $white;

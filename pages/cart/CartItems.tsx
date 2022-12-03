@@ -7,7 +7,7 @@ import { Fragment } from "react";
 import QtyErrorModal from "../../components/ui/modal/QtyErrorModal";
 import changeToKebabCase from "../../components/helpers/changeToKebabCase";
 import Link from "next/link";
-import {CartStateModel} from "../../model/cartStateModel.model";
+import { CartStateModel } from "../../model/cartStateModel.model";
 import { CartItemsModel } from "../../model/cartItemsModel.model";
 import Image from "next/image";
 
@@ -82,8 +82,87 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
   return (
     <Fragment>
       <div className={`${classes["cart-items"]}`}>
-        {/* add a different JSX block for mobile view. This one below is for desktop / large tablet view */}
-        <ul>
+        <table className={`${classes.table}`}>
+          <thead>
+            <tr className={classes.row}>
+              <th></th>
+              <th></th>
+              <th className={`${classes.product}`}>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cartItems.map((item, index) => (
+              <tr key={index} className={classes.row}>
+                {/* Remove button */}
+                <td className={`${classes['remove-btn-container']}`}>
+                  <div className={`${classes['remove-btn']}`}>
+                    <button onClick={() => removeItemHandler(item.id)}>×</button>
+                  </div>
+                </td>
+                {/* Image */}
+                <td className={`${classes['image-container']}`}>
+                  <Image
+                    src={`/images/products${item.imagesFolder}${item.image}`}
+                    layout="fill"
+                    className={`${classes['image']}`}
+                  />
+                </td>
+                {/* Product Name and variation */}
+                <td className={`${classes.product}`}>
+                  <Link
+                    href={{
+                      pathname: `/product/${changeToKebabCase(
+                        [],
+                        item.otherName ? item.otherName : item.productName
+                      )}`,
+                      query: {
+                        id: item.id,
+                      },
+                    }}
+                  >
+                    <a className={classes["product-link"]}>
+                      {item.productName}{" "}
+                      {item.varSize !== "" && `- ${item.varSize}`}
+                    </a>
+                  </Link>
+                </td>
+                {/* Price */}
+                <td className={`price-range`}>
+                  {item.varPrice.toFixed(2)}
+                </td>
+                {/* Quantity Control */}
+                <td className={`${classes.quantity}`}>
+                  <div>
+                    <button
+                      className={`${classes['qty-control']} ${classes.btn}`}
+                      onClick={() => decrementQty(item.id)}>-</button>
+                    <input
+                      id={item.id}
+                      type="number"
+                      min={0}
+                      value={item.qty}
+                      onChange={inputChangeHandler}
+                      onBlur={inputExitHandler}
+                      className={`${classes['qty-control']} ${classes.input}`}
+                    />
+                    <button
+                      className={`${classes['qty-control']} ${classes.btn}`}
+                      onClick={() => incrementQty(item.id)}>+</button>
+                  </div>
+                </td>
+                {/* Subtotal */}
+                <td className={`price-range`}>
+                  {(item.varPrice * item.qty).toFixed(2)}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        {/* <ul>
           <li className={classes.row}>
             <div></div>
             <div></div>
@@ -103,7 +182,7 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
           {cartItems.map((item, index) => (
             <li key={index} className={classes.row}>
               <div>
-                <button onClick={() => removeItemHandler(item.id)}>x</button>
+                <button onClick={() => removeItemHandler(item.id)}>×</button>
               </div>
               <div className={`${classes['image-container']}`}>
                 <Image
@@ -146,7 +225,7 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
               <div className={`price-range`}>{(item.varPrice * item.qty).toFixed(2)}</div>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </div>
       {showQtyInputError && <QtyErrorModal />}
     </Fragment>
