@@ -79,11 +79,9 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   const varPrice = props.variations[vIndex].price.toFixed(2);
   const varSize = props.variations[vIndex].size;
 
-  
-
   useEffect(() => {
     props.selectionDetails(selectedVariation ? vIndex : 0, hasSelection);
-  }, []);
+  }, [selectedVariation]);
 
   const incrementQty = () => {
     setInputQty(inputQty + 1);

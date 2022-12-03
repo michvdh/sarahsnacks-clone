@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import classes from "./AdditionalInfo.module.scss";
 
 interface AdditionalInfoProps {
@@ -18,6 +18,7 @@ interface AdditionalInfoProps {
 }
 
 const AdditionalInfo: React.FC<AdditionalInfoProps> = (props) => {
+  
   return (
     <Fragment>
       <h2 className={`${classes['additional-info']}`}>Additional Information</h2>
@@ -27,6 +28,7 @@ const AdditionalInfo: React.FC<AdditionalInfoProps> = (props) => {
         {/* weight, dimensions -- these values are dynamic, specifcally for those with more than 1 variations */}
         {/* warning, ingredients, sizes -- these values are static */}
         <table className={classes.table}>
+
           {/* weight and dimensions */}
           {props.selectionStatus && (
             <Fragment>

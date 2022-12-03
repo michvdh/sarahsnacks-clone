@@ -43,7 +43,7 @@ const ProductCompleteDetails: React.FC<{product: ProductsDBModel}> = (props) => 
             productName={newItemProductName}
           />
         }
-        
+
         <div className={`${classes['upper__main']}`}>
           <ImageGalleryEmblaThumbnail 
             images={product.images}
