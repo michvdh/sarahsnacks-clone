@@ -34,6 +34,7 @@ const ProductCompleteDetails: React.FC<{product: ProductsDBModel}> = (props) => 
 
   return (
     <div className={`${classes['product-complete-details']}`}>
+
       {/* Upper */}
       <div className={`${classes.upper}`}>
         {addToCartConfirmation && 
@@ -42,14 +43,11 @@ const ProductCompleteDetails: React.FC<{product: ProductsDBModel}> = (props) => 
             productName={newItemProductName}
           />
         }
+        
         <div className={`${classes['upper__main']}`}>
-          {/* <ImageGallery images={product.images} /> */}
-          {/* <ImageGalleryEmbla 
-            images={product.images}
-            // navType="image" // navType = "dot" or "image"
-          /> */}
           <ImageGalleryEmblaThumbnail 
-            images={product.images} 
+            images={product.images}
+            className={''}
           />
           <MainDescription
             id={product.id}
@@ -58,14 +56,17 @@ const ProductCompleteDetails: React.FC<{product: ProductsDBModel}> = (props) => 
             nameColor={product.nameColor}
             category={product.category}
             mainDescription={product.mainDescription}
+            subDescription={product.subDescription}
             variations={product.variations}
             imagesFolder={product.images.folderName} // to be used by cart
             image={product.images.thumbnailSmall[0]} // to be used by cart
             selectionDetails={additionalInfoHandler}
             confirmation={confirmationHandler}
+            className={''}
           />
         </div>
       </div>
+
       {/* Lower */}
       <div className={`${classes.lower}`}>
         <AdditionalInfo

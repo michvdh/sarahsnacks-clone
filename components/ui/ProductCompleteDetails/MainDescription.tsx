@@ -25,6 +25,7 @@ interface MainDescriptionProps {
     };
     last: string;
   };
+  subDescription: string;
   variations: {
     size: string;
     price: number;
@@ -160,19 +161,22 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
         
         {/* Main Description */}
         {props.mainDescription.main &&
-          props.mainDescription.main.map((desc: string[], index) => (
-            <p className={`${classes['description--main']}`} key={index}>
-              {desc.map((text: string, index) => (
-                <span
-                  className={`${index === 0 ? 'bold' : ''}`}
-                  key={index}
-                >
-                  {text}{' '}
-                  {/* {mainDescLength !== (index -1) ? ' ' : ''} */}
-                </span>
-              ))}
-            </p>
-          ))}
+          <div className={`${classes['description--main']}`}>
+            {props.mainDescription.main.map((desc: string[], index) => (
+              <p key={index}>
+                {desc.map((text: string, index) => (
+                  <span
+                    className={`${index === 0 ? 'bold' : ''}`}
+                    key={index}
+                  >
+                    {text}{' '}
+                    {/* {mainDescLength !== (index -1) ? ' ' : ''} */}
+                  </span>
+                ))}
+              </p>
+            ))}
+          </div>
+        }
 
         {/* Unordered list */}
         {(props.mainDescription.unOrderedList[0][0] !== "") && (
@@ -189,6 +193,9 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
           </div>
         )}
 
+        {/* Subdescription */}
+        {props.subDescription !== "" && <span className={`${classes['sub-description']} bold`}>{props.subDescription}</span>}
+
         {/* Ordered list */}
         {props.mainDescription.orderedList.items[0] !== "" && (
           <div className={`${classes['ol--main']}`}>
@@ -203,7 +210,7 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
 
         {/* Last description */}
         {props.mainDescription.last !== "" && (
-          <span className={`${classes['last-description']} bold`}>{props.mainDescription.last.toUpperCase()}</span>
+          <span className={`${classes['last-description']} bold`}>{props.mainDescription.last}</span>
         )}
 
         {/* Variations */}

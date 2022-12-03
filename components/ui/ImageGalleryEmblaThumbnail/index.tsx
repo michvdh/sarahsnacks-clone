@@ -4,7 +4,10 @@ import { ImageGalleryEmblaModel } from "../../../model/imageGalleryEmblaModel.mo
 const ImageGalleryEmblaThumbnail: React.FC<ImageGalleryEmblaModel> = (props) => {
   return (
     <div>
-      <EmblaCarousel images={props.images} />
+      <EmblaCarousel 
+        images={props.images} 
+        className={''}
+      />
     </div>
   )
 }

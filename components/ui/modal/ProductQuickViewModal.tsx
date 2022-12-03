@@ -115,6 +115,7 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
                     nameColor={product.nameColor}
                     category={product.category}
                     mainDescription={product.mainDescription}
+                    subDescription={product.subDescription}
                     variations={product.variations}
                     imagesFolder={product.images.folderName}
                     image={product.images.thumbnailSmall[0]}

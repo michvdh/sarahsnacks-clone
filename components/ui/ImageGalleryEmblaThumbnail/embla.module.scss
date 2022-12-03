@@ -1,11 +1,28 @@
+@import "../../../styles/mixins";
+
 .embla {
   position: relative;
   background-color: #f7f7f7;
   // padding: 20px;
-  min-width: 450px;
-  max-width: 450px;
+  min-width: 100%;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
+
+  @include respond(screen-560) {
+    min-width: 75%;
+    max-width: 75%;
+  }
+
+  @include respond(screen-760) {
+    min-width: 250px;
+    max-width: 250px;
+  }
+
+  @include respond(screen-960) {
+    min-width: 450px;
+    max-width: 450px;
+  }
 }
 
 .embla__viewport {
@@ -29,6 +46,16 @@
   -khtml-user-select: none;
   -webkit-tap-highlight-color: transparent;
   margin-left: -10px;
+
+  //560 - 760
+
+  @include respond(screen-560) {
+    margin-top: 1rem;
+  }
+
+  @include respond(screen-760) {
+    margin-top: 0;
+  }
 }
 
 .embla__slide {

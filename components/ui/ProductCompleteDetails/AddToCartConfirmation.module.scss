@@ -1,6 +1,34 @@
+@import "../../../styles/variables";
+
 .banner {
-  border: 1px solid black;
+  border: 1px solid $border-gray;
   display: flex;
   padding: 1rem 2rem;
   justify-content: space-between;
+  margin-bottom: 3rem;
+
+  .confirmation-details {
+    display: flex;
+    align-items: center;
+
+    .icon-container {
+      display: flex;
+      align-items: center;
+      margin-right: 0.5rem;
+
+      svg {
+        filter: invert(58%) sepia(0%) saturate(0%) hue-rotate(330deg) brightness(88%) contrast(85%);
+      }
+    }
+
+    p {
+      color: $black-fade;
+      font-size: $font-size--xs;
+
+      span {
+        color: inherit;
+        font-size: inherit;
+      }
+    }
+  }
 }

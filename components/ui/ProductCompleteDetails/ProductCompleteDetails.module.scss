@@ -1,11 +1,20 @@
+@import "../../../styles/mixins";
+
 .product-complete-details {
   .upper {
     display: flex;
     flex-direction: column;
+    margin-bottom: 4rem;
   
     &__main {
       display: flex;
-      row-gap: 5rem;
+      flex-direction: column;
+      column-gap: 4rem;
+
+      @include respond(screen-760) {
+        flex-direction: row;
+        row-gap: 5rem;
+      }
     }
   }
 }
