@@ -10,7 +10,8 @@ import Link from "next/link";
 import { CartStateModel } from "../../model/cartStateModel.model";
 import { CartItemsModel } from "../../model/cartItemsModel.model";
 import Image from "next/image";
-
+import capitalizeFirstLetter from "../../components/helpers/capitalizeFirstLetter";
+import { faAllergies } from "@fortawesome/free-solid-svg-icons";
 
 interface cartItemsInterface {
   itemToUndoHandler: (item: CartItemsModel) => void;
@@ -97,17 +98,19 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
             {cartItems.map((item, index) => (
               <tr key={index} className={classes.row}>
                 {/* Remove button */}
-                <td className={`${classes['remove-btn-container']}`}>
-                  <div className={`${classes['remove-btn']}`}>
-                    <button onClick={() => removeItemHandler(item.id)}>×</button>
+                <td className={`${classes["remove-btn-container"]}`}>
+                  <div className={`${classes["remove-btn"]}`}>
+                    <button onClick={() => removeItemHandler(item.id)}>
+                      ×
+                    </button>
                   </div>
                 </td>
                 {/* Image */}
-                <td className={`${classes['image-container']}`}>
+                <td className={`${classes["image-container"]}`}>
                   <Image
                     src={`/images/products${item.imagesFolder}${item.image}`}
                     layout="fill"
-                    className={`${classes['image']}`}
+                    className={`${classes["image"]}`}
                   />
                 </td>
                 {/* Product Name and variation */}
@@ -124,21 +127,23 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
                     }}
                   >
                     <a className={classes["product-link"]}>
-                      {item.productName}{" "}
-                      {item.varSize !== "" && `- ${item.varSize}`}
+                      {capitalizeFirstLetter(item.productName)}{" "}
+                      {item.varSize !== "" &&
+                        `- ${capitalizeFirstLetter(item.varSize)}`}
                     </a>
                   </Link>
                 </td>
                 {/* Price */}
-                <td className={`price-range`}>
-                  {item.varPrice.toFixed(2)}
-                </td>
+                <td className={`price-range`}>{item.varPrice.toFixed(2)}</td>
                 {/* Quantity Control */}
                 <td className={`${classes.quantity}`}>
                   <div>
                     <button
-                      className={`${classes['qty-control']} ${classes.btn}`}
-                      onClick={() => decrementQty(item.id)}>-</button>
+                      className={`${classes["qty-control"]} ${classes.btn}`}
+                      onClick={() => decrementQty(item.id)}
+                    >
+                      -
+                    </button>
                     <input
                       id={item.id}
                       type="number"
@@ -146,11 +151,14 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
                       value={item.qty}
                       onChange={inputChangeHandler}
                       onBlur={inputExitHandler}
-                      className={`${classes['qty-control']} ${classes.input}`}
+                      className={`${classes["qty-control"]} ${classes.input}`}
                     />
                     <button
-                      className={`${classes['qty-control']} ${classes.btn}`}
-                      onClick={() => incrementQty(item.id)}>+</button>
+                      className={`${classes["qty-control"]} ${classes.btn}`}
+                      onClick={() => incrementQty(item.id)}
+                    >
+                      +
+                    </button>
                   </div>
                 </td>
                 {/* Subtotal */}
@@ -161,6 +169,91 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
             ))}
           </tbody>
         </table>
+      </div>
+
+      <div className={`${classes["cart-items-mobile"]}`}>
+        {cartItems.map((item, index) => (
+          <table className={`${classes.table}`} key={index}>
+            <tr>
+              <td className={`${classes["remove-btn-container"]}`} colSpan={2}>
+                <div className={`${classes["remove-btn"]}`}>
+                  <button onClick={() => removeItemHandler(item.id)}>×</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td className={`${classes['image-td']}`} colSpan={2}>
+                <div className={`${classes["image-container"]}`}>
+                  <Image
+                    src={`/images/products${item.imagesFolder}${item.image}`}
+                    layout="fill"
+                    className={`${classes["image"]}`}
+                  />
+                </div>
+              </td>
+            </tr>
+            <tr className={classes["space-between"]}>
+              <th>Product:</th>
+              <td className={`${classes.product}`}>
+                <Link
+                  href={{
+                    pathname: `/product/${changeToKebabCase(
+                      [],
+                      item.otherName ? item.otherName : item.productName
+                    )}`,
+                    query: {
+                      id: item.id,
+                    },
+                  }}
+                >
+                  <a className={classes["product-link"]}>
+                    {capitalizeFirstLetter(item.productName)}{" "}
+                    {item.varSize !== "" &&
+                      `- ${capitalizeFirstLetter(item.varSize)}`}
+                  </a>
+                </Link>
+              </td>
+            </tr>
+            <tr className={classes["space-between"]}>
+              <th>Price:</th>
+              <td className={`price-range`}>{item.varPrice.toFixed(2)}</td>
+            </tr>
+            <tr className={classes["space-between"]}>
+              <th>Quantity:</th>
+              <td className={`${classes.quantity}`}>
+                <div>
+                  <button
+                    className={`${classes["qty-control"]} ${classes.btn}`}
+                    onClick={() => decrementQty(item.id)}
+                  >
+                    -
+                  </button>
+                  <input
+                    id={item.id}
+                    type="number"
+                    min={0}
+                    value={item.qty}
+                    onChange={inputChangeHandler}
+                    onBlur={inputExitHandler}
+                    className={`${classes["qty-control"]} ${classes.input}`}
+                  />
+                  <button
+                    className={`${classes["qty-control"]} ${classes.btn}`}
+                    onClick={() => incrementQty(item.id)}
+                  >
+                    +
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr className={classes["space-between"]}>
+              <th>Subtotal:</th>
+              <td className={`price-range`}>
+                {(item.varPrice * item.qty).toFixed(2)}
+              </td>
+            </tr>
+          </table>
+        ))}
       </div>
       {showQtyInputError && <QtyErrorModal />}
     </Fragment>

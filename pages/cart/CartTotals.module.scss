@@ -6,12 +6,17 @@
   display: flex;
   justify-content: right;
   position: relative;
+  margin-top: 4rem;
   
   .totals-container {
     text-align: center;
-    width: 50rem;
+    width: 100%;
     border: 1px solid $border-gray;
     padding-bottom: 2rem;
+
+    @include respond(screen-840) {
+      width: 50rem;
+    }
 
     h2 {
       text-align: center;
