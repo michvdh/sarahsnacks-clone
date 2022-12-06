@@ -1,5 +1,5 @@
-import classes from './CartTotals.module.scss';
-import { useSelector } from 'react-redux';
+import classes from "./CartTotals.module.scss";
+import { useSelector } from "react-redux";
 
 const CartTotals = () => {
   const cartTotalPrice = useSelector(
@@ -7,29 +7,52 @@ const CartTotals = () => {
   );
 
   return (
-    <div className={classes['cart-totals']}>
-      <div className={classes['totals-table']}>
-        <ul>
-          <li className={classes.full}>Cart Totals</li>
-          <li className={classes.divided}>
-            <span>Subtotal</span>
-            <span className={`price-range`}>{cartTotalPrice.toFixed(2)}</span>
-          </li>
-          <li className={classes.divided}>
-            <span>Shipping</span>
-            <span>Calculate Shipping</span>
-          </li>
-          <li className={classes.divided}>
-            <span>Total</span>
-            <span className={`price-range`}>{cartTotalPrice.toFixed(2)}</span>
-          </li>
-          <li className={classes.full}>
-            <button>Proceed to checkout</button>
-          </li>
-        </ul>
+    <div className={classes["cart-totals"]}>
+      <div className={classes["totals-container"]}>
+        <h2>Cart Totals</h2>
+        <div className={`${classes['totals-table']}`}>
+          <table>
+            {/* <thead>
+              <tr className={`${classes.full} ${classes.header}`}>
+                <th colSpan={2}>Cart Totals</th>
+              </tr>
+            </thead> */}
+            <tr>
+              <th>
+                <span>Subtotal</span>
+              </th>
+              <td>
+                <span className={`price-range`}>{cartTotalPrice.toFixed(2)}</span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <span>Shipping</span>
+              </th>
+              <td>
+                <span>Calculate Shipping</span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <span>Total</span>
+              </th>
+              <td>
+                <span className={`price-range`}>{cartTotalPrice.toFixed(2)}</span>
+              </td>
+            </tr>
+            {/* <tr className={classes.full}>
+              <td colSpan={2}>
+                <button>Proceed to checkout</button>
+              </td>
+            </tr> */}
+          </table>
+        </div>
+
+        <button className={`btn btn--green btn--regular btn--rounded`}>Proceed to checkout</button>
       </div>
     </div>
   );
-}
+};
 
 export default CartTotals;

@@ -6,8 +6,10 @@
   color: $white;
   text-transform: uppercase;
   font-size: $font-size--2xs;
-  letter-spacing: 0.15rem;
+  // letter-spacing: 0.15rem;
+  letter-spacing: 0.5px;
   transition: all .2s;
+  font-weight: $font-weight--medium;
 
   span {
     color: $white;
@@ -90,7 +92,7 @@
     border-radius: 10rem;
   }
 
-  &--curved {
+  &--curved { // curve only on the corners
     border-radius: 0.3rem;
   }
 }

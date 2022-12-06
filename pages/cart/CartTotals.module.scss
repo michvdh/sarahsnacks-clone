@@ -1,33 +1,60 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
 .cart-totals {
   position: relative;
   display: flex;
   justify-content: right;
+  position: relative;
   
-  .totals-table {
-    width: 50%;
-    border: 1px solid black;
+  .totals-container {
+    text-align: center;
+    width: 50rem;
+    border: 1px solid $border-gray;
+    padding-bottom: 2rem;
 
-    ul {
-      display: grid;
-      padding: 0 1rem;    
+    h2 {
+      text-align: center;
+      border-color: $border-gray;
+      background-color: $light-gray;
+      padding: 1rem;
+      margin: 0;
+    }
 
-      .full {
-        display: flex;
-        justify-content: center;
-      }
+    .totals-table {
+      margin: 2rem;
 
-      .divided {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-
-        span {
-          border-bottom: 1px solid black;
-          
-          &:first-child {
-            border-right: 1px solid black;
-          }
+      table {
+        border-spacing: 0;
+        width: 100%;
+        text-align: left;
+  
+        .full {
+          text-align: center;
         }
+  
+        td, th {
+          border-bottom: 1px solid $border-gray;
+        }
+  
+
+        th {
+          border-right: 1px solid $border-gray;
+        }
+
+        th, td {
+          margin-left: 1rem;
+          margin-right: 1rem;
+          padding: 1rem;
+        }
+  
       }
+    }
+
+    button {
+      width: 60%; 
+      font-weight: $font-weight--medium;
+      
     }
   }
 }

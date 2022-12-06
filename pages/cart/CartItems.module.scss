@@ -2,6 +2,8 @@
 @import "../../styles/mixins";
 
 .cart-items {
+  margin-bottom: 3rem;
+
   .table {
     width: 100%;
     border-width: 1px 1px 0 1px;
@@ -14,12 +16,6 @@
     }
 
     .row {
-      // display: grid;
-      // grid-template-columns: 0.3fr 1fr 3fr 1fr 1.5fr 1fr;
-      // display: flex;
-      // flex-direction: row;
-      // background-color: pink;
-
       td, th {
         border-bottom: 1px solid $border-gray;
       }
