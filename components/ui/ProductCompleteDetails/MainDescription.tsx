@@ -6,7 +6,8 @@ import { Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "../../../store/cart";
 import QtyErrorModal from "../modal/QtyErrorModal";
-import {CartItemsModel} from "../../../model/cartItemsModel.model";
+import { CartItemsModel } from "../../../model/cartItemsModel.model";
+import Link from "next/link";
 
 interface MainDescriptionProps {
   id: string;
@@ -37,14 +38,14 @@ interface MainDescriptionProps {
   className: string;
 }
 
-
 const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   const dispatch = useDispatch();
 
   const [inputQty, setInputQty] = useState(1);
   const [showQtyInputError, setShowQtyInputError] = useState(false);
 
-  const cart = useSelector((state: { cart: { cartItems: CartItemsModel } }) => state.cart.cartItems
+  const cart = useSelector(
+    (state: { cart: { cartItems: CartItemsModel } }) => state.cart.cartItems
   );
 
   const quantityInputRef = useRef<HTMLInputElement>(null);
@@ -85,24 +86,24 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
 
   const incrementQty = () => {
     setInputQty(inputQty + 1);
-  }
+  };
 
   const decrementQty = () => {
     if (inputQty > 1) {
       setInputQty(inputQty - 1);
     }
-  }
+  };
 
   const inputChangeHandler = (e) => {
     setInputQty(e.target.value);
-  }
+  };
 
   const inputExitHandler = (e) => {
     if (e.target.value < 1) {
       setInputQty(1);
       setShowQtyInputError(true);
-    } 
-  }
+    }
+  };
 
   const addToCartHandler = () => {
     if (quantityInputRef && quantityInputRef.current && hasSelection) {
@@ -115,12 +116,12 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
           varSize: varSize,
           qty: quantityInputRef.current?.valueAsNumber,
           imagesFolder: props.imagesFolder,
-          image: props.image
+          image: props.image,
         })
       );
 
       props.confirmation(quantityInputRef.current.valueAsNumber, productName);
-        // values passed here will be used by AddToCartSuccessModal
+      // values passed here will be used by AddToCartSuccessModal
     }
   };
 
@@ -131,59 +132,72 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
 
   useEffect(() => {
     if (showQtyInputError) {
-      setTimeout(() => (setShowQtyInputError(false)), 800);
+      setTimeout(() => setShowQtyInputError(false), 800);
     }
   }, [showQtyInputError]);
 
   // const mainDescLength = props.mainDescription.main.length;
 
+  const dummyCategSearch = () => {
+    return;
+  };
 
   return (
     <Fragment>
-      <div className={`${classes['main-description']} ${props.className}`}>
-
+      <div className={`${classes["main-description"]} ${props.className}`}>
         {/* Price or Price Range */}
-        <span className={`${classes['price-range']}`}>{getPriceRange(props.variations)}</span>
+        <span className={`${classes["price-range"]}`}>
+          {getPriceRange(props.variations)}
+        </span>
 
         {/* Product name */}
-        <div className={classes['product-name']}>
-          <h1 className={`${classes[`${props.nameColor}`]} ${classes['first-header']}`}>
+        <div className={classes["product-name"]}>
+          <h1
+            className={`${classes[`${props.nameColor}`]} ${
+              classes["first-header"]
+            }`}
+          >
             {props.productName[0]}
           </h1>
-          {props.productName.length > 1 &&
-            <h1 className={`${classes[`${props.nameColor}`]} ${classes['second-header']}`}>
+          {props.productName.length > 1 && (
+            <h1
+              className={`${classes[`${props.nameColor}`]} ${
+                classes["second-header"]
+              }`}
+            >
               {props.productName[1]}
             </h1>
-          }
+          )}
         </div>
-        
+
         {/* Main Description */}
-        {props.mainDescription.main &&
-          <div className={`${classes['description--main']}`}>
+        {props.mainDescription.main && (
+          <div className={`${classes["description--main"]}`}>
             {props.mainDescription.main.map((desc: string[], index) => (
               <p key={index}>
                 {desc.map((text: string, index) => (
-                  <span
-                    className={`${index === 0 ? 'bold' : ''}`}
-                    key={index}
-                  >
-                    {text}{' '}
-                    {/* {mainDescLength !== (index -1) ? ' ' : ''} */}
+                  <span className={`${index === 0 ? "bold" : ""}`} key={index}>
+                    {text} {/* {mainDescLength !== (index -1) ? ' ' : ''} */}
                   </span>
                 ))}
               </p>
             ))}
           </div>
-        }
+        )}
 
         {/* Unordered list */}
-        {(props.mainDescription.unOrderedList[0][0] !== "") && (
-          <div className={classes['ul--main']}>
+        {props.mainDescription.unOrderedList[0][0] !== "" && (
+          <div className={classes["ul--main"]}>
             <ul>
               {props.mainDescription.unOrderedList.map((desc, index) => (
                 <li key={index}>
                   {desc.map((text: string, index) => (
-                    <span key={index} className={`${index === 0 ? 'bold' : ''}`}>{text}</span>
+                    <span
+                      key={index}
+                      className={`${index === 0 ? "bold" : ""}`}
+                    >
+                      {text}
+                    </span>
                   ))}
                 </li>
               ))}
@@ -192,11 +206,15 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
         )}
 
         {/* Subdescription */}
-        {props.subDescription !== "" && <span className={`${classes['sub-description']} bold`}>{props.subDescription}</span>}
+        {props.subDescription !== "" && (
+          <span className={`${classes["sub-description"]} bold`}>
+            {props.subDescription}
+          </span>
+        )}
 
         {/* Ordered list */}
         {props.mainDescription.orderedList.items[0] !== "" && (
-          <div className={`${classes['ol--main']}`}>
+          <div className={`${classes["ol--main"]}`}>
             <h3>{props.mainDescription.orderedList.title}</h3>
             <ol>
               {props.mainDescription.orderedList.items.map((item, index) => (
@@ -208,7 +226,9 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
 
         {/* Last description */}
         {props.mainDescription.last !== "" && (
-          <span className={`${classes['last-description']} bold`}>{props.mainDescription.last}</span>
+          <span className={`${classes["last-description"]} bold`}>
+            {props.mainDescription.last}
+          </span>
         )}
 
         {/* Variations */}
@@ -240,24 +260,31 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
                   ))}
                 </select>
               </form>
-              {selectedVariation && <button className={classes.clear} onClick={clearHandler}>
-                <div><span className={classes.icon}>×</span></div>
-                <span className={classes.text}>Clear</span>
-              </button>}
+              {selectedVariation && (
+                <button className={classes.clear} onClick={clearHandler}>
+                  <div>
+                    <span className={classes.icon}>×</span>
+                  </div>
+                  <span className={classes.text}>Clear</span>
+                </button>
+              )}
             </div>
           </div>
         )}
 
-        <div className={classes['var-price']}>
+        <div className={classes["var-price"]}>
           {selectedVariation && <span>${varPrice}</span>}
         </div>
 
         {/* Add to cart options */}
-        <div className={`${classes['qty-control-container']}`}>
+        <div className={`${classes["qty-control-container"]}`}>
           <div>
-            <button 
-              className={`${classes['qty-control']} ${classes.btn}`} 
-              onClick={decrementQty}>-</button>
+            <button
+              className={`${classes["qty-control"]} ${classes.btn}`}
+              onClick={decrementQty}
+            >
+              -
+            </button>
             <input
               type="number"
               min={0}
@@ -265,30 +292,56 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
               onChange={inputChangeHandler}
               onBlur={inputExitHandler}
               ref={quantityInputRef}
-              className={`${classes['qty-control']} ${classes.input} ${showQtyInputError && classes['input--error']}`}
+              className={`${classes["qty-control"]} ${classes.input} ${
+                showQtyInputError && classes["input--error"]
+              }`}
             />
-            <button 
-              className={`${classes['qty-control']} ${classes.btn}`} 
-              onClick={incrementQty}>+</button>
+            <button
+              className={`${classes["qty-control"]} ${classes.btn}`}
+              onClick={incrementQty}
+            >
+              +
+            </button>
           </div>
 
-          <button className={`${hasSelection ? '' : `btn--disabled`} btn btn--green btn--regular btn--rounded`} onClick={addToCartHandler}>Add to Cart</button>
+          <button
+            className={`${
+              hasSelection ? "" : `btn--disabled`
+            } btn btn--green btn--regular btn--rounded`}
+            onClick={addToCartHandler}
+          >
+            Add to Cart
+          </button>
         </div>
-        
+
         {/* Category */}
         <div className={`${classes.category}`}>
           <span className={`bold`}>Category: </span>
           {props.category.map((category, index) => (
-            <a
-              href={`/product-category/${category
-                .replace(" ", "-")
-                .toLowerCase()}`}
+            <Link
+              href={{
+                pathname: `/shop`,
+                query: {
+                  category: category,
+                  page: 1,
+                  sort: "default",
+                  display: "12",
+                  style: "min-details",
+                },
+              }}
+              passHref
+              shallow
               key={index}
-              className={`category ${classes.category}`}
             >
-              {category}
-              {index !== props.category.length - 1 ? ", " : ""}
-            </a>
+              <a
+                key={index}
+                onClick={dummyCategSearch}
+                className={`category ${classes.category}`}
+              >
+                {category}
+                {index !== props.category.length - 1 ? ", " : ""}
+              </a>
+            </Link>
           ))}
         </div>
       </div>
