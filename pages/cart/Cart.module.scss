@@ -14,6 +14,11 @@
   display: flex;
   flex-direction: column;
   row-gap: 3rem;
+  
+  @include respond(screen-1024) {
+    width: 95%;
+    margin: 0 auto;
+  }
 
   .box {
     border: 1px solid $faded-purple;
@@ -41,6 +46,7 @@
       margin-left: 0.5rem;
       display: flex;
       align-items: center;
+      text-transform: uppercase;
     }
   }
 
