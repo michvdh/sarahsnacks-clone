@@ -335,16 +335,12 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
 
   hasResults && applyPagination();
 
-  console.log(isReady);
-
   // useEffect is designed to work for links that were copied to a new tab or session
   useEffect(() => {
 
     if (!isReady) return;
 
     !resultsReady && setResultsReady(true);
-
-    console.log(router.query.category);
 
     if (router.query.category) {
       shallowRouting(router.query.category, "", router.query.page, router.query.sort, router.query.display, router.query.style);

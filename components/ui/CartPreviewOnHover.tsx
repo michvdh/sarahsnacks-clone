@@ -83,8 +83,10 @@ const CartPreviewOnHover: React.FC<CartPreviewInterface> = (props) => {
 
       {/* Buttons */}
       <div className={classes['buttons-container']}>
-        <button className={`btn btn--gray`}>View Cart</button>
-        <button className={`btn btn--green`}>Checkout</button>
+        <Link href={"/cart"} passHref>
+          <a className={`btn btn--gray`}>View Cart</a>
+        </Link>
+        <a className={`btn btn--green`}>Checkout</a>
       </div>
     </div>
   )
