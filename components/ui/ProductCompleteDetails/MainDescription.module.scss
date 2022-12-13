@@ -232,9 +232,9 @@
     span {
       color: $dark-green;
       border-top: 1px solid $border-gray;
-    padding-top: 2rem;
-    display: inline-block;
-    width: 100%;
+      padding-top: 2rem;
+      display: inline-block;
+      width: 100%;
     }
   }
 
@@ -270,6 +270,10 @@
     .input {
       outline: none;
       font-size: $font-size--2xs;
+    }
+
+    .input--error {
+      border: 0.5px solid $red !important;
     }
 
     .btn {

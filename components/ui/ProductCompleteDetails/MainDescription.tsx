@@ -131,7 +131,7 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
 
   useEffect(() => {
     if (showQtyInputError) {
-      setTimeout(() => (setShowQtyInputError(false)), 3000);
+      setTimeout(() => (setShowQtyInputError(false)), 800);
     }
   }, [showQtyInputError]);
 
@@ -265,7 +265,7 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
               onChange={inputChangeHandler}
               onBlur={inputExitHandler}
               ref={quantityInputRef}
-              className={`${classes['qty-control']} ${classes.input}`}
+              className={`${classes['qty-control']} ${classes.input} ${showQtyInputError && classes['input--error']}`}
             />
             <button 
               className={`${classes['qty-control']} ${classes.btn}`} 
@@ -292,7 +292,9 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
           ))}
         </div>
       </div>
-      {showQtyInputError && <QtyErrorModal />}
+
+      {/* Quantity Error */}
+      {/* {showQtyInputError && <QtyErrorModal />} */}
     </Fragment>
   );
 };
