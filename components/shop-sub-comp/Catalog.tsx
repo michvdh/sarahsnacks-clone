@@ -80,16 +80,16 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     setCurrentPage(clickedPage);
 
     if (categorySearch !== "" || undefined) {
-      shallowRouting(categorySearch, "", clickedPage, productSort, displayCount);
+      shallowRouting(categorySearch, "", clickedPage, productSort, displayCount, "");
       return;
     } 
     
     if (keywordSearch !== "" || undefined) {
-      shallowRouting("", keywordSearch, clickedPage, productSort, displayCount);
+      shallowRouting("", keywordSearch, clickedPage, productSort, displayCount, "");
       return;
     }
 
-    shallowRouting("", "", clickedPage, productSort, displayCount);
+    shallowRouting("", "", clickedPage, productSort, displayCount, "");
     return;
   };
 
@@ -335,12 +335,16 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
 
   hasResults && applyPagination();
 
+  console.log(isReady);
 
   // useEffect is designed to work for links that were copied to a new tab or session
   useEffect(() => {
+
     if (!isReady) return;
 
     !resultsReady && setResultsReady(true);
+
+    console.log(router.query.category);
 
     if (router.query.category) {
       shallowRouting(router.query.category, "", router.query.page, router.query.sort, router.query.display, router.query.style);

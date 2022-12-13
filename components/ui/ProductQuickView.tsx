@@ -12,6 +12,7 @@ interface QuickViewProps {
   productNameDashed: string;
   imagesFolder: string;
   images: string[];
+  onCategorySearch: (category: string) => void;
 }
 
 const ProductQuickView: React.FC<QuickViewProps> = (props) => {
@@ -103,6 +104,7 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
           id={props.id}
           onClick={overlayHandler}
           fetching={fetchStateHandler}
+          onCategorySearch={props.onCategorySearch}
           // fetched={fetched}
         />
       )}

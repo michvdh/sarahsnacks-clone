@@ -81,6 +81,7 @@ const ProductMinDetails: React.FC<ProductMinModel> = (props) => {
           productNameDashed={productNameDashed}
           imagesFolder={props.imagesFolder}
           images={props.images}
+          onCategorySearch={props.onCategorySearch}
         />
 
         <figcaption className={`${emblaClass['embla__slide__caption']}`}>

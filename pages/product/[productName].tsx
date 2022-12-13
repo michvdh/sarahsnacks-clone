@@ -30,7 +30,6 @@ const Product = () => {
   const allData = async() => {
     const response = await fetch('https://sarahsnacks-clone-default-rtdb.firebaseio.com/productsDB.json');
     const data = await response.json();
-    console.log(response);
     setProductsDB(data);
   }
 
@@ -40,7 +39,6 @@ const Product = () => {
 
   // get the index of the product
   const pIndex = productsDB.findIndex((p) => (p.id === queriedProductID)); 
-  console.log(pIndex);
 
   // get the specific product and store in a temporary variable
   const tempProd = productsDB[pIndex];

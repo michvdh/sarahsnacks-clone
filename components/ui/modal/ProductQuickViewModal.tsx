@@ -24,6 +24,7 @@ interface ProductQuickViewModalInterface {
   id: string;
   onClick: () => void;
   fetching: () => void;
+  onCategorySearch: (category: string) => void;
   // fetched: boolean;
   // allProducts: ProductsDBModel[];
 }
@@ -122,6 +123,8 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
                     selectionDetails={additionalInfoHandler}
                     confirmation={confirmationHandler}
                     className={classes['main-description']}
+                    onClick={closeHandler}
+                    onCategorySearch={props.onCategorySearch}
                   />
                   <button className={classes['btn--close']} onClick={closeHandler}>×</button>
                 </div>

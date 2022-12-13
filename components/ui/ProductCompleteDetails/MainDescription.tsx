@@ -36,6 +36,8 @@ interface MainDescriptionProps {
   selectionDetails: (vIndex: number, hasSelection: boolean) => void;
   confirmation: (quantity: number, productName: string) => void;
   className: string;
+  onClick: (e) => void;
+  onCategorySearch: (category: string) => void;
 }
 
 const MainDescription: React.FC<MainDescriptionProps> = (props) => {
@@ -335,7 +337,11 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
             >
               <a
                 key={index}
-                onClick={dummyCategSearch}
+                onClick={(e) => {
+                  props.onCategorySearch(category);
+                  props.onClick(e);
+                }}
+                // onClick={props.onClick}
                 className={`category ${classes.category}`}
               >
                 {category}
