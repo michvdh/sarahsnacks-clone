@@ -8,6 +8,7 @@ import { useState } from "react";
 import { cartActions } from "../../store/cart";
 import { CartItemsModel } from "../../model/cartItemsModel.model";
 import Link from "next/link";
+import capitalizeFirstLetter from "../../components/helpers/capitalizeFirstLetter";
 // import {modalActions} from '../../store/modal';
 
 const Cart = () => {
@@ -76,7 +77,7 @@ const Cart = () => {
                   />
                 </svg>
               </span>
-              <span className={classes.text}>"{itemToUndo.productName}" removed</span>
+              <span className={classes.text}>"{capitalizeFirstLetter(itemToUndo.productName)}" removed</span>
             </div>
             <button className={`btn btn--green btn--thin`} onClick={undoHandler}>{`Undo?`}</button>
           </div>
