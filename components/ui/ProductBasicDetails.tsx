@@ -41,8 +41,8 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
     dispatch(
       cartActions.addItem({
         id: props.id,
-        productName: `${props.productName[0]} ${
-          props.productName[1] && props.productName[1]
+        productName: `${props.productName[0]}${
+          props.productName[1] && ` ${props.productName[1]}`
         }`,
         otherName: props.otherName,
         varPrice: props.variations[0].price,

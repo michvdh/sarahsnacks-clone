@@ -44,6 +44,8 @@ const cartSlice = createSlice({
 
     addItem(state, action) {
       const newItem = action.payload;
+      console.log("new item");
+      console.log(newItem);
       const now = (new Date()).getTime();
 
       const existingItem = state.cartItems.find(

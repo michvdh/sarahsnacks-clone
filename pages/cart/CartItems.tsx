@@ -11,7 +11,6 @@ import { CartStateModel } from "../../model/cartStateModel.model";
 import { CartItemsModel } from "../../model/cartItemsModel.model";
 import Image from "next/image";
 import capitalizeFirstLetter from "../../components/helpers/capitalizeFirstLetter";
-import { faAllergies } from "@fortawesome/free-solid-svg-icons";
 
 interface cartItemsInterface {
   itemToUndoHandler: (item: CartItemsModel) => void;
@@ -81,6 +80,8 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
 
     dispatch(cartActions.removeItem({ inputId: id }));
   };
+
+  console.log(cartItems);
 
   return (
     <Fragment>
