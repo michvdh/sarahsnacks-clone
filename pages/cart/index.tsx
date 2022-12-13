@@ -99,7 +99,7 @@ const Cart = () => {
             </div>
             <Link href="/shop">
               <a className="btn btn--green btn--rounded">
-
+                <span className={classes.container}>
                   <span className={`${classes.icon}`}>
                     <svg
                       // width="24"
@@ -115,7 +115,7 @@ const Cart = () => {
                     </svg>
                   </span>
                   <span className={classes.label}>Return to shop</span>
-
+                </span>
               </a>
             </Link>
           </div>

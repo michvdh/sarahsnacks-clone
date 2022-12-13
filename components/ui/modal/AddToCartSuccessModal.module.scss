@@ -1,5 +1,5 @@
 @import "../../../styles/variables";
-
+@import "../../../styles/mixins";
 
 .success-backdrop {
   display: flex;
@@ -21,15 +21,16 @@
   // top: 50%;
   // left: 50%;
   // transform: translate(-50%, -50%);
-  width: 60rem;
-  height: 60rem;
+  
   z-index: 999;
-  border-radius: 60rem;
+  padding: 3rem;
+  border-radius: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   overflow: hidden;
+  width: 95%;
 
   animation-duration: 0.4s;
   animation-iteration-count: 1;
@@ -39,17 +40,42 @@
   -o-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 
+  @include respond(screen-430) {
+    width: initial;
+  }
+
+  @include respond(screen-800) {
+    border-radius: 60rem;
+    width: 60rem;
+    height: 60rem;
+  }
+
   .check-icon {
     margin-bottom: 3rem;
 
     .icon-container {
-      width: 11rem;
-      height: 11rem;
+      width: 8rem;
+      height: 8rem;
       background-color: $dark-green;
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 11rem;
+
+      @include respond(screen-800) {
+        width: 11rem;
+        height: 11rem;
+      }
+
+      svg {
+        width: 7rem;
+        height: 7rem;
+
+        @include respond(screen-800) {
+          width: initial;
+          height: initial;
+        }
+      }
 
       // animation flow
       // 1. border forming clockwise, start at 3'oclock
@@ -85,6 +111,12 @@
   .btn-container {
     display: flex;
     column-gap: 2rem;
+    flex-direction: column;
+    row-gap: 1rem;
+
+    @include respond(screen-800) {
+      flex-direction: row;
+    }
 
     button {
       font-size: $font-size--xs;
