@@ -1,34 +1,51 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-.brands { grid-area: brands; }
-.contacts-details { grid-area: contacts }
-.nav { grid-area: navigation; }
-.women-owned { grid-area: logo; }
-.copyright { grid-area: copyright; }
+.brands {
+  grid-area: brands;
+}
+.contacts-details {
+  grid-area: contacts;
+}
+.nav {
+  grid-area: navigation;
+}
+.women-owned {
+  grid-area: logo;
+}
+.copyright {
+  grid-area: copyright;
+}
 
 .footer {
   .footer--upper {
-    width: 95%;
+    width: 90%;
     margin: 2rem auto;
+    display: grid;
+    grid-template-areas: "brands" "contacts" "navigation" "logo";
+    row-gap: 3.5rem;
 
-    @include respond(screen-1024) {
-      position: relative;
-      display: grid;
-      // width: 85%;
-      justify-content: space-between;
-      grid-template-areas: 
-      'brands contacts navigation logo';
+    @include respond(screen-880) {
+      // position: relative;
+      grid-template-areas:
+        "brands brands brands"
+        "contacts navigation logo";
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @include respond(screen-1150) {
+      grid-template-areas: "brands contacts navigation logo";
+      grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 
     @include respond(screen-1250) {
-      width: 85%;
+      width: 80%;
     }
 
     @include respond(screen-1366) {
-      width: 1250px;
+      width: 1200px;
     }
-    
+
     .brands {
       .media {
         margin-left: 1rem;
@@ -37,10 +54,32 @@
           display: flex;
           flex-direction: row;
           column-gap: 1rem;
+
+          a {
+            svg {
+              transition: all 0.2s;
+              transform: scale(1.05);
+
+              path {
+                fill: currentColor;
+                color: $light-brown;
+                transition: inherit;
+              }
+            }
+
+            &:hover {
+              svg {
+                path {
+                  fill: currentColor;
+                  color: $dark-brown;
+                }
+              }
+            }
+          }
         }
       }
     }
-  
+
     .contact-details {
       display: flex;
       align-items: center;
@@ -48,48 +87,68 @@
         display: flex;
         flex-direction: column;
         row-gap: 1rem;
-  
+
         li {
           display: flex;
           flex-direction: row;
           column-gap: 1.2rem;
-  
+
           div {
             width: 1rem;
           }
         }
       }
     }
-  
+
     .nav {
       width: 100%;
       display: flex;
       flex-direction: row;
       align-items: center;
       column-gap: 25%;
-      border-left: 1px solid $dark-gray;
-      border-right: 1px solid $dark-gray;
-      padding: 0 2rem;
-      
-  
+      padding: 3.5rem 0;
+      border-width: 1px 0;
+      border-style: solid;
+      border-color: $dark-gray;
+
       ul {
         display: flex;
         flex-direction: column;
-        row-gap: 1rem;
+        row-gap: 1.5rem;
+
+        a {
+          transition: all 0.2s;
+          &:hover {
+            color: $dark-green;
+          }
+        }
+      }
+
+      @include respond(screen-880) {
+        justify-content: center;
+        column-gap: 25%;
+        padding: 0 2rem;
+        border-width: 0 1px;
       }
     }
-  
+
     .women-owned {
       position: relative;
       width: 25rem;
       height: 10rem;
-      
+      left: -16px;
+
+      @include respond(screen-880) {
+        justify-self: end;
+        left: 0;
+      }
+
       .image {
         object-fit: contain;
       }
     }
   }
-  
+
   .copyright {
     display: flex;
     flex-direction: column;
