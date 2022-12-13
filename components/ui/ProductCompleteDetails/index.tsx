@@ -63,7 +63,8 @@ const ProductCompleteDetails: React.FC<{product: ProductsDBModel}> = (props) => 
             selectionDetails={additionalInfoHandler}
             confirmation={confirmationHandler}
             className={''}
-            onClick={(e) => {}}
+            onCategorySearch={(category) => {}} // dummy value
+            onClick={(e) => {}} // dummy value
           />
         </div>
       </div>
