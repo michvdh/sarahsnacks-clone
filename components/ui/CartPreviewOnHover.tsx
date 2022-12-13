@@ -22,11 +22,14 @@ const CartPreviewOnHover: React.FC<CartPreviewInterface> = (props) => {
     dispatch(cartActions.removeItem({ inputId: id }));
   };
 
+  const cartItemsLength = cart.cartItems.length;
+  console.log(cartItemsLength);
+
   return (
     <div
       className={`${classes["cart-preview"]} ${props.className} shadow`}
     >
-      <div>
+      <div className={`${classes['preview-container']} ${cartItemsLength < 1 && classes.hide}`}>
         <div>
           <ul className={classes["list-container"]}>
             {cart.cartItems.map((item, index) => (
@@ -84,6 +87,10 @@ const CartPreviewOnHover: React.FC<CartPreviewInterface> = (props) => {
           </Link>
           <a className={`btn btn--green`}>Checkout</a>
         </div>
+      </div>
+
+      <div className={`${classes['empty-container']} ${cartItemsLength > 0 && classes.hide}`}>
+        <span>No products in the cart.</span>
       </div>
     </div>
   )

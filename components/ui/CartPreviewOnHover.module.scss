@@ -19,6 +19,10 @@
   //   top: 110%;
   // }
 
+  .preview-container {
+    // display: none;
+  }
+
   .list-container {
     max-height: 25rem;
     overflow: auto;
@@ -146,4 +150,17 @@
   font-size: $font-size--xs;
   font-weight: $font-weight--regular;
   text-transform: uppercase;
+}
+
+.empty-container {
+  padding: 2rem;
+
+  span {
+    text-transform: initial;
+    font-weight: $font-weight--regular;
+  }
+}
+
+.hide {
+  display: none !important;
 }
