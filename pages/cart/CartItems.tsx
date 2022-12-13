@@ -81,8 +81,6 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
     dispatch(cartActions.removeItem({ inputId: id }));
   };
 
-  console.log(cartItems);
-
   return (
     <Fragment>
       <div className={`${classes["cart-items"]}`}>

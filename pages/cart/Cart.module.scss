@@ -3,11 +3,44 @@
 
 .undo {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  row-gap: 1rem;
   align-items: center;
-  border: 1px solid black;
-  padding: 0.5rem 1rem;
+  border: 1px solid $border-gray;
+  padding: 1rem;
+  margin-bottom: 3rem;
+
+  @include respond(screen-400) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  @include respond(screen-1024) {
+    width: 95%;
+    margin: 0 auto 3rem auto;
+  }
+
+  .description {
+    display: flex;
+    align-items: center;
+
+    .icon {
+      display: flex;
+      align-items: center;
+      svg {
+        path { color: $darker-gray; }
+      }
+    }
+
+    .text {
+      font-size: $font-size--xs;
+      color: $darker-gray;
+    }
+  }
+
+  button {
+    font-weight: $font-weight--medium;
+  }
 }
 
 .empty-cart {
