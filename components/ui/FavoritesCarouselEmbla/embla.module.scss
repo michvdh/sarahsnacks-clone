@@ -6,6 +6,7 @@
 */
 
 @import "../../../styles/mixins"; 
+@import "../../../styles/variables"; 
 
 .embla {
   position: relative;
@@ -177,3 +178,4 @@
 .embla__button--next {
   right: -1rem;
 }
+
