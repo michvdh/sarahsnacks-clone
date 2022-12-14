@@ -101,7 +101,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     if (categorySearch) {
       shallowRouting(categorySearch, "", currentPage, productSort, itemCount, displayType);
       return;
-    } 
+    }
     
     if (keywordSearch) {
       shallowRouting("", keywordSearch, currentPage, productSort, itemCount, displayType);
@@ -263,12 +263,15 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     const tempSourceList = sortChanged
       ? sortedProducts : (filteredProducts.length === 0 ? products : filteredProducts);
 
-    if (displayCount === "All") {
+    
+    if (displayCount === "ALL") {
       totalPages = 1;
       pageControlledProductList = tempSourceList;
+
+      return;
     }
 
-    if (tempSourceList.length < +displayCount) {
+    if (displayCount !== "ALL" && tempSourceList.length < +displayCount) {
       totalPages = 1;
       pageControlledProductList = [];
 
@@ -282,7 +285,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
       return;
     }
 
-    if (tempSourceList.length > +displayCount) {
+    if (displayCount !== "ALL" && tempSourceList.length > +displayCount) {
       const batch = +displayCount * currentPage; // ex. 12 * 1 = 12 .. 24 .. 36
       totalPages = Math.ceil(tempSourceList.length / +displayCount); // 34/24 .. 34/12
       const firstItemInBatch = batch - +displayCount; // starting value is 0 .. 12.. 24

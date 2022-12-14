@@ -23,7 +23,6 @@ const CartPreviewOnHover: React.FC<CartPreviewInterface> = (props) => {
   };
 
   const cartItemsLength = cart.cartItems.length;
-  console.log(cartItemsLength);
 
   return (
     <div
