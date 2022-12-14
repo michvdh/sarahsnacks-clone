@@ -122,7 +122,7 @@ const ViewControls: React.FC<ViewControlsProps> = (props) => {
               onClick={(e) => {
                 paginationHandler(e.target.innerText);
               }}
-              className={props.displayCountInput === "All" ? classes.selected : ''}
+              className={props.displayCountInput === "ALL" ? classes.selected : ''}
             >
               All
             </span>

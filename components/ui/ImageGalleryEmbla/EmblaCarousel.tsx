@@ -104,7 +104,7 @@ const EmblaCarousel: React.FC<ImageGalleryEmblaModel> = (props) => {
             selected={index === selectedIndex}
             onClick={() => scrollTo(index)}
             // navType={props.navType}
-            imgSrc={`${basePath}${slides[index]}`}
+            // imgSrc={`${basePath}${slides[index]}`}
           />
         ))}
       </div>

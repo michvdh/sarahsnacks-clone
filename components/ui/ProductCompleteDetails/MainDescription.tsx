@@ -342,7 +342,7 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
                   props.onClick(e);
                 }}
                 // onClick={props.onClick}
-                className={`category ${classes.category}`}
+                className={`category ${classes['category-link']}`}
               >
                 {category}
                 {index !== props.category.length - 1 ? ", " : ""}
