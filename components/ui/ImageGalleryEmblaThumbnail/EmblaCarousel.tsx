@@ -15,7 +15,6 @@ const EmblaCarousel: React.FC<ImageGalleryEmblaModel> = (props) => {
   const imagesFolder = props.images.folderName;
   const basePath = `/images/products${imagesFolder}`;
 
-  console.log(props.images);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [mainViewportRef, embla] = useEmblaCarousel({ skipSnaps: false });
@@ -28,7 +27,6 @@ const EmblaCarousel: React.FC<ImageGalleryEmblaModel> = (props) => {
 
   const onThumbClick = useCallback(
     (index) => {
-      console.log(index);
       if (!embla || !emblaThumbs) return;
       if (emblaThumbs.clickAllowed()) embla.scrollTo(index);
     },

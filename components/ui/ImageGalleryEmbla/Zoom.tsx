@@ -19,7 +19,6 @@ const Zoom: React.FC<ZoomInterface> = (props) => {
   const [backgroundPosition, setBackgroundPosition] = useState("0% 0%");
 
   const handleMouseMove = (e) => {
-    console.log(e);
     const { left, top, width, height } = e.target.getBoundingClientRect();
     const x = ((e.pageX - left) / width) * 100;
     const y = ((e.pageY - top) / height) * 100;

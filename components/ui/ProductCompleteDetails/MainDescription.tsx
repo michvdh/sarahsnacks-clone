@@ -66,6 +66,7 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
 
   // this will only be triggered if variations > 1
   const variationsHandler = (variation: string) => {
+
     if (variation == "Choose an option") {
       setSelectedVariation("");
       setHasSelection(false);
@@ -108,6 +109,7 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   };
 
   const addToCartHandler = () => {
+
     if (quantityInputRef && quantityInputRef.current && hasSelection) {
       dispatch(
         cartActions.addItem({
@@ -147,10 +149,12 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   return (
     <Fragment>
       <div className={`${classes["main-description"]} ${props.className}`}>
+
         {/* Price or Price Range */}
         <span className={`${classes["price-range"]}`}>
           {getPriceRange(props.variations)}
         </span>
+
         {/* Product name */}
         <div className={classes["product-name"]}>
           <h1
@@ -277,7 +281,7 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
           {selectedVariation && <span>${varPrice}</span>}
         </div>
 
-        {/* Add to cart options */}
+        {/* Qty adjustment */}
         <div className={`${classes["qty-control-container"]}`}>
           <div>
             <button
@@ -305,6 +309,7 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
             </button>
           </div>
 
+          {/* Add To Cart Button */}
           <button
             className={`${
               hasSelection ? "" : `btn--disabled`
