@@ -7,11 +7,15 @@ import { ImageGalleryEmblaModel } from "../../../model/imageGalleryEmblaModel.mo
 import Image from "next/image";
 import classes from "./embla.module.scss";
 import { Fragment } from "react";
+import Zoom from "../ImageGalleryEmbla/Zoom";
 
 const EmblaCarousel: React.FC<ImageGalleryEmblaModel> = (props) => {
   const slides = props.images.thumbnailLarge;
+  const slidesHD = props.images.hd
   const imagesFolder = props.images.folderName;
   const basePath = `/images/products${imagesFolder}`;
+
+  console.log(props.images);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [mainViewportRef, embla] = useEmblaCarousel({ skipSnaps: false });
@@ -19,7 +23,7 @@ const EmblaCarousel: React.FC<ImageGalleryEmblaModel> = (props) => {
   const [thumbViewportRef, emblaThumbs] = useEmblaCarousel({
     containScroll: "keepSnaps",
     selectedClass: "",
-    dragFree: true
+    dragFree: true,
   });
 
   const onThumbClick = useCallback(
@@ -51,13 +55,29 @@ const EmblaCarousel: React.FC<ImageGalleryEmblaModel> = (props) => {
             {slides.map((slide, index) => (
               <div className={`${classes[`embla__slide`]}`} key={index}>
                 <div className={`${classes[`embla__slide__inner`]}`}>
-                    <div className={`${classes["embla__slide__img-container"]}`}>
-                      <Image
+                  <div>
+                  {/* <div className={`${classes["embla__slide__img-container"]}`}> */}
+                    {/* <Image
                         className={`${classes[`embla__slide__img`]}`}
                         src={`${basePath}${slide}`}
                         layout='fill'
-                      />
-                    </div>
+                      /> */}
+                    {/* <Zoom 
+                        className={`${classes[`embla__slide__img`]}`}
+                        src={`${basePath}${slide}`}
+                      /> */}
+                    <Zoom
+                      // containerClass={`${classes["embla__slide__img-container"]}`}
+                      imageClass={`${classes[`embla__slide__img`]}`}
+                      src={`${basePath}${slide}`}
+                      srcHD={`${basePath}${slidesHD[index]}`}
+                    />
+                  </div>
+                  {/* <Zoom
+                    containerClass={`${classes["embla__slide__img-container"]}`}
+                    imageClass={`${classes[`embla__slide__img`]}`}
+                    src={`${basePath}${slide}`}
+                  /> */}
                 </div>
               </div>
             ))}
@@ -65,9 +85,11 @@ const EmblaCarousel: React.FC<ImageGalleryEmblaModel> = (props) => {
         </div>
       </div>
 
-      <div className={`${classes['embla embla--thumb']}`}>
-        <div className={`${classes['embla__viewport']}`} ref={thumbViewportRef}>
-          <div className={`${classes['embla__container']} ${classes['embla__container--thumb']}`}>
+      <div className={`${classes["embla embla--thumb"]}`}>
+        <div className={`${classes["embla__viewport"]}`} ref={thumbViewportRef}>
+          <div
+            className={`${classes["embla__container"]} ${classes["embla__container--thumb"]}`}
+          >
             {slides.map((slide, index) => (
               <Fragment>
                 <Thumb

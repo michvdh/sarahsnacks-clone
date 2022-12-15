@@ -151,7 +151,6 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
         <span className={`${classes["price-range"]}`}>
           {getPriceRange(props.variations)}
         </span>
-
         {/* Product name */}
         <div className={classes["product-name"]}>
           <h1

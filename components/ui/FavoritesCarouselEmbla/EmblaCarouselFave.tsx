@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { PrevButton, NextButton } from "../buttons/EmblaCarouselButtons";
 import useEmblaCarousel from "embla-carousel-react";
 import ProductMinDetails from "../ProductMinDetails";
 import productsDB from "../../../model/productsDB";
 import emblaClass from "./embla.module.scss";
 import Autoplay from "embla-carousel-autoplay";
-import { useRef } from "react";
 
 interface ProductsProps {
   className: string;
