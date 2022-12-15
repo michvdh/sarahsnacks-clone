@@ -226,13 +226,13 @@
   }
 
   .var-price {
-    margin-top: 2.5rem;
+    // margin-top: 2.5rem;
     position: relative;
     
     span {
       color: $dark-green;
-      border-top: 1px solid $border-gray;
-      padding-top: 2rem;
+      // border-top: 1px solid $border-gray;
+      // padding-top: 2rem;
       display: inline-block;
       width: 100%;
     }
@@ -247,7 +247,7 @@
     padding: 2rem 0 0 0;
 
     @include respond(screen-380) {
-      flex-direction: row;
+      // flex-direction: column;
       column-gap: 2rem;
     }
 
@@ -255,6 +255,17 @@
       height: 3.4rem;
       position: relative;
       display: flex;
+    }
+
+    .controls {
+      display: flex;
+      row-gap: 1rem;
+      flex-direction: column;
+
+      @include respond(screen-380) {
+        flex-direction: row;
+        column-gap: 2rem;
+      }
     }
 
     .qty-control {
@@ -301,4 +312,8 @@
       }
     }
   }
+}
+
+.hide {
+  display: none !important;
 }

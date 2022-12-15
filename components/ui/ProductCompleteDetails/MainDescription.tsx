@@ -277,47 +277,49 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
           </div>
         )}
 
-        <div className={classes["var-price"]}>
-          {selectedVariation && <span>${varPrice}</span>}
-        </div>
 
         {/* Qty adjustment */}
         <div className={`${classes["qty-control-container"]}`}>
-          <div>
-            <button
-              className={`${classes["qty-control"]} ${classes.btn}`}
-              onClick={decrementQty}
-            >
-              -
-            </button>
-            <input
-              type="number"
-              min={0}
-              value={inputQty}
-              onChange={inputChangeHandler}
-              onBlur={inputExitHandler}
-              ref={quantityInputRef}
-              className={`${classes["qty-control"]} ${classes.input} ${
-                showQtyInputError && classes["input--error"]
-              }`}
-            />
-            <button
-              className={`${classes["qty-control"]} ${classes.btn}`}
-              onClick={incrementQty}
-            >
-              +
-            </button>
+          <div className={`${classes["var-price"]} ${selectedVariation == "" && classes.hide}`}>
+            {selectedVariation && <span>${varPrice}</span>}
           </div>
 
-          {/* Add To Cart Button */}
-          <button
-            className={`${
-              hasSelection ? "" : `btn--disabled`
-            } btn btn--green btn--regular btn--rounded`}
-            onClick={addToCartHandler}
-          >
-            Add to Cart
-          </button>
+          <div className={classes.controls}>
+            <div>
+              <button
+                className={`${classes["qty-control"]} ${classes.btn}`}
+                onClick={decrementQty}
+              >
+                -
+              </button>
+              <input
+                type="number"
+                min={0}
+                value={inputQty}
+                onChange={inputChangeHandler}
+                onBlur={inputExitHandler}
+                ref={quantityInputRef}
+                className={`${classes["qty-control"]} ${classes.input} ${
+                  showQtyInputError && classes["input--error"]
+                }`}
+              />
+              <button
+                className={`${classes["qty-control"]} ${classes.btn}`}
+                onClick={incrementQty}
+              >
+                +
+              </button>
+            </div>
+            {/* Add To Cart Button */}
+            <button
+              className={`${
+                hasSelection ? "" : `btn--disabled`
+              } btn btn--green btn--regular btn--rounded`}
+              onClick={addToCartHandler}
+            >
+              Add to Cart
+            </button>
+          </div>
         </div>
 
         {/* Category */}
