@@ -11,10 +11,9 @@ import Zoom from "../ImageGalleryEmbla/Zoom";
 
 const EmblaCarousel: React.FC<ImageGalleryEmblaModel> = (props) => {
   const slides = props.images.thumbnailLarge;
-  const slidesHD = props.images.hd
+  const slidesHD = props.images.hd;
   const imagesFolder = props.images.folderName;
   const basePath = `/images/products${imagesFolder}`;
-
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [mainViewportRef, embla] = useEmblaCarousel({ skipSnaps: false });
@@ -52,30 +51,25 @@ const EmblaCarousel: React.FC<ImageGalleryEmblaModel> = (props) => {
           <div className={`${classes[`embla__container`]}`}>
             {slides.map((slide, index) => (
               <div className={`${classes[`embla__slide`]}`} key={index}>
-                <div className={`${classes[`embla__slide__inner`]}`}>
+                <div
+                  className={`${classes[`embla__slide__inner`]}`}
+                  key={index}
+                >
                   <div>
-                  {/* <div className={`${classes["embla__slide__img-container"]}`}> */}
+                    {/* <div className={`${classes["embla__slide__img-container"]}`}> */}
                     {/* <Image
                         className={`${classes[`embla__slide__img`]}`}
                         src={`${basePath}${slide}`}
                         layout='fill'
                       /> */}
-                    {/* <Zoom 
-                        className={`${classes[`embla__slide__img`]}`}
-                        src={`${basePath}${slide}`}
-                      /> */}
                     <Zoom
                       // containerClass={`${classes["embla__slide__img-container"]}`}
+                      key={index}
                       imageClass={`${classes[`embla__slide__img`]}`}
                       src={`${basePath}${slide}`}
                       srcHD={`${basePath}${slidesHD[index]}`}
                     />
                   </div>
-                  {/* <Zoom
-                    containerClass={`${classes["embla__slide__img-container"]}`}
-                    imageClass={`${classes[`embla__slide__img`]}`}
-                    src={`${basePath}${slide}`}
-                  /> */}
                 </div>
               </div>
             ))}
@@ -89,14 +83,12 @@ const EmblaCarousel: React.FC<ImageGalleryEmblaModel> = (props) => {
             className={`${classes["embla__container"]} ${classes["embla__container--thumb"]}`}
           >
             {slides.map((slide, index) => (
-              <Fragment>
-                <Thumb
-                  onClick={() => onThumbClick(index)}
-                  selected={index === selectedIndex ? true : false}
-                  imgSrc={`${basePath}${slide}`}
-                  key={index}
-                />
-              </Fragment>
+              <Thumb
+                onClick={() => onThumbClick(index)}
+                selected={index === selectedIndex ? true : false}
+                imgSrc={`${basePath}${slide}`}
+                key={index}
+              />
             ))}
           </div>
         </div>
