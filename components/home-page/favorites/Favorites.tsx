@@ -3,6 +3,7 @@ import { useState } from 'react';
 import classes from "./Favorites.module.scss";
 import EmblaCarouselFave from "../../ui/FavoritesCarouselEmbla/EmblaCarouselFave";
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Favorites = () => {
   const [slides, setSlides] = useState<number[]>([0, 1, 2, 3]);
@@ -23,7 +24,9 @@ const Favorites = () => {
             <span>favorites</span>
           </h1>
           <p>Enjoy your snacking experience. New here and not sure what to try first? Check out some of our most popular snacks and products.</p>
-          <button className={`btn btn--large btn--green btn--thick-font`}>Shop Now</button>
+          <Link href={"/shop"} passHref>
+            <a className={`btn btn--large btn--green btn--thick-font`}>Shop Now</a>
+          </Link>
         </div>
         <div className={`${classes['image-container']}`}>
           <div>
