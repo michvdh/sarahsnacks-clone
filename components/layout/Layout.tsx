@@ -1,4 +1,5 @@
 import React from "react";
+import ScrollToTopBtn from "../ui/buttons/ScrollToTopBtn";
 import Footer from "./Footer";
 import Header from "./Header";
 import IODiv from "./IODiv";
@@ -17,6 +18,7 @@ const Layout: React.FC<Props> = ({children}) => {
       {children}
       <Newsletter />
       <Footer />
+      <ScrollToTopBtn />
     </div>
   );
 }
