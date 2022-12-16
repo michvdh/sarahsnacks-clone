@@ -20,13 +20,13 @@ import {
 
 
 const Header: React.FC = () => {
-  const intersectState = useSelector(
-    (state: {
-      io: {
-        targetIntersect: boolean;
-      };
-    }) => state.io.targetIntersect
-  );
+  // const intersectState = useSelector(
+  //   (state: {
+  //     io: {
+  //       targetIntersect: boolean;
+  //     };
+  //   }) => state.io.targetIntersect
+  // );
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -49,7 +49,6 @@ const Header: React.FC = () => {
   const mobileNavHandler = () => {
     setChecked(false); 
   }
-
 
   useEffect(() => {
     let cartLS =
@@ -84,8 +83,8 @@ const Header: React.FC = () => {
 
         <CompanyLogo
           className={`${classes.logo}`}
-          section={'header'}
-          intersectState={intersectState}
+          parentComponent={'header'}
+          // intersectState={intersectState}
           onClick={mobileNavHandler}
         />
 

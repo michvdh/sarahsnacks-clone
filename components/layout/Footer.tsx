@@ -29,8 +29,8 @@ const Footer: React.FC = () => {
           <div className={classes["logo-container"]}>
             <CompanyLogo
               className={`${classes.logo}`}
-              section={"footer"}
-              intersectState={null}
+              parentComponent={"footer"}
+              // intersectState={null}
               onClick={mobileNavHandler}
             />
             <div className={classes.media}>
