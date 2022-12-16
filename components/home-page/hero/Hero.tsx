@@ -13,17 +13,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import classes from "./Hero.module.scss";
 
-interface RefDetails {
-  ref: React.Ref<HTMLElement>
-}
-
-// const Hero: React.FC<RefDetails> = React.forwardRef((props, ref) => {
-//   const heroRef = useRef();  
-
 const Hero: React.FC = () => {
 
   return (
-    // <section className={`${classes.hero} hero`} ref={heroRef}>
     <section className={`${classes.hero} hero`}>
       <div className={`${classes['hero--upper']}`}>
         <div className={classes["image--main-container"]}>

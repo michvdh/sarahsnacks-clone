@@ -6,17 +6,18 @@ import { useSelector } from "react-redux";
 import { Fragment } from "react";
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import { cartActions } from '../../store/cart';
 import CartPreviewOnHover from "../ui/CartPreviewOnHover";
 
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPhone,
   faBagShopping,
   faCaretLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRouter } from "next/router";
+
 
 const Header: React.FC = () => {
   const intersectState = useSelector(
