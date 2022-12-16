@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React, { useRef } from "react";
+import Link from "next/link";
 
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
@@ -51,15 +52,17 @@ const Hero: React.FC = () => {
 
       <div className={classes["text-container"]}>
         <h1>
-          Inspiring Mindful
-          <br />
-          <span className={`extra-bold`}>Snacking</span>
+          <span className={`${classes.side}`}>Inspiring Mindful</span>
+          {/* <br /> */}
+          <span className={`extra-bold ${classes.highlight}`}>Snacking</span>
         </h1>
         <h3>Free Shipping on orders over $50</h3>
-        <button className={`${classes.btn} btn btn--brown btn--regular`}>
-          <span>Shop Now</span>
-          <FontAwesomeIcon className={`fa-icon--right fa-icon--white`} icon={faRightLong} />
-        </button>
+        <Link href={"/shop"} passHref>
+          <a className={`${classes.btn} btn btn--brown btn--regular`}>
+            <span>Shop Now</span>
+            <FontAwesomeIcon className={`fa-icon--right fa-icon--white`} icon={faRightLong} />
+          </a>
+        </Link>
       </div>
 
       <div className={`${classes.overlay}`}></div>

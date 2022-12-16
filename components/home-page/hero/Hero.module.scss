@@ -14,6 +14,7 @@
   background-repeat: repeat;
   background-attachment: fixed;
   background-size: 5rem auto;
+  text-transform: uppercase;
   position: relative;
   z-index: 1;
 
@@ -31,7 +32,7 @@
     // position: relative;
     width: 100%;
     // pad    ding-top: 100%;
-    background-color: blueviolet;
+    // background-color: blueviolet;
   }
 
   .image--main-container {
@@ -56,13 +57,41 @@
       // top: 0;
       // top: 18.2rem;
       // object-fit: contain;
-      top: -40rem;
+      top: -25rem;
+
+      @include respond(screen-700) {
+        top: -24rem;
+      }
+
+      @include respond(screen-960) {
+        top: -30rem;
+      }
+
+      @include respond(screen-960) {
+        top: -30rem;
+      }
+
+      @include respond(screen-1200) {
+        top: -33rem;
+      }
+
+      @include respond(screen-1250) {
+        top: -35rem;
+      }
     }
 
     .exclamation {
       // background-color: chartreuse;
-      width: 85%;
-      height: 85%;
+      // width: 85%;
+      // height: 85%;
+
+      width: 100%;
+      height: 100%;
+
+      @include respond(screen-480) {
+        width: 85%;
+        height: 85%;
+      }
     }
 
     .PBandChoco {
@@ -70,8 +99,20 @@
       // top: -40%   ;
       z-index: 10;
       // back ground-color: bisque;
-      width: 78%;
-      height: 78%;
+      // width: 78%;
+      // height: 78%;
+      width: 100%;
+      height: 100%;
+
+      @include respond(screen-480) {
+        width: 84%;
+        height: 84%;
+      }
+
+      @include respond(screen-1250) {
+        width: 81%;
+        height: 81%;
+      }
     }
 
     .image {
@@ -82,10 +123,10 @@
   .text-container {
     text-align: center;
     z-index: 100;
-    margin-top: 15rem;
+    margin-top: 8rem;
 
     @include respond(screen-480) {
-      margin-top: 20rem;
+      margin-top: 13rem;
     }
 
     @include respond(screen-620) {
@@ -96,15 +137,62 @@
       margin-top: 30rem;
     }
 
+    @include respond(screen-760) {
+      margin-top: 30rem;
+    }
+
+    @include respond(screen-960) {
+      margin-top: 35rem;
+    }
+
     @include respond(screen-1250  ) {
       margin-top: 35rem;
     }
 
     h1 {
-      line-height: 5.8rem;
+      color: $white;
+      font-size: $font-header--large;
+      font-weight: $font-weight--regular;
+      display: flex;
+      flex-direction: column;
+      
+      .side {
+        font-size: 10vw;
+        line-height: 3rem;
+
+        @include respond(screen-360) {
+          line-height: 4rem;
+        }
+
+        @include respond(screen-480) {
+          line-height: 5rem;
+        }
+
+        @include respond(screen-620) {
+          font-size: $font-header--large;
+        }
+      }
+
+      .highlight {
+        color: $white;
+        // font-size: 5rem;
+        font-size: 15vw;
+        // font-weight: $font-weight--extra-bold;
+  
+        @include respond(screen-620) {
+          font-size: $font-header--extra-large;
+        }
+      }
+    }
+  
+    h3 {
+      color: $white;
+      font-size: $font-header--extra-small;
+      font-weight: $font-weight--medium;
     }
 
     .btn {
+      display: inline-block;
       margin-top: 4rem;
     }
 
