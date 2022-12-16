@@ -23,26 +23,6 @@ html {
   font-weight: $font-weight--extra-bold;
 }
 
-// .btn {
-//   color: $white;
-//   text-transform: uppercase;
-//   font-size: $font-size--2xs;
-//   letter-spacing: 0.15rem;
-
-//   span {
-//     color: $white;
-//     font-size: $font-size--2xs;
-//     letter-spacing: 0.15rem;
-//   }
-
-//   &--thick-font {
-//     font-weight: $font-weight--bold;
-//   }
-
-//   &--small {
-//     font-size: $font-size--3xs;
-//   }
-// }
 
 .quick-view-text {
   color: $white;
@@ -50,74 +30,7 @@ html {
   font-weight: $font-weight--semi-bold;
 }
 
-/* ---------------------------------- */
-/* ---------- HEADER SECTION ---------- */
 
-// .header {
-//   // text-transform: uppercase;
-
-//   // .call {
-//   //   &-now {
-//   //     font-size: $font-size--small;
-//   //   }
-//   // }
-
-//   // .cart {
-    
-
-//   //   &__count {
-//   //     color: $white;
-//   //     font-size: $font-size--2xs;
-//   //      
-//   //   }
-
-//   //   &__price {
-//   //     font-weight: $font-weight--bold;
-//   //   }
-//   // }
-
-//   // .nav {
-//   //   ul {
-//   //     li {
-//   //       font-size: $font-size--small;
-  
-//   //       .link {
-//   //         font-weight: $font-weight--bold;
-//   //       }
-//   //     }
-//   //   }
-    
-//   // }
-// }
-
-/* ---------------------------------- */
-/* ---------- HERO SECTION ---------- */
-
-.hero {
-  text-transform: uppercase;
-
-  h1 {
-    color: $white;
-    font-size: $font-header--large;
-    font-weight: $font-weight--regular;
-
-    span {
-      color: $white;
-      font-size: 15vw;
-      // font-weight: $font-weight--extra-bold;
-
-      @include respond(screen-620) {
-        font-size: $font-header--extra-large;
-      }
-    }
-  }
-
-  h3 {
-    color: $white;
-    font-size: $font-header--extra-small;
-    font-weight: $font-weight--medium;
-  }
-}
 
 /* ---------------------------------- */
 /* ---------- CATEGORY SECTION ---------- */

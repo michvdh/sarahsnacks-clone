@@ -67,7 +67,7 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   // this will only be triggered if variations > 1
   const variationsHandler = (variation: string) => {
 
-    if (variation == "Choose an option") {
+    if (variation === "Choose an option") {
       setSelectedVariation("");
       setHasSelection(false);
     } else {
@@ -111,6 +111,8 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   const addToCartHandler = () => {
 
     if (quantityInputRef && quantityInputRef.current && hasSelection) {
+      scrollToTop();
+
       dispatch(
         cartActions.addItem({
           id: props.id,
@@ -132,6 +134,8 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   const clearHandler = () => {
     setSelectedVariation("");
     setHasSelection(false);
+
+    variationsHandler("Choose an option");
   };
 
   useEffect(() => {
@@ -145,6 +149,19 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   const dummyCategSearch = () => {
     return;
   };
+
+  const scrollToTop = () =>{
+    window.scrollTo({
+      top: 0, 
+      behavior: 'smooth'
+      /* you can also use 'auto' behaviour
+         in place of 'smooth' */
+    });
+  };
+
+  // useEffect(() => { 
+  //   window.addEventListener('scroll', toggleVisible);
+  // }, []);
 
   return (
     <Fragment>
@@ -248,12 +265,13 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
                   onChange={(e) => {
                     variationsHandler(e.target.value);
                   }}
-                  defaultValue="Choose an option"
+                  // defaultValue="Choose an option"
+                  value={selectedVariation}
                 >
                   <option
                     key="initial"
                     value="Choose an option"
-                    selected={!selectedVariation ? true : false}
+                    // selected={!selectedVariation ? true : false}
                   >
                     Choose an option
                   </option>
