@@ -9,7 +9,7 @@ const Snacks = () => {
     <section className={`${classes.snacks} snacks`}>
       <div className={`${classes['text-container']} text-container`}>
         <h1>
-          Don't miss out on
+          Don&apos;t miss out on
           <br/>
           <span>A chance to get:</span>
         </h1>

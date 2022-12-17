@@ -6,12 +6,12 @@ import productsDB from "../../../model/productsDB";
 import emblaClass from "./embla.module.scss";
 import Autoplay from "embla-carousel-autoplay";
 
-interface ProductsProps {
-  className: string;
-}
+// interface ProductsProps {
+//   className: string;
+// }
 
 // const EmblaCarouselFave: React.FC<ProductsProps> = (props, slides, options = { loop: false }) => {
-  const EmblaCarouselFave: React.FC<ProductsProps> = (props) => {
+  const EmblaCarouselFave: React.FC = () => {
   
   // const autoplay = useRef(
   //   Autoplay(
@@ -74,7 +74,7 @@ interface ProductsProps {
   };
 
   return (
-    <div className={`${props.className} ${emblaClass.embla}`}>
+    <div className={`${emblaClass['carousel--fave']} ${emblaClass.embla}`}>
       <div className={`${emblaClass["embla__viewport"]}`} ref={emblaRef}>
         <div className={`${emblaClass["embla__container"]}`}>
           {featuredProducts.map((product) => (

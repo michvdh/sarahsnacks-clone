@@ -14,7 +14,8 @@ const Favorites = () => {
 
   return (
     <section className={`${classes.favorites} favorites`}>
-      <EmblaCarouselFave className={`${classes.carousel}`} />
+      {/* <EmblaCarouselFave className={`${classes.carousel}`} /> */}
+      <EmblaCarouselFave />
 
       <div className={`${classes['side']}`}>
         <div className={`${classes['side-text']} side-text`}>

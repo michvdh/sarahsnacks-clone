@@ -14,12 +14,14 @@ const CategorySearch: React.FC<CategorySearchProps> = (props) => {
     return category.replace(/\s+/g, "-").toLowerCase();
   };
 
-  let categoryInputRef: any[] = [];
+  // let categoryInputRef: any[] = [];
 
-  categoriesDB.forEach((_, index) => {
-    categoryInputRef[index] = useRef<HTMLInputElement>(null);
-  });
+  // categoriesDB.forEach((_, index) => {
+  //   categoryInputRef[index] = useRef<HTMLInputElement>(null);
+  // });
+    // I replaced the code above with "let categoryInputRef = useRef([]);" since I'm not allowed to use hooks inside other functions
 
+  let categoryInputRef = useRef([]);
 
   const selectHandler = (category: string) => {
     props.onCategorySearch(category);

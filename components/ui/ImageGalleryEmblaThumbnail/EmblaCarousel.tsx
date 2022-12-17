@@ -20,7 +20,7 @@ const EmblaCarousel: React.FC<ImageGalleryEmblaModel> = (props) => {
 
   const [thumbViewportRef, emblaThumbs] = useEmblaCarousel({
     containScroll: "keepSnaps",
-    selectedClass: "",
+    // selectedClass: "",
     dragFree: true,
   });
 

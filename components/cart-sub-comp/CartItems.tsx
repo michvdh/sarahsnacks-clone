@@ -98,7 +98,7 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
             </tr>
           </thead>
           <tbody>
-            {cartItems.map((item, index) => (
+            {!cartItems ? '' : cartItems.map((item, index) => (
               <tr key={index} className={classes.row}>
                 {/* Remove button */}
                 <td className={`${classes["remove-btn-container"]}`}>

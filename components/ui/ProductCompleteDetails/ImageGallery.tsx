@@ -34,6 +34,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = (props) => {
         {images.thumbnailSmall.map((thumbnail, index) => {
           return (
             <Image 
+              key={index}
               src={`${basePath}${thumbnail}`}
               width="100px"
               height="100px"

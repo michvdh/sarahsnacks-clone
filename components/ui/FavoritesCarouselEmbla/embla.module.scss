@@ -8,6 +8,10 @@
 @import "../../../styles/mixins"; 
 @import "../../../styles/variables"; 
 
+.carousel--fave {
+  margin: 0 1rem;
+}
+
 .embla {
   position: relative;
   padding: 0 2rem; 

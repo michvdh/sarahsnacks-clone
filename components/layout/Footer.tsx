@@ -126,7 +126,7 @@ const Footer: React.FC = () => {
           Lancaster | Harrisburg | Lebanon | Mechanicsburg
         </span>
         <span>
-          © Copyright 2022 Sarah's Sweet & Savory Snacks | All Rights Reserved |
+          © Copyright 2022 Sarah&apos;s Sweet & Savory Snacks | All Rights Reserved |
           This site designed and hosted by Enter.Net
         </span>
         <span>

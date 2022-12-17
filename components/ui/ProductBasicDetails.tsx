@@ -108,6 +108,7 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
           productNameDashed={productNameDashed}
           imagesFolder={props.imagesFolder}
           images={props.images}
+          onCategorySearch={props.onCategorySearch}
         />
       </div>
       <figcaption>
@@ -126,6 +127,7 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
               }}
               passHref
               shallow
+              key={index}
             >
               <a
                 key={index}

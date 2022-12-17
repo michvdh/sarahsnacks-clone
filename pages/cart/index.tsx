@@ -1,6 +1,6 @@
 import classes from "./Cart.module.scss";
-import CartItems from "./CartItems";
-import CartTotals from "./CartTotals";
+import CartItems from "../../components/cart-sub-comp/CartItems";
+import CartTotals from "../../components/cart-sub-comp/CartTotals";
 import { useDispatch, useSelector } from "react-redux";
 import { Fragment } from "react";
 import { CartStateModel } from "../../model/cartStateModel.model";
@@ -79,9 +79,9 @@ const Cart = () => {
                   />
                 </svg>
               </span>
-              <span className={classes.text}>"{capitalizeFirstLetter(itemToUndo.productName)}" removed</span>
+              <span className={classes.text}>&quot;{capitalizeFirstLetter(itemToUndo.productName)}&quot; removed</span>
             </div>
-            <button className={`btn btn--green btn--thin`} onClick={undoHandler}>{`Undo?`}</button>
+            <button className={`btn btn--green btn--thin`} onClick={undoHandler}>Undo?</button>
           </div>
         )}
 

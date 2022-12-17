@@ -1,9 +1,9 @@
 import { createSlice, current } from "@reduxjs/toolkit";
-import {cartStateModel} from  '../model/cartStateModel.model';
+import {CartStateModel} from  '../model/cartStateModel.model';
 // current is used so that we can get the "current state" for debugging
 
 
-const initialCartState: cartStateModel = {
+const initialCartState: CartStateModel = {
   cartItems: [],
   totalQty: 0,
   totalPrice: 0,

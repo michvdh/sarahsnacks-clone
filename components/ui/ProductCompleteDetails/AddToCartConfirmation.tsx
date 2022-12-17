@@ -24,7 +24,7 @@ const AddToCartConfirmation: React.FC<AddToCartConfirmationProps> = (props) => {
             />
           </svg>
         </div>
-        <p>{props.quantity > 1 ? <span>{props.quantity} ×</span> : ''} <span>"{props.productName}"</span> {props.quantity > 1 ? 'have' : 'has'} been added to your cart</p>
+        <p>{props.quantity > 1 ? <span>{props.quantity} ×</span> : ''} <span>&quot;{props.productName}&quot;</span> {props.quantity > 1 ? 'have' : 'has'} been added to your cart</p>
       </div>
       <div className={`${classes['btn-container']}`}>
         <Link href={{ pathname: `/cart` }}>

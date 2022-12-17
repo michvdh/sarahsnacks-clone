@@ -21,7 +21,7 @@ const Home: React.FC = () => {
   return (
     <Fragment>
       <Head>
-        <title>Sarah's Snacks - Healthy Vegan Snacks | York PA
+        <title>Sarah&apos;s Snacks - Healthy Vegan Snacks | York PA
         </title>
       </Head>
       <main className={`main`}>
