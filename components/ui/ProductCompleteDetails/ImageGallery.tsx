@@ -28,6 +28,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = (props) => {
           // layout="fill"
           width="100px"
           height="150px"
+          alt="thumbnail large"
         />
       </div>
       <div className={`${classes['selections']}`}>
@@ -39,6 +40,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = (props) => {
               width="100px"
               height="100px"
               onClick={()=> {imageNavHandler(index)}}
+              alt="thumbnail small"
             />
           )
         })}

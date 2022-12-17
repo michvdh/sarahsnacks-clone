@@ -39,6 +39,7 @@ const CartPreviewOnHover: React.FC<CartPreviewInterface> = (props) => {
                     src={`/images/products${item.imagesFolder}${item.image}`}
                     layout="fill"
                     className={`${classes['image']}`}
+                    alt={item.otherName ? item.otherName : item.productName}
                   />
                 </div>
                 {/* Text */}

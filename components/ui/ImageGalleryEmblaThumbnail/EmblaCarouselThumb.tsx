@@ -17,6 +17,7 @@ export const Thumb = ({ selected, onClick, imgSrc }) => (
           className={`${classes["embla__slide__img"]} ${classes["embla__slide__thumbnail"]}`}
           src={imgSrc}
           layout="fill"
+          alt={"thumbnail image"}
         />
       </div>
     </button>

@@ -77,6 +77,7 @@ const EmblaCarousel: React.FC<ImageGalleryEmblaModel> = (props) => {
                       className={`${classes[`embla__slide__img`]}`}
                       src={`${basePath}${index}`}
                       layout="fill"
+                      alt={imagesFolder}
                     />
                   </div>
                 </div>

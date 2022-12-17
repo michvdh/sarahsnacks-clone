@@ -115,6 +115,7 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
                     src={`/images/products${item.imagesFolder}${item.image}`}
                     layout="fill"
                     className={`${classes["image"]}`}
+                    alt={item.otherName ? item.otherName : item.productName}
                   />
                 </td>
 
@@ -202,6 +203,7 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
                       src={`/images/products${item.imagesFolder}${item.image}`}
                       layout="fill"
                       className={`${classes["image"]}`}
+                      alt={item.otherName ? item.otherName : item.productName}
                     />
                   </div>
                 </td>

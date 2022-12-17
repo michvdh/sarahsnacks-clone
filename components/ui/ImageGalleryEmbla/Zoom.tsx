@@ -10,7 +10,6 @@ interface ZoomInterface {
 }
 
 const Zoom: React.FC<ZoomInterface> = (props) => {
-  // const src = "https://images.unsplash.com/photo-1444065381814-865dc9da92c0";
 
   const src = props.src;
   const srcHD = props.srcHD;
@@ -43,6 +42,7 @@ const Zoom: React.FC<ZoomInterface> = (props) => {
         // width="1000"
         // height="1000"
         layout="fill"
+        alt={`highlight product`}
       />
     </div>
   );
