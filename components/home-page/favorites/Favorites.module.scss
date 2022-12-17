@@ -14,8 +14,8 @@
     column-gap: 5rem;
   }
 
-  @include respond(screen-1600) {
-    width: 1600px;
+  @include respond(screen-1980) {
+    width: 1980px;
     margin: 10rem auto;
   }
   
@@ -58,9 +58,9 @@
         display: initial;
       }
 
-      @include respond(screen-1366) {
-        overflow: initial;
-      }
+      // @include respond(screen-1600) {
+      //   overflow: initial;
+      // }
 
       // @include respond(screen-960) {
       //   right: 0;
