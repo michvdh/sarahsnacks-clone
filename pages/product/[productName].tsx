@@ -85,7 +85,6 @@ const Product: React.FC = () => {
     setResultsReady(true);
   }, [isReady]);
 
-  // console.log(targetProduct);
 
   return (
     // <main className={`main`}>

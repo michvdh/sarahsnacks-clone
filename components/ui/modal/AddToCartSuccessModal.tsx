@@ -14,8 +14,6 @@ interface SuccessInterface {
 const SuccessModalOverlay: React.FC<{onClick: () => void}> = (props) => {
   const [closeWindow, setCloseWindow] = useState(false);
 
-  console.log("helooooo addtocartsuccessmodal");
-
   const cartTotalPrice = useSelector(
     (state: { cart: { totalPrice: number } }) => state.cart.totalPrice
   );

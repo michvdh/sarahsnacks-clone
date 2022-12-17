@@ -127,10 +127,6 @@ const cartSlice = createSlice({
       typeof window !== "undefined" &&
         localStorage.setItem("cartLS", JSON.stringify(state));
     },
-
-    checkCart(state) {
-      console.log(current(state));
-    },
   },
 });
 
