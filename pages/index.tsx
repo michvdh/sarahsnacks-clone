@@ -23,6 +23,7 @@ const Home: React.FC = () => {
       <Head>
         <title>Sarah&apos;s Snacks - Healthy Vegan Snacks | York PA
         </title>
+        <link rel="shortcut icon" href="/sarahsnacks-fav.png" />
       </Head>
       <main className={`main`}>
         <Hero />

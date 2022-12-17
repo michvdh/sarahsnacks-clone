@@ -7,6 +7,7 @@ import classes from "./Catalog.module.scss";
 import { Fragment, useEffect, useState } from "react";
 import { ProductsDBModel } from "../../model/productsDBModel.model";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
   const router = useRouter();
@@ -383,33 +384,39 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
 
 
   return (
-    <main className={`main`}>
-      <section className={`${classes.catalog} catalog`}>
-        <SearchPane
-          onKeywordSearch={keywordSearchHandler}
-          onClearKeyword={clearKeyword}
-          onCategorySearch={categorySearchHandler}
-          onClearCategory={clearCategory}
-          categoryInput={categorySearch}
-          keywordInput={keywordSearch}
-        />
-        <ResultsPane
-          showProducts={hasResults ? pageControlledProductList : []}
-          onProductSort={productSortHandler}
-          onDisplayCount={displayCountHandler}
-          onPageBtnClick={pageControlHandler}
-          onCategorySearch={categorySearchHandler}
-          onChangeDisplayType={displayTypeHandler}
-          displayType={displayType}
-          totalPages={totalPages}
-          resultsReady={resultsReady}
-          sortInput={productSort}
-          displayCountInput={displayCount}
-          pageInput={currentPage}
-        />
-        {/* <div>RecentlyViewed</div> */}
-      </section>
-    </main>
+    <Fragment>
+      <Head>
+        <title>Shop - Sarah&apos;s Snacks</title>
+        <link rel="shortcut icon" href="/sarahsnacks-fav.png" />
+      </Head>
+      <main className={`main`}>
+        <section className={`${classes.catalog} catalog`}>
+          <SearchPane
+            onKeywordSearch={keywordSearchHandler}
+            onClearKeyword={clearKeyword}
+            onCategorySearch={categorySearchHandler}
+            onClearCategory={clearCategory}
+            categoryInput={categorySearch}
+            keywordInput={keywordSearch}
+          />
+          <ResultsPane
+            showProducts={hasResults ? pageControlledProductList : []}
+            onProductSort={productSortHandler}
+            onDisplayCount={displayCountHandler}
+            onPageBtnClick={pageControlHandler}
+            onCategorySearch={categorySearchHandler}
+            onChangeDisplayType={displayTypeHandler}
+            displayType={displayType}
+            totalPages={totalPages}
+            resultsReady={resultsReady}
+            sortInput={productSort}
+            displayCountInput={displayCount}
+            pageInput={currentPage}
+          />
+          {/* <div>RecentlyViewed</div> */}
+        </section>
+      </main>
+    </Fragment>
   );
 };
 
