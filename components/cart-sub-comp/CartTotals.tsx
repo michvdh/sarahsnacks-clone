@@ -17,30 +17,32 @@ const CartTotals = () => {
                 <th colSpan={2}>Cart Totals</th>
               </tr>
             </thead> */}
-            <tr>
-              <th>
-                <span>Subtotal</span>
-              </th>
-              <td>
-                <span className={`price-range`}>{cartTotalPrice.toFixed(2)}</span>
-              </td>
-            </tr>
-            <tr>
-              <th>
-                <span>Shipping</span>
-              </th>
-              <td>
-                <span>Calculate Shipping</span>
-              </td>
-            </tr>
-            <tr>
-              <th>
-                <span>Total</span>
-              </th>
-              <td>
-                <span className={`price-range`}>{cartTotalPrice.toFixed(2)}</span>
-              </td>
-            </tr>
+            <tbody>
+              <tr>
+                <th>
+                  <span>Subtotal</span>
+                </th>
+                <td>
+                  <span className={`price-range`}>{cartTotalPrice.toFixed(2)}</span>
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <span>Shipping</span>
+                </th>
+                <td>
+                  <span>Calculate Shipping</span>
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <span>Total</span>
+                </th>
+                <td>
+                  <span className={`price-range`}>{cartTotalPrice.toFixed(2)}</span>
+                </td>
+              </tr>
+            </tbody>
             {/* <tr className={classes.full}>
               <td colSpan={2}>
                 <button>Proceed to checkout</button>
