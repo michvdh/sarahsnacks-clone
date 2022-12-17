@@ -12,10 +12,12 @@ interface QuickViewProps {
   productNameDashed: string;
   imagesFolder: string;
   images: string[];
+  onCategorySearch: (category: string) => void;
 }
 
 const ProductQuickView: React.FC<QuickViewProps> = (props) => {
-  const [showProductQuickViewModal, setShowProductQuickViewModal] = useState(false);
+  const [showProductQuickViewModal, setShowProductQuickViewModal] =
+    useState(false);
   // const [qvClicked, setQVClicked] = useState(false);
   const [fetched, setFetched] = useState(false);
 
@@ -23,23 +25,22 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
   const numberOfImages = props.images.length;
 
   const overlayHandler = () => {
-    const newState = !showProductQuickViewModal;
+    const newState = !showProductQuickViewModal; // boolean
     setShowProductQuickViewModal(newState);
-  }; // used by close button and backdrop to close the modal
+  }; // used to close PQVModal and AddToCartSuccessModal
 
   const productQuickViewModalHandler = () => {
     setShowProductQuickViewModal(true);
     setFetched(false);
-  } 
+  };
 
   const fetchStateHandler = () => {
-    setFetched(true); 
-  } // used by loading indicator in ProductQuickView
-
+    setFetched(true);
+  }; // used by loading indicator in ProductQuickView
 
   return (
     <div
-      className={`${classes["image-container"]} ${emblaClass['embla__slide__img-container']}`}
+      className={`${classes["image-container"]} ${emblaClass["embla__slide__img-container"]}`}
     >
       <Link
         href={{
@@ -51,38 +52,41 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
         passHref
       >
         <a className={`${classes.link}`}>
-          <Image
-            className={`
-              ${classes["image--front"]} 
-              ${classes["image"]} 
-              ${emblaClass['embla__slide__img']} 
-            `}
-            src={`${basePath}${props.images[0]}`}
-            alt={props.productNameDashed}
-            layout="fill"
-          />
-          {numberOfImages > 1 ? (
+          {/* <span> */}
             <Image
               className={`
-                ${classes["image--back"]} 
-                ${classes["image"]} 
-                ${emblaClass['embla__slide__img']} 
-                
-              `}
-              src={`${basePath}${props.images[1]}`}
+                    ${classes["image--front"]}
+                    ${classes["image"]}
+                    ${emblaClass["embla__slide__img"]}
+                  `}
+              src={`${basePath}${props.images[0]}`}
               alt={props.productNameDashed}
               layout="fill"
             />
-          ) : ("")}
-
-          {showProductQuickViewModal && !fetched && 
-            <div className={classes['spinner-wrapper']}>
-              <div className={classes.spinner}></div>
-            </div>
-          }
+            {numberOfImages > 1 ? (
+              <Image
+                className={`
+                          ${classes["image--back"]}
+                          ${classes["image"]}
+                          ${emblaClass["embla__slide__img"]}
+            
+                        `}
+                src={`${basePath}${props.images[1]}`}
+                alt={props.productNameDashed}
+                layout="fill"
+              />
+            ) : (
+              ""
+            )}
+          {/* </span> */}
         </a>
       </Link>
 
+      {showProductQuickViewModal && !fetched && (
+        <div className={classes["spinner-wrapper"]}>
+          <div className={classes.spinner}></div>
+        </div>
+      )}
       {/* Quick view button */}
       <div
         className={`${classes["quick-view"]}`}
@@ -96,14 +100,15 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
         </span>
         <span className={`quick-view-text`}>Quick View</span>
       </div>
-      {showProductQuickViewModal &&
-        <ProductQuickViewModal 
+      {showProductQuickViewModal && (
+        <ProductQuickViewModal
           id={props.id}
           onClick={overlayHandler}
           fetching={fetchStateHandler}
+          onCategorySearch={props.onCategorySearch}
           // fetched={fetched}
         />
-      }
+      )}
     </div>
   );
 };

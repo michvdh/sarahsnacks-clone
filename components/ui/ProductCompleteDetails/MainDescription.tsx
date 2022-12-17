@@ -6,7 +6,8 @@ import { Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "../../../store/cart";
 import QtyErrorModal from "../modal/QtyErrorModal";
-import {CartItemsModel} from "../../../model/cartItemsModel.model";
+import { CartItemsModel } from "../../../model/cartItemsModel.model";
+import Link from "next/link";
 
 interface MainDescriptionProps {
   id: string;
@@ -25,6 +26,7 @@ interface MainDescriptionProps {
     };
     last: string;
   };
+  subDescription: string;
   variations: {
     size: string;
     price: number;
@@ -33,8 +35,10 @@ interface MainDescriptionProps {
   }[];
   selectionDetails: (vIndex: number, hasSelection: boolean) => void;
   confirmation: (quantity: number, productName: string) => void;
+  className: string;
+  onClick: (e) => void;
+  onCategorySearch: (category: string) => void;
 }
-
 
 const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   const dispatch = useDispatch();
@@ -42,7 +46,8 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   const [inputQty, setInputQty] = useState(1);
   const [showQtyInputError, setShowQtyInputError] = useState(false);
 
-  const cart = useSelector((state: { cart: { cartItems: CartItemsModel } }) => state.cart.cartItems
+  const cart = useSelector(
+    (state: { cart: { cartItems: CartItemsModel } }) => state.cart.cartItems
   );
 
   const quantityInputRef = useRef<HTMLInputElement>(null);
@@ -52,7 +57,6 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
       : props.productName[0];
   const productName = capitalizeFirstLetter(tempPName);
 
-  
   // this will be used if there are multiple variations
   // the values will be the weight
   const [selectedVariation, setSelectedVariation] = useState("");
@@ -62,7 +66,8 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
 
   // this will only be triggered if variations > 1
   const variationsHandler = (variation: string) => {
-    if (variation == "Choose an option") {
+
+    if (variation === "Choose an option") {
       setSelectedVariation("");
       setHasSelection(false);
     } else {
@@ -78,31 +83,36 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   const varPrice = props.variations[vIndex].price.toFixed(2);
   const varSize = props.variations[vIndex].size;
 
-  props.selectionDetails(selectedVariation ? vIndex : 0, hasSelection);
+  useEffect(() => {
+    props.selectionDetails(selectedVariation ? vIndex : 0, hasSelection);
+  }, [selectedVariation]);
 
   const incrementQty = () => {
     setInputQty(inputQty + 1);
-  }
+  };
 
   const decrementQty = () => {
     if (inputQty > 1) {
-      setInputQty(inputQty - 1)
+      setInputQty(inputQty - 1);
     }
-  }
+  };
 
   const inputChangeHandler = (e) => {
-    setInputQty(e.target.value)
-  }
+    setInputQty(e.target.value);
+  };
 
   const inputExitHandler = (e) => {
     if (e.target.value < 1) {
       setInputQty(1);
       setShowQtyInputError(true);
-    } 
-  }
+    }
+  };
 
   const addToCartHandler = () => {
+
     if (quantityInputRef && quantityInputRef.current && hasSelection) {
+      scrollToTop();
+
       dispatch(
         cartActions.addItem({
           id: props.id,
@@ -112,59 +122,121 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
           varSize: varSize,
           qty: quantityInputRef.current?.valueAsNumber,
           imagesFolder: props.imagesFolder,
-          image: props.image
+          image: props.image,
         })
       );
 
       props.confirmation(quantityInputRef.current.valueAsNumber, productName);
+      // values passed here will be used by AddToCartSuccessModal
     }
   };
-
 
   const clearHandler = () => {
     setSelectedVariation("");
     setHasSelection(false);
+
+    variationsHandler("Choose an option");
   };
 
   useEffect(() => {
     if (showQtyInputError) {
-      setTimeout(() => (setShowQtyInputError(false)), 3000);
+      setTimeout(() => setShowQtyInputError(false), 800);
     }
   }, [showQtyInputError]);
 
+  // const mainDescLength = props.mainDescription.main.length;
+
+  const dummyCategSearch = () => {
+    return;
+  };
+
+  const scrollToTop = () =>{
+    window.scrollTo({
+      top: 0, 
+      behavior: 'smooth'
+      /* you can also use 'auto' behaviour
+         in place of 'smooth' */
+    });
+  };
+
+  // useEffect(() => { 
+  //   window.addEventListener('scroll', toggleVisible);
+  // }, []);
 
   return (
     <Fragment>
-      <div>
+      <div className={`${classes["main-description"]} ${props.className}`}>
+
         {/* Price or Price Range */}
-        <span>{getPriceRange(props.variations)}</span>
+        <span className={`${classes["price-range"]}`}>
+          {getPriceRange(props.variations)}
+        </span>
+
         {/* Product name */}
-        <h1>{props.productName[0]}</h1>
-        {props.productName.length > 1 && <h1>{props.productName[1]}</h1>}
+        <div className={classes["product-name"]}>
+          <h1
+            className={`${classes[`${props.nameColor}`]} ${
+              classes["first-header"]
+            }`}
+          >
+            {props.productName[0]}
+          </h1>
+          {props.productName.length > 1 && (
+            <h1
+              className={`${classes[`${props.nameColor}`]} ${
+                classes["second-header"]
+              }`}
+            >
+              {props.productName[1]}
+            </h1>
+          )}
+        </div>
+
         {/* Main Description */}
-        {props.mainDescription.main &&
-          props.mainDescription.main.map((desc: string[]) => (
-            <p>
-              {desc.map((text: string) => (
-                <span>{text}</span>
-              ))}
-            </p>
-          ))}
-        {/* Unordered list */}
-        {props.mainDescription.unOrderedList && (
-          <ul>
-            {props.mainDescription.unOrderedList.map((desc, index) => (
-              <li key={index}>
-                {desc.map((text: string) => (
-                  <span>{text}</span>
+        {props.mainDescription.main && (
+          <div className={`${classes["description--main"]}`}>
+            {props.mainDescription.main.map((desc: string[], index) => (
+              <p key={index}>
+                {desc.map((text: string, index) => (
+                  <span className={`${index === 0 ? "bold" : ""}`} key={index}>
+                    {text} {/* {mainDescLength !== (index -1) ? ' ' : ''} */}
+                  </span>
                 ))}
-              </li>
+              </p>
             ))}
-          </ul>
+          </div>
         )}
+
+        {/* Unordered list */}
+        {props.mainDescription.unOrderedList[0][0] !== "" && (
+          <div className={classes["ul--main"]}>
+            <ul>
+              {props.mainDescription.unOrderedList.map((desc, index) => (
+                <li key={index}>
+                  {desc.map((text: string, index) => (
+                    <span
+                      key={index}
+                      className={`${index === 0 ? "bold" : ""}`}
+                    >
+                      {text}
+                    </span>
+                  ))}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Subdescription */}
+        {props.subDescription !== "" && (
+          <span className={`${classes["sub-description"]} bold`}>
+            {props.subDescription}
+          </span>
+        )}
+
         {/* Ordered list */}
         {props.mainDescription.orderedList.items[0] !== "" && (
-          <div>
+          <div className={`${classes["ol--main"]}`}>
             <h3>{props.mainDescription.orderedList.title}</h3>
             <ol>
               {props.mainDescription.orderedList.items.map((item, index) => (
@@ -173,23 +245,28 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
             </ol>
           </div>
         )}
+
         {/* Last description */}
         {props.mainDescription.last !== "" && (
-          <span>{props.mainDescription.last.toUpperCase()}</span>
+          <span className={`${classes["last-description"]} bold`}>
+            {props.mainDescription.last}
+          </span>
         )}
+
         {/* Variations */}
         {props.variations.length > 1 && (
-          <div>
-            <div>
+          <div className={`${classes.variations}`}>
+            <div className={classes.size}>
               <span>Sizes</span>
             </div>
-            <div>
+            <div className={classes.form}>
               <form>
                 <select
                   onChange={(e) => {
                     variationsHandler(e.target.value);
                   }}
-                  defaultValue="Choose an option"
+                  // defaultValue="Choose an option"
+                  value={selectedVariation}
                 >
                   <option
                     key="initial"
@@ -206,46 +283,101 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
                   ))}
                 </select>
               </form>
-              {selectedVariation && <button onClick={clearHandler}>Clear</button>}
+              {selectedVariation && (
+                <button className={classes.clear} onClick={clearHandler}>
+                  <div>
+                    <span className={classes.icon}>×</span>
+                  </div>
+                  <span className={classes.text}>Clear</span>
+                </button>
+              )}
             </div>
           </div>
         )}
-        {/* Add to cart options */}
-        <div>
-          {selectedVariation && <span>${varPrice}</span>}
-          <div>
-            <button onClick={decrementQty}>-</button>
-            <input
-              type="number"
-              min={0}
-              value={inputQty}
-              onChange={inputChangeHandler}
-              onBlur={inputExitHandler}
-              ref={quantityInputRef}
-            />
-            <button onClick={incrementQty}>+</button>
+
+
+        {/* Qty adjustment */}
+        <div className={`${classes["qty-control-container"]}`}>
+          <div className={`${classes["var-price"]} ${selectedVariation == "" && classes.hide}`}>
+            {selectedVariation && <span>${varPrice}</span>}
           </div>
-          <button className={hasSelection ? '' : `btn--disabled`} onClick={addToCartHandler}>Add to Cart</button>
-          {/* <button onClick={checkCartHandler}>Check cart</button> */}
-        </div>
-        {/* Category */}
-        <div>
-          <span>Category</span>
-          {props.category.map((category, index) => (
-            <a
-              href={`/product-category/${category
-                .replace(" ", "-")
-                .toLowerCase()}`}
-              key={index}
-              className={`category ${classes.category}`}
+
+          <div className={classes.controls}>
+            <div>
+              <button
+                className={`${classes["qty-control"]} ${classes.btn}`}
+                onClick={decrementQty}
+              >
+                -
+              </button>
+              <input
+                type="number"
+                min={0}
+                value={inputQty}
+                onChange={inputChangeHandler}
+                onBlur={inputExitHandler}
+                ref={quantityInputRef}
+                className={`${classes["qty-control"]} ${classes.input} ${
+                  showQtyInputError && classes["input--error"]
+                }`}
+              />
+              <button
+                className={`${classes["qty-control"]} ${classes.btn}`}
+                onClick={incrementQty}
+              >
+                +
+              </button>
+            </div>
+            {/* Add To Cart Button */}
+            <button
+              className={`${
+                hasSelection ? "" : `btn--disabled`
+              } btn btn--green btn--regular btn--rounded`}
+              onClick={addToCartHandler}
             >
-              {category}
-              {index !== props.category.length - 1 ? ", " : ""}
-            </a>
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+        {/* Category */}
+        <div className={`${classes.category}`}>
+          <span className={`bold`}>Category: </span>
+          {props.category.map((category, index) => (
+            <Link
+              href={{
+                pathname: `/shop`,
+                query: {
+                  category: category,
+                  page: 1,
+                  sort: "default",
+                  display: "12",
+                  style: "min-details",
+                },
+              }}
+              passHref
+              shallow
+              key={index}
+            >
+              <a
+                key={index}
+                onClick={(e) => {
+                  props.onCategorySearch(category);
+                  props.onClick(e);
+                }}
+                // onClick={props.onClick}
+                className={`category ${classes['category-link']}`}
+              >
+                {category}
+                {index !== props.category.length - 1 ? ", " : ""}
+              </a>
+            </Link>
           ))}
         </div>
       </div>
-      {showQtyInputError && <QtyErrorModal />}
+
+      {/* Quantity Error */}
+      {/* {showQtyInputError && <QtyErrorModal />} */}
     </Fragment>
   );
 };

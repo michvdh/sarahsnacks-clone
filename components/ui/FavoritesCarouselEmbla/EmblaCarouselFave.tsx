@@ -1,36 +1,60 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { PrevButton, NextButton } from "../buttons/EmblaCarouselButtons";
 import useEmblaCarousel from "embla-carousel-react";
 import ProductMinDetails from "../ProductMinDetails";
 import productsDB from "../../../model/productsDB";
 import emblaClass from "./embla.module.scss";
+import Autoplay from "embla-carousel-autoplay";
 
-interface ProductsProps {
-  className: string;
-}
+// interface ProductsProps {
+//   className: string;
+// }
 
-const EmblaCarousel: React.FC<ProductsProps> = (props) => {
+// const EmblaCarouselFave: React.FC<ProductsProps> = (props, slides, options = { loop: false }) => {
+  const EmblaCarouselFave: React.FC = () => {
+  
+  // const autoplay = useRef(
+  //   Autoplay(
+  //     { delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true },
+  //     (emblaRoot) => emblaRoot.parentElement
+  //   )
+  // );
+  const options = { delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true };
+  // const autoplayRoot = (emblaRoot) => emblaRoot.parentElement;
+
+  const autoplay = useRef(Autoplay(options));
+
+  const [emblaRef, embla] = useEmblaCarousel(
+    {
+      align: "start",
+      dragFree: false,
+      inViewThreshold: 0,
+      skipSnaps: true,
+      loop: true,
+    },
+    [autoplay.current],
+  );
 
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = useState(true);
 
-  const [viewportRef, embla] = useEmblaCarousel({
-    align: "start",
-    dragFree: false,
-    inViewThreshold: 0,
-    skipSnaps: true,
-    loop: true,
-  }); // the parameters make it an infinite carousel
+  // const [viewportRef, embla] = useEmblaCarousel({
+  //   align: "start",
+  //   dragFree: false,
+  //   inViewThreshold: 0,
+  //   skipSnaps: true,
+  //   loop: true,
+  // }); // the parameters make it an infinite carousel
 
   const scrollPrev = useCallback(() => embla && embla.scrollPrev(), [embla]);
   const scrollNext = useCallback(() => embla && embla.scrollNext(), [embla]);
+
 
   const onSelect = useCallback(() => {
     if (!embla) return;
     setPrevBtnEnabled(embla.canScrollPrev());
     setNextBtnEnabled(embla.canScrollNext());
   }, [embla]);
-
 
   useEffect(() => {
     if (!embla) return;
@@ -50,9 +74,9 @@ const EmblaCarousel: React.FC<ProductsProps> = (props) => {
   };
 
   return (
-    <div className={`${props.className} ${emblaClass.embla}`}>
-      <div className={`${emblaClass['embla__viewport']}`} ref={viewportRef}>
-        <div className={`${emblaClass['embla__container']}`}>
+    <div className={`${emblaClass['carousel--fave']} ${emblaClass.embla}`}>
+      <div className={`${emblaClass["embla__viewport"]}`} ref={emblaRef}>
+        <div className={`${emblaClass["embla__container"]}`}>
           {featuredProducts.map((product) => (
             <ProductMinDetails
               key={product.id}
@@ -74,4 +98,4 @@ const EmblaCarousel: React.FC<ProductsProps> = (props) => {
   );
 };
 
-export default EmblaCarousel;
+export default EmblaCarouselFave;

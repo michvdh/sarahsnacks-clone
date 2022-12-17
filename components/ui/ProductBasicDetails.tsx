@@ -41,8 +41,8 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
     dispatch(
       cartActions.addItem({
         id: props.id,
-        productName: `${props.productName[0]} ${
-          props.productName[1] && props.productName[1]
+        productName: `${props.productName[0]}${
+          props.productName[1] && ` ${props.productName[1]}`
         }`,
         otherName: props.otherName,
         varPrice: props.variations[0].price,
@@ -80,16 +80,39 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
     return priceRange;
   };
 
+
+  // -- used to control description length -- //
+  const filterAr = (desc) => {
+    return desc !== "";
+  }
+
+  const paragraph = props.description.map(desc => {
+    return desc.filter(filterAr).join(" ");
+  }).join(" ");
+
+  const parAr = paragraph.split(" ");
+  const initParLength = parAr.length;
+
+  parAr.length > 50 && parAr.splice(50, parAr.length - 50);
+
+  const description = initParLength <= 50 ? parAr.join(" ") : parAr.join(" ").concat("...");
+
+  // -- -- -- //
+
+
   return (
     <figure className={`${classes["product-basic-details"]}`}>
-      <ProductQuickView
-        id={props.id}
-        productNameDashed={productNameDashed}
-        imagesFolder={props.imagesFolder}
-        images={props.images}
-      />
+      <div className={classes.image}>
+        <ProductQuickView
+          id={props.id}
+          productNameDashed={productNameDashed}
+          imagesFolder={props.imagesFolder}
+          images={props.images}
+          onCategorySearch={props.onCategorySearch}
+        />
+      </div>
       <figcaption>
-        <p className={`${classes["category-container"]}`}>
+        <p className={`${classes["category-container"]} category-container`}>
           {props.category.map((category, index) => (
             <Link
               href={{
@@ -104,6 +127,7 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
               }}
               passHref
               shallow
+              key={index}
             >
               <a
                 key={index}
@@ -118,6 +142,7 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
             </Link>
           ))}
         </p>
+
         <h2>
           <Link
             href={{
@@ -135,25 +160,13 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
             </a>
           </Link>
         </h2>
-        <span className={`${classes["price-range"]} price-ranges`}>
+
+        <span className={`${classes["price-range"]} price-range`}>
           {getPriceRange(props.variations)}
         </span>
-        <p>{props.description}</p>
-        {/* <Link
-          href={{
-            pathname: `/product/${productNameDashed}`,
-            query: {
-              id: props.id,
-            },
-          }}
-          passHref
-        >
-          <a
-            className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
-          >
-            {props.variations.length > 1 ? "Select Options" : "Add to Cart"}
-          </a>
-        </Link> */}
+
+        <p className={classes.description}>{description}</p>
+
         {props.variations.length > 1 && (
           <Link
             href={{
@@ -165,7 +178,7 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
             passHref
           >
             <a
-              className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
+              className={`${classes.btn} btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
             >
               Select Options
             </a>
@@ -181,14 +194,14 @@ const ProductBasicDetails: React.FC<ProductBasicModel> = (props) => {
               passHref
             >
               <a
-                className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
+                className={`${classes.btn} btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
               >
                 View Cart
               </a>
             </Link>
           ) : (
             <a
-              className={`btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
+              className={`${classes.btn} btn btn--thick-font btn--green btn--small btn--featured ${classes.btn}`}
               onClick={addToCartHandler}
             >
               Add to Cart

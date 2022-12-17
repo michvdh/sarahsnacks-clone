@@ -28,16 +28,19 @@ const ImageGallery: React.FC<ImageGalleryProps> = (props) => {
           // layout="fill"
           width="100px"
           height="150px"
+          alt="thumbnail large"
         />
       </div>
       <div className={`${classes['selections']}`}>
         {images.thumbnailSmall.map((thumbnail, index) => {
           return (
             <Image 
+              key={index}
               src={`${basePath}${thumbnail}`}
               width="100px"
               height="100px"
               onClick={()=> {imageNavHandler(index)}}
+              alt="thumbnail small"
             />
           )
         })}

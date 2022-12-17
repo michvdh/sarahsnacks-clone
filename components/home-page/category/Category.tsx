@@ -10,6 +10,8 @@ import classes from "./Category.module.scss";
 const Category: React.FC = () => {
   return (
     <section className={`${classes.category} category`}>
+
+      {/* Door image */}
       <div className={`${classes[`order-online`]} order-online`}>
         <div>
           <div className={classes[`image-container`]}>
@@ -32,6 +34,7 @@ const Category: React.FC = () => {
           </div>
         </div>
       </div>
+
       <div className={`${classes[`feel-good`]} feel-good`}>
         <div className={classes[`image-container`]}>
           <Image

@@ -9,6 +9,7 @@ import classes from "./ProductCompleteDetails.module.scss";
 import AddToCartConfirmation from "./AddToCartConfirmation";
 import { useSelector, useDispatch } from "react-redux";
 import ImageGalleryEmbla from "../ImageGalleryEmbla";
+import ImageGalleryEmblaThumbnail from "../ImageGalleryEmblaThumbnail";
 
 
 const ProductCompleteDetails: React.FC<{product: ProductsDBModel}> = (props) => {
@@ -33,6 +34,7 @@ const ProductCompleteDetails: React.FC<{product: ProductsDBModel}> = (props) => 
 
   return (
     <div className={`${classes['product-complete-details']}`}>
+
       {/* Upper */}
       <div className={`${classes.upper}`}>
         {addToCartConfirmation && 
@@ -41,11 +43,11 @@ const ProductCompleteDetails: React.FC<{product: ProductsDBModel}> = (props) => 
             productName={newItemProductName}
           />
         }
+
         <div className={`${classes['upper__main']}`}>
-          {/* <ImageGallery images={product.images} /> */}
-          <ImageGalleryEmbla 
+          <ImageGalleryEmblaThumbnail 
             images={product.images}
-            navType="image" // navType = "dot" or "image"
+            className={''}
           />
           <MainDescription
             id={product.id}
@@ -54,14 +56,19 @@ const ProductCompleteDetails: React.FC<{product: ProductsDBModel}> = (props) => 
             nameColor={product.nameColor}
             category={product.category}
             mainDescription={product.mainDescription}
+            subDescription={product.subDescription}
             variations={product.variations}
             imagesFolder={product.images.folderName} // to be used by cart
             image={product.images.thumbnailSmall[0]} // to be used by cart
             selectionDetails={additionalInfoHandler}
             confirmation={confirmationHandler}
+            className={''}
+            onCategorySearch={(category) => {}} // dummy value
+            onClick={(e) => {}} // dummy value
           />
         </div>
       </div>
+
       {/* Lower */}
       <div className={`${classes.lower}`}>
         <AdditionalInfo

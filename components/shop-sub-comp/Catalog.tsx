@@ -7,6 +7,7 @@ import classes from "./Catalog.module.scss";
 import { Fragment, useEffect, useState } from "react";
 import { ProductsDBModel } from "../../model/productsDBModel.model";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
   const router = useRouter();
@@ -23,15 +24,15 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
   let clearCategory: boolean = false;
   // let defaultSort: boolean = true;
 
-  const [displayType, setDisplayType] = useState("min-details");
+  const [displayType, setDisplayType] = useState<string | string[]>("min-details");
     // options: ProductMinDetails and ProductBasicDetails
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [displayCount, setDisplayCount] = useState("12");
+  const [displayCount, setDisplayCount] = useState<string | string[]>("12");
     // options: 12, 24, all (all is arrayLength)
 
-  const [productSort, setProductSort] = useState("default");
+  const [productSort, setProductSort] = useState<string | string[]>("default");
   const [sortChanged, setSortChanged] = useState(false);
     // the logic for sortChanged seems off because there will be no empty value
 
@@ -47,11 +48,11 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
   // shallowRouting helper function
   const shallowRouting = ( 
       category: string | string[], 
-      keyword: string, 
+      keyword: string | string[], 
       page: number, 
-      sort: string, 
-      display: string,
-      style: string
+      sort: string | string[], 
+      display: string | string[],
+      style: string | string[]
     ) => {
 
     router.push(
@@ -80,16 +81,16 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     setCurrentPage(clickedPage);
 
     if (categorySearch !== "" || undefined) {
-      shallowRouting(categorySearch, "", clickedPage, productSort, displayCount);
+      shallowRouting(categorySearch, "", clickedPage, productSort, displayCount, "");
       return;
     } 
     
     if (keywordSearch !== "" || undefined) {
-      shallowRouting("", keywordSearch, clickedPage, productSort, displayCount);
+      shallowRouting("", keywordSearch, clickedPage, productSort, displayCount, "");
       return;
     }
 
-    shallowRouting("", "", clickedPage, productSort, displayCount);
+    shallowRouting("", "", clickedPage, productSort, displayCount, "");
     return;
   };
 
@@ -101,7 +102,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     if (categorySearch) {
       shallowRouting(categorySearch, "", currentPage, productSort, itemCount, displayType);
       return;
-    } 
+    }
     
     if (keywordSearch) {
       shallowRouting("", keywordSearch, currentPage, productSort, itemCount, displayType);
@@ -227,7 +228,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
       summarizedList.push([id, price]);
     });
 
-    const processSorting = (sortType: string) => {
+    const processSorting = (sortType: string | string[]) => {
       let tempSortedProducts: ProductsDBModel[] = [];
 
       if (sortType !== "default") {
@@ -263,12 +264,15 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     const tempSourceList = sortChanged
       ? sortedProducts : (filteredProducts.length === 0 ? products : filteredProducts);
 
-    if (displayCount === "All") {
+    
+    if (displayCount === "ALL") {
       totalPages = 1;
       pageControlledProductList = tempSourceList;
+
+      return;
     }
 
-    if (tempSourceList.length < +displayCount) {
+    if (displayCount !== "ALL" && tempSourceList.length < +displayCount) {
       totalPages = 1;
       pageControlledProductList = [];
 
@@ -282,7 +286,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
       return;
     }
 
-    if (tempSourceList.length > +displayCount) {
+    if (displayCount !== "ALL" && tempSourceList.length > +displayCount) {
       const batch = +displayCount * currentPage; // ex. 12 * 1 = 12 .. 24 .. 36
       totalPages = Math.ceil(tempSourceList.length / +displayCount); // 34/24 .. 34/12
       const firstItemInBatch = batch - +displayCount; // starting value is 0 .. 12.. 24
@@ -335,15 +339,15 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
 
   hasResults && applyPagination();
 
-
   // useEffect is designed to work for links that were copied to a new tab or session
   useEffect(() => {
+
     if (!isReady) return;
 
     !resultsReady && setResultsReady(true);
 
     if (router.query.category) {
-      shallowRouting(router.query.category, "", router.query.page, router.query.sort, router.query.display, router.query.style);
+      shallowRouting(router.query.category, "", +router.query.page, router.query.sort, router.query.display, router.query.style);
       !categorySearchTriggered && setCategorySearchTriggered(true);
       setCategorySearch(router.query.category.toString());
       setProductSort(router.query.sort);
@@ -355,7 +359,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     }
 
     if (router.query.keyword) {
-      shallowRouting("", router.query.keyword, router.query.page, router.query.sort, router.query.display, router.query.style);
+      shallowRouting("", router.query.keyword, +router.query.page, router.query.sort, router.query.display, router.query.style);
       !keywordSearchTriggered && setKeywordSearchTriggered(true);
       setKeywordSearch(router.query.keyword.toString());
       setProductSort(router.query.sort);
@@ -367,7 +371,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     }
 
     if (!router.query.keyword && !router.query.category) {
-      shallowRouting("", "", router.query.page, router.query.sort, router.query.display, router.query.style);
+      shallowRouting("", "", +router.query.page, router.query.sort, router.query.display, router.query.style);
       router.query.sort && setProductSort(router.query.sort);
       router.query.sort && setSortChanged(true);
       router.query.page && setCurrentPage(+router.query.page);
@@ -380,33 +384,39 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
 
 
   return (
-    <main className={`main`}>
-      <section className={`${classes.catalog} catalog`}>
-        <SearchPane
-          onKeywordSearch={keywordSearchHandler}
-          onClearKeyword={clearKeyword}
-          onCategorySearch={categorySearchHandler}
-          onClearCategory={clearCategory}
-          categoryInput={categorySearch}
-          keywordInput={keywordSearch}
-        />
-        <ResultsPane
-          showProducts={hasResults ? pageControlledProductList : []}
-          onProductSort={productSortHandler}
-          onDisplayCount={displayCountHandler}
-          onPageBtnClick={pageControlHandler}
-          onCategorySearch={categorySearchHandler}
-          onChangeDisplayType={displayTypeHandler}
-          displayType={displayType}
-          totalPages={totalPages}
-          resultsReady={resultsReady}
-          sortInput={productSort}
-          displayCountInput={displayCount}
-          pageInput={currentPage}
-        />
-        <div>{/* RecentlyViewed */}</div>
-      </section>
-    </main>
+    <Fragment>
+      <Head>
+        <title>Shop - Sarah&apos;s Snacks</title>
+        <link rel="shortcut icon" href="/sarahsnacks-fav.png" />
+      </Head>
+      <main className={`main`}>
+        <section className={`${classes.catalog} catalog`}>
+          <SearchPane
+            onKeywordSearch={keywordSearchHandler}
+            onClearKeyword={clearKeyword}
+            onCategorySearch={categorySearchHandler}
+            onClearCategory={clearCategory}
+            categoryInput={categorySearch}
+            keywordInput={keywordSearch}
+          />
+          <ResultsPane
+            showProducts={hasResults ? pageControlledProductList : []}
+            onProductSort={productSortHandler}
+            onDisplayCount={displayCountHandler}
+            onPageBtnClick={pageControlHandler}
+            onCategorySearch={categorySearchHandler}
+            onChangeDisplayType={displayTypeHandler}
+            displayType={displayType}
+            totalPages={totalPages}
+            resultsReady={resultsReady}
+            sortInput={productSort}
+            displayCountInput={displayCount}
+            pageInput={currentPage}
+          />
+          {/* <div>RecentlyViewed</div> */}
+        </section>
+      </main>
+    </Fragment>
   );
 };
 

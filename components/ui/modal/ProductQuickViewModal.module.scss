@@ -1,15 +1,68 @@
 @import "../../../styles/variables";
+@import "../../../styles/mixins";
 
-.product-qv-overlay {
+.product-qv-modal {
   position: fixed;
-  background-color: silver;
-  top: 30vh;
-  left: 10%;
-  width: 80%;
-  z-index: 999;
-  border: 1px solid black;
+  background-color: $overlay--dark;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 700;
+  vertical-align: baseline;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.product-qv-container {
+  position: absolute;
+  width: 100%;
+  top: 10vh;
+  vertical-align: baseline;
+
+  @include respond(screen-840) {
+    top: 20vh;
+  }
+
+  // &::before {
+  //   content: "";
+  //   display: inline-block;
+  //   height: 100%;
+  //   vertical-align: middle;
+  // }
+}
+
+.product-qv-wrap {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: left;
+  z-index: 710;
+  margin-bottom: 3rem;
+  width: 100%;
+  // background-color: red;
+}
+
+.product-qv-inner {
+  background-color: white;
+  z-index: 705;
   display: flex;
   flex-direction: column;
+  cursor: initial;
+  width: 95%;
+
+  @include respond(screen-1024) {
+    width: 90%;
+  }
+
+  @include respond(screen-1536) {
+    width: 1200px;
+  }
+
+  position: relative;
+  margin: 0 auto;
+  vertical-align: baseline;
 
   animation-duration: 0.4s;
   animation-iteration-count: 1;
@@ -21,14 +74,72 @@
 
   // I can also use fade instead of scale for a gentler UI effect
 
-  .close {
-    display: flex;
-    justify-content: right;
-  }
-
   .main {
+    pointer-events: initial;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    position: relative;
+    // display: grid;
+    // grid-template-columns: 5fr 1fr 0.5fr;
+
+    @include respond(screen-840) {
+      column-gap: 2rem;
+      flex-direction: row;
+      justify-content: initial;
+    }
+
+    .image-gallery-embla {
+      min-width: 100% !important;
+      max-width: 100% !important;
+
+      @include respond(screen-480) {
+        min-width: 80% !important;
+        max-width: 80% !important;
+      }
+
+      @include respond(screen-560) {
+        min-width: 40rem !important;
+        max-width: 40rem !important;
+      }
+    }
+
+    .main-description {
+      max-width: 90%;
+      margin: 0 auto;
+
+      @include respond(screen-730) {
+        max-width: 85%;
+        margin: 0 auto;
+      }
+
+      @include respond(screen-730) {
+        max-width: 85%;
+        margin: 0 auto;
+      }
+
+      @include respond(screen-840) {
+        max-width: initial;
+        margin: initial;
+      }
+    }
+    .btn--close {
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      right: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: $font-header--regular;
+      background: none;
+      border: none;
+      color: $darker-gray;
+      transition: all .2s;
+
+      &:hover {
+        color: $black;
+      }
+    }
   }
 }
 
@@ -44,14 +155,24 @@
   // 0%   {transform: scale(0);}
   // 100% {transform: scale(1);}
 
-  0%   {opacity: 0;}
-  100% {opacity: 1;}
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes close {
   // 0%   {transform: scale(1);}
   // 100% {transform: scale(0);}
 
-  0%   {opacity: 1;}
-  100% {opacity: 0;}
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }

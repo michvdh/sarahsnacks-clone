@@ -1,0 +1,111 @@
+@mixin respond($breakpoint) {
+
+  @if $breakpoint == screen-360 {
+    @media only screen and (min-width: 360px) { @content };
+  }
+
+  @if $breakpoint == screen-380 {
+    @media only screen and (min-width: 380px) { @content };
+  }
+
+  @if $breakpoint == screen-400 {
+    @media only screen and (min-width: 400px) { @content };
+  }
+
+  @if $breakpoint == screen-430 {
+    @media only screen and (min-width: 430px) { @content };
+  }
+
+  @if $breakpoint == screen-480 {
+    @media only screen and (min-width: 480px) { @content };
+  }
+
+  @if $breakpoint == screen-520 {
+    @media only screen and (min-width: 520px) { @content };
+  }
+
+  @if $breakpoint == screen-560 {
+    @media only screen and (min-width: 560px) { @content };
+  }
+
+  @if $breakpoint == screen-600 {
+    @media only screen and (min-width: 600px) { @content };
+  }
+
+  @if $breakpoint == screen-620 {
+    @media only screen and (min-width: 620px) { @content };
+  }
+
+  @if $breakpoint == screen-650 {
+    @media only screen and (min-width: 650px) { @content };
+  }
+
+  @if $breakpoint == screen-700 {
+    @media only screen and (min-width: 700px) { @content };
+  }
+
+  @if $breakpoint == screen-730 {
+    @media only screen and (min-width: 730px) { @content };
+  }
+
+  @if $breakpoint == screen-760 {
+    @media only screen and (min-width: 760px) { @content };
+  }
+
+  @if $breakpoint == screen-800 {
+    @media only screen and (min-width: 800px) { @content };
+  }
+
+  @if $breakpoint == screen-840 {
+    @media only screen and (min-width: 840px) { @content };
+  }
+
+  @if $breakpoint == screen-880 {
+    @media only screen and (min-width: 880px) { @content };
+  }
+
+  @if $breakpoint == screen-900 {
+    @media only screen and (min-width: 900px) { @content };
+  }
+
+  @if $breakpoint == screen-960 {
+    @media only screen and (min-width: 960px) { @content };
+  }
+
+  @if $breakpoint == screen-1024 {
+    @media only screen and (min-width: 1024px) { @content };
+  }
+
+  @if $breakpoint == screen-1120 {
+    @media only screen and (min-width: 1120px) { @content };
+  }
+
+  @if $breakpoint == screen-1150 {
+    @media only screen and (min-width: 1150px) { @content };
+  }
+
+  @if $breakpoint == screen-1200 {
+    @media only screen and (min-width: 1200px) { @content };
+  }
+
+  @if $breakpoint == screen-1250 {
+    @media only screen and (min-width: 1250px) { @content };
+  }
+
+  @if $breakpoint == screen-1366 {
+    @media only screen and (min-width: 1366px) { @content };
+  }
+
+  @if $breakpoint == screen-1536 {
+    @media only screen and (min-width: 1536px) { @content };
+  }
+
+  @if $breakpoint == screen-1600 {
+    @media only screen and (min-width: 1600px) { @content };
+  }
+
+  @if $breakpoint == screen-1980 {
+    @media only screen and (min-width: 1980px) { @content };
+  }
+
+}

@@ -1,11 +1,24 @@
+@import "../../../styles/mixins";
+
 .favorites {
   margin: 10rem 0;
   position: relative;
   height: 100%;
-  // border: 1px solid black;
   display: flex;
-  flex-direction: row;
-  column-gap: 5rem;
+  flex-direction: column-reverse;
+  row-gap: 5rem;
+  width: 100%;
+  
+  @include respond(screen-960) {
+    flex-direction: row;
+    column-gap: 5rem;
+  }
+
+  @include respond(screen-1600) {
+    width: 1600px;
+    margin: 10rem auto;
+  }
+  
 
   .carousel {
     margin: 0 1rem;
@@ -14,10 +27,16 @@
   .side {
     display: flex;
     flex-direction: row;
-    // position: relative;
+    position: relative;
+    // overflow: hidden;
 
     .side-text {
       max-width: 70%;
+      margin-left: 3rem;
+
+      @include respond(screen-960) {
+        margin-left: 0;
+      }
 
       p {
         line-height: 3rem;
@@ -26,16 +45,53 @@
     }
 
     .image-container {
-      position: relative;
+      // position: relative;
+      position: absolute;
+      z-index: -1;
+      top: -15rem;
+      display: none;
+      right: 0rem;
+      overflow: hidden;
+
+
+      @include respond(screen-480) {
+        display: initial;
+      }
+
+      @include respond(screen-1366) {
+        overflow: initial;
+      }
+
+      // @include respond(screen-960) {
+      //   right: 0;
+      // }
+      
+      // @include respond(screen-1024) {
+      //   right: 0;
+      // }
 
       div {
-        // position: relative;
-        z-index: -1;
+        position: relative;
         width: 28rem;
-        height: 120%;
-        position: absolute;
-        right: -25rem;
-        top: -15rem;
+        // height: 120%;
+        padding-top: 180%;
+        right: -10rem;
+
+        @include respond(screen-480) {
+          right: -18rem;
+        }
+
+        @include respond(screen-620) {
+          right: -11rem;
+        }
+
+        @include respond(screen-960) {
+          right: -17rem;
+        }
+
+        @include respond(screen-1250) {
+          right: -12rem;
+        }
 
         .image {
           object-fit: contain;

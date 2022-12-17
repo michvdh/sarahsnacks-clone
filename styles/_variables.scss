@@ -12,14 +12,35 @@
 // $bright-orange
 // $regular-orange
 
+@import "./mixins";
+
+// gray - #ccc;
+// border-gray - #eaeaea
+
 $black: #333333;
+$black-fade: #555555;
+$black-fade-2: #999999;
 $white: #ffffff;
+$border-gray: #eaeaea;
+$lighter-gray: #fcfcfc;
 $light-gray: #f3f3f3;
 $dark-gray: #ebebeb;
-$dark-brown: #4e3629;
-$light-brown: #814029;
+$darker-gray: #848282;
 $dark-green: #009288;
 $light-green: #28B4AA;
+$faded-purple: #b1befd;
+
+// $dark-brown: #614219;
+$dark-brown: #4e3629;
+$light-brown: #814029;
+$gold: #c69214;
+$dark-leaf-green: #008264;
+$dark-seaweed-green: #949300;
+$light-seaweed-green: #cfc539;
+$red: #902051;
+$bright-orange: #e85c00;
+$regular-orange: #c95e00;
+
 
 $font-weight--thin: 100;
 $font-weight--extra-light: 200;
@@ -34,6 +55,7 @@ $font-header--extra-large: 9.7rem;
 $font-header--large: 5rem;
 $font-header--regular: 4rem;
 $font-header--small: 3.6rem;
+$font-header--xs: 2.4rem;
 $font-header--extra-small: 2rem;
 
 $font-size--regular: 1.6rem;

@@ -1,9 +1,9 @@
 import { createSlice, current } from "@reduxjs/toolkit";
-import {cartStateModel} from  '../model/cartStateModel.model';
+import {CartStateModel} from  '../model/cartStateModel.model';
 // current is used so that we can get the "current state" for debugging
 
 
-const initialCartState: cartStateModel = {
+const initialCartState: CartStateModel = {
   cartItems: [],
   totalQty: 0,
   totalPrice: 0,
@@ -47,7 +47,7 @@ const cartSlice = createSlice({
       const now = (new Date()).getTime();
 
       const existingItem = state.cartItems.find(
-        (item) => item.id === newItem.id
+        (item) => ((item.id === newItem.id) && (item.varSize === newItem.varSize))
       );
 
       if (!existingItem) {
@@ -126,10 +126,6 @@ const cartSlice = createSlice({
 
       typeof window !== "undefined" &&
         localStorage.setItem("cartLS", JSON.stringify(state));
-    },
-
-    checkCart(state) {
-      console.log(current(state));
     },
   },
 });

@@ -3,9 +3,31 @@
 .btn {
   cursor: pointer;
   border: none;
+  color: $white;
+  text-transform: uppercase;
+  font-size: $font-size--2xs;
+  // letter-spacing: 0.15rem;
+  letter-spacing: 0.5px;
+  transition: all .2s;
+  font-weight: $font-weight--medium;
+
+  span {
+    color: $white;
+    font-size: $font-size--2xs;
+    letter-spacing: 0.15rem;
+  }
+
+  &--thick-font {
+    font-weight: $font-weight--bold;
+  }
+
+  &--small {
+    font-size: $font-size--3xs;
+  }
 
   &--disabled {
-    cursor: not-allowed;
+    cursor: not-allowed !important;
+    background-color: $black-fade-2 !important;
   }
 
   &--large {
@@ -16,8 +38,16 @@
     padding: 1rem 2rem;
   }
 
+  &--thick {
+    padding: 1.5rem 2rem;
+  }
+
+  &--thin {
+    padding: 0.5rem 1.75rem;
+  }
+
   &--small {
-    padding: 0.5rem 1rem;
+    padding: 1rem 1.5rem;
   }
 
   &--brown {
@@ -36,6 +66,16 @@
     }
   }
 
+  &--gray {
+    color: $black-fade;
+    background-color: $light-gray;
+
+    &:hover {
+      color: $black;
+      background-color: $dark-gray;
+    }
+  }
+
   &--green {
     background-color: $dark-green;
   
@@ -47,4 +87,13 @@
   &--featured {
     max-width: 16rem;
   }
+
+  &--rounded {
+    border-radius: 10rem;
+  }
+
+  &--curved { // curve only on the corners
+    border-radius: 0.3rem;
+  }
 }
+

@@ -1,0 +1,126 @@
+@import "../../../styles/mixins";
+
+.embla {
+  position: relative;
+  background-color: #f7f7f7;
+  // padding: 20px;
+  min-width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include respond(screen-560) {
+    min-width: 75%;
+    max-width: 75%;
+  }
+
+  @include respond(screen-760) {
+    min-width: 250px;
+    max-width: 250px;
+  }
+
+  @include respond(screen-960) {
+    min-width: 450px;
+    max-width: 450px;
+  }
+}
+
+.embla__viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.embla__viewport.is-draggable {
+  cursor: move;
+  cursor: grab;
+}
+
+.embla__viewport.is-dragging {
+  cursor: grabbing;
+}
+
+.embla__container {
+  display: flex;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  margin-left: -10px;
+
+  //560 - 760
+
+  @include respond(screen-560) {
+    margin-top: 1rem;
+  }
+
+  @include respond(screen-760) {
+    margin-top: 0;
+  }
+}
+
+.embla__slide {
+  padding-left: 10px;
+  min-width: 100%;
+  position: relative;
+}
+
+.embla__slide__inner {
+  position: relative;
+  overflow: hidden;
+}
+
+.embla__slide__img-container {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  // background-color: cornflowerblue;
+}
+
+.embla__slide__img {
+  transition: opacity 0.25s ease-in-out;
+  object-fit: cover;
+  width: auto;
+  min-height: 100%;
+  min-width: 100%;
+  max-width: none;
+  // background-color: chartreuse;
+}
+
+.embla--thumb {
+  padding-top: 0;
+  margin-top: -12px;
+}
+
+.embla__container--thumb {
+  cursor: default;
+  margin-left: -8px;
+}
+
+.embla__slide--thumb {
+  padding-left: 8px;
+  min-width: 20%;
+}
+
+.embla__slide__inner--thumb {
+  touch-action: manipulation;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  margin: 0;
+  padding: 0;
+  height: 100px;
+  width: 100%;
+  background-color: transparent;
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.embla__slide__thumbnail {
+  opacity: 0.2;
+  transition: opacity 0.2s;
+}
+
+.embla__slide--thumb.is-selected .embla__slide__thumbnail {
+  opacity: 1;
+}

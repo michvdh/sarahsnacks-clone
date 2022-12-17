@@ -2,8 +2,27 @@
 
 // styles directly applied to image is handled by ui/FavoritesCarouselEmbla/embla.module.scss -> .embla__slide__img
 
+
 .image-container {
-  position: relative;
+
+  .link {
+    // display: inline-block;
+    // min-width: 100%;
+    // min-height: 100%;
+    // position: relative; 
+
+    // span {
+    //   display: inline-block;
+    //   position: relative;
+    //   width: 100%;
+    //   height: 100%;
+    //   // padding-top: 50%;
+    // }
+  }
+
+  .image {
+    object-fit: cover;
+  }
 
   .image--back {
     opacity: 0;
@@ -15,6 +34,11 @@
     width: 100%;
     text-align: center;
     opacity: 0;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .2s;
   }
 
   &:hover { 
@@ -46,7 +70,7 @@
   top: 0;
   left: 0;
   background-color: $overlay--dark;
-  z-index: 9999;
+  z-index: 400;
 }
 
 .spinner {
@@ -83,4 +107,3 @@
   from {transform: rotate(0deg);}
   to {transform: rotate(359deg);}
 }
-

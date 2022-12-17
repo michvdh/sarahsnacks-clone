@@ -1,6 +1,51 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
 .banner {
-  border: 1px solid black;
+  border: 1px solid $border-gray;
   display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  text-align: center;
   padding: 1rem 2rem;
-  justify-content: space-between;
+  margin-bottom: 3rem;
+
+  @include respond(screen-650) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .confirmation-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include respond(screen-650) {
+      justify-content: initial;
+    }
+
+    .icon-container {
+      display: none;
+
+      @include respond(screen-480) {
+        display: flex;
+        align-items: center;
+        margin-right: 0.5rem;
+
+        svg {
+          filter: invert(58%) sepia(0%) saturate(0%) hue-rotate(330deg) brightness(88%) contrast(85%);
+        }
+      }
+    }
+
+    p {
+      color: $black-fade;
+      font-size: $font-size--xs;
+
+      span {
+        color: inherit;
+        font-size: inherit;
+      }
+    }
+  }
 }

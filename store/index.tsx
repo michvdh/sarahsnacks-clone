@@ -2,13 +2,11 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import ioReducer from "./intersectionObserver"
 import cartReducer from "./cart";
-// import modalReducer from "./modal";
 
 const store = configureStore({
   reducer: {
-    io: ioReducer,
+    io: ioReducer, // intersection observer
     cart: cartReducer,
-    // modal: modalReducer
   }
 });
 

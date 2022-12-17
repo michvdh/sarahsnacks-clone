@@ -1,4 +1,5 @@
 @import "../../../styles/variables";
+@import "../../../styles/mixins";
 
 .order-online {
   grid-area: online;
@@ -8,22 +9,49 @@
 }
 
 .category {
-  display: grid;
-  grid-template-areas: "online feel";
-  grid-template-columns: 1.2fr 2fr;
-  column-gap: 7%;
+  display: flex;
+  flex-direction: column-reverse;
+  row-gap: 5rem;
   position: relative;
-  top: -5rem;
-  z-index: 2;
+
+
+  @include respond(screen-800) {
+    display: grid;
+    grid-template-areas: "online feel";
+    grid-template-columns: 1.5fr 2fr;
+    column-gap: 7%;
+    position: relative;
+    top: -5rem;
+    z-index: 2;
+  }
+
+  @include respond(screen-1250) {
+    grid-template-columns: 1.2fr 2fr;
+  }
 
   .order-online {
     position: relative;
+    min-height: 44rem;
+    z-index: 5;
+    top: -2rem;
+
+    @include respond(screen-800) {
+      top: 0;
+    }
 
     .image-container {
       position: absolute;
       bottom: 0;
       width: 100%;
-      height: 80%;
+      height: 100%;
+
+      @include respond(screen-800) {
+        height: 65%;
+      }
+
+      @include respond(screen-960) {
+        height: 70%;
+      }
 
       .overlay {
         width: 100%;
@@ -40,14 +68,18 @@
       .text-container {
         display: flex;
         text-align: center;
-        justify-content: center;        
+        justify-content: center;
 
         h2 {
           border-top: 1px solid $white;
           border-bottom: 1px solid $white;
           padding: 5%;
           position: absolute;
-          top: 50%;
+          top: 40%;
+
+          @include respond(screen-800) {
+            top: 50%;
+          }
 
           span {
             text-align: center;
@@ -76,11 +108,31 @@
   .feel-good {
     display: flex;
     flex-direction: column;
+    top: -2rem;
+    position: relative;
+
+    @include respond(screen-800) {
+      top: 0;
+    }
 
     .image-container {
       position: relative;
       width: 100%;
-      height: 20em;
+      height: 35rem;
+      z-index: 99;
+
+      @include respond(screen-800) {
+        top: 0;
+        height: 27rem;
+      }
+
+      @include respond(screen-900) {
+        height: 30rem;
+      }
+
+      @include respond(screen-960) {
+        height: 35rem;
+      }
 
       .image {
         object-fit: cover;
