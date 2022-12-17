@@ -12,10 +12,10 @@ interface ResultsPaneProps {
   onPageBtnClick: (clickedPage: number) => void;
   onCategorySearch: (category: string) => void;
   onChangeDisplayType: (detailLevel: string) => void;
-  displayType: string;
+  displayType: string | string[];
   resultsReady: boolean;
-  sortInput: string;
-  displayCountInput: string;
+  sortInput: string | string[];
+  displayCountInput: string | string[];
   pageInput: number;
 }
 

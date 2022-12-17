@@ -4,12 +4,25 @@
 
 
 .image-container {
-  position: relative;
 
-  // .link {
-  //   display: inline-block;
-  //   position: relative;
-  // }
+  .link {
+    // display: inline-block;
+    // min-width: 100%;
+    // min-height: 100%;
+    // position: relative; 
+
+    // span {
+    //   display: inline-block;
+    //   position: relative;
+    //   width: 100%;
+    //   height: 100%;
+    //   // padding-top: 50%;
+    // }
+  }
+
+  .image {
+    object-fit: cover;
+  }
 
   .image--back {
     opacity: 0;

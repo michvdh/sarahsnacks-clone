@@ -23,15 +23,15 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
   let clearCategory: boolean = false;
   // let defaultSort: boolean = true;
 
-  const [displayType, setDisplayType] = useState("min-details");
+  const [displayType, setDisplayType] = useState<string | string[]>("min-details");
     // options: ProductMinDetails and ProductBasicDetails
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [displayCount, setDisplayCount] = useState("12");
+  const [displayCount, setDisplayCount] = useState<string | string[]>("12");
     // options: 12, 24, all (all is arrayLength)
 
-  const [productSort, setProductSort] = useState("default");
+  const [productSort, setProductSort] = useState<string | string[]>("default");
   const [sortChanged, setSortChanged] = useState(false);
     // the logic for sortChanged seems off because there will be no empty value
 
@@ -47,11 +47,11 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
   // shallowRouting helper function
   const shallowRouting = ( 
       category: string | string[], 
-      keyword: string, 
+      keyword: string | string[], 
       page: number, 
-      sort: string, 
-      display: string,
-      style: string
+      sort: string | string[], 
+      display: string | string[],
+      style: string | string[]
     ) => {
 
     router.push(
@@ -227,7 +227,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
       summarizedList.push([id, price]);
     });
 
-    const processSorting = (sortType: string) => {
+    const processSorting = (sortType: string | string[]) => {
       let tempSortedProducts: ProductsDBModel[] = [];
 
       if (sortType !== "default") {
@@ -346,7 +346,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     !resultsReady && setResultsReady(true);
 
     if (router.query.category) {
-      shallowRouting(router.query.category, "", router.query.page, router.query.sort, router.query.display, router.query.style);
+      shallowRouting(router.query.category, "", +router.query.page, router.query.sort, router.query.display, router.query.style);
       !categorySearchTriggered && setCategorySearchTriggered(true);
       setCategorySearch(router.query.category.toString());
       setProductSort(router.query.sort);
@@ -358,7 +358,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     }
 
     if (router.query.keyword) {
-      shallowRouting("", router.query.keyword, router.query.page, router.query.sort, router.query.display, router.query.style);
+      shallowRouting("", router.query.keyword, +router.query.page, router.query.sort, router.query.display, router.query.style);
       !keywordSearchTriggered && setKeywordSearchTriggered(true);
       setKeywordSearch(router.query.keyword.toString());
       setProductSort(router.query.sort);
@@ -370,7 +370,7 @@ const Catalog: React.FC<{ allProducts: ProductsDBModel[] }> = (props) => {
     }
 
     if (!router.query.keyword && !router.query.category) {
-      shallowRouting("", "", router.query.page, router.query.sort, router.query.display, router.query.style);
+      shallowRouting("", "", +router.query.page, router.query.sort, router.query.display, router.query.style);
       router.query.sort && setProductSort(router.query.sort);
       router.query.sort && setSortChanged(true);
       router.query.page && setCurrentPage(+router.query.page);

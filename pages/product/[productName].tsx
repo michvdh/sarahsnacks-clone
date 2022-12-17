@@ -16,8 +16,23 @@ import { useEffect, useState } from "react";
 import Custom404 from "../404";
 import { Fragment } from "react";
 import Loading from "../../components/ui/Loading";
+// import { getAllProducts } from "../../components/helpers/apiUtils";
+// import { ProductsDBModel } from "../../model/productsDBModel.model";
 
-const Product = () => {
+// I NEED TO USE GETSTATICPATHS HERE INSTEAD OF GETSTATICPROPS
+
+// export async function getStaticProps() {
+//   const allData = await getAllProducts();
+
+//   return {
+//     props: {
+//       allData: allData,
+//     },
+//   };
+// }
+
+// const Product: React.FC<{allData: ProductsDBModel[]}> = (props) => {
+const Product: React.FC = () => {
   const router = useRouter();
   const isReady = router.isReady;
   const queriedProductID = router.query.id;
@@ -33,8 +48,10 @@ const Product = () => {
     setProductsDB(data);
   }
 
+
   useEffect(() => {
     allData();
+    // setProductsDB(props.allData);
   }, []);
 
   // get the index of the product

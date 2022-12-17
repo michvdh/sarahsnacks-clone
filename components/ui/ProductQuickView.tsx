@@ -52,32 +52,33 @@ const ProductQuickView: React.FC<QuickViewProps> = (props) => {
         passHref
       >
         <a className={`${classes.link}`}>
-          <Image
-            className={`
-                  ${classes["image--front"]}
-                  ${classes["image"]}
-                  ${emblaClass["embla__slide__img"]}
-                `}
-            src={`${basePath}${props.images[0]}`}
-            alt={props.productNameDashed}
-            layout="fill"
-          />
-
-          {numberOfImages > 1 ? (
+          {/* <span> */}
             <Image
               className={`
-                        ${classes["image--back"]}
-                        ${classes["image"]}
-                        ${emblaClass["embla__slide__img"]}
-          
-                      `}
-              src={`${basePath}${props.images[1]}`}
+                    ${classes["image--front"]}
+                    ${classes["image"]}
+                    ${emblaClass["embla__slide__img"]}
+                  `}
+              src={`${basePath}${props.images[0]}`}
               alt={props.productNameDashed}
               layout="fill"
             />
-          ) : (
-            ""
-          )}
+            {numberOfImages > 1 ? (
+              <Image
+                className={`
+                          ${classes["image--back"]}
+                          ${classes["image"]}
+                          ${emblaClass["embla__slide__img"]}
+            
+                        `}
+                src={`${basePath}${props.images[1]}`}
+                alt={props.productNameDashed}
+                layout="fill"
+              />
+            ) : (
+              ""
+            )}
+          {/* </span> */}
         </a>
       </Link>
 

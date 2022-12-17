@@ -13,15 +13,18 @@ import Image from "next/image";
 import capitalizeFirstLetter from "../../components/helpers/capitalizeFirstLetter";
 
 interface cartItemsInterface {
+  cartItems: CartItemsModel[];
   itemToUndoHandler: (item: CartItemsModel) => void;
 }
 
 const CartItems: React.FC<cartItemsInterface> = (props) => {
   const dispatch = useDispatch();
 
-  const cartItems = useSelector(
-    (state: { cart: CartStateModel }) => state.cart.cartItems
-  );
+  // const cartItems = useSelector(
+  //   (state: { cart: CartStateModel }) => state.cart.cartItems
+  // );
+
+  const cartItems = props.cartItems;
 
   const [inputId, setInputId] = useState(""); // id of the specific item being adjusted
   const [inputQty, setInputQty] = useState(1); // quantity of the specific item being adjusted
@@ -58,7 +61,6 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
       setShowQtyInputError(true);
     }
   };
-
 
   useEffect(() => {
     dispatch(
@@ -98,7 +100,6 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
           <tbody>
             {cartItems.map((item, index) => (
               <tr key={index} className={classes.row}>
-
                 {/* Remove button */}
                 <td className={`${classes["remove-btn-container"]}`}>
                   <div className={`${classes["remove-btn"]}`}>
@@ -157,7 +158,11 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
                       value={item.qty}
                       onChange={inputChangeHandler}
                       onBlur={inputExitHandler}
-                      className={`${classes["qty-control"]} ${classes.input} ${showQtyInputError && item.id === inputId && classes['input--error']}`}
+                      className={`${classes["qty-control"]} ${classes.input} ${
+                        showQtyInputError &&
+                        item.id === inputId &&
+                        classes["input--error"]
+                      }`}
                     />
                     <button
                       className={`${classes["qty-control"]} ${classes.btn}`}
@@ -178,7 +183,6 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
         </table>
       </div>
 
-
       {/* Cart Items Mobile */}
       <div className={`${classes["cart-items-mobile"]}`}>
         {cartItems.map((item, index) => (
@@ -191,7 +195,7 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
               </td>
             </tr>
             <tr>
-              <td className={`${classes['image-td']}`} colSpan={2}>
+              <td className={`${classes["image-td"]}`} colSpan={2}>
                 <div className={`${classes["image-container"]}`}>
                   <Image
                     src={`/images/products${item.imagesFolder}${item.image}`}
@@ -244,7 +248,11 @@ const CartItems: React.FC<cartItemsInterface> = (props) => {
                     value={item.qty}
                     onChange={inputChangeHandler}
                     onBlur={inputExitHandler}
-                    className={`${classes["qty-control"]} ${classes.input} ${showQtyInputError && item.id === inputId && classes['input--error']}`}
+                    className={`${classes["qty-control"]} ${classes.input} ${
+                      showQtyInputError &&
+                      item.id === inputId &&
+                      classes["input--error"]
+                    }`}
                   />
                   <button
                     className={`${classes["qty-control"]} ${classes.btn}`}

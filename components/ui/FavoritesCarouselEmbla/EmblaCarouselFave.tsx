@@ -10,14 +10,19 @@ interface ProductsProps {
   className: string;
 }
 
-const EmblaCarouselFave: React.FC<ProductsProps> = (props, slides, options = { loop: false }) => {
+// const EmblaCarouselFave: React.FC<ProductsProps> = (props, slides, options = { loop: false }) => {
+  const EmblaCarouselFave: React.FC<ProductsProps> = (props) => {
   
-  const autoplay = useRef(
-    Autoplay(
-      { delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true },
-      (emblaRoot) => emblaRoot.parentElement
-    )
-  );
+  // const autoplay = useRef(
+  //   Autoplay(
+  //     { delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true },
+  //     (emblaRoot) => emblaRoot.parentElement
+  //   )
+  // );
+  const options = { delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true };
+  // const autoplayRoot = (emblaRoot) => emblaRoot.parentElement;
+
+  const autoplay = useRef(Autoplay(options));
 
   const [emblaRef, embla] = useEmblaCarousel(
     {

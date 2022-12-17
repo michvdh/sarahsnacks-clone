@@ -10,9 +10,9 @@ interface ViewControlsProps {
   onDisplayCount: (itemCount: string) => void;
   // onReturnToDefaultSort: boolean;
   onChangeDisplayType: (displayType: string) => void;
-  sortInput: string;
-  displayCountInput: string;
-  displayType: string;
+  sortInput: string | string[];
+  displayCountInput: string | string[];
+  displayType: string | string[];
 }
 
 const ViewControls: React.FC<ViewControlsProps> = (props) => {
@@ -57,7 +57,7 @@ const ViewControls: React.FC<ViewControlsProps> = (props) => {
 
         {/* Sort - asc, desc, etc */}
         <div className={`${classes["sort-type"]}`}>
-          <form key={props.sortInput}>
+          <form>
             {/* <div className={classes.border}></div> */}
             <select
               onChange={(e) => {
@@ -100,7 +100,8 @@ const ViewControls: React.FC<ViewControlsProps> = (props) => {
           <li>
             <span
               onClick={(e) => {
-                paginationHandler(e.target.innerText);
+                const input = e.target as HTMLElement;
+                paginationHandler(input.innerText);
               }}
               className={props.displayCountInput === "12" ? classes.selected : ''}
             >
@@ -110,7 +111,8 @@ const ViewControls: React.FC<ViewControlsProps> = (props) => {
           <li>
             <span
               onClick={(e) => {
-                paginationHandler(e.target.innerText);
+                const input = e.target as HTMLElement;
+                paginationHandler(input.innerText);
               }}
               className={props.displayCountInput === "24" ? classes.selected : ''}
             >
@@ -120,7 +122,8 @@ const ViewControls: React.FC<ViewControlsProps> = (props) => {
           <li>
             <span
               onClick={(e) => {
-                paginationHandler(e.target.innerText);
+                const input = e.target as HTMLElement;
+                paginationHandler(input.innerText);
               }}
               className={props.displayCountInput === "ALL" ? classes.selected : ''}
             >
@@ -134,11 +137,3 @@ const ViewControls: React.FC<ViewControlsProps> = (props) => {
 };
 
 export default ViewControls;
-
-// ViewControls;
-//   ViewType;
-//   Sorting;
-//     GridView;
-//     ListView;
-//   ResultCountControl;
-//     12 / 24 / All;

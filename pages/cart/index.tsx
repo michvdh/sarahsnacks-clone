@@ -16,6 +16,8 @@ const Cart = () => {
     (state: { cart: CartStateModel }) => state.cart.cartItems
   );
 
+  console.log(cartItems);
+
   const dispatch = useDispatch();
   const [showUndoBox, setShowUndoBox] = useState(false);
   const [itemToUndo, setItemToUndo] = useState({
@@ -140,7 +142,7 @@ const Cart = () => {
 
         {cartItems.length > 0 && (
           <Fragment>
-            <CartItems itemToUndoHandler={itemToUndoHandler} />
+            <CartItems cartItems={cartItems} itemToUndoHandler={itemToUndoHandler} />
             <CartTotals />
           </Fragment>
         )}

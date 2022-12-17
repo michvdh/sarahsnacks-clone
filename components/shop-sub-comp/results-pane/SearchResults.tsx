@@ -5,7 +5,7 @@ import classes from "./SearchResults.module.scss";
 
 interface SearchResultsProps {
   showProducts: ProductsDBModel[] | [];
-  displayType: string;
+  displayType: string | string[];
   resultsReady: boolean;
   onCategorySearch: (category: string) => void;
 }
