@@ -65,6 +65,7 @@ const ProductCompleteDetails: React.FC<{product: ProductsDBModel}> = (props) => 
             className={''}
             onCategorySearch={(category) => {}} // dummy value
             onClick={(e) => {}} // dummy value
+            calledBy="ProductCompleteDetails"
           />
         </div>
       </div>

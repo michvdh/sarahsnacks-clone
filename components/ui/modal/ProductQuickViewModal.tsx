@@ -125,6 +125,7 @@ const ProductQuickViewModal: React.FC<ProductQuickViewModalInterface> = (
                     className={classes['main-description']}
                     onClick={closeHandler}
                     onCategorySearch={props.onCategorySearch}
+                    calledBy="ProductQuickViewModal"
                   />
                   <button className={classes['btn--close']} onClick={closeHandler}>×</button>
                 </div>

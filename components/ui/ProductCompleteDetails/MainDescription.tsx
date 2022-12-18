@@ -38,6 +38,7 @@ interface MainDescriptionProps {
   className: string;
   onClick: (e) => void;
   onCategorySearch: (category: string) => void;
+  calledBy: string;
 }
 
 const MainDescription: React.FC<MainDescriptionProps> = (props) => {
@@ -111,8 +112,11 @@ const MainDescription: React.FC<MainDescriptionProps> = (props) => {
   const addToCartHandler = () => {
 
     if (quantityInputRef && quantityInputRef.current && hasSelection) {
-      scrollToTop();
 
+      if(props.calledBy === "ProductCompleteDetails") {
+        scrollToTop();
+      }
+      
       dispatch(
         cartActions.addItem({
           id: props.id,
