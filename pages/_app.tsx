@@ -26,11 +26,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     const handleComplete = () => setLoading(false);
 
+    const handleCompleteWithTimeout = () => setTimeout(handleComplete, 500)
+
     // we start the loading the routeChangeStart
     // we can finish the loading at routeChangeComplete or routeChangeError
 
     router.events.on("routeChangeStart", handleStart);
-    router.events.on("routeChangeComplete", handleComplete);
+    router.events.on("routeChangeComplete", handleCompleteWithTimeout);
     router.events.on("routeChangeError", handleComplete);
 
     return () => {
