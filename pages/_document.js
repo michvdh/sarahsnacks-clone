@@ -17,6 +17,8 @@ export default class MyDocument extends Document {
             {/* QuickView Modal */}
             <div id="product-quick-view-root"></div>
 
+            {/* InDevelopmentModal */}
+            <div id="in-development-root"></div>
             <NextScript />
           </body>
       </Html>

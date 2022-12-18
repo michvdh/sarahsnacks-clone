@@ -5,6 +5,8 @@ import { cartActions } from "../../store/cart";
 import classes from "./CartPreviewOnHover.module.scss";
 import Link from "next/link";
 import changeToKebabCase from "../../components/helpers/changeToKebabCase";
+import { useState } from "react";
+import InDevelopmentModal from "./modal/InDevelopmentModal";
 
 interface CartPreviewInterface {
   className: string;
@@ -23,6 +25,13 @@ const CartPreviewOnHover: React.FC<CartPreviewInterface> = (props) => {
   };
 
   const cartItemsLength = cart.cartItems.length;
+
+  const [showInDevModal, setShowInDevModal] = useState(false);
+
+  const inDevelopmentHandler = () => {
+    const newState = !showInDevModal;
+    setShowInDevModal(newState);
+  }
 
   return (
     <div
@@ -85,13 +94,14 @@ const CartPreviewOnHover: React.FC<CartPreviewInterface> = (props) => {
           <Link href={"/cart"} passHref>
             <a className={`btn btn--gray`}>View Cart</a>
           </Link>
-          <a className={`btn btn--green`}>Checkout</a>
+          <a className={`btn btn--green`} onClick={inDevelopmentHandler}>Checkout</a>
         </div>
       </div>
 
       <div className={`${classes['empty-container']} ${cartItemsLength > 0 && classes.hide}`}>
         <span>No products in the cart.</span>
       </div>
+      {showInDevModal === true && <InDevelopmentModal onClick={inDevelopmentHandler}/>}
     </div>
   )
 }

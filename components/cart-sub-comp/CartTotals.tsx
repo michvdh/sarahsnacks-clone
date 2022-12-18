@@ -1,10 +1,19 @@
 import classes from "./CartTotals.module.scss";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import InDevelopmentModal from "../ui/modal/InDevelopmentModal";
 
 const CartTotals = () => {
   const cartTotalPrice = useSelector(
     (state: { cart: { totalPrice: number } }) => state.cart.totalPrice
   );
+
+  const [showInDevModal, setShowInDevModal] = useState(false);
+
+  const inDevelopmentHandler = () => {
+    const newState = !showInDevModal;
+    setShowInDevModal(newState);
+  }
 
   return (
     <div className={classes["cart-totals"]}>
@@ -12,11 +21,6 @@ const CartTotals = () => {
         <h2>Cart Totals</h2>
         <div className={`${classes['totals-table']}`}>
           <table>
-            {/* <thead>
-              <tr className={`${classes.full} ${classes.header}`}>
-                <th colSpan={2}>Cart Totals</th>
-              </tr>
-            </thead> */}
             <tbody>
               <tr>
                 <th>
@@ -43,16 +47,12 @@ const CartTotals = () => {
                 </td>
               </tr>
             </tbody>
-            {/* <tr className={classes.full}>
-              <td colSpan={2}>
-                <button>Proceed to checkout</button>
-              </td>
-            </tr> */}
           </table>
         </div>
 
-        <button className={`btn btn--green btn--regular btn--rounded`}>Proceed to checkout</button>
+        <button className={`btn btn--green btn--regular btn--rounded`} onClick={inDevelopmentHandler}>Proceed to checkout</button>
       </div>
+      {showInDevModal === true && <InDevelopmentModal onClick={inDevelopmentHandler}/>}
     </div>
   );
 };

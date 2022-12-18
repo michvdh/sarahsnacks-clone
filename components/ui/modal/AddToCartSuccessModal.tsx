@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import Backdrop from "./Backdrop";
 
-interface SuccessInterface {
-  onClick: () => void;
-  addToCartConfirmation: boolean;
-}
+// interface SuccessInterface {
+//   onClick: () => void;
+//   addToCartConfirmation: boolean;
+// }
 
 const SuccessModalOverlay: React.FC<{onClick: () => void}> = (props) => {
   const [closeWindow, setCloseWindow] = useState(false);
@@ -69,7 +69,7 @@ const SuccessModalOverlay: React.FC<{onClick: () => void}> = (props) => {
 
 // this is the modal that appears once a user adds an item (with single variation) from the shop page
 const AddToCartSuccessModal: React.FC<{onClick: () => void}> = (props) => {
-  const backdrop = document.getElementById("backdrop-root")!;
+  // const backdrop = document.getElementById("backdrop-root")!;
   const successOverlay = document.getElementById("success-overlay-root")!;
 
   return (

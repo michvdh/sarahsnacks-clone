@@ -17,6 +17,7 @@ import {
   faBagShopping,
   faCaretLeft,
 } from "@fortawesome/free-solid-svg-icons";
+import InDevelopmentModal from "../ui/modal/InDevelopmentModal";
 
 
 const Header: React.FC = () => {
@@ -60,6 +61,14 @@ const Header: React.FC = () => {
 
     cartLS && dispatch(cartActions.getCartDetailsFromLocalStorage(cartLS));
   }, []);
+
+
+  const [showInDevModal, setShowInDevModal] = useState(false);
+
+  const inDevelopmentHandler = () => {
+    const newState = !showInDevModal;
+    setShowInDevModal(newState);
+  }
 
 
   // If intersectState = true, this means default state
@@ -146,27 +155,28 @@ const Header: React.FC = () => {
             </li>
 
             <li onClick={mobileNavHandler}>
-              <a className={`${classes.link}`}>Our Story</a>
+              <a className={`${classes.link}`} onClick={inDevelopmentHandler}>Our Story</a>
             </li>
 
             <li onClick={mobileNavHandler}>
-              <a className={`${classes.link}`}>Where to buy</a>
+              <a className={`${classes.link}`} onClick={inDevelopmentHandler}>Where to buy</a>
             </li>
 
             <li onClick={mobileNavHandler}>
-              <a className={`${classes.link}`}>Recipes</a>
+              <a className={`${classes.link}`} onClick={inDevelopmentHandler}>Recipes</a>
             </li>
 
             <li onClick={mobileNavHandler}>
-              <a className={`${classes.link}`}>News</a>
+              <a className={`${classes.link}`} onClick={inDevelopmentHandler}>News</a>
             </li>
 
             <li onClick={mobileNavHandler}>
-              <a className={`${classes.link}`}>Contact</a>
+              <a className={`${classes.link}`} onClick={inDevelopmentHandler}>Contact</a>
             </li>
           </ul>
         </div>
       </div>
+      {showInDevModal === true && <InDevelopmentModal onClick={inDevelopmentHandler}/>}
     </header>
   );
 };
